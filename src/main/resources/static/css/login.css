@@ -1,0 +1,28 @@
+.login{
+  width: 100%;
+  display: inline-flex;
+}
+#loginType{
+  margin: 20% 0 10% 10%;
+}
+#loginType>span{
+  margin-right: 10px;
+}
+#loginForm{
+  margin: 0 auto;
+}
+#loginForm>span{
+  float: left;
+  width: 30%;
+  margin-bottom: 20px;
+}
+#loginForm>input{
+  width: 65%;
+  margin-bottom: 20px;
+  line-height: 20px;
+}
+#loginForm>button{
+  display: block;
+  margin: 20px;
+  float: right;
+}
