@@ -1,28 +1,31 @@
-.login{
-  width: 100%;
-  display: inline-flex;
+.center{
+  width: 90%;
+  margin: 120px auto;
+  text-align: left;
 }
 #loginType{
-  margin: 20% 0 10% 10%;
+  margin-bottom: 20px;
 }
-#loginType>span{
+#loginType>input{
   margin-right: 10px;
 }
 #loginForm{
-  margin: 0 auto;
+  margin-left: 20px;
+  line-height: 40px;
 }
 #loginForm>span{
-  float: left;
+  display: inline-block;
   width: 30%;
-  margin-bottom: 20px;
 }
 #loginForm>input{
-  width: 65%;
-  margin-bottom: 20px;
-  line-height: 20px;
+  border: none;
+  border-bottom: solid 1px black;
+  width: 55%;
 }
 #loginForm>button{
-  display: block;
-  margin: 20px;
+  display: inline-block;
   float: right;
+  margin-top:20px;
+  width: 40%;
+  line-height: 20px;
 }
