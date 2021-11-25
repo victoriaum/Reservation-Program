@@ -1,4 +1,4 @@
-package com.example.reservation;
+package com.system.reservation;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

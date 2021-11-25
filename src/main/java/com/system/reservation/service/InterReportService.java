@@ -1,4 +1,4 @@
-package com.example.reservation.service;
+package com.system.reservation.service;
 
 public interface InterReportService {
 

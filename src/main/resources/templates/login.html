@@ -11,25 +11,25 @@
   <body>
     <div id="container">
       <div id="container2">
-        <header>조치대 레포트 공지</header>
+        <header>조치대 레포트 관리시스템</header>
         <div class="center">
           <div id="loginType">
-            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-              <input type="checkbox" class="btn-check" id="Teacher" autocomplete="off">
-              <label class="btn btn-outline-primary" for="Teacher">Teacher</label>
-              <input type="checkbox" class="btn-check" id="Student" autocomplete="off">
-              <label class="btn btn-outline-primary" for="Student">Student</label>
+            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+              <input type="radio" class="btn-check" name="btnradio" id="teacher" autocomplete="off" checked>
+              <label class="btn btn-outline-primary" for="teacher">Teacher</label>
+              <input type="radio" class="btn-check" name="btnradio" id="student" autocomplete="off">
+              <label class="btn btn-outline-primary" for="student">Student</label>
             </div>
           </div>
           <div>
-            <form id="loginForm">
+            <form name="loginForm" id="loginForm">
               <div class="input-group mb-3">
                 <span class="input-group-text">ID</span>
                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text">PW</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
               </div>
               <button type="button" class="btn btn-primary">Login</button>
             </form>
@@ -38,8 +38,8 @@
       </div>
     </div>
 
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/index.js"></script>
+    <script src="../static/static/js/bootstrap.min.js"></script>
+    <script src="../static/static/js/jquery.min.js"></script>
+    <script src="../static/js/login.js"></script>
   </body>
 </html>
