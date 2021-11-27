@@ -1,0 +1,77 @@
+header{
+  margin-top: 1.5rem;
+  color: black;
+}
+#headerTitle{
+  font-size: 1.2rem;
+}
+
+
+.menu {
+  align-content: center;
+  margin: 0 auto;
+  width: 85%;
+}
+.indexMenu {
+  font-size: 0.5rem;
+  display: inline-block;
+}
+.menuIcon{
+  display: block;
+  width: 2.8rem;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 0.8rem;
+  cursor: pointer;
+}
+
+
+.center {
+  color: black;
+  font-size: 0.7rem;
+  width: 85%;
+  margin: 2rem auto;
+  text-align: left;
+}
+
+.indexContents{
+  border: solid 0.01rem lightgrey;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  font-size: 0.7rem;
+  margin: 1rem 0;
+}
+.indexContents>div{
+  line-height: 1rem;
+  margin-bottom: 0.5rem;
+}
+.indexContentsImg{
+  height: 1.2rem;
+  width: auto;
+  margin-right: 0.5rem;
+}
+.indexContentsTitle{
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+.more{
+  float: right;
+  color: grey;
+  text-decoration: underline;
+}
+.indexContentsDetail{
+  margin: 0.5rem auto;
+  width: 90%;
+}
+.noticeDept {
+  background-color: lightgrey;
+  border-radius: 0.2rem;
+  margin-right: 1rem;
+  padding: 0.2rem;
+}
+.scheduleTime {
+  background-color: lightblue;
+  border-radius: 0.2rem;
+  margin-right: 1rem;
+  padding: 0.2rem;
+}

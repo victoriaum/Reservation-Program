@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="~{layouts/layout}">
+      layout:decorator="~{layouts/layout-withMenu}">
+<head>
+  <link th:href="@{css/index.css}" rel="stylesheet">
+  <script th:href="@{js/index.js}"></script>
+</head>
 
-  <head>
-  </head>
+<div layout:fragment="content">
+  <div id="container">
+    <div class="center">
 
-  <div layout:fragment="content" class="bg-success m-5">
-    index.html 입니다. 즉 컨텐츠 영역
+      <!-- 공지사항 부분 -->
+      <div class="indexContents indexNotice">
+        <div>
+          <img class="indexContentsImg" th:src="@{image/exclamation.png}"/>
+          <span class="indexContentsTitle">최근 주요 공지사항</span>
+          <span class="more">more</span>
+        </div>
+        <p class="indexContentsDetail">
+          <span class="noticeDept">외과</span>
+          <span class="noticeSubject">외과 레포트 검사 없습니다.</span>
+        </p>
+      </div>
+
+      <!-- 오늘의 일정부분 -->
+      <div class="indexContents indexNotice">
+        <div>
+          <img class="indexContentsImg"th:src="@{image/haveto.png}"/>
+          <span class="indexContentsTitle">오늘 해야할 일</span>
+          <span class="more">more</span>
+        </div>
+        <p class="indexContentsDetail">
+          <span class="scheduleTime">PM 2:00</span>
+          <span class="noticeSubject">외과 OOO 선생님 레포트 검사</span>
+        </p>
+        <p class="indexContentsDetail">
+          <span class="scheduleTime">PM 5:00</span>
+          <span class="noticeSubject">내과 OOO 선생님 레포트 검사</span>
+        </p>
+      </div>
+
+    </div>
   </div>
+</div>
 
 </html>
