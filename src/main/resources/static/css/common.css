@@ -3,30 +3,33 @@
   font-family: "NanumR"
 }
 
+html{
+  height: 100%;
+}
 body{
   font-family: NanumR;
 }
 
-#container{
-  height: 100%;
-  text-align: center;
-  background-color: white;
-  margin: 0 auto;
+header {
+  margin-top: 3rem;
 }
-#container2{
-  padding: 20px 20px 10px 20px;
+#container{
+  margin: 0 auto;
+  background-color: white;
 }
 
 header{
-  margin-bottom: 1em;
-  font-size: 1.5em;
-  font-weight: bold;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
   text-align: center;
-  line-height: 30px;
+  line-height: 2rem;
   color: #0077b6;
 }
-#logo{
-  width: 30px;
-  margin-right: 10px;
-  float: left;
+
+footer{
+  height: 0;
+}
+
+.pointer{
+  cursor: pointer;
 }
