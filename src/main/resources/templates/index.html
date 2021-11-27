@@ -3,6 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{layouts/layout-withMenu}">
 <head>
+  <link th:href="@{css/head.css}" rel="stylesheet">
   <link th:href="@{css/index.css}" rel="stylesheet">
   <script th:href="@{js/index.js}"></script>
 </head>
@@ -10,6 +11,25 @@
 <div layout:fragment="content">
   <div id="container">
     <div class="center">
+
+      <div class="menu row row-cols-4">
+        <div class="indexMenu col">
+          <img class="menuIcon" th:src="@{image/index/request.png}"/>
+          Request
+        </div>
+        <div class="indexMenu col">
+          <img class="menuIcon" th:src="@{image/index/schedule.png}"/>
+          Schedule
+        </div>
+        <div class="indexMenu col">
+          <img class="menuIcon" th:src="@{image/index/notice.png}"/>
+          Notice
+        </div>
+        <div class="indexMenu col">
+          <img class="menuIcon" th:src="@{image/index/mypage.png}"/>
+          MyPage
+        </div>
+      </div>
 
       <!-- 공지사항 부분 -->
       <div class="indexContents indexNotice">

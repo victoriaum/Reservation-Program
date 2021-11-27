@@ -2,26 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <header th:fragment="headerFragment">
   <div>
-    <div id="headerTitle">조치대 레포트 관리시스템</div>
-    <br>
-    <div class="menu row row-cols-4">
-      <div class="indexMenu col">
-        <img class="menuIcon" th:src="@{image/index/home.png}"/>
-        Home
-      </div>
-      <div class="indexMenu col">
-        <img class="menuIcon" th:src="@{image/index/schedule.png}"/>
-        Schedule
-      </div>
-      <div class="indexMenu col">
-        <img class="menuIcon" th:src="@{image/index/notice.png}"/>
-        Notice
-      </div>
-      <div class="indexMenu col">
-        <img class="menuIcon" th:src="@{image/index/mypage.png}"/>
-        MyPage
-      </div>
+    <div id="headerTitle">
+      <img class="titleIcon titleIconMenu" th:src="@{image/menu.png}"/>
+      <span>조치대 레포트 관리시스템</span>
+      <img class="titleIcon titleIconSetting" th:src="@{image/setting.png}"/>
     </div>
+    <br>
   </div>
 </header>
 </html>
