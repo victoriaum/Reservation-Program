@@ -1,45 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/layout-default}">
   <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <meta charset="UTF-8">
-    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/css/common.css" rel="stylesheet">
-    <link href="../static/css/login.css" rel="stylesheet">
-    <title>레포트 예약 및 공지시스템</title>
+    <link th:href="@{css/login.css}" rel="stylesheet">
+    <script th:href="@{js/login.js}"></script>
   </head>
-  <body>
+
+  <div layout:fragment="content">
     <div id="container">
-      <div id="container2">
-        <header>조치대 레포트 관리시스템</header>
-        <div class="center">
+      <div class="center">
+        <form name="loginForm" id="loginForm">
+
           <div id="loginType">
-            <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-              <input type="radio" class="btn-check" name="btnradio" id="teacher" autocomplete="off" checked>
-              <label class="btn btn-outline-primary" for="teacher">Teacher</label>
-              <input type="radio" class="btn-check" name="btnradio" id="student" autocomplete="off">
-              <label class="btn btn-outline-primary" for="student">Student</label>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="teacher" value="1" checked="checked">
+              <label class="form-check-label" for="teacher">Teacher</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="student" value="2">
+              <label class="form-check-label" for="student">Student</label>
             </div>
           </div>
-          <div>
-            <form name="loginForm" id="loginForm">
-              <div class="input-group mb-3">
-                <span class="input-group-text">ID</span>
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text">PW</span>
-                <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-              </div>
-              <button type="button" class="btn btn-primary">Login</button>
-            </form>
+
+          <div id="loginInput">
+            <div class="input-group input-group-sm mb-3">
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="아이디">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="비밀번호">
+            </div>
+            <button type="button" class="btn btn-primary loginBtn">로그인</button>
           </div>
-        </div>
+
+          <div class="line"></div>
+
+          <button type="button" class="btn btn-outline-secondary googleLogin">구글로 로그인</button>
+
+        </form>
+
       </div>
     </div>
+  </div>
 
-    <script src="../static/js/bootstrap.min.js"></script>
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/js/login.js"></script>
-  </body>
 </html>
