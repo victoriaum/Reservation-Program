@@ -6,6 +6,12 @@
 .indexMenu {
   font-size: 0.5rem;
   display: inline-block;
+  cursor: pointer;
+}
+.menuName {
+  display: block;
+  text-align: center;
+  margin: 0.5rem 0;
 }
 .menuIcon{
   display: block;
@@ -13,7 +19,6 @@
   height: auto;
   margin: 0 auto;
   border-radius: 0.6rem;
-  cursor: pointer;
 }
 
 
