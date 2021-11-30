@@ -4,13 +4,13 @@
       layout:decorator="~{layouts/layout-default}">
   <head>
     <link th:href="@{css/login.css}" rel="stylesheet">
-    <script th:href="@{js/login.js}"></script>
+    <script th:src="@{js/login.js}"></script>
   </head>
 
   <div layout:fragment="content">
     <div id="container">
       <div class="center">
-        <form name="loginForm" id="loginForm">
+        <form name="loginForm" id="loginForm" th:action="@{/login}" method="post">
 
           <div id="loginType">
             <div class="form-check form-check-inline">
