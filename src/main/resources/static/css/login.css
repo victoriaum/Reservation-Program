@@ -46,3 +46,9 @@ button {
 .googleLogin {
   margin: 0;
 }
+
+#error {
+  color: red;
+  float: left;
+  font-size: 0.7rem;
+}

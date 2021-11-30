@@ -10,32 +10,34 @@
   <div layout:fragment="content">
     <div id="container">
       <div class="center">
-        <form name="loginForm" id="loginForm" th:action="@{/login}" method="post">
+        <form name="loginForm" id="loginForm" th:action="@{/login}" method="post" onsubmit="return func_login()">
 
           <div id="loginType">
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="teacher" value="1" checked="checked">
+              <input class="form-check-input" type="radio" th:name="inlineRadioOptions" id="teacher" value="1" checked="checked">
               <label class="form-check-label" for="teacher">Teacher</label>
             </div>
             <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="student" value="2">
+              <input class="form-check-input" type="radio" th:name="inlineRadioOptions" id="student" value="2">
               <label class="form-check-label" for="student">Student</label>
             </div>
           </div>
 
           <div id="loginInput">
             <div class="input-group input-group-sm mb-3">
-              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="아이디">
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" th:name="id" id="id" placeholder="아이디">
             </div>
             <div class="input-group input-group-sm mb-3">
-              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="비밀번호">
+              <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" th:name="password" id="password" placeholder="비밀번호">
             </div>
-            <button type="button" class="btn btn-primary loginBtn">로그인</button>
+            <span id="error"></span>
+            <button type="submit" class="btn btn-primary loginBtn" th:onclick="func_login">로그인</button>
           </div>
 
           <div class="line"></div>
 
           <button type="button" class="btn btn-outline-secondary googleLogin">구글로 로그인</button>
+
 
         </form>
 
