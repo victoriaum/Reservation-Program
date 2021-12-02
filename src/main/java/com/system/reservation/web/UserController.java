@@ -29,7 +29,7 @@ public class UserController {
     HttpSession httpSession = request.getSession();
 
     if("1".equals(type)){
-      TeacherDto teacherDto = teacherService.login(id, password);
+      TeacherDto teacherDto = teacherService.findByTeacher_idAndTeacher_password(id, password);
       if(teacherDto==null){
         m.addAttribute("error","등록되지 않은 아이디와 비밀번호입니다. 다시 시도해주세요.");
         return "login";
@@ -40,7 +40,7 @@ public class UserController {
       }
 
     } else {
-      StudentDto studentDto = studentService.login(id, password);
+      StudentDto studentDto = studentService.findByStudent_idAndStudent_password(id, password);
       if(studentDto==null){
         m.addAttribute("error","등록되지 않은 아이디와 비밀번호입니다. 다시 시도해주세요.");
         return "login";

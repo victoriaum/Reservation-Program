@@ -11,12 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class StudentService {
   private final StudentRepository studentRepository;
   @Transactional
-  public StudentDto login(String id, String password) {
-    StudentDto studentDto = studentRepository.login(id, password).get(0);
-    if(studentDto==null){
+  public StudentDto findByStudent_idAndStudent_password(String id, String password) {
+
+    if(studentRepository.findByStudent_idAndStudent_password(id, password).size()==0){
       return null;
     } else {
-      return studentRepository.login(id, password).get(0);
+      return studentRepository.findByStudent_idAndStudent_password(id, password).get(0);
     }
+
   }
 }

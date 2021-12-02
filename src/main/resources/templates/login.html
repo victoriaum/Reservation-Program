@@ -30,7 +30,7 @@
             <div class="input-group input-group-sm mb-3">
               <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" th:name="password" id="password" placeholder="비밀번호">
             </div>
-            <span id="error"></span>
+            <span id="error" th:value="${error}"></span>
             <button type="submit" class="btn btn-primary loginBtn" th:onclick="func_login">로그인</button>
           </div>
 
