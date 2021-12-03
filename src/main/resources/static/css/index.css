@@ -1,7 +1,7 @@
 .menu {
   align-content: center;
   margin: 0 auto;
-  width: 85%;
+  width: 90%;
 }
 .indexMenu {
   font-size: 0.5rem;
@@ -11,7 +11,8 @@
 .menuName {
   display: block;
   text-align: center;
-  margin: 0.5rem 0;
+  margin: 0.5rem auto;
+  width: 100%;
 }
 .menuIcon{
   display: block;
@@ -25,8 +26,8 @@
 .center {
   color: black;
   font-size: 0.7rem;
-  width: 85%;
-  margin: 2rem auto;
+  width: 100%;
+  margin: 1rem auto;
   text-align: left;
 }
 
@@ -35,7 +36,7 @@
   border-radius: 0.5rem;
   padding: 1rem;
   font-size: 0.7rem;
-  margin: 1rem 0;
+  margin: 1rem;
 }
 .indexContents>div{
   line-height: 1rem;

@@ -3,18 +3,18 @@ header{
   color: black;
 }
 #headerTitle{
-  font-size: 1.2rem;
+  font-size: 1rem;
   width: 90%;
   margin: 0 auto;
-  vertical-align: middle;
 }
 .titleIcon {
-  width: 1.8rem;
+  margin-top: 0.4rem;
+  width: 1.2rem;
   height: auto;
 }
 .titleIconMenu {
   float: left;
 }
-.titleIconSetting {
+.titleIconLogout {
   float: right;
 }
