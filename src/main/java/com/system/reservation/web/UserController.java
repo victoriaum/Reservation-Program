@@ -33,7 +33,7 @@ public class UserController {
     if("1".equals(type)){
       TeacherDto teacherDto = teacherService.findByTeacher_idAndTeacher_password(id, password);
       if(teacherDto==null){
-        m.addAttribute("loginFailed","등록되지 않은 아이디와 비밀번호입니다. 다시 시도해주세요.");
+        m.addAttribute("loginFailed","일치하는 회원이 없습니다. 다시 로그인해주세요!");
         return "login";
       }
       else {
@@ -44,7 +44,7 @@ public class UserController {
     } else {
       StudentDto studentDto = studentService.findByStudent_idAndStudent_password(id, password);
       if(studentDto==null){
-        m.addAttribute("loginFailed","등록되지 않은 아이디와 비밀번호입니다. 다시 시도해주세요.");
+        m.addAttribute("loginFailed","일치하는 회원이 없습니다. 다시 로그인해주세요!");
         return "login";
       }
       else {
