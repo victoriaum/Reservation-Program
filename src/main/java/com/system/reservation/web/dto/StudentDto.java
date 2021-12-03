@@ -15,6 +15,7 @@ public class StudentDto {
   @Builder
   public StudentDto(Student entity){
     this.student_id = entity.getStudent_id();
+    this.student_password = entity.getStudent_password();
     this.student_name = entity.getStudent_name();
     this.student_email = entity.getStudent_email();
     this.student_grade = entity.getStudent_grade();
