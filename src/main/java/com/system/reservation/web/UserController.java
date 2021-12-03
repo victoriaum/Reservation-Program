@@ -18,7 +18,9 @@ public class UserController {
   private final StudentService studentService;
 
   @GetMapping("/login")
-  public String loginPage() {
+  public String loginPage(HttpServletRequest request) {
+    HttpSession session = request.getSession();
+    session.removeAttribute("loginUser");
     return "login";
   }
 
