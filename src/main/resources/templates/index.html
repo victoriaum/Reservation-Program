@@ -10,21 +10,20 @@
 <div layout:fragment="content">
   <div id="container">
     <div class="center">
-
       <div class="menu row row-cols-4">
-        <div class="indexMenu col" id="requestMenu">
+        <div class="indexMenu col" id="request" onclick="func_move(this)">
           <img class="menuIcon" th:src="@{image/index/request.png}"/>
           <span class="menuName">Request</span>
         </div>
-        <div class="indexMenu col" id="scheduleMenu">
+        <div class="indexMenu col" id="schedule" onclick="func_move(this)">
           <img class="menuIcon" th:src="@{image/index/schedule.png}"/>
           <span class="menuName">Schedule</span>
         </div>
-        <div class="indexMenu col" id="noticeMenu">
+        <div class="indexMenu col" id="notice" onclick="func_move(this)">
           <img class="menuIcon" th:src="@{image/index/notice.png}"/>
           <span class="menuName">Notice</span>
         </div>
-        <div class="indexMenu col" id="mypageMenu">
+        <div class="indexMenu col" id="mypage" onclick="func_move(this)">
           <img class="menuIcon" th:src="@{image/index/mypage.png}"/>
           <span class="menuName">MyPage</span>
         </div>

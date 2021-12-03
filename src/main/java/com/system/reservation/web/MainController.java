@@ -1,7 +1,7 @@
 package com.system.reservation.web;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class MainController {
@@ -11,22 +11,22 @@ public class MainController {
     return "index";
   }
 
-  @GetMapping("/request")
+  @PostMapping("/request")
   public String request() {
     return "request";
   }
 
-  @GetMapping("/schedule")
+  @PostMapping("/schedule")
   public String schedule() {
     return "schedule";
   }
 
-  @GetMapping("/notice")
+  @PostMapping("/notice")
   public String notice() {
     return "notice";
   }
 
-  @GetMapping("/mypage")
+  @PostMapping("/mypage")
   public String mypage() {
     return "mypage";
   }
