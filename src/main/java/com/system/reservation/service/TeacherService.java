@@ -2,6 +2,7 @@ package com.system.reservation.service;
 
 import com.system.reservation.domain.TeacherRepository;
 import com.system.reservation.web.dto.TeacherDto;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TeacherService {
   private final TeacherRepository teacherRepository;
+
   @Transactional
   public TeacherDto findByTeacher_idAndTeacher_password(String id, String password) {
     TeacherDto teacherDto;
@@ -20,4 +22,11 @@ public class TeacherService {
       return teacherRepository.findByTeacher_idAndTeacher_password(id, password).get(0);
     }
   }
+
+  @Transactional
+  public List<String> getDept(){
+    List<String> deptList = teacherRepository.getDept();
+    return deptList;
+  };
+
 }

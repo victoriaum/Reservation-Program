@@ -11,4 +11,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, String> {
   @Query("SELECT t FROM Teacher t WHERE t.teacher_id=:id and t.teacher_password=:password")
   List<TeacherDto> findByTeacher_idAndTeacher_password(@Param("id") String id, @Param("password") String password);
 
+  @Query("SELECT DISTINCT t.teacher_dept FROM Teacher t")
+  List<String> getDept();
+
 }

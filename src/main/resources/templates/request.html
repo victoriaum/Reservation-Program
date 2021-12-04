@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{layouts/layout-withMenu}">
 <head>
-  <link th:href="@{css/head.css}" rel="stylesheet">
+  <link th:href="@{css/header.css}" rel="stylesheet">
   <link th:href="@{css/request.css}" rel="stylesheet">
   <script th:src="@{js/request.js}"></script>
 </head>
@@ -13,6 +13,11 @@
     <div class="center">
       <span class="question">검사요청할 과와 선생님을 선택해주세요</span>
 
+      <span class="choice" th:each="dept:${deptList}">
+        <span th:text="${dept}"></span>
+      </span>
+
+      <div id="requestTeacher"></div>
     </div>
   </div>
 </div>
