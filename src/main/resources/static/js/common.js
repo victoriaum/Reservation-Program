@@ -9,7 +9,8 @@ $(function(){
 // 보류
 function func_move(e) {
   var form = document.moveForm;
-  e.attr("th:action", "@{/"+e.id+"}");
-  e.attr("th:method", post);
+  $("#moveForm").attr("action", "/"+e.id);
+  $("#moveForm").attr("method", "POST");
+
   form.submit();
 }

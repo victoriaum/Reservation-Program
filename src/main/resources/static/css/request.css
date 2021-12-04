@@ -1,0 +1,21 @@
+.center {
+  color: black;
+  font-size: 1rem;
+  width: 90%;
+  margin: 1rem auto;
+  text-align: left;
+}
+.question {
+
+}
+.choice {
+  border: solid 0.01rem lightgrey;
+  border-radius: 0.2rem;
+  margin-right: 0.5rem;
+  padding: 0.3rem;
+}
+
+.checkedDept {
+  border: solid 0.01rem #0a58ca;
+  background-color: #0a58ca;
+}
