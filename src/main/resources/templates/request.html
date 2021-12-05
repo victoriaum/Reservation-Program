@@ -13,11 +13,13 @@
     <div class="center">
       <span class="question">검사요청할 과와 선생님을 선택해주세요</span>
 
-      <span class="choice" th:each="dept:${deptList}">
-        <span th:text="${dept}"></span>
-      </span>
+      <div id="requestDepartment"></div>
 
       <div id="requestTeacher"></div>
+
+      <form name="selected" id="selected" action="/searchTeacher" method="post">
+
+      </form>
     </div>
   </div>
 </div>
