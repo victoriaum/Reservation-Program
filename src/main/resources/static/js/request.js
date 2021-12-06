@@ -19,7 +19,7 @@ $(function(){
       data:{checkedDept:checkedDept},
       success: function(json){
         $.each(json.teacherList, function(idx, val) {
-          val.replace(","," ");
+          val = val.replace(","," ");
           $(".secondArea").append("<span class='choice teacher'>"+val+"</span>")
         });
       },
