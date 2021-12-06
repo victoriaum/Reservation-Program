@@ -1,5 +1,6 @@
 package com.system.reservation.web;
 
+import com.system.reservation.service.ScheduleService;
 import com.system.reservation.service.TeacherService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class RequestController {
   private final TeacherService teacherService;
+  private final ScheduleService scheduleService;
 
   @PostMapping("/request")
   public String request(Model m) {
@@ -33,11 +35,10 @@ public class RequestController {
 
   @ResponseBody
   @PostMapping("/getTeacherSchedule")
-  public String getTeacherSchedule(@RequestParam("checkedDept") String checkedDept,
-                                  @RequestParam("checkedTeacher") String checkedTeacher) {
-    List<String> teacherList = teacherService.getTeacherSchedule(checkedDept, checkedTeacher);
+  public String getTeacherSchedule(@RequestParam("checkedTeacher") String checkedTeacher) {
+    List<String> scheduleList = scheduleService.getTeacherSchedule(checkedTeacher);
     JSONObject jsonObject = new JSONObject();
-    jsonObject.put("teacherList", teacherList);
+    jsonObject.put("scheduleList", scheduleList);
     return jsonObject.toString();
   }
 

@@ -2,13 +2,12 @@ $(function(){
   $(".firstArea").show();
   $(".secondArea").hide();
   $(".thirdArea").hide();
-  $(".hiddenTeacherId").hide();
 
   // 과 선택했을 때
   $(".dept").click(function(){
     var checkedDept = $(this).text();
 
-    $(".choosenArea").append("<span class='choice checkedChoice'  id='checkedDept'>"+checkedDept+"</span>")
+    $(".choosenArea").append("<span class='choice checkedChoice' id='checkedDept'>"+checkedDept+"</span>")
 
     $(".firstArea").hide();
     $(".secondArea").show();
@@ -34,8 +33,8 @@ $(function(){
 
 
   // 선생님 선택했을 때
-  $(".hiddenTeacherId").click(function(){
-    var checkedTeacher = $(this).text();
+  $(".teacher").click(function(){
+    var checkedTeacher = $(this).children().text();
 
     $(".choosenArea").append("<span class='choice checkedChoice'  id='checkedTeacher'>"+checkedTeacher+"</span>")
 
@@ -46,7 +45,7 @@ $(function(){
       url:"/getTeacherSchedule",
       type: "post",
       dataType:"json",
-      data:{checkedDept:checkedDept, checkedTeacher:checkedTeacher},
+      data:{checkedTeacher:checkedTeacher},
       success: function(json){
         $.each(json.scheduleList, function(idx, val) {
           val.replace(","," ");

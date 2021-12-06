@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 @Getter
 @NoArgsConstructor
@@ -16,7 +17,7 @@ public class Schedule {
 
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
-  private String schedule_no;
+  private Long schedule_no;
 
   @Column(columnDefinition = "TEXT", length=100, nullable = false)
   private String teacher_id;
@@ -27,11 +28,14 @@ public class Schedule {
   @Column(columnDefinition = "TEXT", length=100, nullable = false)
   private String schedule_date;
   private String schedule_time;
-  private String schedule_space;
+
+  @Column(columnDefinition = "TEXT", length=100)
+  @ColumnDefault("6")
+  private Integer schedule_space;
 
   @Builder
-  public void Schedule(String schedule_no, String teacher_id, String student_id,
-                      String schedule_date, String schedule_time, String schedule_space){
+  public void Schedule(Long schedule_no, String teacher_id, String student_id,
+                      String schedule_date, String schedule_time, Integer schedule_space){
     this.schedule_no = schedule_no;
     this.teacher_id = teacher_id;
     this.student_id = student_id;
