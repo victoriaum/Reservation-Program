@@ -19,8 +19,10 @@ $(function(){
       data:{checkedDept:checkedDept},
       success: function(json){
         $.each(json.teacherList, function(idx, val) {
+          var valArray = val.split(",");
           val = val.replace(","," ");
-          $(".secondArea").append("<span class='choice teacher'>"+val+"</span>")
+          $(".secondArea").append("<span class='choice teacher'>"+valArray[0]+" "+valArray[1]+""
+                                + "<span class='hiddenTeacherId'>"+valArray[2]+"</span></span>")
         });
       },
       error: function(request, status, error){
