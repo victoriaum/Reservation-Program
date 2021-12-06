@@ -11,11 +11,6 @@ public class MainController {
     return "index";
   }
 
-  @PostMapping("/request")
-  public String request() {
-    return "request";
-  }
-
   @PostMapping("/schedule")
   public String schedule() {
     return "schedule";

@@ -14,7 +14,6 @@ public class TeacherService {
 
   @Transactional
   public TeacherDto findByTeacher_idAndTeacher_password(String id, String password) {
-    TeacherDto teacherDto;
 
     if(teacherRepository.findByTeacher_idAndTeacher_password(id, password).size()==0){
       return null;

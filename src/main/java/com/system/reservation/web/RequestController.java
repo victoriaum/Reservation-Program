@@ -1,6 +1,5 @@
 package com.system.reservation.web;
 
-import com.system.reservation.service.StudentService;
 import com.system.reservation.service.TeacherService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +12,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class RequestController {
   private final TeacherService teacherService;
-  private final StudentService studentService;
 
-  @PostMapping("/getDept")
-  public String getDept(Model m) {
+  @PostMapping("/request")
+  public String request(Model m) {
     List<String> deptList = teacherService.getDept();
-    JSONObject jsonObj = new JSONObject();
-    jsonObj.put("deptList", deptList);
-    return jsonObj.toString();
+    m.addAttribute("deptList",deptList);
+    return "request";
   }
+
 }

@@ -11,14 +11,26 @@
 <div layout:fragment="content">
   <div id="container">
     <div class="center">
-      <span class="question">검사요청할 과와 선생님을 선택해주세요</span>
 
-      <div id="requestDepartment"></div>
+      <div class="area">
+        <span class="question" id="firstQuestion">검사요청할 과를 선택해주세요</span><br>
+        <th:block th:each="dept:${deptList}">
+          <span class="choice dept" th:text="${dept}"></span>
+        </th:block>
+      </div>
 
-      <div id="requestTeacher"></div>
+      <div class="area secondArea">
+        <span class="question" id="secondQuestion">교수님 또는 선생님을 선택해주세요</span><br>
+        <th:block th:each="teacher:${teacherList}">
+          <span class="choice teacher" th:text="${teacher}" ></span>
+        </th:block>
+      </div>
 
-      <form name="selected" id="selected" action="/searchTeacher" method="post">
+      <div class="area thirdArea"></div>
 
+      <form name="selected" id="selected" action="/search" method="post">
+        <input type="hidden" name="checkedDept" id="checkedDept"/>
+        <input type="hidden" name="checkedTeacher" id="checkedTeacher"/>
       </form>
     </div>
   </div>
