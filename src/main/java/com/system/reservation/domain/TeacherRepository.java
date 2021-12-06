@@ -14,4 +14,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, String> {
   @Query("SELECT DISTINCT t.teacher_dept FROM Teacher t")
   List<String> getDept();
 
+  @Query("SELECT t.teacher_name, t.teacher_position FROM Teacher t WHERE t.teacher_dept=:checkedDept")
+  List<String> findByTeacher_dept(@Param("checkedDept") String checkedDept);
+
 }

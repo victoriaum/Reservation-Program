@@ -28,4 +28,16 @@ public class TeacherService {
     return deptList;
   };
 
+  @Transactional
+  public List<String> getTeacher(String checkedDept){
+    List<String> teacherList = teacherRepository.findByTeacher_dept(checkedDept);
+    return teacherList;
+  };
+
+  @Transactional
+  public List<String> getTeacherSchedule(String checkedDept, String checkedTeacher) {
+    List<String> teacherList = teacherRepository.findByTeacher_dept(checkedDept);
+    return teacherList;
+  };
+
 }
