@@ -2,6 +2,7 @@ $(function(){
   $(".firstArea").show();
   $(".secondArea").hide();
   $(".thirdArea").hide();
+  $(".hiddenTeacherId").hide();
 
   // 과 선택했을 때
   $(".dept").click(function(){
@@ -33,7 +34,7 @@ $(function(){
 
 
   // 선생님 선택했을 때
-  $(".teacher").click(function(){
+  $(".hiddenTeacherId").click(function(){
     var checkedTeacher = $(this).text();
 
     $(".choosenArea").append("<span class='choice checkedChoice'  id='checkedTeacher'>"+checkedTeacher+"</span>")
