@@ -13,7 +13,7 @@ public class ScheduleService {
 
   @Transactional
   public List<String> getTeacherSchedule(String checkedTeacher) {
-    List<String> scheduleList = schedulerRepository.findByTeacher_id(checkedTeacher);
+    List<String> scheduleList = schedulerRepository.getTeacherSchedule(checkedTeacher);
     return scheduleList;
   };
 

@@ -37,6 +37,7 @@ public class RequestController {
   @PostMapping("/getTeacherSchedule")
   public String getTeacherSchedule(@RequestParam("checkedTeacher") String checkedTeacher) {
     List<String> scheduleList = scheduleService.getTeacherSchedule(checkedTeacher);
+    System.out.println(scheduleList);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("scheduleList", scheduleList);
     return jsonObject.toString();
