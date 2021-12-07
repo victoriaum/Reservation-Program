@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class StudentService {
   private final StudentRepository studentRepository;
+
   @Transactional
   public StudentDto findByStudent_idAndStudent_password(String id, String password) {
 
