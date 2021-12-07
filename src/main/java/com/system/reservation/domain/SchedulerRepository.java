@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface SchedulerRepository extends JpaRepository<Student, String> {
 
-  @Query("SELECT t FROM Schedule t WHERE t.teacher_id=:checkedTeacher")
+  @Query("SELECT s FROM Scheduler s WHERE s.teacher.teacher_id=:checkedTeacher")
   List<String> findByTeacher_id(@Param("checkedTeacher") String checkedTeacher);
 
 }
