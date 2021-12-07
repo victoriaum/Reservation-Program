@@ -9,7 +9,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Schedule {
+public class Scheduler{
 
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Schedule {
   @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
   private Teacher teacher_id;
 
-  @Column(columnDefinition = "TEXT", length=100)
+  @Column(columnDefinition = "TEXT", length=600)
   private String schedule_attender;
 
   @Column(columnDefinition = "TEXT", length=100, nullable = false)
@@ -32,7 +32,7 @@ public class Schedule {
   private Integer schedule_space;
 
   @Builder
-  public void Schedule(Teacher teacher_id, String schedule_attender, String schedule_date, String schedule_startTime, String schedule_endTime, Integer schedule_space){
+  public void Scheduler(Teacher teacher_id, String schedule_attender, String schedule_date, String schedule_startTime, String schedule_endTime, Integer schedule_space){
     this.teacher_id = teacher_id;
     this.schedule_attender = schedule_attender;
     this.schedule_date = schedule_date;
