@@ -17,13 +17,12 @@ body{
 
 .subTitle {
   text-align: center;
-  font-size: 3rem;
+  font-size: 1.5rem;
   font-weight: bold;
 }
 
 header{
   margin-top: 3rem;
-  margin-bottom: 2rem;
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;

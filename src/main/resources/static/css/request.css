@@ -10,13 +10,24 @@
   margin-top: 0.5rem;
 }
 .choice {
+  display: block;
   border: solid 0.01rem lightgrey;
   border-radius: 0.2rem;
   margin-right: 0.5rem;
   padding: 0.3rem;
+  cursor: pointer;
 }
 
 .checkedChoice {
+  display: inline-block;
   background-color: #0a58ca;
   color: white;
+  cursor: none;
+}
+
+#reSearch {
+  float: right;
+  font-size: 0.7rem;
+  cursor: pointer;
+  text-decoration: underline;
 }
