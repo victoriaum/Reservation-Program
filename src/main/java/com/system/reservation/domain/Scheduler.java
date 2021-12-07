@@ -16,8 +16,8 @@ public class Scheduler{
   private Long schedule_no;
 
   @ManyToOne
-  @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
-  private Teacher teacher_id;
+  @JoinColumn(name = "teacher_id")
+  private Teacher teacher;
 
   @Column(columnDefinition = "TEXT", length=600)
   private String schedule_attender;
@@ -32,8 +32,7 @@ public class Scheduler{
   private Integer schedule_space;
 
   @Builder
-  public void Scheduler(Teacher teacher_id, String schedule_attender, String schedule_date, String schedule_startTime, String schedule_endTime, Integer schedule_space){
-    this.teacher_id = teacher_id;
+  public void Scheduler(String schedule_attender, String schedule_date, String schedule_startTime, String schedule_endTime, Integer schedule_space){
     this.schedule_attender = schedule_attender;
     this.schedule_date = schedule_date;
     this.schedule_startTime = schedule_startTime;

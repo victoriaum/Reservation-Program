@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 public class SchedulerDto {
   private Long schedule_no;
-  private Teacher teacher_id;
+  private String teacher_id;
   private String schedule_attender;
   private String schedule_date;
   private String schedule_startTime;
@@ -18,7 +18,7 @@ public class SchedulerDto {
   @Builder
   public SchedulerDto(Scheduler entity){
     this.schedule_no = entity.getSchedule_no();
-    this.teacher_id = entity.getTeacher_id();
+    this.teacher_id = entity.getTeacher().getTeacher_id();
     this.schedule_attender = entity.getSchedule_attender();
     this.schedule_date = entity.getSchedule_date();
     this.schedule_startTime = entity.getSchedule_startTime();
