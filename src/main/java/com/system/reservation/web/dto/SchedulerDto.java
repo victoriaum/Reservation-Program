@@ -1,12 +1,12 @@
 package com.system.reservation.web.dto;
 
-import com.system.reservation.domain.Schedule;
+import com.system.reservation.domain.Scheduler;
 import com.system.reservation.domain.Teacher;
 import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-public class ScheduleDto {
+public class SchedulerDto {
   private Long schedule_no;
   private Teacher teacher_id;
   private String schedule_attender;
@@ -16,7 +16,7 @@ public class ScheduleDto {
   private Integer schedule_space;
 
   @Builder
-  public ScheduleDto(Schedule entity){
+  public SchedulerDto(Scheduler entity){
     this.schedule_no = entity.getSchedule_no();
     this.teacher_id = entity.getTeacher_id();
     this.schedule_attender = entity.getSchedule_attender();
