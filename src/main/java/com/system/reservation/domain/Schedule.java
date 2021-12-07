@@ -1,10 +1,6 @@
 package com.system.reservation.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,28 +15,29 @@ public class Schedule {
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private Long schedule_no;
 
-  @Column(columnDefinition = "TEXT", length=100, nullable = false)
-  private String teacher_id;
+  @ManyToOne
+  @JoinColumn(name = "teacher_id", referencedColumnName = "teacher_id")
+  private Teacher teacher_id;
 
   @Column(columnDefinition = "TEXT", length=100)
-  private String student_id;
+  private String schedule_attender;
 
   @Column(columnDefinition = "TEXT", length=100, nullable = false)
   private String schedule_date;
-  private String schedule_time;
+  private String schedule_startTime;
+  private String schedule_endTime;
 
   @Column(columnDefinition = "TEXT", length=100)
   @ColumnDefault("6")
   private Integer schedule_space;
 
   @Builder
-  public void Schedule(Long schedule_no, String teacher_id, String student_id,
-                      String schedule_date, String schedule_time, Integer schedule_space){
-    this.schedule_no = schedule_no;
+  public void Schedule(Teacher teacher_id, String schedule_attender, String schedule_date, String schedule_startTime, String schedule_endTime, Integer schedule_space){
     this.teacher_id = teacher_id;
-    this.student_id = student_id;
+    this.schedule_attender = schedule_attender;
     this.schedule_date = schedule_date;
-    this.schedule_time = schedule_time;
+    this.schedule_startTime = schedule_startTime;
+    this.schedule_endTime = schedule_endTime;
     this.schedule_space = schedule_space;
   }
 
