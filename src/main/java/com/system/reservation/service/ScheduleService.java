@@ -18,4 +18,10 @@ public class ScheduleService {
     return scheduleList;
   };
 
+  @Transactional
+  public Integer scheduleRequest(String schedule_no) {
+    Integer result = schedulerRepository.scheduleRequest(schedule_no);
+    return result;
+  }
+
 }

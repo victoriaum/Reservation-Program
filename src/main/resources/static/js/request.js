@@ -1,8 +1,8 @@
 $(function(){
+
   $(".firstArea").show();
   $(".secondArea").hide();
   $(".thirdArea").hide();
-
 
   // 과 선택했을 때
   $(".dept").click(function(){
@@ -37,7 +37,6 @@ $(function(){
     });
   });
 
-
 });
 
 
@@ -59,10 +58,10 @@ function func_getSchedule(id){
     dataType:"json",
     data:{checkedTeacher:idArray[1]},
     success: function(json){
-      if(json.scheduleList==""){  // 저장된 일정이 없는 경우
+      if(json.scheduleList==""){    // 저장된 일정이 없는 경우
         $(".thirdArea").append("<div>정해진 일정이 없습니다.</div>");
       }
-      else {
+      else {    // 저장된 일정이 있는 경우
         $.each(json.scheduleList, function(idx, val) {
           var scheduleArray = val.split(",");
           var lastIndex = scheduleArray.length - 1;
@@ -72,7 +71,7 @@ function func_getSchedule(id){
           var attenderCnt = lastIndex - 4;
 
           $(".thirdArea").append(
-              "<div class='subArea' id='" + scheduleArray[0] + "'>"
+              "<div class='subArea' id='" + scheduleArray[0] + "' onclick='func_request(this, this.id)'>"
               + "<span class='date'>" + subAreaDateArray + "</span><br>"
               + "<span class='time'>" + scheduleArray[2] + " - "
               + scheduleArray[3] + "</span><br>"
@@ -117,3 +116,46 @@ function func_teacherOut(){
 }
 
 
+// 검사요청하기
+function func_request(subArea, id) {
+  if($(subArea).hasClass("smallWidth")){
+    $(subArea).removeClass("smallWidth");
+    $(subArea).next().remove();
+  } else {
+    $(subArea).addClass("smallWidth");
+    $(subArea).after("<div class='requestBtnSpace'>"
+                  + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this.id)'>"
+                  + "<img class='requestBtnImg' src='image/check_white.png'/>"
+                  + "</span>"
+                  + "<span type='button' class='requestBtn requestNo' onclick='func_requestNo(this)'>"
+                  + "<img class='requestBtnImg' src='image/close_white.png'/>"
+                  + "</span></div>");
+  }
+}
+
+
+// 검사요청 close 버튼 클릭시
+function func_requestNo(requestNo) {
+  $(requestNo).parent().prev().click();
+}
+
+
+// 검사요청 okay 버튼 클릭시
+function func_requestOkay(id) {
+  var schedule_no = Number(id);
+
+  $.ajax({
+    url:"/scheduleRequest",
+    type: "post",
+    dataType:"json",
+    data:{schedule_no:schedule_no},
+    success: function(json){
+      if(json.result==1){    // 성공적으로 일정이 예약된 경우
+        alert("레포트검사 일정이 저장되었습니다.");
+      }
+    },
+    error: function(request, status, error){
+      alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+    }
+  });
+}
