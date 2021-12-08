@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
@@ -16,6 +17,12 @@ public class LoginInterceptor implements HandlerInterceptor {
     HttpSession session = request.getSession();
     String loginType = (String) session.getAttribute("type");
 
+    // 리다이랙션 방지
+    String requestUrl = request.getRequestURL().toString();
+    if(requestUrl.contains("/login")){
+      return true;
+    }
+
     if(ObjectUtils.isEmpty(loginType)){
       response.sendRedirect("/login");
       return false;
@@ -23,6 +30,12 @@ public class LoginInterceptor implements HandlerInterceptor {
       session.setMaxInactiveInterval(30*60);
       return true;
     }
+
+  }
+
+  @Override
+  public void postHandle(HttpServletRequest request,
+      HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
 
   }
 
