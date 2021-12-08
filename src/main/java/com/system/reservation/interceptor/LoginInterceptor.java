@@ -15,11 +15,11 @@ public class LoginInterceptor implements HandlerInterceptor {
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
       throws Exception {
     HttpSession session = request.getSession();
-    String loginType = (String) session.getAttribute("type");
+    String loginType = (String) session.getAttribute("loginType");
 
     // 리다이랙션 방지
     String requestUrl = request.getRequestURL().toString();
-    if(requestUrl.contains("/login")){
+    if(requestUrl.contains("/login.do")){
       return true;
     }
 

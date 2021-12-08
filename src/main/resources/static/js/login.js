@@ -1,7 +1,3 @@
-$(function(){
-
-});
-
 // 로그인 유효성 검사
 function func_login(){
 

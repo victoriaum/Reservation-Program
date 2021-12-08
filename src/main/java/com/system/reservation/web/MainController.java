@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class MainController {
 
-  @PostMapping("/")
+  @RequestMapping(value = {"/", "/index.do"})
   public String mainPage() {
     return "index";
   }
 
-  @PostMapping("/schedule")
+  @RequestMapping("/schedule.do")
   public String schedule() { return "schedule";  }
 
-  @PostMapping("/notice")
+  @RequestMapping("/notice.do")
   public String notice() {
     return "notice";
   }
 
-  @PostMapping("/mypage")
+  @RequestMapping("/mypage.do")
   public String mypage() {
     return "mypage";
   }

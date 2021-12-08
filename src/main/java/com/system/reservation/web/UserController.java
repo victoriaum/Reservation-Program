@@ -17,7 +17,7 @@ public class UserController {
   private final TeacherService teacherService;
   private final StudentService studentService;
 
-  @GetMapping("/login")
+  @GetMapping("/login.do")
   public String loginPage(HttpServletRequest request) {
     HttpSession session = request.getSession();
     session.removeAttribute("loginUser");
@@ -25,7 +25,7 @@ public class UserController {
     return "login";
   }
 
-  @PostMapping("/login")
+  @PostMapping("/login.do")
   public String login(@RequestParam("inlineRadioOptions") String type, @RequestParam("id") String id,
                       @RequestParam("password") String password, Model m, HttpServletRequest request) {
 
@@ -39,8 +39,7 @@ public class UserController {
       }
       else {
         httpSession.setAttribute("loginUser",teacherDto);
-        httpSession.setAttribute("type",type);
-        m.addAttribute("loginType","teacher");
+        httpSession.setAttribute("loginType",type);
         return "index";
       }
 
@@ -52,8 +51,7 @@ public class UserController {
       }
       else {
         httpSession.setAttribute("loginUser",studentDto);
-        httpSession.setAttribute("type",type);
-        m.addAttribute("loginType","student");
+        httpSession.setAttribute("loginType",type);
         return "index";
       }
     }

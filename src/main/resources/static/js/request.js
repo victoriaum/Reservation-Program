@@ -144,9 +144,5 @@ function func_requestNo(requestNo) {
 function func_requestOkay(id) {
   var schedule_no = Number(id);
 
-  var form = document.moveForm;
-  $("#moveForm").attr("action", "/scheduleRequest");
-  $("#moveForm").attr("method", "POST");
-  form.submit();
 
 }

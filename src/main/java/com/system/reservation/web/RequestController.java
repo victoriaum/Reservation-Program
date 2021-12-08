@@ -12,6 +12,7 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,14 +22,14 @@ public class RequestController {
   private final TeacherService teacherService;
   private final ScheduleService scheduleService;
 
-  @PostMapping("/request_s")
+  @RequestMapping("/request_s.do")
   public String request_s(Model m) {
     List<String> deptList = teacherService.getDept();
     m.addAttribute("deptList",deptList);
     return "request_s";
   }
 
-  @PostMapping("/request_t")
+  @RequestMapping("/request_t.do")
   public String request_t(Model m) {
     List<String> deptList = teacherService.getDept();
     m.addAttribute("deptList",deptList);
@@ -36,7 +37,7 @@ public class RequestController {
   }
 
   @ResponseBody
-  @PostMapping("/getTeacher")
+  @RequestMapping("/getTeacher")
   public String getTeacher(@RequestParam("checkedDept") String checkedDept) {
     List<String> teacherList = teacherService.getTeacher(checkedDept);
     JSONObject jsonObject = new JSONObject();
@@ -45,7 +46,7 @@ public class RequestController {
   }
 
   @ResponseBody
-  @PostMapping("/getTeacherSchedule")
+  @RequestMapping("/getTeacherSchedule")
   public String getTeacherSchedule(@RequestParam("checkedTeacher") String checkedTeacher) {
     LocalDate now = LocalDate.now();
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
@@ -58,7 +59,7 @@ public class RequestController {
   }
 
   @ResponseBody
-  @PostMapping("/scheduleRequest")
+  @RequestMapping("/scheduleRequest")
   public String scheduleRequest(@RequestParam("schedule_no") Long schedule_no) {
     Integer result = scheduleService.scheduleRequest(schedule_no);
     JSONObject jsonObject = new JSONObject();

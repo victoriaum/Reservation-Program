@@ -11,23 +11,23 @@
   <div id="container">
     <div class="center">
       <div class="menu row row-cols-4">
-        <div th:if="${loginType}=='teacher'" class="indexMenu col" id="request_t" onclick="func_move(this)">
+        <div th:if="${session.loginType}=='1'" class="indexMenu col" onclick="location.href='/request_t.do'">
           <img class="menuIcon" th:src="@{image/index/request.png}"/>
           <span class="menuName">Request</span>
         </div>
-        <div th:if="${loginType}=='student'" class="indexMenu col" id="request_s" onclick="func_move(this)">
+        <div th:if="${session.loginType}=='2'" class="indexMenu col" onclick="location.href='/request_s.do'">
           <img class="menuIcon" th:src="@{image/index/request.png}"/>
           <span class="menuName">Request</span>
         </div>
-        <div class="indexMenu col" id="schedule" onclick="func_move(this)">
+        <div class="indexMenu col" onclick="location.href='/schedule.do'">
           <img class="menuIcon" th:src="@{image/index/schedule.png}"/>
           <span class="menuName">Schedule</span>
         </div>
-        <div class="indexMenu col" id="notice" onclick="func_move(this)">
+        <div class="indexMenu col" onclick="location.href='/notice.do'">
           <img class="menuIcon" th:src="@{image/index/notice.png}"/>
           <span class="menuName">Notice</span>
         </div>
-        <div class="indexMenu col" id="mypage" onclick="func_move(this)">
+        <div class="indexMenu col" onclick="location.href='/mypage.do'">
           <img class="menuIcon" th:src="@{image/index/mypage.png}"/>
           <span class="menuName">MyPage</span>
         </div>
