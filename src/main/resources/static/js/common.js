@@ -5,7 +5,7 @@ $(function(){
     location.href="/login";
   });
 
-  // 현재 날짜와 시각 구하기
+  /* 현재 날짜와 시각 구하기
   var today = new Date();
 
   var year = today.getFullYear();
@@ -15,7 +15,7 @@ $(function(){
 
   var hours = ('0' + today.getHours()).slice(-2);
   var minutes = ('0' + today.getMinutes()).slice(-2);
-  var presentTime = hours + ':' + minutes;
+  var presentTime = hours + ':' + minutes; */
 
 });
 

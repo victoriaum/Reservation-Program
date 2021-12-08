@@ -49,9 +49,17 @@ function func_getSchedule(id){
     dataType:"json",
     data:{checkedTeacher:idArray[1]},
     success: function(json){
-      alert(json.scheduleList);
       $.each(json.scheduleList, function(idx, val) {
-        val.replace(","," ");
+        var scheduleArray = val.split(",");
+        var subAreaTitleArray = scheduleArray[1].substring(0,4)+"년 "+scheduleArray[1].substring(4,6)+"월 "+scheduleArray[1].substring(6)+"일";
+        var attenderCnt = scheduleArray[4].split(",").length;
+        console.log(attenderCnt);
+        $(".thirdArea").append("<div class='subArea' id='"+scheduleArray[0]+"' onclick='func_doResiger(this.id)'>"
+                              +"<span class='subAreaTitle'>"+subAreaTitleArray+"</span><br>"
+                              +"<span>"+scheduleArray[2]+" - "+scheduleArray[3]+"</span><br>"
+                              +"<img class='attenderImg' src='image/request/attender.png'/>"
+                              +"<span>"+attenderCnt+" / "+scheduleArray[5]+"</span>"
+                              +"</div>")
       });
     },
     error: function(request, status, error){

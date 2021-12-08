@@ -11,7 +11,11 @@
   <div id="container">
     <div class="center">
       <div class="menu row row-cols-4">
-        <div class="indexMenu col" id="request" onclick="func_move(this)">
+        <div th:if="${loginType}=='teacher'" class="indexMenu col" id="request_t" onclick="func_move(this)">
+          <img class="menuIcon" th:src="@{image/index/request.png}"/>
+          <span class="menuName">Request</span>
+        </div>
+        <div th:if="${loginType}=='student'" class="indexMenu col" id="request_s" onclick="func_move(this)">
           <img class="menuIcon" th:src="@{image/index/request.png}"/>
           <span class="menuName">Request</span>
         </div>
@@ -28,6 +32,7 @@
           <span class="menuName">MyPage</span>
         </div>
       </div>
+
 
       <!-- 공지사항 부분 -->
       <div class="indexContents indexNotice">

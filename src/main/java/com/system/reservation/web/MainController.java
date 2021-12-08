@@ -12,9 +12,7 @@ public class MainController {
   }
 
   @PostMapping("/schedule")
-  public String schedule() {
-    return "schedule";
-  }
+  public String schedule() { return "schedule";  }
 
   @PostMapping("/notice")
   public String notice() {
@@ -25,5 +23,6 @@ public class MainController {
   public String mypage() {
     return "mypage";
   }
+
 
 }

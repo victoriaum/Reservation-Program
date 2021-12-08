@@ -2,6 +2,10 @@ package com.system.reservation.web;
 
 import com.system.reservation.service.ScheduleService;
 import com.system.reservation.service.TeacherService;
+import com.system.reservation.web.dto.SchedulerDto;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
@@ -17,11 +21,18 @@ public class RequestController {
   private final TeacherService teacherService;
   private final ScheduleService scheduleService;
 
-  @PostMapping("/request")
-  public String request(Model m) {
+  @PostMapping("/request_s")
+  public String request_s(Model m) {
     List<String> deptList = teacherService.getDept();
     m.addAttribute("deptList",deptList);
-    return "request";
+    return "request_s";
+  }
+
+  @PostMapping("/request_t")
+  public String request_t(Model m) {
+    List<String> deptList = teacherService.getDept();
+    m.addAttribute("deptList",deptList);
+    return "request_t";
   }
 
   @ResponseBody
@@ -36,8 +47,10 @@ public class RequestController {
   @ResponseBody
   @PostMapping("/getTeacherSchedule")
   public String getTeacherSchedule(@RequestParam("checkedTeacher") String checkedTeacher) {
-    List<String> scheduleList = scheduleService.getTeacherSchedule(checkedTeacher);
-    System.out.println(scheduleList);
+    LocalDate now = LocalDate.now();
+    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+    String formatDate = now.format(dateTimeFormatter);
+    List<String> scheduleList = scheduleService.getTeacherSchedule(checkedTeacher, formatDate);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("scheduleList", scheduleList);
     return jsonObject.toString();

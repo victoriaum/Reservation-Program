@@ -39,7 +39,7 @@ public class Scheduler{
     this.schedule_no = schedule_no;
     this.schedule_attender = schedule_attender;
     this.teacher_id = teacher_id;
-    this.schedule_date = schedule_date;
+    this.schedule_date = schedule_date;   /* 형식: 2021-12-10 */
     this.schedule_start = schedule_start;
     this.schedule_end = schedule_end;
     this.schedule_space = schedule_space;

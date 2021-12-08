@@ -38,6 +38,7 @@ public class UserController {
       }
       else {
         httpSession.setAttribute("loginUser",teacherDto);
+        m.addAttribute("loginType","teacher");
         return "index";
       }
 
@@ -49,6 +50,7 @@ public class UserController {
       }
       else {
         httpSession.setAttribute("loginUser",studentDto);
+        m.addAttribute("loginType","student");
         return "index";
       }
     }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/layout-withMenu}">
+<head>
+  <link th:href="@{css/header.css}" rel="stylesheet">
+  <link th:href="@{css/request.css}" rel="stylesheet">
+  <script th:src="@{js/request.js}"></script>
+</head>
+
+<div layout:fragment="content">
+  <div id="container">
+    <div class="center">
+
+      <div class="area choosenArea">
+        <span class="subTitle mb-3">레포트 검사요청</span>
+        <span id="reSearch" onclick="func_moveTo('/request')">재검색하기</span>
+        <br>
+      </div>
+
+      <div class="area firstArea">
+        <th:block th:each="dept:${deptList}">
+          <span class="choice dept" th:text="${dept}"></span>
+        </th:block>
+      </div>
+
+      <div class="area secondArea"></div>
+
+      <div class="area thirdArea"></div>
+
+    </div>
+  </div>
+</div>
+
+</html>
