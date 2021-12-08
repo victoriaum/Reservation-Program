@@ -25,7 +25,16 @@
   font-size: 0.8rem;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
+  cursor: none;
 }
+.closeCheckedChose {
+  margin: 0.2rem;
+  width: 0.8rem;
+  height: auto;
+  cursor: pointer;
+  float: right;
+}
+
 
 #reSearch {
   float: right;

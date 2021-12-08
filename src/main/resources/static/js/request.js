@@ -8,7 +8,10 @@ $(function(){
   $(".dept").click(function(){
     var checkedDept = $(this).text();
 
-    $(".choosenArea").append("<span class='col-4 choice checkedChoice' id='checkedDept'>"+checkedDept+"</span>")
+    $(".choosenArea").append("<span class='col-4 choice checkedChoice' id='checkedDept'>"
+                              +checkedDept
+                              +"<img class='closeCheckedChose' src='image/close_white.png'/>"
+                              +"</span>")
 
     $(".firstArea").hide();
     $(".secondArea").show();
@@ -38,7 +41,10 @@ $(function(){
 // 선생님 선택했을 때
 function func_getSchedule(id){
   var idArray = id.split(",");
-  $(".choosenArea").append("<span class='col-6 choice checkedChoice'>"+idArray[0]+"</span>")
+  $(".choosenArea").append("<span class='col-6 choice checkedChoice'>"
+                            +idArray[0]
+                            +"<img class='closeCheckedChose' src='image/close_white.png'/>"
+                            +"</span>")
 
   $(".secondArea").hide();
   $(".thirdArea").show();
@@ -54,7 +60,7 @@ function func_getSchedule(id){
         var lastIndex = scheduleArray.length-1;
         var subAreaDateArray = scheduleArray[1].substring(0,4)+"년 "+scheduleArray[1].substring(4,6)+"월 "+scheduleArray[1].substring(6)+"일";
         var attenderCnt = lastIndex-4;
-        $(".thirdArea").append("<div class='subArea' id='"+scheduleArray[0]+"' onclick='func_doResiger(this.id)'>"
+        $(".thirdArea").append("<div class='subArea' id='"+scheduleArray[0]+"'>"
                               +"<span class='date'>"+subAreaDateArray+"</span><br>"
                               +"<span class='time'>"+scheduleArray[2]+" - "+scheduleArray[3]+"</span><br>"
                               +"<span class='space'>"+attenderCnt+" / "+scheduleArray[lastIndex]+"</span>"
