@@ -13,6 +13,7 @@
   text-align: center;
   margin: 0.5rem auto;
   width: 100%;
+  font-weight: bold;
 }
 .menuIcon{
   display: block;
@@ -32,15 +33,20 @@
 }
 
 .indexContents{
-  border: solid 0.01rem lightgrey;
-  border-radius: 0.5rem;
+  border: solid 0.01rem #e48873;
+  border-left: solid 0.5rem #e48873;
+  border-radius: 0rem 0.5rem 0.5rem 0rem;
   padding: 1rem;
   font-size: 0.7rem;
   margin: 1rem;
 }
+.indexNotice2 {
+  border: solid 0.01rem #2B2119;
+  border-left: solid 0.5rem #2B2119;
+}
 .indexContents>div{
   line-height: 1rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 .indexContentsImg{
   height: 1.2rem;
@@ -53,22 +59,24 @@
 }
 .more{
   float: right;
-  color: grey;
+  color: #2B2119;
   text-decoration: underline;
 }
 .indexContentsDetail{
-  margin: 0.5rem auto;
+  margin: 0.5rem 0.5rem 0.5rem 0rem;
   width: 90%;
 }
 .noticeDept {
-  background-color: lightgrey;
+  background-color: #ECDCCB;
   border-radius: 0.2rem;
   margin-right: 1rem;
-  padding: 0.2rem;
+  padding: 0.3rem;
+  font-weight: bold;
 }
 .scheduleTime {
-  background-color: #e6f0ff;
+  background-color: #ECDCCB;
   border-radius: 0.2rem;
   margin-right: 1rem;
-  padding: 0.2rem;
+  padding: 0.3rem;
+  font-weight: bold;
 }
