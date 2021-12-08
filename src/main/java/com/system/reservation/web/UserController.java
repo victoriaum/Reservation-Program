@@ -17,7 +17,7 @@ public class UserController {
   private final TeacherService teacherService;
   private final StudentService studentService;
 
-  @GetMapping("/login.do")
+  @GetMapping("/login")
   public String loginPage(HttpServletRequest request) {
     HttpSession session = request.getSession();
     session.removeAttribute("loginUser");
@@ -25,7 +25,7 @@ public class UserController {
     return "login";
   }
 
-  @PostMapping("/login.do")
+  @PostMapping("/login")
   public String login(@RequestParam("inlineRadioOptions") String type, @RequestParam("id") String id,
                       @RequestParam("password") String password, Model m, HttpServletRequest request) {
 

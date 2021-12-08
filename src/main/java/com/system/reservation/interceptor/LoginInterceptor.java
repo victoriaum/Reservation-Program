@@ -19,7 +19,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     // 리다이랙션 방지
     String requestUrl = request.getRequestURL().toString();
-    if(requestUrl.contains("/login.do")){
+    if(requestUrl.contains("/login")){
       return true;
     }
 

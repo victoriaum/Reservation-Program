@@ -22,14 +22,14 @@ public class RequestController {
   private final TeacherService teacherService;
   private final ScheduleService scheduleService;
 
-  @RequestMapping("/request_s.do")
+  @RequestMapping("/request_s")
   public String request_s(Model m) {
     List<String> deptList = teacherService.getDept();
     m.addAttribute("deptList",deptList);
     return "request_s";
   }
 
-  @RequestMapping("/request_t.do")
+  @RequestMapping("/request_t")
   public String request_t(Model m) {
     List<String> deptList = teacherService.getDept();
     m.addAttribute("deptList",deptList);

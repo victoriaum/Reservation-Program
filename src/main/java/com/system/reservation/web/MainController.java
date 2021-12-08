@@ -6,20 +6,20 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class MainController {
 
-  @RequestMapping(value = {"/", "/index.do"})
+  @RequestMapping(value = {"/", "/index"})
   public String mainPage() {
     return "index";
   }
 
-  @RequestMapping("/schedule.do")
+  @RequestMapping("/schedule")
   public String schedule() { return "schedule";  }
 
-  @RequestMapping("/notice.do")
+  @RequestMapping("/notice")
   public String notice() {
     return "notice";
   }
 
-  @RequestMapping("/mypage.do")
+  @RequestMapping("/mypage")
   public String mypage() {
     return "mypage";
   }
