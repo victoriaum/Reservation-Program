@@ -35,14 +35,6 @@
   float: right;
 }
 
-
-#reSearch {
-  float: right;
-  font-size: 0.7rem;
-  cursor: pointer;
-  text-decoration: underline;
-}
-
 .subArea {
   border-radius: 0.5rem;
   padding: 0.5rem;
