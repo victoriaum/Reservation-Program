@@ -51,6 +51,7 @@ public class RequestController {
     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
     String formatDate = now.format(dateTimeFormatter);
     List<String> scheduleList = scheduleService.getTeacherSchedule(checkedTeacher, formatDate);
+    System.out.println(scheduleList);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("scheduleList", scheduleList);
     return jsonObject.toString();

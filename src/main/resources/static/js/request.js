@@ -51,14 +51,14 @@ function func_getSchedule(id){
     success: function(json){
       $.each(json.scheduleList, function(idx, val) {
         var scheduleArray = val.split(",");
-        var subAreaTitleArray = scheduleArray[1].substring(0,4)+"년 "+scheduleArray[1].substring(4,6)+"월 "+scheduleArray[1].substring(6)+"일";
-        var attenderCnt = scheduleArray[4].split(",").length;
-        console.log(attenderCnt);
+        var lastIndex = scheduleArray.length-1;
+        var subAreaDateArray = scheduleArray[1].substring(0,4)+"년 "+scheduleArray[1].substring(4,6)+"월 "+scheduleArray[1].substring(6)+"일";
+        var attenderCnt = lastIndex-4;
         $(".thirdArea").append("<div class='subArea' id='"+scheduleArray[0]+"' onclick='func_doResiger(this.id)'>"
-                              +"<span class='subAreaTitle'>"+subAreaTitleArray+"</span><br>"
-                              +"<span>"+scheduleArray[2]+" - "+scheduleArray[3]+"</span><br>"
+                              +"<span class='date'>"+subAreaDateArray+"</span><br>"
+                              +"<span class='time'>"+scheduleArray[2]+" - "+scheduleArray[3]+"</span><br>"
+                              +"<span class='space'>"+attenderCnt+" / "+scheduleArray[lastIndex]+"</span>"
                               +"<img class='attenderImg' src='image/request/attender.png'/>"
-                              +"<span>"+attenderCnt+" / "+scheduleArray[5]+"</span>"
                               +"</div>")
       });
     },

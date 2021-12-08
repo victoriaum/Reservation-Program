@@ -1,7 +1,7 @@
 .center {
   color: black;
   font-size: 1rem;
-  width: 80%;
+  width: 85%;
   margin: 1rem auto;
   text-align: left;
 }
@@ -14,7 +14,7 @@
   border: solid 0.01rem lightgrey;
   border-radius: 0.2rem;
   margin-right: 0.5rem;
-  padding: 0.3rem;
+  padding: 0.2rem;
   cursor: pointer;
 }
 
@@ -22,7 +22,9 @@
   display: inline-block;
   background-color: #0a58ca;
   color: white;
-  cursor: none;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 #reSearch {
@@ -30,4 +32,24 @@
   font-size: 0.7rem;
   cursor: pointer;
   text-decoration: underline;
+}
+
+.subArea {
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  height: 4.5rem;
+  background-color: lightblue;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-bottom: 0.5rem;
+}
+.attenderImg {
+  width: 1rem;
+  height: auto;
+  margin-bottom: 0.2rem;
+  margin-right: 0.3rem;
+  float:right
+}
+.space {
+  float: right;
 }
