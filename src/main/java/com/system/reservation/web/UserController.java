@@ -4,9 +4,11 @@ import com.system.reservation.service.StudentService;
 import com.system.reservation.service.TeacherService;
 import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.util.ParameterMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ public class UserController {
   public String loginPage(HttpServletRequest request) {
     HttpSession session = request.getSession();
     session.removeAttribute("loginUser");
+    session.removeAttribute("type");
     return "login";
   }
 
@@ -38,6 +41,7 @@ public class UserController {
       }
       else {
         httpSession.setAttribute("loginUser",teacherDto);
+        httpSession.setAttribute("type",type);
         m.addAttribute("loginType","teacher");
         return "index";
       }
@@ -50,6 +54,7 @@ public class UserController {
       }
       else {
         httpSession.setAttribute("loginUser",studentDto);
+        httpSession.setAttribute("type",type);
         m.addAttribute("loginType","student");
         return "index";
       }
