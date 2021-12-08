@@ -66,14 +66,7 @@
   margin: 0.5rem 0.5rem 0.5rem 0rem;
   width: 90%;
 }
-.noticeDept {
-  background-color: #ECDCCB;
-  border-radius: 0.2rem;
-  margin-right: 1rem;
-  padding: 0.3rem;
-  font-weight: bold;
-}
-.scheduleTime {
+.indexContentsDetailInfo {
   background-color: #ECDCCB;
   border-radius: 0.2rem;
   margin-right: 1rem;
