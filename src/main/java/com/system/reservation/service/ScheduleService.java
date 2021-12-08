@@ -19,7 +19,7 @@ public class ScheduleService {
   };
 
   @Transactional
-  public Integer scheduleRequest(String schedule_no) {
+  public Integer scheduleRequest(Long schedule_no) {
     Integer result = schedulerRepository.scheduleRequest(schedule_no);
     return result;
   }

@@ -59,7 +59,7 @@ public class RequestController {
 
   @ResponseBody
   @PostMapping("/scheduleRequest")
-  public String scheduleRequest(@RequestParam("schedule_no") String schedule_no) {
+  public String scheduleRequest(@RequestParam("schedule_no") Long schedule_no) {
     Integer result = scheduleService.scheduleRequest(schedule_no);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("result", result);
