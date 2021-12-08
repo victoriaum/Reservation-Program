@@ -5,6 +5,9 @@ $(function(){
     location.href="/login";
   });
 
+  // 로그인한 아이디 가져오기
+  $(".student_id").val("${session.loginUser.student_id}");
+
   /* 현재 날짜와 시각 구하기
   var today = new Date();
 

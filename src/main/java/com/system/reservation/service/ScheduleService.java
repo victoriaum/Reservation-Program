@@ -4,6 +4,7 @@ import com.system.reservation.domain.SchedulerRepository;
 import com.system.reservation.web.dto.SchedulerDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class ScheduleService {
     return scheduleList;
   };
 
+  @Modifying
   @Transactional
   public Integer scheduleRequest(Long schedule_no) {
     Integer result = schedulerRepository.scheduleRequest(schedule_no);

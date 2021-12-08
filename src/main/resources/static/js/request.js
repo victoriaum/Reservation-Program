@@ -124,7 +124,7 @@ function func_request(subArea, id) {
   } else {
     $(subArea).addClass("smallWidth");
     $(subArea).after("<div class='requestBtnSpace'>"
-                  + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this.id)'>"
+                  + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this.id})'>"
                   + "<img class='requestBtnImg' src='image/check_white.png'/>"
                   + "</span>"
                   + "<span type='button' class='requestBtn requestNo' onclick='func_requestNo(this)'>"
@@ -144,18 +144,9 @@ function func_requestNo(requestNo) {
 function func_requestOkay(id) {
   var schedule_no = Number(id);
 
-  $.ajax({
-    url:"/scheduleRequest",
-    type: "post",
-    dataType:"json",
-    data:{schedule_no:schedule_no},
-    success: function(json){
-      if(json.result==1){    // 성공적으로 일정이 예약된 경우
-        alert("레포트검사 일정이 저장되었습니다.");
-      }
-    },
-    error: function(request, status, error){
-      alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
-    }
-  });
+  var form = document.moveForm;
+  $("#moveForm").attr("action", "/scheduleRequest");
+  $("#moveForm").attr("method", "POST");
+  form.submit();
+
 }
