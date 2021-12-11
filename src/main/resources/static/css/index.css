@@ -33,16 +33,14 @@
 }
 
 .indexContents{
-  border: solid 0.01rem #e48873;
-  border-left: solid 0.5rem #e48873;
-  border-radius: 0rem 0.5rem 0.5rem 0rem;
+  background-color: #f8f2ec;
+  /*border-radius: 0rem 0.5rem 0.5rem 0rem;*/
   padding: 1rem;
   font-size: 0.7rem;
   margin: 1rem;
 }
 .indexNotice2 {
-  border: solid 0.01rem #2B2119;
-  border-left: solid 0.5rem #2B2119;
+  background-color: #f8f2ec;
 }
 .indexContents>div{
   line-height: 1rem;
@@ -66,10 +64,19 @@
   margin: 0.5rem 0.5rem 0.5rem 0rem;
   width: 90%;
 }
-.indexContentsDetailInfo {
-  background-color: #ECDCCB;
+.indexContentsDetailInfo1 {
+  background-color: #E48873;
   border-radius: 0.2rem;
   margin-right: 1rem;
   padding: 0.3rem;
   font-weight: bold;
+  color: white;
+}
+.indexContentsDetailInfo2 {
+  background-color: #55705A;
+  border-radius: 0.2rem;
+  margin-right: 1rem;
+  padding: 0.3rem;
+  font-weight: bold;
+  color: white;
 }

@@ -117,7 +117,7 @@ function func_teacherOut(){
 
 
 // 검사요청하기
-function report(subArea) {
+function func_report(subArea) {
   var id = subArea.id;
 
   if($(subArea).hasClass("smallWidth")){

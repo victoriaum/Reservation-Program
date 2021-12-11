@@ -11,13 +11,12 @@
 }
 .choice {
   display: block;
-  border-left: solid 0.5rem #2B2119;
-  border-radius: 0.2rem;
+  border-left: solid 0.3rem #2B2119;
   margin-right: 0.3rem;
   padding: 0.2rem 0.2rem 0.2rem 1rem;
   cursor: pointer;
   margin-bottom: 0.5rem;
-  background-color: #ECDCCB;
+  background-color: #f8f2ec;
 }
 
 .checkedChoice {
@@ -40,12 +39,10 @@
 }
 
 .subArea {
-  border-radius: 0.2rem 0rem 0rem 0.2rem;
+  border-bottom: solid 0.1rem #2B2119;
   padding: 0.5rem;
   height: 4.5rem;
-  border-left: solid 0.3rem #2B2119;
-  border-bottom: solid 0.1rem #2B2119;
-  background-color: #ECDCCB;
+  background-color: #f8f2ec;
   font-size: 0.8rem;
   cursor: pointer;
   margin-bottom: 0.5rem;
@@ -65,26 +62,26 @@
   width: 70%;
   display: inline-block;
 }
-.requestBtnSpace {
+.reportBtnSpace {
   display: inline-block;
   width: 28%;
   float: right;
 }
-.requestBtn {
+.reportBtn {
   width: 100%;
   height: 2.25rem;
   text-align: center;
   cursor: pointer;
 }
-.requestOkay {
+.reportOkay {
   background-color: #55705A;
   border-radius: 0rem 0.3rem 0rem 0rem
 }
-.requestNo {
+.reportNo {
   background-color: #E48873;
   border-radius: 0rem 0rem 0.3rem 0rem
 }
-.requestBtnImg {
+.reportBtnImg {
   width: 1.2rem;
-  margin-top: 0.3rem;
+  margin-top: 0.5rem;
 }
