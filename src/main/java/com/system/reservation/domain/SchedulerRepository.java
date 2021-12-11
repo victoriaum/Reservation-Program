@@ -1,8 +1,8 @@
 package com.system.reservation.domain;
 
-import com.system.reservation.web.dto.SchedulerDto;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -15,6 +15,7 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
   @Query("SELECT s.schedule_attender FROM Scheduler s WHERE s.schedule_no=:schedule_no")
   String checkattenders(@Param("schedule_no") Long schedule_no);
 
+  @Modifying
   @Query("UPDATE Scheduler s SET s.schedule_attender=:attenders WHERE s.schedule_no=:schedule_no")
   void scheduleRequest(@Param("schedule_no") Long schedule_no, @Param("attenders") String attenders);
 
