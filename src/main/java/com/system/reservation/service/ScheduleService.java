@@ -21,9 +21,17 @@ public class ScheduleService {
 
   @Modifying
   @Transactional
-  public Integer scheduleRequest(Long schedule_no) {
-    Integer result = schedulerRepository.scheduleRequest(schedule_no);
-    return result;
+  public Integer scheduleRequest(Long schedule_no, String login_id) {
+    String attenders = schedulerRepository.checkattenders(schedule_no);
+    if(!attenders.contains(login_id)){ // 일정 내 참여자가 있는 경우
+      return 0;
+    } else {  // 일정 내 참여자가 없는 경우
+      attenders = attenders + login_id;
+      schedulerRepository.scheduleRequest(schedule_no, attenders);
+      return 1;
+    }
+
+
   }
 
 }

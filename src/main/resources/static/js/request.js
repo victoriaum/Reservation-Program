@@ -71,7 +71,7 @@ function func_getSchedule(id){
           var attenderCnt = lastIndex - 4;
 
           $(".thirdArea").append(
-              "<div class='subArea' id='" + scheduleArray[0] + "' onclick='func_request(this, this.id)'>"
+              "<div class='subArea' id='" + scheduleArray[0] + "' onclick='func_request(this)'>"
               + "<span class='date'>" + subAreaDateArray + "</span><br>"
               + "<span class='time'>" + scheduleArray[2] + " - "
               + scheduleArray[3] + "</span><br>"
@@ -117,14 +117,16 @@ function func_teacherOut(){
 
 
 // 검사요청하기
-function func_request(subArea, id) {
+function func_request(subArea) {
+  var id = subArea.id;
+
   if($(subArea).hasClass("smallWidth")){
     $(subArea).removeClass("smallWidth");
     $(subArea).next().remove();
   } else {
     $(subArea).addClass("smallWidth");
     $(subArea).after("<div class='requestBtnSpace'>"
-                  + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this.id})'>"
+                  + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this.id)'>"
                   + "<img class='requestBtnImg' src='image/check_white.png'/>"
                   + "</span>"
                   + "<span type='button' class='requestBtn requestNo' onclick='func_requestNo(this)'>"
@@ -134,15 +136,32 @@ function func_request(subArea, id) {
 }
 
 
-// 검사요청 close 버튼 클릭시
+// 검사요청 close 버튼 클릭시, 등록취소
 function func_requestNo(requestNo) {
   $(requestNo).parent().prev().click();
 }
 
 
-// 검사요청 okay 버튼 클릭시
-function func_requestOkay(id) {
-  var schedule_no = Number(id);
+// 검사요청 okay 버튼 클릭시, 등록요청
+function func_requestOkay(schedule_no) {
+  var login_id = $("#loginId").val();
+  var schedule_no = Number(schedule_no);
 
-
+  $.ajax({
+    url:"/scheduleRequest",
+    type: "post",
+    dataType:"json",
+    data:{schedule_no:schedule_no, login_id:login_id},
+    success: function(json){
+      if(json.result==1){    // 일정 저장성공
+        alert("일정이 등록됐습니다.");
+      }
+      else {    // 일정 저장실패패
+        alert("이미 등록된 예약입니다.");
+      }
+    },
+    error: function(request, status, error){
+      alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+    }
+  });
 }
