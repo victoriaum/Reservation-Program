@@ -129,7 +129,7 @@ function func_request(subArea) {
                   + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this.id)'>"
                   + "<img class='requestBtnImg' src='image/check_white.png'/>"
                   + "</span>"
-                  + "<span type='button' class='requestBtn requestNo' onclick='func_requestNo(this.id)'>"
+                  + "<span type='button' class='requestBtn requestNo' id='"+id+"' onclick='func_requestNo(this.id)'>"
                   + "<img class='requestBtnImg' src='image/close_white.png'/>"
                   + "</span></div>");
   }
@@ -150,7 +150,7 @@ function func_requestOkay(schedule_no) {
       if(json.result==1){    // 일정 저장성공
         alert("일정이 등록됐습니다.");
       }
-      else {    // 일정 저장실패패
+      else if(json.result==0){    // 일정 저장실패패
         alert("이미 등록된 예약입니다.");
       }
     },
@@ -163,8 +163,6 @@ function func_requestOkay(schedule_no) {
 
 // 검사요청 close 버튼 클릭시, 등록취소
 function func_requestNo(schedule_no) {
-  /*$(requestNo).parent().prev().click();*/
-
   var login_id = $("#loginId").val();
   var schedule_no = Number(schedule_no);
 
@@ -177,7 +175,7 @@ function func_requestNo(schedule_no) {
       if(json.result==1){    // 일정 취소성공
         alert("일정이 취소됐습니다.");
       }
-      else {    // 일정 취소실패
+      else if(json.result==0){    // 일정 취소실패
         alert("등록되지 않은 예약으로 취소할 수 없습니다.");
       }
     },
@@ -186,3 +184,6 @@ function func_requestNo(schedule_no) {
     }
   });
 }
+
+
+/*$(requestNo).parent().prev().click();*/
