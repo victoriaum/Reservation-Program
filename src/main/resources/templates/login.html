@@ -50,7 +50,7 @@
             <div class="input-group input-group-sm mb-3">
               <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" th:name="password" id="password" placeholder="비밀번호">
             </div>
-            <span id="error" th:text="${loginFailed}"></span>
+            <span id="error" th:text="${loginFailed}" style="color: red; float: left; font-size: 0.9rem; margin-bottom: 0.2rem;"></span>
             <button type="submit" class="btn btn-primary loginBtn" th:onclick="func_login"
                     style="display: inline-block; float: right; line-height: 0.5rem; height: 2rem; margin-top: 0.5rem; padding: 0 !important; width: 100%; font-size: 0.8rem !important;">
               로그인
