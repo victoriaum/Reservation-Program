@@ -48,6 +48,7 @@ public class ScheduleService {
         List<String> tempList = new ArrayList<String>(Arrays.asList(attendersArray));
         tempList.remove(login_id);
         attenders = tempList.toString();
+        attenders = attenders.substring(1,attenders.length()-1);
       } else {
         attenders = "";
       }
