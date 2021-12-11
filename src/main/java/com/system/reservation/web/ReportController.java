@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
 @Controller
-public class RequestController {
+public class ReportController {
   private final TeacherService teacherService;
   private final ScheduleService scheduleService;
 
-  @RequestMapping("/request_s")
-  public String request_s(Model m) {
+  @RequestMapping("/report_s")
+  public String report_s(Model m) {
     List<String> deptList = teacherService.getDept();
     m.addAttribute("deptList",deptList);
-    return "request_s";
+    return "report_s";
   }
 
-  @RequestMapping("/request_t")
-  public String request_t(Model m) {
+  @RequestMapping("/report_t")
+  public String report_t(Model m) {
     List<String> deptList = teacherService.getDept();
     m.addAttribute("deptList",deptList);
-    return "request_t";
+    return "report_t";
   }
 
   @ResponseBody
@@ -56,18 +56,18 @@ public class RequestController {
   }
 
   @ResponseBody
-  @RequestMapping("/sendRequest")
-  public String sendRequest(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
-    Integer result = scheduleService.sendRequest(schedule_no, login_id);
+  @RequestMapping("/sendReport")
+  public String sendReport(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
+    Integer result = scheduleService.sendReport(schedule_no, login_id);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("result", result);
     return jsonObject.toString();
   }
 
   @ResponseBody
-  @RequestMapping("/cancelRequest")
-  public String cancelRequest(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
-    Integer result = scheduleService.cancelRequest(schedule_no, login_id);
+  @RequestMapping("/cancelReport")
+  public String cancelReport(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
+    Integer result = scheduleService.cancelReport(schedule_no, login_id);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("result", result);
     return jsonObject.toString();

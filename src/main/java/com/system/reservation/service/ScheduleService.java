@@ -21,8 +21,8 @@ public class ScheduleService {
   };
 
   @Transactional
-  public Integer sendRequest(Long schedule_no, String login_id) {
-    String attenders = schedulerRepository.checkattenders(schedule_no);
+  public Integer sendReport(Long schedule_no, String login_id) {
+    String attenders = schedulerRepository.checkAttenders(schedule_no);
 
     if(attenders.contains(login_id)){ // 일정 내 현재 요청한 참여자가 있는 경우
       return 0;
@@ -33,14 +33,14 @@ public class ScheduleService {
       } else {
         attenders = attenders + "," + login_id;
       }
-      schedulerRepository.updateRequest(schedule_no, attenders);
+      schedulerRepository.updateReport(schedule_no, attenders);
       return 1;
     }
   }
 
   @Transactional
-  public Integer cancelRequest(Long schedule_no, String login_id) {
-    String attenders = schedulerRepository.checkattenders(schedule_no);
+  public Integer cancelReport(Long schedule_no, String login_id) {
+    String attenders = schedulerRepository.checkAttenders(schedule_no);
 
     if(attenders!=null && attenders.contains(login_id)){ // 일정 내 현재 요청한 참여자가 있는 경우
       if(attenders.contains(",")){
@@ -52,7 +52,7 @@ public class ScheduleService {
       } else {
         attenders = "";
       }
-      schedulerRepository.updateRequest(schedule_no, attenders);
+      schedulerRepository.updateReport(schedule_no, attenders);
       return 1;
 
     } else {  // 일정 내 현재 요청한 참여자가 없는 경우

@@ -31,8 +31,8 @@ $(function(){
                                   + valArray[0]+" "+valArray[1]+"</span>")
         });
       },
-      error: function(request, status, error){
-        alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+      error: function(report, status, error){
+        alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
       }
     });
   });
@@ -71,19 +71,19 @@ function func_getSchedule(id){
           var attenderCnt = lastIndex - 4;
 
           $(".thirdArea").append(
-              "<div class='subArea' id='" + scheduleArray[0] + "' onclick='func_request(this)'>"
+              "<div class='subArea' id='" + scheduleArray[0] + "' onclick='func_report(this)'>"
               + "<span class='date'>" + subAreaDateArray + "</span><br>"
               + "<span class='time'>" + scheduleArray[2] + " - "
               + scheduleArray[3] + "</span><br>"
               + "<span class='space'><span id='attenderCnt'>" + attenderCnt + "</span> / "
               + scheduleArray[lastIndex] + "</span>"
-              + "<img class='attenderImg' src='image/request/attender.png'/>"
+              + "<img class='attenderImg' src='image/report/attender.png'/>"
               + "</div>");
         });
       }
     },
-    error: function(request, status, error){
-      alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
     }
   });
 }
@@ -117,7 +117,7 @@ function func_teacherOut(){
 
 
 // 검사요청하기
-function func_request(subArea) {
+function report(subArea) {
   var id = subArea.id;
 
   if($(subArea).hasClass("smallWidth")){
@@ -125,24 +125,24 @@ function func_request(subArea) {
     $(subArea).next().remove();
   } else {
     $(subArea).addClass("smallWidth");
-    $(subArea).after("<div class='requestBtnSpace'>"
-                  + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this)'>"
-                  + "<img class='requestBtnImg' src='image/check_white.png'/>"
+    $(subArea).after("<div class='reportBtnSpace'>"
+                  + "<span type='button' class='reportBtn reportOkay' id='"+id+"' onclick='func_reportOkay(this)'>"
+                  + "<img class='reportBtnImg' src='image/check_white.png'/>"
                   + "</span>"
-                  + "<span type='button' class='requestBtn requestNo' id='"+id+"' onclick='func_requestNo(this)'>"
-                  + "<img class='requestBtnImg' src='image/close_white.png'/>"
+                  + "<span type='button' class='reportBtn reportNo' id='"+id+"' onclick='func_reportNo(this)'>"
+                  + "<img class='reportBtnImg' src='image/close_white.png'/>"
                   + "</span></div>");
   }
 }
 
 
 // 검사요청 okay 버튼 클릭시, 등록요청
-function func_requestOkay(obj) {
+function func_reportOkay(obj) {
   var login_id = $("#loginId").val();
   var schedule_no = Number(obj.id);
 
   $.ajax({
-    url:"/sendRequest",
+    url:"/sendReport",
     type: "post",
     dataType:"json",
     data:{schedule_no:schedule_no, login_id:login_id},
@@ -157,20 +157,20 @@ function func_requestOkay(obj) {
         alert("이미 등록된 예약입니다.");
       }
     },
-    error: function(request, status, error){
-      alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
     }
   });
 }
 
 
 // 검사요청 close 버튼 클릭시, 등록취소
-function func_requestNo(obj) {
+function func_reportNo(obj) {
   var login_id = $("#loginId").val();
   var schedule_no = Number(obj.id);
 
   $.ajax({
-    url:"/cancelRequest",
+    url:"/cancelReport",
     type: "post",
     dataType:"json",
     data:{schedule_no:schedule_no, login_id:login_id},
@@ -185,12 +185,11 @@ function func_requestNo(obj) {
         alert("등록되지 않은 예약으로 취소할 수 없습니다.");
       }
     },
-    error: function(request, status, error){
-      alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
     }
   });
 }
 
 
 
-/*$(requestNo).parent().prev().click();*/

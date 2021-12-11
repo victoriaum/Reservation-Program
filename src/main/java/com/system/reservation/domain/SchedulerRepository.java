@@ -13,11 +13,11 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
   List<String> getTeacherSchedule(@Param("checkedTeacher") String checkedTeacher, @Param("formatDate") String formatDate);
 
   @Query("SELECT s.schedule_attender FROM Scheduler s WHERE s.schedule_no=:schedule_no")
-  String checkattenders(@Param("schedule_no") Long schedule_no);
+  String checkAttenders(@Param("schedule_no") Long schedule_no);
 
   @Modifying
   @Query("UPDATE Scheduler s SET s.schedule_attender=:attenders WHERE s.schedule_no=:schedule_no")
-  void updateRequest(@Param("schedule_no") Long schedule_no, @Param("attenders") String attenders);
+  void updateReport(@Param("schedule_no") Long schedule_no, @Param("attenders") String attenders);
 
 }
 
