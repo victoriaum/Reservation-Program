@@ -21,7 +21,8 @@ public class UserController {
   public String loginPage(HttpServletRequest request) {
     HttpSession session = request.getSession();
     session.removeAttribute("loginUser");
-    session.removeAttribute("type");
+    session.removeAttribute("loginType");
+    session.removeAttribute("loginId");
     return "login";
   }
 
@@ -40,6 +41,7 @@ public class UserController {
       else {
         httpSession.setAttribute("loginUser",teacherDto);
         httpSession.setAttribute("loginType",type);
+        httpSession.setAttribute("loginId",id);
         return "index";
       }
 
@@ -52,6 +54,7 @@ public class UserController {
       else {
         httpSession.setAttribute("loginUser",studentDto);
         httpSession.setAttribute("loginType",type);
+        httpSession.setAttribute("loginId",id);
         return "index";
       }
     }
