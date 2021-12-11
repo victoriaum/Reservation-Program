@@ -26,7 +26,7 @@ $(function(){
         $.each(json.teacherList, function(idx, val) {
           var valArray = val.split(",");
           val = val.replace(","," ");
-          $(".secondArea").append("<span class='choice teacher' id='"+valArray[0]+","+valArray[2]+"' "
+          $(".secondArea").append("<span class='choice teacher' id='"+valArray[0]+" "+valArray[1]+","+valArray[2]+"' "
                                   + "onclick='func_getSchedule(this.id)'>"
                                   + valArray[0]+" "+valArray[1]+"</span>")
         });
