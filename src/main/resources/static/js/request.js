@@ -129,16 +129,10 @@ function func_request(subArea) {
                   + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this.id)'>"
                   + "<img class='requestBtnImg' src='image/check_white.png'/>"
                   + "</span>"
-                  + "<span type='button' class='requestBtn requestNo' onclick='func_requestNo(this)'>"
+                  + "<span type='button' class='requestBtn requestNo' onclick='func_requestNo(this.id)'>"
                   + "<img class='requestBtnImg' src='image/close_white.png'/>"
                   + "</span></div>");
   }
-}
-
-
-// 검사요청 close 버튼 클릭시, 등록취소
-function func_requestNo(requestNo) {
-  $(requestNo).parent().prev().click();
 }
 
 
@@ -148,7 +142,7 @@ function func_requestOkay(schedule_no) {
   var schedule_no = Number(schedule_no);
 
   $.ajax({
-    url:"/scheduleRequest",
+    url:"/sendRequest",
     type: "post",
     dataType:"json",
     data:{schedule_no:schedule_no, login_id:login_id},
@@ -158,6 +152,33 @@ function func_requestOkay(schedule_no) {
       }
       else {    // 일정 저장실패패
         alert("이미 등록된 예약입니다.");
+      }
+    },
+    error: function(request, status, error){
+      alert("code: "+request.status+"\n"+"message: "+request.responseText+"\n"+"error: "+error);
+    }
+  });
+}
+
+
+// 검사요청 close 버튼 클릭시, 등록취소
+function func_requestNo(schedule_no) {
+  /*$(requestNo).parent().prev().click();*/
+
+  var login_id = $("#loginId").val();
+  var schedule_no = Number(schedule_no);
+
+  $.ajax({
+    url:"/cancelRequest",
+    type: "post",
+    dataType:"json",
+    data:{schedule_no:schedule_no, login_id:login_id},
+    success: function(json){
+      if(json.result==1){    // 일정 취소성공
+        alert("일정이 취소됐습니다.");
+      }
+      else {    // 일정 취소실패
+        alert("등록되지 않은 예약으로 취소할 수 없습니다.");
       }
     },
     error: function(request, status, error){

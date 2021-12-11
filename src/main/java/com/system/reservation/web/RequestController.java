@@ -56,9 +56,18 @@ public class RequestController {
   }
 
   @ResponseBody
-  @RequestMapping("/scheduleRequest")
-  public String scheduleRequest(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
-    Integer result = scheduleService.scheduleRequest(schedule_no, login_id);
+  @RequestMapping("/sendRequest")
+  public String sendRequest(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
+    Integer result = scheduleService.sendRequest(schedule_no, login_id);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("result", result);
+    return jsonObject.toString();
+  }
+
+  @ResponseBody
+  @RequestMapping("/cancelRequest")
+  public String cancelRequest(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
+    Integer result = scheduleService.cancelRequest(schedule_no, login_id);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("result", result);
     return jsonObject.toString();
