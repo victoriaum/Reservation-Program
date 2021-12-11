@@ -75,7 +75,7 @@ function func_getSchedule(id){
               + "<span class='date'>" + subAreaDateArray + "</span><br>"
               + "<span class='time'>" + scheduleArray[2] + " - "
               + scheduleArray[3] + "</span><br>"
-              + "<span class='space'>" + attenderCnt + " / "
+              + "<span class='space'><span id='attenderCnt'>" + attenderCnt + "</span> / "
               + scheduleArray[lastIndex] + "</span>"
               + "<img class='attenderImg' src='image/request/attender.png'/>"
               + "</div>");
@@ -126,10 +126,10 @@ function func_request(subArea) {
   } else {
     $(subArea).addClass("smallWidth");
     $(subArea).after("<div class='requestBtnSpace'>"
-                  + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this.id)'>"
+                  + "<span type='button' class='requestBtn requestOkay' id='"+id+"' onclick='func_requestOkay(this)'>"
                   + "<img class='requestBtnImg' src='image/check_white.png'/>"
                   + "</span>"
-                  + "<span type='button' class='requestBtn requestNo' id='"+id+"' onclick='func_requestNo(this.id)'>"
+                  + "<span type='button' class='requestBtn requestNo' id='"+id+"' onclick='func_requestNo(this)'>"
                   + "<img class='requestBtnImg' src='image/close_white.png'/>"
                   + "</span></div>");
   }
@@ -137,9 +137,9 @@ function func_request(subArea) {
 
 
 // 검사요청 okay 버튼 클릭시, 등록요청
-function func_requestOkay(schedule_no) {
+function func_requestOkay(obj) {
   var login_id = $("#loginId").val();
-  var schedule_no = Number(schedule_no);
+  var schedule_no = Number(obj.id);
 
   $.ajax({
     url:"/sendRequest",
@@ -149,6 +149,9 @@ function func_requestOkay(schedule_no) {
     success: function(json){
       if(json.result==1){    // 일정 저장성공
         alert("일정이 등록됐습니다.");
+        var attenderCnt = $(obj).parent().prev().children('span.space').children('span#attenderCnt');
+        var cnt = Number(attenderCnt.text());
+        attenderCnt.html(cnt+1);
       }
       else if(json.result==0){    // 일정 저장실패패
         alert("이미 등록된 예약입니다.");
@@ -162,9 +165,9 @@ function func_requestOkay(schedule_no) {
 
 
 // 검사요청 close 버튼 클릭시, 등록취소
-function func_requestNo(schedule_no) {
+function func_requestNo(obj) {
   var login_id = $("#loginId").val();
-  var schedule_no = Number(schedule_no);
+  var schedule_no = Number(obj.id);
 
   $.ajax({
     url:"/cancelRequest",
@@ -174,6 +177,9 @@ function func_requestNo(schedule_no) {
     success: function(json){
       if(json.result==1){    // 일정 취소성공
         alert("일정이 취소됐습니다.");
+        var attenderCnt = $(obj).parent().prev().children('span.space').children('span#attenderCnt');
+        var cnt = Number(attenderCnt.text());
+        attenderCnt.html(cnt-1);
       }
       else if(json.result==0){    // 일정 취소실패
         alert("등록되지 않은 예약으로 취소할 수 없습니다.");
@@ -184,6 +190,7 @@ function func_requestNo(schedule_no) {
     }
   });
 }
+
 
 
 /*$(requestNo).parent().prev().click();*/
