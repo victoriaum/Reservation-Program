@@ -2,9 +2,12 @@ package com.system.reservation.web;
 
 import com.system.reservation.service.ScheduleService;
 import com.system.reservation.service.TeacherService;
+import com.system.reservation.web.dto.TeacherDto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
@@ -27,9 +30,13 @@ public class ReportController {
   }
 
   @RequestMapping("/report_t")
-  public String report_t(Model m) {
-    List<String> deptList = teacherService.getDept();
-    m.addAttribute("deptList",deptList);
+  public String report_t(HttpServletRequest request, Model m) {
+    HttpSession httpSession = request.getSession();
+    TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
+    String teacher_id = teacherDto.getTeacher_id();
+
+    List<String> scheduleList = scheduleService.findByTeacher_id(teacher_id);
+    m.addAttribute("scheduleList",scheduleList);
     return "report_t";
   }
 

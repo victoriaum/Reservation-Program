@@ -59,4 +59,12 @@ public class ScheduleService {
       return 0;
     }
   }
+
+
+  @Transactional
+  public List<String> findByTeacher_id(String teacher_id) {
+    List<String> scheduleList = schedulerRepository.findByTeacher_id(teacher_id);
+    return scheduleList;
+  }
+
 }

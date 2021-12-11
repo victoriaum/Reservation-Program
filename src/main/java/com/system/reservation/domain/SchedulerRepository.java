@@ -19,5 +19,7 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
   @Query("UPDATE Scheduler s SET s.schedule_attender=:attenders WHERE s.schedule_no=:schedule_no")
   void updateReport(@Param("schedule_no") Long schedule_no, @Param("attenders") String attenders);
 
+  @Query("SELECT s FROM Scheduler s WHERE s.teacher_id=:teacher_id")
+  List<String> findByTeacher_id(String teacher_id);
 }
 
