@@ -13,13 +13,13 @@
     <div class="center">
 
       <div class="area choosenArea">
-        <span class="subTitle mb-3" onclick="func_moveTo('/report_t')">레포트 검사일자 관리</span>
+        <span class="subTitle mb-3" onclick="location.href='/report_t'">레포트 검사일자 관리</span>
         <br>
       </div>
 
       <div class="area firstArea">
-        <th:block th:each="dept:${deptList}">
-          <span class="choice dept" th:text="${dept}"></span>
+        <th:block th:each="schedule:${scheduleList}">
+          <span th:text="${schedule}"></span>
         </th:block>
       </div>
 

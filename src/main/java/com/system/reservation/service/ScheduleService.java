@@ -15,8 +15,8 @@ public class ScheduleService {
   private final SchedulerRepository schedulerRepository;
 
   @Transactional
-  public List<String> getTeacherSchedule(String checkedTeacher, String formatDate) {
-    List<String> scheduleList = schedulerRepository.getTeacherSchedule(checkedTeacher, formatDate);
+  public List<String> getTeacherSchedule(String teacher_id, String formatDate) {
+    List<String> scheduleList = schedulerRepository.getTeacherSchedule(teacher_id, formatDate);
     return scheduleList;
   };
 
@@ -61,10 +61,5 @@ public class ScheduleService {
   }
 
 
-  @Transactional
-  public List<String> findByTeacher_id(String teacher_id) {
-    List<String> scheduleList = schedulerRepository.findByTeacher_id(teacher_id);
-    return scheduleList;
-  }
 
 }

@@ -22,6 +22,12 @@ public class ReportController {
   private final TeacherService teacherService;
   private final ScheduleService scheduleService;
 
+  // 오늘 날짜 구하기
+  LocalDate now = LocalDate.now();
+  DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+  String formatDate = now.format(dateTimeFormatter);
+
+
   @RequestMapping("/report_s")
   public String report_s(Model m) {
     List<String> deptList = teacherService.getDept();
@@ -35,7 +41,7 @@ public class ReportController {
     TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
     String teacher_id = teacherDto.getTeacher_id();
 
-    List<String> scheduleList = scheduleService.findByTeacher_id(teacher_id);
+    List<String> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
     m.addAttribute("scheduleList",scheduleList);
     return "report_t";
   }
@@ -51,12 +57,8 @@ public class ReportController {
 
   @ResponseBody
   @RequestMapping("/getTeacherSchedule")
-  public String getTeacherSchedule(@RequestParam("checkedTeacher") String checkedTeacher) {
-    LocalDate now = LocalDate.now();
-    DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-    String formatDate = now.format(dateTimeFormatter);
-
-    List<String> scheduleList = scheduleService.getTeacherSchedule(checkedTeacher, formatDate);
+  public String getTeacherSchedule(@RequestParam("checkedTeacher") String teacher_id) {
+    List<String> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("scheduleList", scheduleList);
     return jsonObject.toString();
