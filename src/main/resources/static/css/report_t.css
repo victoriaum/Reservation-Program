@@ -11,11 +11,10 @@
 }
 
 .subArea {
-  margin-bottom: 0.5rem;
+  margin: 0.3rem 0;
   padding: 0.5rem;
   background-color: #f8f2ec;
   font-size: 0.8rem;
-  margin-bottom: 0.2rem;
 }
 .smallWidth {
   width: 85%;
@@ -48,4 +47,52 @@
   vertical-align: middle;
   margin-top: 1.5rem;
   margin-right: 0.3rem;
+}
+.subHelp {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+.subInput {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  width: 10rem;
+  height: 1.5rem;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.3rem;
+}
+.timepicker {
+  width: 8rem;
+}
+.space {
+  width: 30%;
+}
+
+#saveSchedule {
+  width: 100%;
+  height: 2rem;
+  text-align: center;
+  background-color: #55705A;
+  color: white;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  margin: 1rem auto 0rem auto;
+}
+.saveSchedule2 {
+  display: inline-block;
+  width: 48%;
+  height: 2rem;
+  text-align: center;
+  background-color: #55705A;
+  color: white;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  margin: 0.7rem auto 0rem auto;
+}
+#deleteSchedule {
+  background-color: #E48873;
+}
+#buttons {
+  margin: 0 auto;
 }

@@ -91,14 +91,16 @@ public class ReportController {
     return "report_t";
   }
 
-  @RequestMapping("/makeSchedule")
-  public String makeSchedule(@RequestParam("no") String no,Model m) {
-    Long schedule_no = Long.parseLong(no);
-    String schedule = "";
+  @RequestMapping("/report_t/makeSchedule")
+  public String makeSchedule(@RequestParam("no") String no, Model m) {
 
-    if(no!=null){
-      schedule = scheduleService.getSpecificSchedule(schedule_no);
+    if(!"0".equals(no)){
+      Long schedule_no = Long.parseLong(no);
+      String schedule = scheduleService.findBySchedule_no(schedule_no);
       m.addAttribute("schedule", schedule);
+    } else {
+      m.addAttribute("no", no);
+      m.addAttribute("schedule", "");
     }
 
     return "makeSchedule";

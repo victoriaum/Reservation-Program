@@ -8,45 +8,89 @@
   <script th:src="@{js/report_t.js}"></script>
   <!--datepicker custom-->
   <link th:href="@{css/datepicker.min.css}" rel="stylesheet" type="text/css" media="all">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
   <script th:href="@{js/jquery-3.1.1.min.js}"></script>
   <script th:src="@{js/datepicker/datepicker.js}"></script>
   <script th:src="@{js/datepicker/datepicker.ko.js}"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </head>
 
 <div layout:fragment="content">
   <div id="container">
     <div class="center">
 
-      <div class="area choosenArea">
+      <div class="area choosenArea mb-3">
         <span class="subTitle mb-3" onclick="location.href='/report_t'">Report</span>
         <br>
       </div>
 
-      <button type="button" id="makeSchedule">+ 일정 추가하기</button>
+      <!--새로운 예약을 만들어야 하는 경우-->
+      <form>
+      <div class="subArea" th:if="${schedule}==''">
+        <label for="datepicker" class="form-label subHelp">
+          <img class="smallImg" th:src="@{image/report/date.png}"/>
+          날짜
+        </label>
+        <input type="date" class="form-control subInput" id="datepicker"><br>
 
-      <div th:if="${schedule}==''" class="area firstArea">
-        <th:block th:each="schedule:${scheduleList}">
-          <div class="subArea" th:id="${schedule.split(',')[0]}" onclick="func_edit(this)">
-            <img class="smallImg" th:src="@{image/report/date.png}"/>
-            <span class="date" th:text = "${schedule.split(',')[1].substring(0,4)
-                                       +'-'+schedule.split(',')[1].substring(4,6)
-                                       +'-'+schedule.split(',')[1].substring(6)}"/><br>
+        <label for="startTimer" class="form-label subHelp">
+          <img class="smallImg" th:src="@{image/report/time.png}"/>
+          시작시간
+        </label>
+        <input type="time" class="form-control subInput timepicker" id="startTimer" name="startTime"/><br>
 
-            <img class="smallImg" th:src="@{image/report/time.png}"/>
-            <span class="startTime" th:text="${schedule.split(',')[2]}"></span>
-            <span> - </span>
-            <span class="endTime" th:text="${schedule.split(',')[3]}"></span><br>
+        <label for="endTime" class="form-label subHelp">
+          <img class="smallImg" th:src="@{image/report/time.png}"/>
+          마감시간
+        </label>
+        <input type="time" class="form-control subInput timepicker" id="endTime" name="endTime"/><br>
 
-            <img class="smallImg" th:src="@{image/report/attender.png}"/>
-            <span th:text="${schedule.split(',')[5]}"></span>
-            <span> 명</span>
-          </div>
-        </th:block>
+        <label for="space" class="form-label subHelp">
+          <img class="smallImg" th:src="@{image/report/attender.png}"/>
+          가능인원
+        </label>
+        <input type="number" min="1" max="100" step="1" class="form-control subInput space" id="space" name="space" placeholder="0"/>
+        <span> 명</span>
+
+        <button type="button" id="saveSchedule" onclick="func_saveSchedule()">저장하기</button>
       </div>
+      </form>
 
 
-      <div th:if="${schedule}!=''" class="area firstArea">
-        <span th:text="${schedule}"></span>
+      <!--수정이 필요한 경우-->
+      <div class="subArea" th:if="${schedule}!=''">
+        <input type="hidden" name="no" th:value="${no}"/>
+
+        <label for="datepicker2" class="form-label subHelp">
+          <img class="smallImg" th:src="@{image/report/date.png}"/>
+          날짜
+        </label>
+        <input type="date" class="form-control subInput" id="datepicker2" th:value="${schedule.split(',')[1]}"><br>
+
+        <label for="startTimer2" class="form-label subHelp">
+          <img class="smallImg" th:src="@{image/report/time.png}"/>
+          시작시간
+        </label>
+        <input type="time" class="form-control subInput timepicker" id="startTimer2" name="startTime"/><br>
+
+        <label for="endTime2" class="form-label subHelp">
+          <img class="smallImg" th:src="@{image/report/time.png}"/>
+          마감시간
+        </label>
+        <input type="time" class="form-control subInput timepicker" id="endTime2" name="endTime"/><br>
+
+        <label for="space2" class="form-label subHelp">
+          <img class="smallImg" th:src="@{image/report/attender.png}"/>
+          가능인원
+        </label>
+        <input type="number" min="1" max="100" step="1" class="form-control subInput space" id="space2" name="space" placeholder="0"/>
+        <span> 명</span>
+
+        <div id="buttons">
+          <button type="button" class="saveSchedule2" id="editSchedule">수정하기</button>
+          <button type="button" class="saveSchedule2" id="deleteSchedule">삭제하기</button>
+        </div>
+
       </div>
 
     </div>

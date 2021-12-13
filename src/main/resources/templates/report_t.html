@@ -6,11 +6,6 @@
   <link th:href="@{css/header.css}" rel="stylesheet">
   <link th:href="@{css/report_t.css}" rel="stylesheet">
   <script th:src="@{js/report_t.js}"></script>
-  <!--datepicker custom-->
-  <link th:href="@{css/datepicker.min.css}" rel="stylesheet" type="text/css" media="all">
-  <script th:href="@{js/jquery-3.1.1.min.js}"></script>
-  <script th:src="@{js/datepicker/datepicker.js}"></script>
-  <script th:src="@{js/datepicker/datepicker.ko.js}"></script>
 </head>
 
 <div layout:fragment="content">
@@ -22,11 +17,11 @@
         <br>
       </div>
 
-      <button type="button" id="makeSchedule">+ 일정 추가하기</button>
+      <button type="button" id="makeSchedule" onclick="location.href='/report_t/makeSchedule?no=0'">+ 일정 추가하기</button>
 
       <div th:if="${schedule}==''" class="area firstArea">
         <th:block th:each="schedule:${scheduleList}">
-          <div class="subArea" th:id="${schedule.split(',')[0]}" onclick="func_edit(this)">
+          <div class="subArea" th:id="${schedule.split(',')[0]}" onclick="func_edit(this, this.id)">
             <img class="smallImg" th:src="@{image/report/date.png}"/>
             <span class="date" th:text = "${schedule.split(',')[1].substring(0,4)
                                        +'-'+schedule.split(',')[1].substring(4,6)
