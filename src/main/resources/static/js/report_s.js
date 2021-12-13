@@ -55,32 +55,32 @@ function func_getSchedule(id){
   $.ajax({
     url:"/getTeacherSchedule",
     type: "post",
+    traditional: true,
     dataType:"json",
     data:{checkedTeacher:idArray[1]},
     success: function(json){
-      if(json.scheduleList==""){    // 저장된 일정이 없는 경우
-        $(".thirdArea").append("<div>정해진 일정이 없습니다.</div>");
-      }
-      else {    // 저장된 일정이 있는 경우
-        $.each(json.scheduleList, function(idx, val) {
-          var scheduleArray = val.split(",");
-          var lastIndex = scheduleArray.length - 1;
-          var subAreaDateArray = scheduleArray[1].substring(0, 4) + "년 "
-              + scheduleArray[1].substring(4, 6) + "월 "
-              + scheduleArray[1].substring(6) + "일";
-          var attenderCnt = lastIndex - 4;
+      var result = json.scheduleList;
+      console.log(json.scheduleList);
+      if(result.length>0) {    // 저장된 일정이 있는 경우
+        $.each(json, function (idx, val) {
+          var attenderCnt = val.getSchedule_attender().split(",").length;
 
           $(".thirdArea").append(
-              "<div class='subArea' id='" + scheduleArray[0] + "' onclick='func_report(this)'>"
-              + "<span class='date'>" + subAreaDateArray + "</span><br>"
-              + "<span class='time'>" + scheduleArray[2] + " - "
-              + scheduleArray[3] + "</span><br>"
-              + "<span class='space'><span id='attenderCnt'>" + attenderCnt + "</span> / "
-              + scheduleArray[lastIndex] + "</span>"
+              "<div class='subArea' id='" + val.get(idx).schedule_no
+              + "' onclick='func_report(this)'>"
+              + "<span class='date'>" + val.getSchedule_date() + "</span><br>"
+              + "<span class='time'>" + val.getSchedule_start() + " - "
+              + val.getSchedule_end() + "</span><br>"
+              + "<span class='space'><span id='attenderCnt'>" + attenderCnt
+              + "</span> / " + val.getSchedule_space() + "</span>"
               + "<img class='attenderImg' src='image/report/attender.png'/>"
               + "</div>");
         });
       }
+      else{    // 저장된 일정이 없는 경우
+        $(".thirdArea").append("<div>정해진 일정이 없습니다.</div>");
+      }
+
     },
     error: function(report, status, error){
       alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);

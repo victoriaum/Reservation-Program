@@ -20,20 +20,18 @@
       <button type="button" id="makeSchedule" onclick="location.href='/report_t/makeSchedule?no=0'">+ 일정 추가하기</button>
 
       <div th:if="${schedule}==''" class="area firstArea">
-        <th:block th:each="schedule:${scheduleList}">
-          <div class="subArea" th:id="${schedule.split(',')[0]}" onclick="func_edit(this, this.id)">
+        <th:block th:each="dto:${scheduleList}">
+          <div class="subArea" th:id="${dto.schedule_no}" onclick="func_edit(this, this.id)">
             <img class="smallImg" th:src="@{image/report/date.png}"/>
-            <span class="date" th:text = "${schedule.split(',')[1].substring(0,4)
-                                       +'-'+schedule.split(',')[1].substring(4,6)
-                                       +'-'+schedule.split(',')[1].substring(6)}"/><br>
+            <span class="date" th:text = "${dto.schedule_date}"/><br>
 
             <img class="smallImg" th:src="@{image/report/time.png}"/>
-            <span class="startTime" th:text="${schedule.split(',')[2]}"></span>
+            <span class="startTime" th:text="${dto.schedule_start}"></span>
             <span> - </span>
-            <span class="endTime" th:text="${schedule.split(',')[3]}"></span><br>
+            <span class="endTime" th:text="${dto.schedule_end}"></span><br>
 
             <img class="smallImg" th:src="@{image/report/attender.png}"/>
-            <span th:text="${schedule.split(',')[5]}"></span>
+            <span th:text="${dto.schedule_space}"></span>
             <span> 명</span>
           </div>
         </th:block>

@@ -1,11 +1,13 @@
 package com.system.reservation.service;
 
+import com.system.reservation.domain.Scheduler;
 import com.system.reservation.domain.SchedulerRepository;
 import com.system.reservation.web.dto.SchedulerDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,9 +18,10 @@ public class ScheduleService {
   private final SchedulerRepository schedulerRepository;
 
   @Transactional
-  public List<String> getTeacherSchedule(String teacher_id, String formatDate) {
-    List<String> scheduleList = schedulerRepository.getTeacherSchedule(teacher_id, formatDate);
-    return scheduleList;
+  public List<SchedulerDto> getTeacherSchedule(String teacher_id, String formatDate) {
+    return schedulerRepository.getTeacherSchedule(teacher_id, formatDate).stream()
+        .map(SchedulerDto::new)
+        .collect(Collectors.toList());
   };
 
   @Transactional

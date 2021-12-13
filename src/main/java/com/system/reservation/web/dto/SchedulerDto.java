@@ -15,7 +15,6 @@ public class SchedulerDto {
   private String schedule_end;
   private String schedule_space;
 
-  @Builder
   public SchedulerDto(Scheduler entity){
     this.schedule_no = entity.getSchedule_no();
     this.teacher_id = entity.getTeacher_id();

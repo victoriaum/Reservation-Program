@@ -27,7 +27,7 @@ public class ReportController {
 
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
-  DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+  DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   String formatDate = now.format(dateTimeFormatter);
 
 
@@ -50,7 +50,8 @@ public class ReportController {
   @ResponseBody
   @RequestMapping("/getTeacherSchedule")
   public String getTeacherSchedule(@RequestParam("checkedTeacher") String teacher_id) {
-    List<String> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
+    List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
+    System.out.println(scheduleList.get(0).getSchedule_no());
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("scheduleList", scheduleList);
     return jsonObject.toString();
@@ -81,7 +82,8 @@ public class ReportController {
     TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
     String teacher_id = teacherDto.getTeacher_id();
 
-    List<String> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
+    List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
+
 
     if(scheduleList.size()==0) {
       m.addAttribute("schedule","등록한 일정이 없습니다.");
@@ -128,7 +130,7 @@ public class ReportController {
 
     scheduleService.saveSchedule(schedulerDto);
 
-    List<String> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
+    List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
     m.addAttribute("schedule","");
     m.addAttribute("scheduleList",scheduleList);
 
