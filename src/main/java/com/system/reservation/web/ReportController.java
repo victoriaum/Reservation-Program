@@ -2,6 +2,7 @@ package com.system.reservation.web;
 
 import com.system.reservation.service.ScheduleService;
 import com.system.reservation.service.TeacherService;
+import com.system.reservation.web.dto.SchedulerDto;
 import com.system.reservation.web.dto.TeacherDto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -33,17 +34,6 @@ public class ReportController {
     List<String> deptList = teacherService.getDept();
     m.addAttribute("deptList",deptList);
     return "report_s";
-  }
-
-  @RequestMapping("/report_t")
-  public String report_t(HttpServletRequest request, Model m) {
-    HttpSession httpSession = request.getSession();
-    TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
-    String teacher_id = teacherDto.getTeacher_id();
-
-    List<String> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
-    m.addAttribute("scheduleList",scheduleList);
-    return "report_t";
   }
 
   @ResponseBody
@@ -82,4 +72,22 @@ public class ReportController {
     return jsonObject.toString();
   }
 
+
+  @RequestMapping("/report_t")
+  public String report_t(HttpServletRequest request, Model m) {
+    HttpSession httpSession = request.getSession();
+    TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
+    String teacher_id = teacherDto.getTeacher_id();
+
+    List<String> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
+    String schedule="";
+    if(scheduleList.size()==0) {
+      schedule = "등록한 일정이 없습니다.";
+      m.addAttribute("schedule",schedule);
+    } else {
+      m.addAttribute("scheduleList",scheduleList);
+    }
+
+    return "report_t";
+  }
 }

@@ -24,5 +24,8 @@ public class MainController {
     return "mypage";
   }
 
-
+  @RequestMapping("/test")
+  public String test() {
+    return "datepicker";
+  }
 }
