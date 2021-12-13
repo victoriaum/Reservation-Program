@@ -61,4 +61,11 @@ public class ScheduleService {
     }
   }
 
+  @Transactional
+  public String getSpecificSchedule(Long schedule_no) {
+    String schedule = schedulerRepository.findBySchedule_no(schedule_no);
+    return schedule;
+  }
+
+
 }

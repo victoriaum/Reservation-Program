@@ -80,14 +80,27 @@ public class ReportController {
     String teacher_id = teacherDto.getTeacher_id();
 
     List<String> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
-    String schedule="";
+
     if(scheduleList.size()==0) {
-      schedule = "등록한 일정이 없습니다.";
-      m.addAttribute("schedule",schedule);
+      m.addAttribute("schedule","등록한 일정이 없습니다.");
     } else {
+      m.addAttribute("schedule","");
       m.addAttribute("scheduleList",scheduleList);
     }
 
     return "report_t";
+  }
+
+  @RequestMapping("/makeSchedule")
+  public String makeSchedule(@RequestParam("no") String no,Model m) {
+    Long schedule_no = Long.parseLong(no);
+    String schedule = "";
+
+    if(no!=null){
+      schedule = scheduleService.getSpecificSchedule(schedule_no);
+      m.addAttribute("schedule", schedule);
+    }
+
+    return "makeSchedule";
   }
 }

@@ -23,5 +23,8 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
   @Query("SELECT s FROM Scheduler s WHERE s.teacher_id=:teacher_id AND s.schedule_date>=:formatDate")
   List<SchedulerDto> getSchedule(@Param("teacher_id") String teacher_id, @Param("formatDate") String formatDate);
 
+  @Query("SELECT s.schedule_no, s.schedule_date, s.schedule_start, s.schedule_end, s.schedule_attender, s.schedule_space "
+      + "FROM Scheduler s WHERE s.schedule_no=:schedule_no")
+  String findBySchedule_no(Long schedule_no);
 }
 

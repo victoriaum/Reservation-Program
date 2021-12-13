@@ -15,8 +15,11 @@
   padding: 0.5rem;
   background-color: #f8f2ec;
   font-size: 0.8rem;
-  cursor: pointer;
   margin-bottom: 0.2rem;
+}
+.smallWidth {
+  width: 85%;
+  display: inline-block;
 }
 #makeSchedule {
   width: 100%;
@@ -38,4 +41,11 @@
 .detailSubArea {
   margin: 0rem auto 0.5rem auto;
   font-size: 0.8rem;
+}
+.editImg {
+  float: right;
+  width: 1.5rem;
+  vertical-align: middle;
+  margin-top: 1.5rem;
+  margin-right: 0.3rem;
 }
