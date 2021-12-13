@@ -15,6 +15,7 @@
   padding: 0.5rem;
   background-color: #f8f2ec;
   font-size: 0.8rem;
+  cursor: pointer;
 }
 .smallWidth {
   width: 85%;
@@ -47,10 +48,12 @@
   vertical-align: middle;
   margin-top: 1.5rem;
   margin-right: 0.3rem;
+  cursor: pointer;
 }
 .subHelp {
   display: inline-block;
   margin-right: 0.5rem;
+  cursor: pointer;
 }
 .subInput {
   display: inline-block;
@@ -59,6 +62,7 @@
   height: 1.5rem;
   font-size: 0.7rem;
   padding: 0.1rem 0.3rem;
+  cursor: pointer;
 }
 .timepicker {
   width: 8rem;
