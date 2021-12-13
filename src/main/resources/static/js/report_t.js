@@ -38,7 +38,7 @@ function func_editSchedule(id){
 
 // 일정 저장하기
 function func_saveSchedule(){
-/*2021-12-17 00:48 23:52 2 true*/
+
   var form = document.saveScheduleForm;
   var date = $("#date").val();
   var startTime = $("#startTime").val();
