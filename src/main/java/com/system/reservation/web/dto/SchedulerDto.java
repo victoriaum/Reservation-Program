@@ -1,10 +1,11 @@
 package com.system.reservation.web.dto;
 
 import com.system.reservation.domain.Scheduler;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@Setter
+@RequiredArgsConstructor
 public class SchedulerDto {
   private Long schedule_no;
   private String teacher_id;
@@ -12,7 +13,7 @@ public class SchedulerDto {
   private String schedule_date;
   private String schedule_start;
   private String schedule_end;
-  private Integer schedule_space;
+  private String schedule_space;
 
   @Builder
   public SchedulerDto(Scheduler entity){
@@ -24,4 +25,16 @@ public class SchedulerDto {
     this.schedule_end = entity.getSchedule_end();
     this.schedule_space = entity.getSchedule_space();
   }
+
+  public Scheduler toEntity(){
+    return Scheduler.builder()
+        .schedule_attender(schedule_attender)
+        .teacher_id(teacher_id)
+        .schedule_date(schedule_date)
+        .schedule_start(schedule_start)
+        .schedule_end(schedule_end)
+        .schedule_space(schedule_space)
+        .build();
+  }
+
 }

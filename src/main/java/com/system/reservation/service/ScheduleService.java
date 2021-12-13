@@ -5,8 +5,8 @@ import com.system.reservation.web.dto.SchedulerDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,5 +67,9 @@ public class ScheduleService {
     return schedule;
   }
 
+  @Transactional
+  public void saveSchedule(SchedulerDto schedulerDto){
+    schedulerRepository.save(schedulerDto.toEntity());
+  }
 
 }

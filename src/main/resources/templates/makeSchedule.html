@@ -25,19 +25,19 @@
       </div>
 
       <!--새로운 예약을 만들어야 하는 경우-->
-      <form>
+      <form name="saveScheduleForm" id="saveScheduleForm" th:action="@{/saveSchedule}" onsubmit="return func_saveSchedule()">
       <div class="subArea" th:if="${schedule}==''">
-        <label for="datepicker" class="form-label subHelp">
+        <label for="date" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/date.png}"/>
           날짜
         </label>
-        <input type="date" class="form-control subInput" id="datepicker"><br>
+        <input type="date" class="form-control subInput" id="date" name="date"><br>
 
-        <label for="startTimer" class="form-label subHelp">
+        <label for="startTime" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/time.png}"/>
           시작시간
         </label>
-        <input type="time" class="form-control subInput timepicker" id="startTimer" name="startTime"/><br>
+        <input type="time" class="form-control subInput timepicker" id="startTime" name="startTime"/><br>
 
         <label for="endTime" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/time.png}"/>
@@ -52,7 +52,9 @@
         <input type="number" min="1" max="100" step="1" class="form-control subInput space" id="space" name="space" placeholder="0"/>
         <span> 명</span>
 
-        <button type="button" id="saveSchedule" onclick="func_saveSchedule()">저장하기</button>
+        <span class="error"></span>
+
+        <button type="submit" id="saveSchedule">저장하기</button>
       </div>
       </form>
 

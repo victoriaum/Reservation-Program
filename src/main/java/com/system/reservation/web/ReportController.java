@@ -6,7 +6,7 @@ import com.system.reservation.web.dto.SchedulerDto;
 import com.system.reservation.web.dto.TeacherDto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ReportController {
   private final TeacherService teacherService;
   private final ScheduleService scheduleService;
+
+  SchedulerDto schedulerDto = new SchedulerDto();
 
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
@@ -104,5 +106,32 @@ public class ReportController {
     }
 
     return "makeSchedule";
+  }
+
+  @RequestMapping("/saveSchedule")
+  public String saveSchedule(@RequestParam("date") String date,
+                             @RequestParam("startTime") String start,
+                             @RequestParam("endTime") String end,
+                             @RequestParam("space") String space,
+                             HttpServletRequest request, Model m) {
+
+    HttpSession httpSession = request.getSession();
+    TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
+    String teacher_id = teacherDto.getTeacher_id();
+
+    schedulerDto.setTeacher_id(teacher_id);
+    schedulerDto.setSchedule_attender("");
+    schedulerDto.setSchedule_date(date);
+    schedulerDto.setSchedule_start(start);
+    schedulerDto.setSchedule_end(end);
+    schedulerDto.setSchedule_space(space);
+
+    scheduleService.saveSchedule(schedulerDto);
+
+    List<String> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
+    m.addAttribute("schedule","");
+    m.addAttribute("scheduleList",scheduleList);
+
+    return "report_t";
   }
 }

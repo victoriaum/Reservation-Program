@@ -96,3 +96,9 @@
 #buttons {
   margin: 0 auto;
 }
+.error {
+  color: red;
+  float: left;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}

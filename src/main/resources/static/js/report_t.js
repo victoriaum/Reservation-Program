@@ -15,10 +15,6 @@ $(function(){
     dropdown: true,
     scrollbar: true
   });*/
-
-
-
-
 });
 
 // 일정을 클릭했을 때
@@ -37,4 +33,48 @@ function func_edit(obj, id){
 // 일정 수정하기 이동
 function func_editSchedule(id){
   location.href="/report_t/makeSchedule?no="+id;
+}
+
+
+// 일정 저장하기
+function func_saveSchedule(){
+/*2021-12-17 00:48 23:52 2 true*/
+  var form = document.saveScheduleForm;
+  var date = $("#date").val();
+  var startTime = $("#startTime").val();
+  var endTime = $("#endTime").val();
+  var space = $("#space").val();
+
+  if(date==null || date==""){
+    $("#date").focus();
+    $(".error").html("날짜를 입력해 주세요.");
+    return false;
+  }
+
+  if(startTime==null || startTime==""){
+    $("#startTime").focus();
+    $(".error").html("시작시간을 입력해 주세요.");
+    return false;
+  }
+
+  if(endTime==null || endTime==""){
+    $("#endTime").focus();
+    $(".error").html("마감시간을 입력해 주세요.");
+    return false;
+  }
+
+  if(space==null || space==""){
+    $("#space").focus();
+    $(".error").html("가능인원을 입력해 주세요.");
+    return false;
+  }
+
+  if(startTime>=endTime){
+    $("#startTime").focus();
+    $(".error").html("시작시간이 마감시간보다 빠를 수 없습니다.");
+    return false;
+  }
+
+  return true;
+  form.submit();
 }

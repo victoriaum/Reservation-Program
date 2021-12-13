@@ -20,7 +20,7 @@ public class Scheduler{
   @JoinColumn(name = "teacher_id")
 */
 
-  @Column(columnDefinition = "TEXT", length=600)
+  @Column(columnDefinition = "TEXT default ''", length=600)
   private String schedule_attender;
 
   @Column(columnDefinition = "TEXT", length=100, nullable = false)
@@ -28,15 +28,11 @@ public class Scheduler{
   private String schedule_date;
   private String schedule_start;
   private String schedule_end;
-
-  @Column(columnDefinition = "TEXT", length=100)
-  @ColumnDefault("6")
-  private Integer schedule_space;
+  private String schedule_space;
 
   @Builder
-  public void Scheduler(Long schedule_no, String schedule_attender, String teacher_id, String schedule_date, String schedule_start,
-                        String schedule_end, Integer schedule_space){
-    this.schedule_no = schedule_no;
+  public Scheduler(String schedule_attender, String teacher_id, String schedule_date, String schedule_start,
+                        String schedule_end, String schedule_space){
     this.schedule_attender = schedule_attender;
     this.teacher_id = teacher_id;
     this.schedule_date = schedule_date;   /* 형식: 2021-12-10 */
