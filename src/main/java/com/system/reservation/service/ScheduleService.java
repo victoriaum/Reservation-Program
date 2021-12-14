@@ -6,6 +6,7 @@ import com.system.reservation.web.dto.SchedulerDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -95,5 +96,8 @@ public class ScheduleService {
     schedulerRepository.deleteById(no);
   }
 
-
+  @Transactional
+  public void editSchedule(Long no, String date, String start, String end, String space) {
+    schedulerRepository.editSchedule(no, date, start, end, space);
+  }
 }

@@ -119,6 +119,10 @@ function func_editSchedule(){
     return false;
   }
 
+  const url = new URL(window.location.href);
+  const no = url.searchParams.get('no');
+  $("#no").html(no);
+
   return true;
   form.submit();
 }

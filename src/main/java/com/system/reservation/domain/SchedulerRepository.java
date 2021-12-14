@@ -37,5 +37,8 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
   List<String> studentTodaySchedule(@Param("student_id") String student_id, @Param("formatDate") String formatDate);
 
 
+  @Modifying
+  @Query("UPDATE Scheduler s SET s.schedule_date=:date, s.schedule_start=:start, s.schedule_end=:end, s.schedule_space=:space WHERE s.schedule_no=:no")
+  void editSchedule(@Param("no") Long no, @Param("date") String date, @Param("start") String start, @Param("end") String end, @Param("space") String space);
 }
 

@@ -10,6 +10,7 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.util.ParameterMap;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -107,7 +108,7 @@ public class ReportController {
     return "makeSchedule";
   }
 
-  @RequestMapping("/saveSchedule")
+  @RequestMapping("/report_t/saveSchedule")
   public String saveSchedule(@RequestParam("date") String date,
                              @RequestParam("startTime") String start,
                              @RequestParam("endTime") String end,
@@ -130,6 +131,22 @@ public class ReportController {
     List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
     m.addAttribute("schedule","");
     m.addAttribute("scheduleList",scheduleList);
+
+    return "report_t";
+  }
+
+
+  @RequestMapping("/report_t/editSchedule")
+  public String editSchedule(@RequestParam("no") String str_no,
+                              @RequestParam("date") String date,
+                              @RequestParam("startTime") String start,
+                              @RequestParam("endTime") String end,
+                              @RequestParam("space") String space,
+                              Model m) {
+
+    Long no = Long.parseLong(str_no);
+    scheduleService.editSchedule(no, date, start, end, space);
+    m.addAttribute("","");
 
     return "report_t";
   }
