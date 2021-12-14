@@ -4,7 +4,9 @@ import com.system.reservation.service.StudentService;
 import com.system.reservation.service.TeacherService;
 import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
+import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -27,7 +29,8 @@ public class UserController {
 
   @PostMapping("/login")
   public String login(@RequestParam("inlineRadioOptions") String type, @RequestParam("id") String id,
-                      @RequestParam("password") String password, Model m, HttpServletRequest request) {
+                      @RequestParam("password") String password, Model m, HttpServletRequest request, HttpServletResponse response)
+      throws IOException {
 
     HttpSession httpSession = request.getSession();
 
@@ -40,6 +43,7 @@ public class UserController {
       else {
         httpSession.setAttribute("loginUser",teacherDto);
         httpSession.setAttribute("loginType",type);
+        response.sendRedirect("index");
         return "index";
       }
 
@@ -52,6 +56,7 @@ public class UserController {
       else {
         httpSession.setAttribute("loginUser",studentDto);
         httpSession.setAttribute("loginType",type);
+        response.sendRedirect("index");
         return "index";
       }
     }
