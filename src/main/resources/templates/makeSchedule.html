@@ -63,29 +63,33 @@
       <div class="subArea" th:if="${schedule}!=''">
         <input type="hidden" name="no" th:value="${no}"/>
 
-        <label for="datepicker2" class="form-label subHelp">
+        <label for="date2" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/date.png}"/>
           날짜
         </label>
-        <input type="date" class="form-control subInput" id="datepicker2" th:value="${schedule.split(',')[1]}"><br>
+        <input type="date" class="form-control subInput"
+               id="date2" name="date2" th:value="${schedule.split(',')[1]}"><br>
 
-        <label for="startTimer2" class="form-label subHelp">
+        <label for="startTime2" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/time.png}"/>
           시작시간
         </label>
-        <input type="time" class="form-control subInput timepicker" id="startTimer2" name="startTime"/><br>
+        <input type="time" class="form-control subInput timepicker"
+               id="startTime2" name="startTime2" th:value="${schedule.split(',')[2]}"/><br>
 
         <label for="endTime2" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/time.png}"/>
           마감시간
         </label>
-        <input type="time" class="form-control subInput timepicker" id="endTime2" name="endTime"/><br>
+        <input type="time" class="form-control subInput timepicker"
+               id="endTime2" name="endTime2" th:value="${schedule.split(',')[3]}"/><br>
 
         <label for="space2" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/attender.png}"/>
           가능인원
         </label>
-        <input type="number" min="1" max="100" step="1" class="form-control subInput space" id="space2" name="space" placeholder="0"/>
+        <input type="number" min="1" max="100" step="1" class="form-control subInput space"
+               id="space2" name="space2" th:value="${schedule.split(',')[5]}"/>
         <span> 명</span>
 
         <div id="buttons">
