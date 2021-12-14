@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ScheduleService {
   private final SchedulerRepository schedulerRepository;
 
+
   @Transactional
   public List<SchedulerDto> getTeacherSchedule(String teacher_id, String formatDate) {
     return schedulerRepository.getTeacherSchedule(teacher_id, formatDate).stream()
@@ -74,5 +75,21 @@ public class ScheduleService {
   public void saveSchedule(SchedulerDto schedulerDto){
     schedulerRepository.save(schedulerDto.toEntity());
   }
+
+  @Transactional
+  public List<SchedulerDto> teacherTodaySchedule(String teacher_id, String formatDate) {
+    return schedulerRepository.teacherTodaySchedule(teacher_id, formatDate).stream()
+        .map(SchedulerDto::new)
+        .collect(Collectors.toList());
+  };
+
+  @Transactional
+  public List<SchedulerDto> studentTodaySchedule(String student_id, String formatDate) {
+    return schedulerRepository.studentTodaySchedule(student_id, formatDate).stream()
+        .map(SchedulerDto::new)
+        .collect(Collectors.toList());
+  };
+
+
 
 }

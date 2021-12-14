@@ -55,24 +55,21 @@ function func_getSchedule(id){
   $.ajax({
     url:"/getTeacherSchedule",
     type: "post",
-    traditional: true,
-    dataType:"json",
     data:{checkedTeacher:idArray[1]},
-    success: function(json){
-      var result = json.scheduleList;
-      console.log(json.scheduleList);
-      if(result.length>0) {    // 저장된 일정이 있는 경우
-        $.each(json, function (idx, val) {
-          var attenderCnt = val.getSchedule_attender().split(",").length;
+    success: function(data){
+
+      if(data.length>0) {    // 저장된 일정이 있는 경우
+
+        $.each(data, function (idx,val) {
+          var attenderCnt = val.schedule_attender.split(",").length;
 
           $(".thirdArea").append(
-              "<div class='subArea' id='" + val.get(idx).schedule_no
-              + "' onclick='func_report(this)'>"
-              + "<span class='date'>" + val.getSchedule_date() + "</span><br>"
-              + "<span class='time'>" + val.getSchedule_start() + " - "
-              + val.getSchedule_end() + "</span><br>"
+              "<div class='subArea' id='" +val.schedule_no+ "' onclick='func_report(this)'>"
+              + "<span class='date'>" + val.schedule_date + "</span><br>"
+              + "<span class='time'>" + val.schedule_start + " - "
+              + val.schedule_end + "</span><br>"
               + "<span class='space'><span id='attenderCnt'>" + attenderCnt
-              + "</span> / " + val.getSchedule_space() + "</span>"
+              + "</span> / " + val.schedule_space + "</span>"
               + "<img class='attenderImg' src='image/report/attender.png'/>"
               + "</div>");
         });

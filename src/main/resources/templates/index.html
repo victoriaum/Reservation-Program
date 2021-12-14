@@ -52,16 +52,38 @@
           <span class="indexContentsTitle">오늘 레포트검사 일정</span>
           <span class="more">more</span>
         </div>
-        <p class="indexContentsDetail">
-          <span class="indexContentsDetailInfo2">PM 2:00</span>
-          <span class="noticeSubject">외과 OOO 선생님</span>
-        </p>
-        <p class="indexContentsDetail">
-          <span class="indexContentsDetailInfo2">PM 5:00</span>
-          <span class="noticeSubject">내과 OOO 선생님</span>
-        </p>
-      </div>
 
+        <!-- 선생님 오늘 일정을 보여주는 부분 -->
+        <div th:if="${session.loginType}=='1' and ${scheduleList!=null}">
+          <th:block th:each="dto:${scheduleList}">
+            <p class="indexContentsDetail" th:value="${dto.schedule_no}">
+              <span class="indexContentsDetailInfo2" th:text="${dto.schedule_start}"></span>
+              <span class="noticeSubject" th:text="${dto.schedule_attender}"></span>
+            </p>
+          </th:block>
+        </div>
+        <div th:if="${session.loginType}=='1' and ${scheduleList==null}">
+          <p class="indexContentsDetail">
+            <span class="noticeSubject">오늘 일정은 없습니다.</span>
+          </p>
+        </div>
+
+        <!-- 학생 오늘 일정을 보여주는 부분 -->
+        <div th:if="${session.loginType}=='1' and ${scheduleList!=null}">
+          <th:block th:each="dto:${scheduleList}">
+            <p class="indexContentsDetail" th:value="${dto.schedule_no}">
+              <span class="indexContentsDetailInfo2" th:text="${dto.schedule_start}"></span>
+              <span class="noticeSubject" th:text="${dto.teacher_id}"></span>
+            </p>
+          </th:block>
+        </div>
+        <div th:if="${session.loginType}=='1' and ${scheduleList==null}">
+          <p class="indexContentsDetail">
+            <span class="noticeSubject">오늘 일정은 없습니다.</span>
+          </p>
+        </div>
+
+      </div>
     </div>
   </div>
 </div>

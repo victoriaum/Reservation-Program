@@ -49,12 +49,9 @@ public class ReportController {
 
   @ResponseBody
   @RequestMapping("/getTeacherSchedule")
-  public String getTeacherSchedule(@RequestParam("checkedTeacher") String teacher_id) {
+  public Object getTeacherSchedule(@RequestParam("checkedTeacher") String teacher_id) {
     List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
-    System.out.println(scheduleList.get(0).getSchedule_no());
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("scheduleList", scheduleList);
-    return jsonObject.toString();
+    return scheduleList;
   }
 
   @ResponseBody
