@@ -84,10 +84,8 @@ public class ScheduleService {
   };
 
   @Transactional
-  public List<SchedulerDto> studentTodaySchedule(String student_id, String formatDate) {
-    return schedulerRepository.studentTodaySchedule(student_id, formatDate).stream()
-        .map(SchedulerDto::new)
-        .collect(Collectors.toList());
+  public List<String> studentTodaySchedule(String student_id, String formatDate) {
+    return schedulerRepository.studentTodaySchedule(student_id, formatDate);
   };
 
 

@@ -40,7 +40,7 @@ public class MainController {
     else {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
-      List<SchedulerDto> scheduleList = scheduleService.studentTodaySchedule(student_id, formatDate);
+      List<String> scheduleList = scheduleService.studentTodaySchedule(student_id, formatDate);
       m.addAttribute("scheduleList",scheduleList);
     }
 
