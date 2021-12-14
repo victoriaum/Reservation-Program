@@ -41,6 +41,7 @@ public class MainController {
       StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
       List<String> scheduleList = scheduleService.studentTodaySchedule(student_id, formatDate);
+      System.out.println(scheduleList);
       m.addAttribute("scheduleList",scheduleList);
     }
 

@@ -74,14 +74,12 @@
         <!-- 학생 오늘 일정을 보여주는 부분 -->
         <div th:if="${session.loginType}=='2' and ${scheduleList!=null}">
           <th:block th:each="list:${scheduleList}">
-            <th:block th:each="s:${#strings.arraySplit(list,',')}">
-              <p class="indexContentsDetail" th:value="${s[0]}">
-                <span class="indexContentsDetailInfo2" th:text="${s[1]}"></span>
-                <span class="noticeSubject">
-                  <span th:text="|${s[2]} ${s[3]} ${s[4]}|" class="import"></span>
-                </span>
-              </p>
-            </th:block>
+            <p class="indexContentsDetail" th:value="${#strings.arraySplit(list,',')[0]}">
+              <span class="indexContentsDetailInfo2" th:text="${#strings.arraySplit(list,',')[1]}"></span>
+              <span class="noticeSubject">
+                <span th:text="|${#strings.arraySplit(list,',')[2]} ${#strings.arraySplit(list,',')[3]} ${#strings.arraySplit(list,',')[4]}|"></span>
+              </span>
+            </p>
           </th:block>
         </div>
         <div th:if="${session.loginType}=='2' and ${scheduleList==null}">
