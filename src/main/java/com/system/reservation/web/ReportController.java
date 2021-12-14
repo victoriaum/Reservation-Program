@@ -133,4 +133,13 @@ public class ReportController {
 
     return "report_t";
   }
+
+
+  @ResponseBody
+  @RequestMapping("/report_t/deleteSchedule")
+  public String deleteSchedule(@RequestParam("no") String schedule_no, Model m) {
+    Long no = Long.parseLong(schedule_no);
+    scheduleService.deleteById(no);
+    return "성공적으로 삭제되었습니다.";
+  }
 }

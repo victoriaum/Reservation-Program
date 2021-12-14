@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -88,6 +89,11 @@ public class ScheduleService {
     return schedulerRepository.studentTodaySchedule(student_id, formatDate);
   };
 
+  @Modifying
+  @Transactional
+  public void deleteById(Long no) {
+    schedulerRepository.deleteById(no);
+  }
 
 
 }

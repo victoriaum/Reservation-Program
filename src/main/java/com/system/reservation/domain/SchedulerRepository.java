@@ -9,7 +9,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
 
-  @Query("SELECT s FROM Scheduler s WHERE s.teacher_id=:teacher_id AND s.schedule_date>=:formatDate")
+  @Query("SELECT s FROM Scheduler s WHERE s.teacher_id=:teacher_id AND s.schedule_date>=:formatDate"
+      + " ORDER BY s.schedule_start ASC")
   Collection<Scheduler> getTeacherSchedule(@Param("teacher_id") String teacher_id, @Param("formatDate") String formatDate);
 
   @Query("SELECT s.schedule_attender FROM Scheduler s WHERE s.schedule_no=:schedule_no")
