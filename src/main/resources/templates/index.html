@@ -69,7 +69,7 @@
         </div>
 
         <!-- 학생 오늘 일정을 보여주는 부분 -->
-        <div th:if="${session.loginType}=='1' and ${scheduleList!=null}">
+        <div th:if="${session.loginType}=='2' and ${scheduleList!=null}">
           <th:block th:each="dto:${scheduleList}">
             <p class="indexContentsDetail" th:value="${dto.schedule_no}">
               <span class="indexContentsDetailInfo2" th:text="${dto.schedule_start}"></span>
@@ -77,7 +77,7 @@
             </p>
           </th:block>
         </div>
-        <div th:if="${session.loginType}=='1' and ${scheduleList==null}">
+        <div th:if="${session.loginType}=='2' and ${scheduleList==null}">
           <p class="indexContentsDetail">
             <span class="noticeSubject">오늘 일정은 없습니다.</span>
           </p>
