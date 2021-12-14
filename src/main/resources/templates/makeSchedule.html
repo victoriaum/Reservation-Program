@@ -25,7 +25,7 @@
       </div>
 
       <!--새로운 예약을 만들어야 하는 경우-->
-      <form name="saveScheduleForm" id="saveScheduleForm" th:action="@{/saveSchedule}" onsubmit="return func_saveSchedule()">
+      <form name="saveScheduleForm" id="saveScheduleForm" th:action="@{/report_t/saveSchedule}" onsubmit="return func_saveSchedule()">
       <div class="subArea" th:if="${schedule}==''">
         <label for="date" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/date.png}"/>
@@ -60,42 +60,46 @@
 
 
       <!--수정이 필요한 경우-->
-      <form name="editScheduleForm" id="editScheduleForm" th:action="@{/editSchedule}" onsubmit="return func_editSchedule()">
+      <form name="editScheduleForm" id="editScheduleForm" th:action="@{/report_t/editSchedule}" onsubmit="return func_editSchedule()">
       <div class="subArea" th:if="${schedule}!=''">
+
+        <input type="hidden" id="no" name="no"/>
 
         <label for="date2" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/date.png}"/>
           날짜
         </label>
         <input type="date" class="form-control subInput"
-               id="date2" name="date2" th:value="${schedule.split(',')[1]}"><br>
+               id="date2" name="date" th:value="${schedule.split(',')[1]}"><br>
 
         <label for="startTime2" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/time.png}"/>
           시작시간
         </label>
         <input type="time" class="form-control subInput timepicker"
-               id="startTime2" name="startTime2" th:value="${schedule.split(',')[2]}"/><br>
+               id="startTime2" name="startTime" th:value="${schedule.split(',')[2]}"/><br>
 
         <label for="endTime2" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/time.png}"/>
           마감시간
         </label>
         <input type="time" class="form-control subInput timepicker"
-               id="endTime2" name="endTime2" th:value="${schedule.split(',')[3]}"/><br>
+               id="endTime2" name="endTime" th:value="${schedule.split(',')[3]}"/><br>
 
         <label for="space2" class="form-label subHelp">
           <img class="smallImg" th:src="@{image/report/attender.png}"/>
           가능인원
         </label>
         <input type="number" min="1" max="100" step="1" class="form-control subInput space"
-               id="space2" name="space2" th:value="${schedule.split(',')[5]}"/>
+               id="space2" name="space" th:value="${schedule.split(',')[5]}"/>
         <span> 명</span>
 
         <div id="buttons">
           <button type="submit" class="saveSchedule2" id="editSchedule">수정하기</button>
           <button type="button" class="saveSchedule2" id="deleteSchedule" onclick="func_deleteSchedule()">삭제하기</button>
         </div>
+
+        <span class="error"></span>
 
       </div>
       </form>
