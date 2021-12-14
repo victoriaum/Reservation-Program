@@ -137,15 +137,17 @@ public class ReportController {
 
 
   @RequestMapping("/report_t/editSchedule")
-  public String editSchedule(@RequestParam("no") String str_no,
+  public String editSchedule(@RequestParam("no") String no,
                               @RequestParam("date") String date,
                               @RequestParam("startTime") String start,
                               @RequestParam("endTime") String end,
                               @RequestParam("space") String space,
                               Model m) {
 
-    Long no = Long.parseLong(str_no);
-    scheduleService.editSchedule(no, date, start, end, space);
+    System.out.println(no);
+
+    Long schedule_no = Long.parseLong(no);
+    scheduleService.editSchedule(schedule_no, date, start, end, space);
     m.addAttribute("","");
 
     return "report_t";

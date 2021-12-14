@@ -82,6 +82,9 @@ function func_saveSchedule(){
 
 // 일정 수정하기
 function func_editSchedule(){
+  const url = new URL(window.location.href);
+  const no = url.searchParams.get('no');
+  $("#no").val(no);
 
   var form = document.editScheduleForm;
   var date = $("#date2").val();
@@ -113,15 +116,11 @@ function func_editSchedule(){
     return false;
   }
 
-  if(startTime>=endTime){
+  if(startTime>=endTime) {
     $("#endTime2").focus();
     $(".error").html("마감시간이 시작시간보다 빠를 수 없습니다.");
     return false;
   }
-
-  const url = new URL(window.location.href);
-  const no = url.searchParams.get('no');
-  $("#no").html(no);
 
   return true;
   form.submit();
