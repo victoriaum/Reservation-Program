@@ -24,11 +24,11 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
   String findBySchedule_no(@Param("schedule_no") Long schedule_no);
 
   @Query("SELECT s FROM Scheduler s "
-      + "WHERE s.teacher_id=:teacher_id AND s.schedule_date=:formatDate ORDER BY s.schedule_start desc ")
+      + "WHERE s.teacher_id=:teacher_id AND s.schedule_date=:formatDate ORDER BY s.schedule_start ASC")
   Collection<Scheduler> teacherTodaySchedule(@Param("teacher_id") String teacher_id, @Param("formatDate") String formatDate);
 
   @Query("SELECT s FROM Scheduler s "
-      + "WHERE s.schedule_attender LIKE %:student_id% AND s.schedule_date=:formatDate ORDER BY s.schedule_start desc ")
+      + "WHERE s.schedule_attender LIKE %:student_id% AND s.schedule_date=:formatDate ORDER BY s.schedule_start ASC")
   Collection<Scheduler> studentTodaySchedule(@Param("student_id") String student_id, @Param("formatDate") String formatDate);
 
 
