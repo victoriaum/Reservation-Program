@@ -58,7 +58,10 @@
           <th:block th:each="dto:${scheduleList}">
             <p class="indexContentsDetail" th:value="${dto.schedule_no}">
               <span class="indexContentsDetailInfo2" th:text="${dto.schedule_start}"></span>
-              <span class="noticeSubject" th:text="${dto.schedule_attender}"></span>
+              <span class="noticeSubject">
+                검사를 요청한 인원:
+                <span th:text="${#lists.size(#strings.arraySplit(dto.schedule_attender,','))}" class="attenderCnt"></span>명
+              </span>
             </p>
           </th:block>
         </div>
