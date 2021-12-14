@@ -150,7 +150,7 @@ public class ReportController {
     scheduleService.editSchedule(schedule_no, date, start, end, space);
     m.addAttribute("","");
 
-    return "report_t";
+    return "redirect:/report_t";
   }
 
 
