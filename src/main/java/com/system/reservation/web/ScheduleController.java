@@ -1,6 +1,5 @@
 package com.system.reservation.web;
 
-import com.system.reservation.domain.SchedulerRepository;
 import com.system.reservation.service.ScheduleService;
 import com.system.reservation.web.dto.SchedulerDto;
 import com.system.reservation.web.dto.StudentDto;
@@ -13,11 +12,13 @@ import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RequiredArgsConstructor
 @Controller
-public class MainController {
+public class ScheduleController {
+
   private final ScheduleService scheduleService;
 
   // 오늘 날짜 구하기
@@ -26,8 +27,9 @@ public class MainController {
   String formatDate = now.format(dateTimeFormatter);
 
 
-  @RequestMapping(value = {"/", "/index"})
-  public String mainPage(HttpServletRequest request, Model m) {
+  @RequestMapping("/schedule")
+  public String schedule(HttpServletRequest request, Model m) {
+
     HttpSession httpSession = request.getSession();
     String loginType = (String)httpSession.getAttribute("loginType");
 
@@ -44,25 +46,32 @@ public class MainController {
       m.addAttribute("scheduleList",scheduleList);
     }
 
-    return "index";
+    m.addAttribute("date",formatDate);
+    return "schedule";
   }
 
 
   @RequestMapping("/schedule")
-  public String schedule() { return "schedule";  }
+  public String scheduleWithDate(@RequestParam("date") String date, HttpServletRequest request, Model m) {
 
-  @RequestMapping("/notice")
-  public String notice() {
-    return "notice";
-  }
+    HttpSession httpSession = request.getSession();
+    String loginType = (String)httpSession.getAttribute("loginType");
 
-  @RequestMapping("/mypage")
-  public String mypage() {
-    return "mypage";
-  }
+    if("1".equals(loginType)){  // 선생님이 로그인한 경우
+      TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
+      String teacher_id = teacherDto.getTeacher_id();
+      List<SchedulerDto> scheduleList = scheduleService.teacherTodaySchedule(teacher_id, date);
+      m.addAttribute("scheduleList",scheduleList);
+    }
+    else {  // 학생이 로그인한 경우
+      StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
+      String student_id = studentDto.getStudent_id();
+      List<String> scheduleList = scheduleService.studentTodaySchedule(student_id, date);
+      m.addAttribute("scheduleList",scheduleList);
+    }
 
-  @RequestMapping("/test")
-  public String test() {
-    return "datepicker";
+    m.addAttribute("date",date);
+
+    return "schedule";
   }
 }
