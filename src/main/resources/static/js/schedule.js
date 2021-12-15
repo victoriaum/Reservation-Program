@@ -9,7 +9,7 @@ $(function(){
 
   /* Url Hash Navigation */
   $('.owl-carousel').owlCarousel({
-    items:4,
+    items:6,
     loop:false,
     center:true,
     margin:10,
@@ -20,10 +20,14 @@ $(function(){
 
   $(".owl-dots").hide();
 
-  location.hash = $("#todayDate").val();
+  var todayDate = $("#todayDate").val();
+  location.hash = todayDate;
+  /*func_getScheduleData(todayDate);*/
 
-
-
+ /* $('.owl-carousel').on('changed.owl.carousel', function(e) {
+    var date = $(".center").children().attr("data-hash");
+    func_getScheduleData(date);
+  });*/
 
 
 });
@@ -46,6 +50,46 @@ function func_dateSetting(year,month,date){
   $("#month").val(month).prop("selected",true);
 
 }
+
+
+// schduleList 가져오기
+function func_getScheduleData(date){
+  $.ajax({
+    url:"/getScheduleData",
+    data:{date:date},
+    success: function(data){
+
+      if($("#loginType")=="1"){
+        $.each(data.scheduleList, function(idx, val) {
+          var attenderCnt = val.schedule_attender.split(",").length;
+
+          $(".scheduleArea").append("<div class='subArea' id='" +val.schedule_no+ "' onclick='func_report(this)'>"
+              + "<span class='date'>" + val.schedule_date + "</span><br>"
+              + "<span class='time'>" + val.schedule_start + " - "
+              + val.schedule_end + "</span><br>"
+              + "<span class='space'><span id='attenderCnt'>" + attenderCnt
+              + "</span> / " + val.schedule_space + "</span>"
+              + "<img class='attenderImg' src='image/report/attender.png'/>"
+              + "</div>");
+        });
+      } else {
+        $.each(data.scheduleList, function(idx, val) {
+          var valArray = val.split(",");
+          val = val.replace(","," ");
+          $(".scheduleArea").append("<span class='choice teacher' id='"+valArray[0]+" "+valArray[1]+","+valArray[2]+"' "
+              + "onclick='func_getSchedule(this.id)'>"
+              + valArray[0]+" "+valArray[1]+"</span>")
+        });
+      }
+
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
+
+}
+
 
 
 /*// owlCarousel 값 넣기

@@ -14,8 +14,10 @@ import lombok.RequiredArgsConstructor;
 import org.apache.catalina.util.ParameterMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
 @Controller
@@ -72,5 +74,29 @@ public class ScheduleController {
     m.addAttribute("todayDate",todayDate);
     return "schedule";
   }
+
+  @ResponseBody
+  @RequestMapping("/getScheduleData")
+  public String getScheduleData(@RequestParam("date") String data, HttpServletRequest request, Model m) {
+
+    HttpSession httpSession = request.getSession();
+    String loginType = (String)httpSession.getAttribute("loginType");
+
+    if("1".equals(loginType)){  // 선생님이 로그인한 경우
+      TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
+      String teacher_id = teacherDto.getTeacher_id();
+      List<SchedulerDto> scheduleList = scheduleService.teacherTodaySchedule(teacher_id, todayDate);
+      m.addAttribute("scheduleList",scheduleList);
+    }
+    else {  // 학생이 로그인한 경우
+      StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
+      String student_id = studentDto.getStudent_id();
+      List<String> scheduleList = scheduleService.studentTodaySchedule(student_id, todayDate);
+      m.addAttribute("scheduleList",scheduleList);
+    }
+
+    return "schedule";
+  }
+
 
 }

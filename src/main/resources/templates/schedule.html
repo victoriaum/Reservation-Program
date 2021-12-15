@@ -17,6 +17,7 @@
   <div id="container">
 
     <input type="hidden" id="todayDate" th:value="${todayDate}">
+    <input type="hidden" id="loginType" th:value="${session.loginType}">
 
     <div id="dateArea">
       <select class="form-select form-select-sm dateAreaInput" aria-label=".form-select-sm example"
@@ -41,11 +42,41 @@
 
     </div>
 
-    <div class="scheduleArea">
-
-
-
+    <!-- 선생님 오늘 일정을 보여주는 부분 -->
+    <div class="scheduleArea" th:if="${session.loginType}=='1' and ${scheduleList!=null}">
+      <th:block th:each="dto:${scheduleList}">
+        <div class="scheduleAreaDetail" th:value="${dto.schedule_no}">
+          <div class="timeArea">
+            <span class="time" th:text="${dto.schedule_start}"></span>
+            <span class="time">  -  </span>
+            <span class="time" th:text="${dto.schedule_end}"></span><br>
+          </div>
+          <img class="smallImg" th:src="@{image/report/attender.png}"/>
+          <span th:text="${#lists.size(#strings.arraySplit(dto.schedule_attender,','))}" class="import"></span>
+          <span> / </span>
+          <span th:text="${dto.schedule_space}" class="import"></span>
+        </div>
+      </th:block>
     </div>
+    <div class="scheduleArea" th:if="${session.loginType}=='1' and ${scheduleList==null}">
+      <p class="scheduleAreaDetail">
+        <span class="noticeSubject">오늘 일정은 없습니다.</span>
+      </p>
+    </div>
+
+    <!-- 학생 오늘 일정을 보여주는 부분 -->
+    <div class="scheduleArea" th:if="${session.loginType}=='2' and ${scheduleList!=null}">
+      <th:block th:each="list:${scheduleList}">
+        <p class="scheduleAreaDetail" th:value="${#strings.arraySplit(list,',')[0]}">
+        </p>
+      </th:block>
+    </div>
+    <div class="scheduleArea" th:if="${session.loginType}=='2' and ${scheduleList==null}">
+      <p class="scheduleAreaDetail">
+        <span class="noticeSubject">오늘 일정은 없습니다.</span>
+      </p>
+    </div>
+
   </div>
 </div>
 
