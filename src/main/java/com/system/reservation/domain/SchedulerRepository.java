@@ -29,7 +29,7 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
   Collection<Scheduler> teacherTodaySchedule(@Param("teacher_id") String teacher_id, @Param("formatDate") String formatDate);
 
 
-  @Query("SELECT s.schedule_no, s.schedule_start, t.teacher_dept, t.teacher_name, t.teacher_position, s.teacher_id"
+  @Query("SELECT s.schedule_no, s.schedule_start, t.teacher_dept, t.teacher_name, t.teacher_position, s.teacher_id, s.schedule_end"
       + " FROM Scheduler s LEFT JOIN Teacher t"
       + " ON s.teacher_id = t.teacher_id"
       + " WHERE s.schedule_attender LIKE %:student_id% AND s.schedule_date=:formatDate"

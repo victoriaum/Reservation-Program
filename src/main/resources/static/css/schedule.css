@@ -1,8 +1,12 @@
+.subTitle {
+  margin-left: 8%;
+}
 #dateArea {
   text-align: center;
   background-color:  #ECDCCB;
   height: 7rem;
   padding: 0.5rem 0;
+  margin-top: 1rem;
 }
 .dateAreaInput {
   width: 40%;
@@ -39,9 +43,9 @@
   border-radius: 0.3rem;
 }
 .center {
-  border: solid 0.1rem #2B2119;
-  background-color: white;
+  background-color: #55705A;
   font-weight: bold;
+  color: white;
 }
 
 
@@ -76,4 +80,7 @@
   width: 0.9rem;
   height: auto;
   padding-bottom: 0.1rem;
+}
+.letterSpace {
+  margin-right: 0.2rem;
 }
