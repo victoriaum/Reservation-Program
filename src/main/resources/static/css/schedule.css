@@ -1,0 +1,53 @@
+#dateArea {
+  text-align: center;
+  background-color:  #ECDCCB;
+  height: 7rem;
+  padding: 0.5rem 0;
+}
+.dateAreaInput {
+  width: 40%;
+  font-size: 0.7rem;
+  display: inline-block;
+  border: none;
+}
+#year {
+  width: 30%;
+}
+.scheduleArea {
+  color: black;
+  font-size: 1rem;
+  width: 85%;
+  margin: 1rem auto;
+  text-align: left;
+  background-color: #55705A;
+}
+
+
+/*owlCarousel*/
+#date {
+  text-align: center;
+  margin-top: 1rem;
+}
+.dateDetail {
+  text-align: center;
+  padding: 0.5rem;
+  width: 2.5rem;
+  height: 3.2rem;
+  border-radius: 0.3rem;
+  margin: 0 auto;
+}
+.dateDetail > span {
+  display: block;
+}
+.day {
+  font-size: 0.7rem;
+}
+.owl-item {
+  background-color: #f8f2ec;
+  border-radius: 0.3rem;
+}
+.center {
+  border: solid 0.1rem #2B2119;
+  background-color: white;
+  font-weight: bold;
+}

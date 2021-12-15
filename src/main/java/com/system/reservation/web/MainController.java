@@ -47,10 +47,6 @@ public class MainController {
     return "index";
   }
 
-
-  @RequestMapping("/schedule")
-  public String schedule() { return "schedule";  }
-
   @RequestMapping("/notice")
   public String notice() {
     return "notice";

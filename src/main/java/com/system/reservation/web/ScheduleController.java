@@ -6,10 +6,12 @@ import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
+import java.time.format.TextStyle;
+import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.apache.catalina.util.ParameterMap;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,8 +25,11 @@ public class ScheduleController {
 
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
-  DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-  String formatDate = now.format(dateTimeFormatter);
+  String todayDate = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+  String year = now.format(DateTimeFormatter.ofPattern("yyyy"));
+  String month = now.format(DateTimeFormatter.ofPattern("MM"));
+  String day = now.format(DateTimeFormatter.ofPattern("dd"));
+  int dayCnt = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month),1).lengthOfMonth();
 
 
   @RequestMapping("/schedule")
@@ -36,42 +41,36 @@ public class ScheduleController {
     if("1".equals(loginType)){  // 선생님이 로그인한 경우
       TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
       String teacher_id = teacherDto.getTeacher_id();
-      List<SchedulerDto> scheduleList = scheduleService.teacherTodaySchedule(teacher_id, formatDate);
+      List<SchedulerDto> scheduleList = scheduleService.teacherTodaySchedule(teacher_id, todayDate);
       m.addAttribute("scheduleList",scheduleList);
     }
     else {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
-      List<String> scheduleList = scheduleService.studentTodaySchedule(student_id, formatDate);
+      List<String> scheduleList = scheduleService.studentTodaySchedule(student_id, todayDate);
       m.addAttribute("scheduleList",scheduleList);
     }
 
-    m.addAttribute("date",formatDate);
+    List<String> dayList = new ArrayList<>();
+    String fullDate, date, day;
+
+    for(int i=1; i<dayCnt+1; i++){
+      if(i<10){
+        fullDate = year+"-"+month+"-0"+i;
+      } else {
+        fullDate = year+"-"+month+"-"+i;
+      }
+
+      date = Integer.toString(i);
+      day = LocalDate.of(Integer.parseInt(year),Integer.parseInt(month),i).getDayOfWeek()
+                  .getDisplayName(TextStyle.SHORT,Locale.US);
+
+      dayList.add(fullDate+"*"+date+"*"+day);
+    }
+
+    m.addAttribute("dayList",dayList);
+    m.addAttribute("todayDate",todayDate);
     return "schedule";
   }
 
-
-  @RequestMapping("/schedule")
-  public String scheduleWithDate(@RequestParam("date") String date, HttpServletRequest request, Model m) {
-
-    HttpSession httpSession = request.getSession();
-    String loginType = (String)httpSession.getAttribute("loginType");
-
-    if("1".equals(loginType)){  // 선생님이 로그인한 경우
-      TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
-      String teacher_id = teacherDto.getTeacher_id();
-      List<SchedulerDto> scheduleList = scheduleService.teacherTodaySchedule(teacher_id, date);
-      m.addAttribute("scheduleList",scheduleList);
-    }
-    else {  // 학생이 로그인한 경우
-      StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
-      String student_id = studentDto.getStudent_id();
-      List<String> scheduleList = scheduleService.studentTodaySchedule(student_id, date);
-      m.addAttribute("scheduleList",scheduleList);
-    }
-
-    m.addAttribute("date",date);
-
-    return "schedule";
-  }
 }

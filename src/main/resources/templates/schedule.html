@@ -3,14 +3,46 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{layouts/layout-withMenu}">
 <head>
-  <link th:href="@{css/header.css}" rel="stylesheet">
-  <link th:href="@{css/request.css}" rel="stylesheet">
-  <script th:src="@{js/index.js}"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{css/header.css}">
+  <link rel="stylesheet" th:href="@{css/schedule.css}">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+          integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script th:src="@{js/schedule.js}"></script>
 </head>
 
 <div layout:fragment="content">
   <div id="container">
-    <div class="center">
+
+    <input type="hidden" id="todayDate" th:value="${todayDate}">
+
+    <div id="dateArea">
+      <select class="form-select form-select-sm dateAreaInput" aria-label=".form-select-sm example"
+              id="year" name="year">
+      </select>
+      <select class="form-select form-select-sm dateAreaInput" aria-label=".form-select-sm example"
+              id="month" name="month">
+      </select>
+
+      <div id="date">
+        <div class="owl-carousel owl-theme">
+          <th:block th:each="list:${dayList}">
+            <div class="item" th:data-hash="${#strings.arraySplit(list,'*')[0]}">
+              <div class="dateDetail">
+                <span class="day" th:text="${#strings.arraySplit(list,'*')[2]}"></span>
+                <span class="date" th:text="${#strings.arraySplit(list,'*')[1]}"></span>
+              </div>
+            </div>
+          </th:block>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="scheduleArea">
+
 
 
     </div>
