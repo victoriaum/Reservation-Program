@@ -94,7 +94,7 @@ public class ReportController {
   }
 
   @RequestMapping("/report_t/makeSchedule")
-  public String makeSchedule(@RequestParam("no") String no, Model m) {
+  public String makeSchedule(@RequestParam("no") String no, HttpServletRequest request, Model m) {
 
     if(!"0".equals(no)){
       Long schedule_no = Long.parseLong(no);

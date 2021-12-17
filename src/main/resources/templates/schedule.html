@@ -47,7 +47,8 @@
     <!-- 선생님 일정을 보여주는 부분 -->
     <div class="scheduleArea" th:if="${session.loginType}=='1' and ${scheduleList!=null}">
       <th:block th:each="dto:${scheduleList}">
-        <div class="scheduleAreaDetail" th:value="${dto.schedule_no}">
+        <div class="scheduleAreaDetail" th:value="${dto.schedule_no}"
+             th:onclick="'func_detail(' + ${dto.schedule_no} + ')'">
           <div class="timeArea">
             <span class="time" th:text="${dto.schedule_start}"></span>
             <span class="time">  -  </span>
@@ -67,7 +68,8 @@
     <!-- 학생 일정을 보여주는 부분 -->
     <div class="scheduleArea" th:if="${session.loginType}=='2' and ${scheduleList!=null}">
       <th:block th:each="list:${scheduleList}">
-        <div class="scheduleAreaDetail" th:value="${#strings.arraySplit(list,',')[0]}">
+        <div class="scheduleAreaDetail" th:value="${#strings.arraySplit(list,',')[0]}"
+              onclick="func_detail(this)">
           <div class="timeArea">
             <span class="time" th:text="${#strings.arraySplit(list,',')[1]}"></span>
             <span class="time">  -  </span>

@@ -22,12 +22,17 @@ $(function(){
 
   var todayDate = $("#todayDate").val();
   location.hash = todayDate;
-  /*func_getScheduleData(todayDate);*/
 
- /* $('.owl-carousel').on('changed.owl.carousel', function(e) {
+  $('.owl-item').click(function() {
+    $('.owl-item').removeClass("center");
+    $(this).addClass("center");
     var date = $(".center").children().attr("data-hash");
+    location.hash = date;
+    $(".scheduleArea").empty();
     func_getScheduleData(date);
-  });*/
+  });
+
+
 
 
 });
@@ -90,6 +95,11 @@ function func_getScheduleData(date){
 
 }
 
+
+// 일정 편집페이지로 이동
+function func_detail(id) {
+  location.href="/report_t/makeSchedule?no="+id;
+}
 
 
 /*// owlCarousel 값 넣기
