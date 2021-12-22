@@ -11,7 +11,7 @@ $(function(){
     $(".choosenArea").append("<span class='col-4 choice checkedChoice' id='checkedDept'>"
                               +checkedDept
                               +"<img class='closeCheckedChose' id='deptOut' "
-                                  + "onclick='func_deptOut()'src='image/close_white.png'/>"
+                                  + "onclick='func_deptOut()' src='image/close_white.png'/>"
                               +"</span>")
 
     $(".firstArea").hide();
@@ -61,7 +61,12 @@ function func_getSchedule(id){
       if(data.length>0) {    // 저장된 일정이 있는 경우
 
         $.each(data, function (idx,val) {
-          var attenderCnt = val.schedule_attender.split(",").length;
+          var attenderCnt;
+          if(val.schedule_attender==""){
+            attenderCnt = 0;
+          } else {
+            attenderCnt = val.schedule_attender.split(",").length;
+          }
 
           $(".thirdArea").append(
               "<div class='subArea' id='" +val.schedule_no+ "' onclick='func_report(this)'>"
