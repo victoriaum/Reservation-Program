@@ -65,7 +65,7 @@
             </p>
           </th:block>
         </div>
-        <div th:if="${session.loginType}=='1' and ${scheduleList==null}">
+        <div th:unless="${session.loginType}=='1' and ${scheduleList==null}">
           <p class="indexContentsDetail">
             <span class="noticeSubject">오늘 일정은 없습니다.</span>
           </p>
@@ -82,7 +82,7 @@
             </p>
           </th:block>
         </div>
-        <div th:if="${session.loginType}=='2' and ${scheduleList==null}">
+        <div th:unless="${session.loginType}=='2' and ${scheduleList==null}">
           <p class="indexContentsDetail">
             <span class="noticeSubject">오늘 일정은 없습니다.</span>
           </p>
