@@ -61,6 +61,7 @@
   float: right;
   color: #2B2119;
   text-decoration: underline;
+  cursor: pointer;
 }
 .indexContentsDetail{
   margin: 0.5rem 0.5rem 0.5rem 0rem;
