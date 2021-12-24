@@ -29,6 +29,7 @@ header{
   text-align: center;
   line-height: 2rem;
   color: #101357;
+  cursor: pointer;
 }
 
 footer{

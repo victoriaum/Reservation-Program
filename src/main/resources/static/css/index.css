@@ -22,7 +22,9 @@
   margin: 0 auto;
   border-radius: 0.6rem;
 }
-
+.indexSchedule {
+  cursor: pointer;
+}
 
 .center {
   color: black;
