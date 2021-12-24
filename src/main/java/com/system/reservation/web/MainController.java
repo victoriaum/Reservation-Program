@@ -48,18 +48,9 @@ public class MainController {
     return "index";
   }
 
-  @RequestMapping("/notice")
-  public String notice() {
-    return "notice";
-  }
-
   @RequestMapping("/mypage")
   public String mypage() {
     return "mypage";
   }
 
-  @RequestMapping("/test")
-  public String test() {
-    return "datepicker";
-  }
 }
