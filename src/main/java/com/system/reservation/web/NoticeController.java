@@ -1,24 +1,16 @@
 package com.system.reservation.web;
 
 import com.system.reservation.service.NoticeService;
-import com.system.reservation.service.ScheduleService;
-import com.system.reservation.web.dto.SchedulerDto;
-import com.system.reservation.web.dto.StudentDto;
-import com.system.reservation.web.dto.TeacherDto;
+import com.system.reservation.web.dto.NoticeDto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.TextStyle;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
 @Controller
@@ -36,7 +28,14 @@ public class NoticeController {
 
 
   @RequestMapping("/notice")
-  public String notice() {
+  public String notice(HttpServletRequest request, Model m) {
+
+    HttpSession httpSession = request.getSession();
+    String loginType = (String)httpSession.getAttribute("loginType");
+
+    List<NoticeDto> noticeList = noticeService.noticeInfo(loginType);
+    m.addAttribute("noticeList",noticeList);
+
     return "notice";
   }
 
