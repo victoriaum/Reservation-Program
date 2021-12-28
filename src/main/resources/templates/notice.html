@@ -4,14 +4,25 @@
       layout:decorator="~{layouts/layout-withMenu}">
 <head>
   <link th:href="@{css/header.css}" rel="stylesheet">
-  <link th:href="@{css/request.css}" rel="stylesheet">
-  <script th:src="@{js/index.js}"></script>
+  <link th:href="@{css/notice.css}" rel="stylesheet">
+  <script th:src="@{js/notice.js}"></script>
 </head>
 
 <div layout:fragment="content">
   <div id="container">
     <div class="center">
+      <div th:if="${session.loginType}=='1' and ${noticeList!=null} and ${noticeList!=''}" class="indexSchedule">
+        <th:block th:each="dto:${noticeList}">
 
+          </p>
+        </th:block>
+      </div>
+      <div th:unless="${session.loginType}=='1' and ${noticeList!=null} and ${noticeList!=''}">
+        <p class="">
+          <span class=""></span>
+
+        </p>
+      </div>
 
     </div>
   </div>

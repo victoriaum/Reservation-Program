@@ -1,13 +1,10 @@
 package com.system.reservation.service;
 
-import com.system.reservation.domain.Scheduler;
 import com.system.reservation.domain.SchedulerRepository;
 import com.system.reservation.web.dto.SchedulerDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Modifying;

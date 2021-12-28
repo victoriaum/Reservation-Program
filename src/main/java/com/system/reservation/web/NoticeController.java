@@ -33,6 +33,12 @@ public class NoticeController {
     HttpSession httpSession = request.getSession();
     String loginType = (String)httpSession.getAttribute("loginType");
 
+    if("1".equals(loginType)){
+      loginType="teacher";
+    } else {
+      loginType="student";
+    }
+
     List<NoticeDto> noticeList = noticeService.noticeInfo(loginType);
     m.addAttribute("noticeList",noticeList);
 
