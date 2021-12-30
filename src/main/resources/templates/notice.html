@@ -11,18 +11,34 @@
 <div layout:fragment="content">
   <div id="container">
     <div class="center">
-      <div th:if="${session.loginType}=='1' and ${noticeList!=null} and ${noticeList!=''}" class="indexSchedule">
-        <th:block th:each="dto:${noticeList}">
 
-          </p>
-        </th:block>
+      <div class="search">
+        <input type="text" id="searchNoticeInput"/>
+        <img class="smallImg" th:src="@{image/search.png}"/>
       </div>
-      <div th:unless="${session.loginType}=='1' and ${noticeList!=null} and ${noticeList!=''}">
-        <p class="">
-          <span class=""></span>
 
-        </p>
-      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">No.</th>
+            <th scope="col">제목</th>
+            <th scope="col">작성자</th>
+            <th scope="col">작성일자</th>
+          </tr>
+        </thead>
+        <tbody>
+          <div th:if="${session.loginType}=='1' and ${noticeList!=null} and ${noticeList!=''}" class="indexSchedule">
+            <th:block th:each="dto:${noticeList}">
+                <tr>
+                  <th scope="row" th:text="${dto.notice_no}"></th>
+                  <td th:text="${dto.notice_title}" id="noticeTitle"></td>
+                  <td th:text="${dto.writer_name}"></td>
+                  <td th:text="${dto.notice_create_date}"></td>
+                </tr>
+            </th:block>
+          </div>
+        </tbody>
+      </table>
 
     </div>
   </div>
