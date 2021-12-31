@@ -8,6 +8,11 @@ $(function(){
   // 로그인한 아이디 가져오기
   $(".student_id").val("${session.loginUser.student_id}");
 
+  // 메뉴 아이콘 클릭시
+  $(".titleIconMenu").click(function(){
+
+  });
+
   /* 현재 날짜와 시각 구하기
   var today = new Date();
 
