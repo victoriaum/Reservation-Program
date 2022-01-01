@@ -32,10 +32,21 @@ header{
   cursor: pointer;
 }
 
-footer{
-  height: 0;
+#footerArea{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:3rem;
+  background:#ECDCCB;
+  text-align: center;
+}
+.footerMenu{
+  margin: 0.5rem 1rem;
+  width: 2rem;
 }
 
 .pointer{
   cursor: pointer;
 }
+
+
