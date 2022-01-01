@@ -10,7 +10,6 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.util.ParameterMap;
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -143,8 +142,6 @@ public class ReportController {
                               @RequestParam("endTime") String end,
                               @RequestParam("space") String space,
                               Model m) {
-
-    System.out.println(no);
 
     Long schedule_no = Long.parseLong(no);
     scheduleService.editSchedule(schedule_no, date, start, end, space);
