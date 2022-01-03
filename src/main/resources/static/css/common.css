@@ -32,18 +32,22 @@ header{
   cursor: pointer;
 }
 
-/*.row>* {
-  padding: 1.2rem !important;
-}*/
+
+
 #footerArea{
+  display: block;
+  text-align: center;
   border-top: solid 0.1rem #2B2119;
   position:absolute;
   bottom:0;
-  width:100%;
   vertical-align: center;
-  padding: 0.3rem;
+  padding: 0.3rem 1rem;
+  width: 100%;
+  margin: 0 auto !important;
 }
 .footerMenu{
+  width: 3.5rem !important;
+  height: auto !important;
   text-align: center;
 }
 
