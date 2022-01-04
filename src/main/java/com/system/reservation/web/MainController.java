@@ -5,12 +5,16 @@ import com.system.reservation.service.ScheduleService;
 import com.system.reservation.web.dto.SchedulerDto;
 import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
+import java.beans.PropertyVetoException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +23,28 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class MainController {
   private final ScheduleService scheduleService;
+
+  @Value("${spring.datasource.driver-class-name}")
+  private String driver;
+
+  @Value("${spring.datasource.url}")
+  private String url;
+
+  @Value("${spring.datasource.username}")
+  private String username;
+
+  @Value("${spring.datasource.password}")
+  private String password;
+
+  public DataSource dataSource() throws PropertyVetoException{
+    final DriverManagerDataSource dataSource = new DriverManagerDataSource();
+    dataSource.setDriverClassName(driver);
+    dataSource.setUrl(url);
+    dataSource.setUsername(username);
+    dataSource.setPassword(password);
+    return dataSource;
+  }
+
 
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
