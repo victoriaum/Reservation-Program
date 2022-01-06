@@ -16,10 +16,10 @@ public class Teacher {
 
   @Id
   @GeneratedValue(strategy= GenerationType.IDENTITY)
-  @Column(name="teacher_id")
-  private String teacher_id;
+  private Long teacher_no;
 
   @Column(columnDefinition = "TEXT", length=100, nullable = false)
+  private String teacher_id;
   private String teacher_password;
   private String teacher_name;
   private String teacher_email;
@@ -27,8 +27,9 @@ public class Teacher {
   private String teacher_position;
 
   @Builder
-  public void Teacher(String teacher_id, String teacher_password, String teacher_name,
+  public void Teacher(Long teacher_no, String teacher_id, String teacher_password, String teacher_name,
                       String teacher_email, String teacher_dept, String teacher_position){
+    this.teacher_no = teacher_no;
     this.teacher_id = teacher_id;
     this.teacher_password = teacher_password;
     this.teacher_name = teacher_name;

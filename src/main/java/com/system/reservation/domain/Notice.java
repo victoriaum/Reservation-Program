@@ -27,10 +27,8 @@ public class Notice {
   private String notice_title;
   private String notice_contents;
 
-  @Column(columnDefinition = "TEXT default sysdate", length = 600, nullable = false)
-  private String notice_create_date;
-
   @Column(columnDefinition = "TEXT", length = 600)
+  private String notice_create_date;
   private String notice_edit_date;
   private String notice_delete_date;
 
