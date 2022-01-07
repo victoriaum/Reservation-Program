@@ -22,18 +22,38 @@ body{
   cursor: pointer;
 }
 
+
+/*header.html*/
 header{
-  margin-top: 3rem;
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
   line-height: 2rem;
-  color: #101357;
+  margin-top: 1.5rem;
+  color: black;
   cursor: pointer;
+}
+#headerTitle{
+  font-size: 1rem;
+  width: 90%;
+  margin: 0 auto;
+}
+.titleIcon {
+  margin-top: 0.4rem;
+  width: 1.2rem;
+  height: auto;
+  cursor: pointer;
+}
+.titleIconMenu {
+  float: left;
+}
+.titleIconLogout {
+  float: right;
 }
 
 
 
+/*footer.html*/
 #footerArea{
   display: block;
   text-align: center;
