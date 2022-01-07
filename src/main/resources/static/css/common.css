@@ -50,8 +50,24 @@ header{
 .titleIconLogout {
   float: right;
 }
-
-
+.loginInfo {
+  font-size: 0.75rem;
+  margin: 0 auto;
+  color: #55705A;
+  display: flex;
+  flex-basis: 100%;
+  align-items: center;
+}
+.loginInfo::before,
+.loginInfo::after {
+  content: "";
+  flex-grow: 1;
+  background: #55705A;
+  height: 1px;
+  font-size: 0px;
+  line-height: 0px;
+  margin: 0px 16px;
+}
 
 /*footer.html*/
 #footerArea{
