@@ -8,7 +8,7 @@ $(function(){
   $(".dept").click(function(){
     var checkedDept = $(this).text();
 
-    $(".choosenArea").append("<span class='col-4 choice checkedChoice' id='checkedDept'>"
+    $(".choosenArea").append("<span class='choice checkedChoice' id='checkedDept'>"
                               +checkedDept
                               +"<img class='closeCheckedChose' id='deptOut' "
                                   + "onclick='func_deptOut()' src='image/close_white.png'/>"
@@ -43,7 +43,7 @@ $(function(){
 // 선생님 선택했을 때
 function func_getSchedule(id){
   var idArray = id.split(",");
-  $(".choosenArea").append("<span class='col-6 choice checkedChoice' id='checkedTeacher'>"
+  $(".choosenArea").append("<span class='choice checkedChoice' id='checkedTeacher'>"
                             +idArray[0]
                             +"<img class='closeCheckedChose' id='teacherOut' "
       + "                           onclick='func_teacherOut()' src='image/close_white.png'/>"

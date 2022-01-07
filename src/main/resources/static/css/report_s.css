@@ -18,20 +18,19 @@
   margin-bottom: 0.5rem;
   background-color: #f8f2ec;
 }
-
 .checkedChoice {
   display: inline-block;
-  border: none;
   background-color: #2B2119;
   color: #ECDCCB;
   font-size: 0.8rem;
   margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   cursor: none;
   padding-left: 0.7rem;
 }
 .closeCheckedChose {
-  margin: 0.2rem;
+  display: inline-block;
+  margin: 0.2rem 0.2rem 0.2rem 1rem;
   width: 0.8rem;
   height: auto;
   cursor: pointer;
@@ -88,4 +87,9 @@
 .reportBtnImg {
   width: 1.2rem;
   margin-top: 0.5rem;
+}
+
+.thirdArea {
+  padding: 1.5rem 0 0 1rem;
+  font-size: 0.9rem;
 }
