@@ -74,8 +74,10 @@
             <span class="time">  -  </span>
             <span class="time" th:text="${#strings.arraySplit(list,',')[6]}"></span>
           </div>
-          <img class="smallImg" th:src="@{image/report/attender.png}"/>
+          <span class="letterSpace">[ </span>
           <span class="letterSpace" th:text="${#strings.arraySplit(list,',')[2]}"></span>
+          <span class="letterSpace"> ]</span>
+          <br>
           <span class="letterSpace" th:text="${#strings.arraySplit(list,',')[3]}"></span>
           <span th:text="${#strings.arraySplit(list,',')[4]}"></span>
         </div>
