@@ -62,7 +62,6 @@ public class MainController {
       String teacher_id = teacherDto.getTeacher_id();
       List<SchedulerDto> scheduleList = scheduleService.teacherTodaySchedule(teacher_id, formatDate);
       m.addAttribute("scheduleList",scheduleList);
-      System.out.println(scheduleList);
     }
     else {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");

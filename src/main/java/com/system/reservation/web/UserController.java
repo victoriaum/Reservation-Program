@@ -34,7 +34,7 @@ public class UserController {
 
     HttpSession httpSession = request.getSession();
 
-    if("1".equals(type)){
+    if("1".equals(type)) {
       TeacherDto teacherDto = teacherService.findByTeacher_idAndTeacher_password(id, password);
       if(teacherDto==null){
         m.addAttribute("loginFailed","일치하는 회원이 없습니다. 다시 로그인해주세요!");

@@ -80,7 +80,7 @@ function func_getSchedule(id){
         });
       }
       else{    // 저장된 일정이 없는 경우
-        $(".thirdArea").append("<div>정해진 일정이 없습니다.</div>");
+        $(".thirdArea").append("<div class='noSchedule'>정해진 일정이 없습니다.</div>");
       }
 
     },

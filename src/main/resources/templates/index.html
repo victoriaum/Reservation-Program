@@ -53,15 +53,8 @@
           <span class="more moreSchedule">more</span>
         </div>
 
-        <!-- 일정이 없는 경우 -->
-        <div th:if="${#lists.isEmpty(scheduleList)}">
-          <p class="indexContentsDetail">
-            <span class="noticeSubject">오늘 일정은 없습니다.</span>
-          </p>
-        </div>
-
         <!-- 선생님 오늘 일정을 보여주는 부분 -->
-        <div th:if="${session.loginType}=='1' and ${scheduleList!=''}" class="indexSchedule">
+        <div th:if="${session.loginType}=='1' and ${not #lists.isEmpty(scheduleList)}" class="indexSchedule">
           <th:block th:each="dto:${scheduleList}">
             <p class="indexContentsDetail" th:value="${dto.schedule_no}">
               <span class="indexContentsDetailInfo2" th:text="${dto.schedule_start}"></span>
@@ -72,9 +65,14 @@
             </p>
           </th:block>
         </div>
+        <div th:if="${session.loginType}=='1' and ${#lists.isEmpty(scheduleList)}">
+          <p class="indexContentsDetail">
+            <span class="noticeSubject">오늘 일정은 없습니다.</span>
+          </p>
+        </div>
 
         <!-- 학생 오늘 일정을 보여주는 부분 -->
-        <div th:if="${session.loginType}=='2' and ${scheduleList!=''}" class="indexSchedule">
+        <div th:if="${session.loginType}=='2' and ${not #lists.isEmpty(scheduleList)}" class="indexSchedule">
           <th:block th:each="list:${scheduleList}">
             <p class="indexContentsDetail" th:value="${#strings.arraySplit(list,',')[0]}">
               <span class="indexContentsDetailInfo2" th:text="${#strings.arraySplit(list,',')[1]}"></span>
@@ -84,8 +82,13 @@
             </p>
           </th:block>
         </div>
-
+        <div th:if="${session.loginType}=='2' and ${#lists.isEmpty(scheduleList)}">
+          <p class="indexContentsDetail">
+            <span class="noticeSubject">오늘 일정은 없습니다.</span>
+          </p>
+        </div>
       </div>
+
     </div>
   </div>
 </div>

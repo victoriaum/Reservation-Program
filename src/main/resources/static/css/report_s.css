@@ -89,7 +89,10 @@
   margin-top: 0.5rem;
 }
 
-.thirdArea {
+.secondArea,.thirdArea {
+  padding-top: 1.5rem;
+}
+.noSchedule {
   padding: 1.5rem 0 0 1rem;
   font-size: 0.9rem;
 }
