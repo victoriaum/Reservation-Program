@@ -4,18 +4,28 @@
 #dateArea {
   text-align: center;
   background-color:  #ECDCCB;
-  height: 7rem;
   padding: 0.5rem 0;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 .dateAreaInput {
   width: 40%;
   font-size: 0.7rem;
+  font-weight: bold;
   display: inline-block;
   border: none;
 }
 #year {
   width: 30%;
+}
+#week {
+  margin-top: 1rem;
+}
+.weekNo {
+  font-size: 0.8rem;
+  background-color: white;
+  padding: 0.2rem 0.4rem;
+  border-radius: 1rem;
+  margin: 0 0.3rem;
 }
 
 

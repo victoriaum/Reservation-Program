@@ -31,10 +31,6 @@ $(function(){
     $(".scheduleArea").empty();
     func_getScheduleData(date);
   });
-
-
-
-
 });
 
 
@@ -47,12 +43,38 @@ function func_dateSetting(year,month,date){
   }
   $("#year").val(year).prop("selected",true);
 
-  const monthArray = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  var monthArray = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
   for(var i=0; i<monthArray.length; i++){
     $("#month").append("<option value='"+(i+1)+"'>"+monthArray[i]+"</option>");
   }
   $("#month").val(month).prop("selected",true);
+
+  var lastdate = new Date(year, month-1, 0).getDate();
+  var firstday = new Date(year, month-1, 0).getDay();
+  var weekcnt;
+  if(lastdate==30 || lastdate==31){
+    if(firstday==5 || firstday==6){
+      weekcnt=6;
+    } else {
+      weekcnt=5;
+    }
+  } else if(lastdate==29) {
+    weekcnt=5;
+  } else {
+    if(firstday==0){
+      weekcnt=4;
+    } else {
+      weekcnt=5;
+    }
+  }
+
+  var lastweek = new Date(year, month-1, lastdate).getDay();
+
+
+  for(var i=1; i<weekcnt+1; i++){
+    $("#week").append("<span class='weekNo' value='"+i+"'>"+i+"</span>");
+  }
 
 }
 
