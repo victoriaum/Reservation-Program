@@ -54,7 +54,7 @@
         </div>
 
         <!-- 일정이 없는 경우 -->
-        <div th:if="${scheduleList==null} or ${scheduleList==''}">
+        <div th:if="${#lists.isEmpty(scheduleList)}">
           <p class="indexContentsDetail">
             <span class="noticeSubject">오늘 일정은 없습니다.</span>
           </p>
