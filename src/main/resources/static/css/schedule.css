@@ -18,13 +18,13 @@
   width: 30%;
 }
 #week {
-  margin-top: 0.7rem;
+  margin: 0.7rem auto 0;
+  width: 70%;
 }
 .weekNo {
   font-size: 0.8rem;
   background-color: white;
   padding: 0.2rem 0.4rem;
-  border-radius: 1rem;
   margin: 0 0.3rem;
 }
 .checkedWeekNo {
@@ -35,7 +35,7 @@
 }
 
 
-/*owlCarousel*/
+/*!*owlCarousel*!
 #date {
   text-align: center;
   margin-top: 1rem;
@@ -62,7 +62,7 @@
   background-color: #55705A;
   font-weight: bold;
   color: white;
-}
+}*/
 
 
 
@@ -71,9 +71,7 @@
   font-size: 0.9rem;
   padding: 1rem;
   text-align: center;
-  background-color: #f8f2ec;
   border-top: solid 0.1rem #2B2119;
-  height: 50rem;
 }
 .scheduleAreaDetail {
   background-color: white;

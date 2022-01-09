@@ -75,9 +75,9 @@ function func_dateSetting(year,month,date){
 
   for(var i=1; i<weekcnt+1; i++){
     if(i==weekcntToday){
-      $("#week").append("<span class='weekNo checkedWeekNo' value='"+i+"'>"+i+"</span>");
+      $("#week").append("<span class='col weekNo checkedWeekNo' value='"+i+"'>"+i+"</span>");
     } else {
-      $("#week").append("<span class='weekNo' value='"+i+"'>"+i+"</span>");
+      $("#week").append("<span class='col weekNo' value='"+i+"'>"+i+"</span>");
     }
   }
 
