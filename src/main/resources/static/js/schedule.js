@@ -1,13 +1,11 @@
 $(function(){
   // 현재 날짜 구하기
   var today = new Date();
-  var year = today.getFullYear();
-  var month = today.getMonth()+1;
-  var date = today.getDate();
+  func_dateSetting(today.getFullYear(),today.getMonth()+1,today.getDate());
 
-  func_dateSetting(year,month,date);
 
-  /* Url Hash Navigation */
+
+  /*/!* Url Hash Navigation *!/
   $('.owl-carousel').owlCarousel({
     items:6,
     loop:false,
@@ -30,11 +28,11 @@ $(function(){
     location.hash = date;
     $(".scheduleArea").empty();
     func_getScheduleData(date);
-  });
+  });*/
 });
 
 
-// 초기 dateArea 값 지정
+// dateArea 값 지정
 function func_dateSetting(year,month,date){
 
   // Year Input, 현재 년도 기준으로 작년, 올해 보여줌.
@@ -55,7 +53,7 @@ function func_dateSetting(year,month,date){
   var lastdate = new Date(year, month-1, 0).getDate();
   var firstday = new Date(year, month-1, 0).getDay();
 
-  var weekcnt = lastdate/7;
+  var weekcnt = Math.floor(lastdate/7);
   if(lastdate%7!=0) {
     if(7-firstday < lastdate%7){
       weekcnt=weekcnt+2;
@@ -64,9 +62,23 @@ function func_dateSetting(year,month,date){
     }
   }
 
-  for(var i=1; i<weekcnt+1; i++){
-    $("#week").append("<span class='weekNo' value='"+i+"'>"+i+"</span>");
+  var weekcntToday;
+  if(7-firstday < date%7){
+    weekcntToday=Math.floor(date/7+2);
+  } else if(7-firstday == date%7) {
+    weekcntToday=Math.floor(date/7+1);
   }
+
+  for(var i=1; i<weekcnt+1; i++){
+    if(i==weekcntToday){
+      $("#week").append("<span class='weekNo checkedWeekNo' value='"+i+"'>"+i+"</span>");
+    } else {
+      $("#week").append("<span class='weekNo' value='"+i+"'>"+i+"</span>");
+    }
+  }
+
+  console.log(weekcnt, weekcntToday);
+
 
 }
 

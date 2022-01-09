@@ -29,9 +29,9 @@
 }
 .checkedWeekNo {
   background-color: #55705A;
-  color: #ECDCCB;
+  color: white;
   font-weight: bold;
-  border: solid 0.1rem #2B2119;
+  border: solid 0.05rem #2B2119;
 }
 
 
