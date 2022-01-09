@@ -37,12 +37,13 @@ $(function(){
 // 초기 dateArea 값 지정
 function func_dateSetting(year,month,date){
 
-  // 현재 년도 기준으로 작년, 올해 보여줌.
+  // Year Input, 현재 년도 기준으로 작년, 올해 보여줌.
   for(var i=year-1; i<year+2; i++){
     $("#year").append("<option value='"+i+"'>"+i+"</option>");
   }
   $("#year").val(year).prop("selected",true);
 
+  // Month Input
   var monthArray = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 
   for(var i=0; i<monthArray.length; i++){
@@ -50,27 +51,18 @@ function func_dateSetting(year,month,date){
   }
   $("#month").val(month).prop("selected",true);
 
+  // Week
   var lastdate = new Date(year, month-1, 0).getDate();
   var firstday = new Date(year, month-1, 0).getDay();
-  var weekcnt;
-  if(lastdate==30 || lastdate==31){
-    if(firstday==5 || firstday==6){
-      weekcnt=6;
-    } else {
-      weekcnt=5;
-    }
-  } else if(lastdate==29) {
-    weekcnt=5;
-  } else {
-    if(firstday==0){
-      weekcnt=4;
-    } else {
-      weekcnt=5;
+
+  var weekcnt = lastdate/7;
+  if(lastdate%7!=0) {
+    if(7-firstday < lastdate%7){
+      weekcnt=weekcnt+2;
+    } else if(7-firstday == lastdate%7) {
+      weekcnt=weekcnt+1;
     }
   }
-
-  var lastweek = new Date(year, month-1, lastdate).getDay();
-
 
   for(var i=1; i<weekcnt+1; i++){
     $("#week").append("<span class='weekNo' value='"+i+"'>"+i+"</span>");
@@ -121,6 +113,12 @@ function func_getScheduleData(date){
 // 일정 편집페이지로 이동
 function func_detail(id) {
   location.href="/report_t/makeSchedule?no="+id;
+}
+
+
+// 주차 구하기
+function func_getWeek(year, month, date){
+
 }
 
 

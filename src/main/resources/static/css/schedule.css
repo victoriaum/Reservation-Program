@@ -18,7 +18,7 @@
   width: 30%;
 }
 #week {
-  margin-top: 1rem;
+  margin-top: 0.7rem;
 }
 .weekNo {
   font-size: 0.8rem;
@@ -26,6 +26,12 @@
   padding: 0.2rem 0.4rem;
   border-radius: 1rem;
   margin: 0 0.3rem;
+}
+.checkedWeekNo {
+  background-color: #55705A;
+  color: #ECDCCB;
+  font-weight: bold;
+  border: solid 0.1rem #2B2119;
 }
 
 
