@@ -3,6 +3,10 @@ $(function(){
   var today = new Date();
   func_dateSetting(today.getFullYear(),today.getMonth()+1,today.getDate());
 
+  $(".dateAreaInput").change(function(){
+
+  });
+
 
 
   /*/!* Url Hash Navigation *!/

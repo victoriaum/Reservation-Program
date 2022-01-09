@@ -3,6 +3,7 @@
 <header th:fragment="headerFragment">
   <div>
     <div id="headerTitle">
+      <img class="titleIcon" id="homeBtn" th:src="@{image/home.png}" onclick="location.href='/'"/>
       <span onclick="location.href='/'">조치대 레포트 관리시스템</span>
       <img class="titleIcon titleIconLogout" id="logoutBtn" th:src="@{image/logout.png}"/>
     </div>

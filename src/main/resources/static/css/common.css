@@ -35,12 +35,12 @@ header{
 }
 #headerTitle{
   font-size: 1rem;
-  width: 90%;
+  width: 88%;
   margin: 0 auto;
 }
 .titleIcon {
-  margin-top: 0.4rem;
-  width: 1.2rem;
+  margin-top: 0.3rem;
+  width: 1.3rem;
   height: auto;
   cursor: pointer;
 }
@@ -49,6 +49,9 @@ header{
 }
 .titleIconLogout {
   float: right;
+}
+#homeBtn {
+  float: left;
 }
 .loginInfo {
   font-size: 0.75rem;
@@ -87,8 +90,13 @@ header{
   text-align: center;
 }
 
+
+/*기타 공통*/
 .pointer{
   cursor: pointer;
 }
-
+.select-selected {
+  color: whitesmoke !important;
+  background: #bf5279 !important;
+}
 
