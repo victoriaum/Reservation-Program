@@ -27,9 +27,8 @@ public class Teacher {
   private String teacher_position;
 
   @Builder
-  public void Teacher(Long teacher_no, String teacher_id, String teacher_password, String teacher_name,
+  public void Teacher(String teacher_id, String teacher_password, String teacher_name,
                       String teacher_email, String teacher_dept, String teacher_position){
-    this.teacher_no = teacher_no;
     this.teacher_id = teacher_id;
     this.teacher_password = teacher_password;
     this.teacher_name = teacher_name;
