@@ -18,8 +18,10 @@ public class Teacher {
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private Long teacher_no;
 
-  @Column(columnDefinition = "TEXT", length=100, nullable = false)
+  @Column(columnDefinition = "TEXT", length=100, nullable = false, unique = true)
   private String teacher_id;
+
+  @Column(columnDefinition = "TEXT", length=100, nullable = false)
   private String teacher_password;
   private String teacher_name;
   private String teacher_email;

@@ -18,9 +18,10 @@ public class Student {
   @GeneratedValue(strategy= GenerationType.IDENTITY)
   private Long student_no;
 
+  @Column(columnDefinition = "TEXT", length=100, nullable = false, unique = true)
+  private String student_id;
 
   @Column(columnDefinition = "TEXT", length=100, nullable = false)
-  private String student_id;
   private String student_password;
   private String student_name;
   private String student_email;
