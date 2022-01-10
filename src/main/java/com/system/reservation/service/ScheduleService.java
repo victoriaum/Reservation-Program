@@ -36,6 +36,17 @@ public class ScheduleService {
     return schedulerRepository.getTodayStudentSchedule(student_id, today);
   }
 
+  @Transactional
+  public List<SchedulerDto> getTeacherWeekSchedule(String teacher_id, String startDate, String endDate) {
+    return schedulerRepository.getTeacherWeekSchedule(teacher_id, startDate, endDate).stream()
+        .map(SchedulerDto::new)
+        .collect(Collectors.toList());
+  }
+
+  @Transactional
+  public List<String> getStudentWeekSchedule(String student_id, String startDate, String endDate) {
+    return schedulerRepository.getStudentWeekSchedule(student_id, startDate, endDate);
+  }
 
 
   @Transactional
@@ -99,4 +110,5 @@ public class ScheduleService {
   public void editSchedule(Long no, String date, String start, String end, String space) {
     schedulerRepository.editSchedule(no, date, start, end, space);
   }
+
 }

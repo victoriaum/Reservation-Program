@@ -30,38 +30,36 @@ public class ScheduleController {
   String todayDate = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
   String year = now.format(DateTimeFormatter.ofPattern("yyyy"));
   String month = now.format(DateTimeFormatter.ofPattern("MM"));
-  String date = now.format(DateTimeFormatter.ofPattern("dd"));
+  String today = now.format(DateTimeFormatter.ofPattern("dd"));
 
   @RequestMapping("/schedule")
   public String schedule(HttpServletRequest request, Model m) {
 
     HttpSession httpSession = request.getSession();
     String loginType = (String)httpSession.getAttribute("loginType");
-
+    m.addAttribute("loginType",loginType);
     return "schedule";
   }
 
   @RequestMapping("/getSchedule")
-  public String getSchedule(HttpServletRequest request, Model m) {
+  public String getSchedule(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
+                            HttpServletRequest request, Model m) {
 
     HttpSession httpSession = request.getSession();
     String loginType = (String)httpSession.getAttribute("loginType");
 
-    /*
     if("1".equals(loginType)){  // 선생님이 로그인한 경우
       TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
       String teacher_id = teacherDto.getTeacher_id();
-      List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, todayDate);
+      List<SchedulerDto> scheduleList = scheduleService.getTeacherWeekSchedule(teacher_id, startDate, endDate);
       m.addAttribute("scheduleList",scheduleList);
     }
     else {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
-      List<SchedulerDetailDto> scheduleDetailList = scheduleService.getStudentSchedule(student_id, todayDate);
-      m.addAttribute("scheduleDetailList",scheduleDetailList);
+      List<String> scheduleList = scheduleService.getStudentWeekSchedule(student_id, startDate, endDate);
+      m.addAttribute("scheduleList",scheduleList);
     }
-    */
-
 
     return "schedule";
   }

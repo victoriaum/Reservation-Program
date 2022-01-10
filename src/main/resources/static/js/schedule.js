@@ -55,21 +55,23 @@ function func_dateSetting(year,month,date){
 
   // Week
   var lastdate = new Date(year, month-1, 0).getDate();
-  var firstday = new Date(year, month-1, 0).getDay();
+  var firstdateDay = new Date(year, month-1, 0).getDay();
+  var lastdateDay = new Date(year, month-1, lastdate).getDay();
+  var today = new Date(year, month-1, date).getDay();
 
   var weekcnt = Math.floor(lastdate/7);
   if(lastdate%7!=0) {
-    if(7-firstday < lastdate%7){
+    if(7-firstdateDay < lastdate%7){
       weekcnt=weekcnt+2;
-    } else if(7-firstday == lastdate%7) {
+    } else if(7-firstdateDay == lastdate%7) {
       weekcnt=weekcnt+1;
     }
   }
 
   var weekcntToday;
-  if(7-firstday < date%7){
+  if(7-firstdateDay < date%7){
     weekcntToday=Math.floor(date/7+2);
-  } else if(7-firstday == date%7) {
+  } else if(7-firstdateDay == date%7) {
     weekcntToday=Math.floor(date/7+1);
   }
 
@@ -80,14 +82,42 @@ function func_dateSetting(year,month,date){
       $("#week").append("<span class='col weekNo' value='"+i+"'>"+i+"</span>");
     }
   }
+
+  var weekStartDate, weekEndDate;
+
+  if(weekcntToday==1){
+    weekStartDate = year+"-"+month+"-01";
+    weekEndDate = year+"-"+month+"-0"+(7-firstdateDay);
+
+  } else if(weekcnt==weekcntToday){
+    weekStartDate = year+"-"+month+"-"+(lastdate-lastdateDay);
+    weekEndDate = year+"-"+month+"-"+lastdate;
+
+  } else {
+    if((date-today)<10){
+      weekStartDate = year+"-"+month+"-0"+(date-today);
+    }
+    else {
+      weekStartDate = year+"-"+month+"-"+(date-today);
+    }
+
+    if((date+7-today)<10){
+      weekEndDate = year+"-"+month+"-0"+(date+7-today);
+    }
+    else {
+      weekEndDate = year+"-"+month+"-"+(date+7-today);
+    }
+  }
+
+  func_getScheduleData(weekStartDate, weekEndDate)
 }
 
 
 // schduleList 가져오기
-function func_getScheduleData(date){
+function func_getScheduleData(startDate, endDate){
   $.ajax({
     url:"/getSchedule",
-    data:{date:date},
+    data:{startDate:startDate, endDate:endDate},
     success: function(data){
 
       if($("#loginType")=="1"){

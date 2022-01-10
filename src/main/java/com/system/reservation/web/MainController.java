@@ -1,6 +1,5 @@
 package com.system.reservation.web;
 
-import com.system.reservation.domain.SchedulerRepository;
 import com.system.reservation.service.ScheduleService;
 import com.system.reservation.web.dto.SchedulerDto;
 import com.system.reservation.web.dto.StudentDto;
