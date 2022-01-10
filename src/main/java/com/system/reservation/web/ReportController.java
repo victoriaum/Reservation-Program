@@ -28,7 +28,7 @@ public class ReportController {
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-  String formatDate = now.format(dateTimeFormatter);
+  String today = now.format(dateTimeFormatter);
 
 
   @RequestMapping("/report_s")
@@ -50,7 +50,7 @@ public class ReportController {
   @ResponseBody
   @RequestMapping("/getTeacherSchedule")
   public Object getTeacherSchedule(@RequestParam("checkedTeacher") String teacher_id) {
-    List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
+    List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
     return scheduleList;
   }
 
@@ -79,7 +79,7 @@ public class ReportController {
     TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
     String teacher_id = teacherDto.getTeacher_id();
 
-    List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
+    List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
 
 
     if(scheduleList.size()==0) {
@@ -127,8 +127,7 @@ public class ReportController {
 
     scheduleService.saveSchedule(schedulerDto);
 
-    List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, formatDate);
-    m.addAttribute("schedule","");
+    List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
     m.addAttribute("scheduleList",scheduleList);
 
     return "report_t";

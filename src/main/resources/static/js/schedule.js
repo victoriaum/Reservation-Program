@@ -80,17 +80,13 @@ function func_dateSetting(year,month,date){
       $("#week").append("<span class='col weekNo' value='"+i+"'>"+i+"</span>");
     }
   }
-
-  console.log(weekcnt, weekcntToday);
-
-
 }
 
 
 // schduleList 가져오기
 function func_getScheduleData(date){
   $.ajax({
-    url:"/getScheduleData",
+    url:"/getSchedule",
     data:{date:date},
     success: function(data){
 

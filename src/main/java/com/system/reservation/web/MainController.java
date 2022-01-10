@@ -49,7 +49,7 @@ public class MainController {
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
   DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-  String formatDate = now.format(dateTimeFormatter);
+  String today = now.format(dateTimeFormatter);
 
 
   @RequestMapping(value = {"/", "/index"})
@@ -60,13 +60,13 @@ public class MainController {
     if("1".equals(loginType)){  // 선생님이 로그인한 경우
       TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
       String teacher_id = teacherDto.getTeacher_id();
-      List<SchedulerDto> scheduleList = scheduleService.teacherTodaySchedule(teacher_id, formatDate);
+      List<SchedulerDto> scheduleList = scheduleService.getTodayTeacherSchedule(teacher_id, today);
       m.addAttribute("scheduleList",scheduleList);
     }
     else {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
-      List<String> scheduleList = scheduleService.studentTodaySchedule(student_id, formatDate);
+      List<String> scheduleList = scheduleService.getTodayStudentSchedule(student_id, today);
       m.addAttribute("scheduleList",scheduleList);
     }
 

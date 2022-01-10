@@ -18,11 +18,25 @@ public class ScheduleService {
 
 
   @Transactional
-  public List<SchedulerDto> getTeacherSchedule(String teacher_id, String formatDate) {
-    return schedulerRepository.getTeacherSchedule(teacher_id, formatDate).stream()
+  public List<SchedulerDto> getTeacherSchedule(String teacher_id, String today) {
+    return schedulerRepository.getTeacherSchedule(teacher_id, today).stream()
         .map(SchedulerDto::new)
         .collect(Collectors.toList());
-  };
+  }
+
+  @Transactional
+  public List<SchedulerDto> getTodayTeacherSchedule(String teacher_id, String today) {
+    return schedulerRepository.getTodayTeacherSchedule(teacher_id, today).stream()
+        .map(SchedulerDto::new)
+        .collect(Collectors.toList());
+  }
+
+  @Transactional
+  public List<String> getTodayStudentSchedule(String student_id, String today) {
+    return schedulerRepository.getTodayStudentSchedule(student_id, today);
+  }
+
+
 
   @Transactional
   public Integer sendReport(Long schedule_no, String login_id) {
@@ -74,18 +88,6 @@ public class ScheduleService {
   public void saveSchedule(SchedulerDto schedulerDto){
     schedulerRepository.save(schedulerDto.toEntity());
   }
-
-  @Transactional
-  public List<SchedulerDto> teacherTodaySchedule(String teacher_id, String formatDate) {
-    return schedulerRepository.teacherTodaySchedule(teacher_id, formatDate).stream()
-        .map(SchedulerDto::new)
-        .collect(Collectors.toList());
-  };
-
-  @Transactional
-  public List<String> studentTodaySchedule(String student_id, String formatDate) {
-    return schedulerRepository.studentTodaySchedule(student_id, formatDate);
-  };
 
   @Modifying
   @Transactional

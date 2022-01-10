@@ -34,10 +34,9 @@ public class Notice {
 
 
   @Builder
-  public Notice(Long notice_no, String writer_id, String writer_name, String writer_position,
+  public Notice(String writer_id, String writer_name, String writer_position,
                 String notice_view, String notice_title, String notice_contents,
                 String notice_create_date, String notice_edit_date, String notice_delete_date){
-    this.notice_no = notice_no;
     this.writer_id = writer_id;
     this.writer_name = writer_name;
     this.writer_position = writer_position;
