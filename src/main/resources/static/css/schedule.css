@@ -27,6 +27,7 @@
   padding: 0.2rem 0.4rem;
   margin: 0 0.3rem;
   border-radius: 0.3rem;
+  cursor: pointer;
 }
 .checkedWeekNo {
   background-color: #55705A;
