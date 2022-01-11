@@ -1,10 +1,28 @@
 $(function(){
-  // 현재 날짜 구하기
-  var today = new Date();
-  func_dateSetting(today.getFullYear(),today.getMonth()+1,today.getDate());
+  var todayDate = new Date();
+  var year = todayDate.getFullYear();
+  var month = todayDate.getMonth()+1;
+  var date = todayDate.getDate();
 
+  // 초기값 설정
+  func_inputDate(year,month);
+  var calculateDate = func_calculateWeek(year, month, date);
+  var dateArray = calculateDate.split(" ");
+  func_getSchedule(year, month, dateArray[0], dateArray[1]);
+
+  // dateArea 변경하는 경우
   $(".dateAreaInput").change(function(){
+    var year = $("#year option:selected").val();
+    var monthArray = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var month;
+    for(var i=0; i<monthArray.length; i++){
+      if(monthArray[i]==$("#month option:selected").val()){
+        month=i;
+      }
+    }
+    func_inputDate(year,month);
 
+    var week = $(".week").hasClass("checkedWeekNo").val();
   });
 
 
@@ -36,9 +54,14 @@ $(function(){
 });
 
 
-// dateArea 값 지정
-function func_dateSetting(year,month,date){
+// 일정 편집페이지로 이동
+function func_detail(id) {
+  location.href="/report_t/makeSchedule?no="+id;
+}
 
+
+// dateArea Input 설정
+function func_inputDate(year,month){
   // Year Input, 현재 년도 기준으로 작년, 올해 보여줌.
   for(var i=year-1; i<year+2; i++){
     $("#year").append("<option value='"+i+"'>"+i+"</option>");
@@ -53,7 +76,11 @@ function func_dateSetting(year,month,date){
   }
   $("#month").val(month).prop("selected",true);
 
-  // Week
+}
+
+
+// 주차 계산하기
+function func_calculateWeek(year,month,date){
   var lastdate = new Date(year, month-1, 0).getDate();
   var firstdateDay = new Date(year, month-1, 0).getDay();
   var lastdateDay = new Date(year, month-1, lastdate).getDay();
@@ -102,65 +129,64 @@ function func_dateSetting(year,month,date){
     }
 
     if((date+7-today)<10){
-      weekEndDate = year+"-"+month+"-0"+(date+7-today);
+      weekEndDate = year+"-"+month+"-0"+(date+6-today);
     }
     else {
-      weekEndDate = year+"-"+month+"-"+(date+7-today);
+      weekEndDate = year+"-"+month+"-"+(date+6-today);
     }
-  }
 
-  func_getScheduleData(weekStartDate, weekEndDate)
+    return weekStartDate+" "+weekEndDate;
+  }
 }
 
 
-// schduleList 가져오기
-function func_getScheduleData(startDate, endDate){
+// 일정 가져오기
+function func_getSchedule(year, month, weekStartDate, weekEndDate){
+  if(month<10){
+    month="0"+month;
+  }
+
   $.ajax({
     url:"/getSchedule",
-    data:{startDate:startDate, endDate:endDate},
+    type: "post",
+    dataType: "json",
+    data:{weekStartDate:weekStartDate, weekEndDate:weekEndDate},
     success: function(data){
-
-      if($("#loginType")=="1"){
-        $.each(data.scheduleList, function(idx, val) {
-          var attenderCnt = val.schedule_attender.split(",").length;
-
-          $(".scheduleArea").append("<div class='subArea' id='" +val.schedule_no+ "' onclick='func_report(this)'>"
-              + "<span class='date'>" + val.schedule_date + "</span><br>"
-              + "<span class='time'>" + val.schedule_start + " - "
-              + val.schedule_end + "</span><br>"
-              + "<span class='space'><span id='attenderCnt'>" + attenderCnt
-              + "</span> / " + val.schedule_space + "</span>"
-              + "<img class='attenderImg' src='image/report/attender.png'/>"
-              + "</div>");
-        });
-      } else {
-        $.each(data.scheduleList, function(idx, val) {
-          var valArray = val.split(",");
-          val = val.replace(","," ");
-          $(".scheduleArea").append("<span class='choice teacher' id='"+valArray[0]+" "+valArray[1]+","+valArray[2]+"' "
-              + "onclick='func_getSchedule(this.id)'>"
-              + valArray[0]+" "+valArray[1]+"</span>")
+      if(data.length>0) {    // 해당하는 일정이 있는 경우
+        $.each(data, function (idx,val) {
+          var scheduleArray = val.split(",");
+          if($("loginType")=="1"){
+            var attenderCnt = scheduleArray[3].split(',').length;
+            $(".scheduleArea").append("<div class='scheduleAreaDetail' id='"+scheduleArray[0]+"' "
+                                    + " onclick='func_detail(this.id)'>"
+                                    + "<div class='timeArea'>"
+                                    + "<span class='time'>"+scheduleArray[1]+"</span>"
+                                    + "<span class='time'> - </span>"
+                                    + "<span class='time'>"+scheduleArray[2]+"</span></div>"
+                                    + "<img class='smallImg' src='image/report/attender.png'/>"
+                                    + "<span>"+attenderCnt+"</span>"
+                                    + "<span> / </span>"
+                                    + "<span class='import'>"+scheduleArray[4]+"</span></div>");
+          } else {
+            $(".scheduleArea").append("<div class='scheduleAreaDetail' id='"+scheduleArray[0]+"' "
+                                    + " onclick='func_detail(id)'>"
+                                    + "<div class='timeArea'>"
+                                    + "<span class='time'>"+scheduleArray[1]+"</span>"
+                                    + "<span class='time'> - </span>"
+                                    + "<span class='time'>"+scheduleArray[2]+"</span></div>"
+                                    + "<span class='dept'>"+scheduleArray[3]+" </span></div>"
+                                    + "<span class='teacher'>"+scheduleArray[4]+" "+scheduleArray[5]+"</span>");
+          }
         });
       }
-
+      else{    // 해당하는 일정이 없는 경우
+        $(".scheduleArea").append("<span>해당하는 일정이 없습니다.<span>");
+      }
     },
     error: function(report, status, error){
       alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
     }
   });
-
-}
-
-
-// 일정 편집페이지로 이동
-function func_detail(id) {
-  location.href="/report_t/makeSchedule?no="+id;
-}
-
-
-// 주차 구하기
-function func_getWeek(year, month, date){
-
 }
 
 

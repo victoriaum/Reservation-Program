@@ -37,10 +37,8 @@ public class ScheduleService {
   }
 
   @Transactional
-  public List<SchedulerDto> getTeacherWeekSchedule(String teacher_id, String startDate, String endDate) {
-    return schedulerRepository.getTeacherWeekSchedule(teacher_id, startDate, endDate).stream()
-        .map(SchedulerDto::new)
-        .collect(Collectors.toList());
+  public List<String> getTeacherWeekSchedule(String teacher_id, String startDate, String endDate) {
+    return schedulerRepository.getTeacherWeekSchedule(teacher_id, startDate, endDate);
   }
 
   @Transactional

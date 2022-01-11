@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.apache.catalina.util.ParameterMap;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,47 +23,36 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 @Controller
 public class ScheduleController {
-
   private final ScheduleService scheduleService;
 
-  // 오늘 날짜 구하기
-  LocalDate now = LocalDate.now();
-  String todayDate = now.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-  String year = now.format(DateTimeFormatter.ofPattern("yyyy"));
-  String month = now.format(DateTimeFormatter.ofPattern("MM"));
-  String today = now.format(DateTimeFormatter.ofPattern("dd"));
 
   @RequestMapping("/schedule")
   public String schedule(HttpServletRequest request, Model m) {
-
     HttpSession httpSession = request.getSession();
     String loginType = (String)httpSession.getAttribute("loginType");
-    m.addAttribute("loginType",loginType);
     return "schedule";
   }
 
   @RequestMapping("/getSchedule")
-  public String getSchedule(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
-                            HttpServletRequest request, Model m) {
+  public String schedule(@RequestParam("weekStartDate") String startDate, @RequestParam("weekEndDate") String endDate,
+      HttpServletRequest request) {
 
     HttpSession httpSession = request.getSession();
     String loginType = (String)httpSession.getAttribute("loginType");
+    List<String> scheduleList;
 
     if("1".equals(loginType)){  // 선생님이 로그인한 경우
       TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
       String teacher_id = teacherDto.getTeacher_id();
-      List<SchedulerDto> scheduleList = scheduleService.getTeacherWeekSchedule(teacher_id, startDate, endDate);
-      m.addAttribute("scheduleList",scheduleList);
+      scheduleList = scheduleService.getTeacherWeekSchedule(teacher_id, startDate, endDate);
     }
     else {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
-      List<String> scheduleList = scheduleService.getStudentWeekSchedule(student_id, startDate, endDate);
-      m.addAttribute("scheduleList",scheduleList);
+      scheduleList = scheduleService.getStudentWeekSchedule(student_id, startDate, endDate);
     }
-
-    return "schedule";
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("scheduleList", scheduleList);
+    return jsonObject.toString();
   }
-
-
 }

@@ -44,49 +44,7 @@
 
     </div>
 
-    <!-- 선생님 일정을 보여주는 부분 -->
-    <div class="scheduleArea" th:if="${session.loginType}=='1' and ${scheduleList!=null}">
-      <th:block th:each="dto:${scheduleList}">
-        <div class="scheduleAreaDetail" th:value="${dto.schedule_no}"
-             th:onclick="'func_detail(' + ${dto.schedule_no} + ')'">
-          <div class="timeArea">
-            <span class="time" th:text="${dto.schedule_start}"></span>
-            <span class="time">  -  </span>
-            <span class="time" th:text="${dto.schedule_end}"></span>
-          </div>
-          <img class="smallImg" th:src="@{image/report/attender.png}"/>
-          <span th:text="${#lists.size(#strings.arraySplit(dto.schedule_attender,','))}"></span>
-          <span> / </span>
-          <span th:text="${dto.schedule_space}" class="import"></span>
-        </div>
-      </th:block>
-    </div>
-    <div class="scheduleArea" th:if="${session.loginType}=='1' and ${scheduleList==null}">
-      <div class="scheduleAreaDetail">오늘 일정은 없습니다.</div>
-    </div>
-
-    <!-- 학생 일정을 보여주는 부분 -->
-    <div class="scheduleArea" th:if="${session.loginType}=='2' and ${scheduleList!=null}">
-      <th:block th:each="list:${scheduleList}">
-        <div class="scheduleAreaDetail" th:value="${#strings.arraySplit(list,',')[0]}"
-              onclick="func_detail(this)">
-          <div class="timeArea">
-            <span class="time" th:text="${#strings.arraySplit(list,',')[1]}"></span>
-            <span class="time">  -  </span>
-            <span class="time" th:text="${#strings.arraySplit(list,',')[6]}"></span>
-          </div>
-          <span class="letterSpace">[ </span>
-          <span class="letterSpace" th:text="${#strings.arraySplit(list,',')[2]}"></span>
-          <span class="letterSpace"> ]</span>
-          <br>
-          <span class="letterSpace" th:text="${#strings.arraySplit(list,',')[3]}"></span>
-          <span th:text="${#strings.arraySplit(list,',')[4]}"></span>
-        </div>
-      </th:block>
-    </div>
-    <div class="scheduleArea" th:if="${session.loginType}=='2' and ${scheduleList==null}">
-      <div class="scheduleAreaDetail">오늘 일정은 없습니다.</div>
-    </div>
+    <div class="scheduleArea"></div>
 
   </div>
 </div>

@@ -130,7 +130,7 @@ public class ReportController {
     List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
     m.addAttribute("scheduleList",scheduleList);
 
-    return "report_t";
+    return "redirect:/report_t";
   }
 
 
