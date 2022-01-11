@@ -26,12 +26,12 @@
   background-color: white;
   padding: 0.2rem 0.4rem;
   margin: 0 0.3rem;
+  border-radius: 0.3rem;
 }
 .checkedWeekNo {
   background-color: #55705A;
   color: white;
   font-weight: bold;
-  border: solid 0.05rem #2B2119;
 }
 
 
@@ -73,7 +73,9 @@
   height: 25rem;
 }
 #scheduleCnt {
-  margin-left: 2rem;
+  margin-left: 1rem;
+  color: #E48873;
+  font-weight: bold;
 }
 .scheduleDetail {
   margin: 0.7rem auto;
