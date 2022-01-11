@@ -33,8 +33,9 @@ public class ScheduleController {
     return "schedule";
   }
 
+  @ResponseBody
   @RequestMapping("/getSchedule")
-  public String schedule(@RequestParam("weekStartDate") String startDate, @RequestParam("weekEndDate") String endDate,
+  public String schedule(@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
       HttpServletRequest request) {
 
     HttpSession httpSession = request.getSession();
@@ -51,6 +52,7 @@ public class ScheduleController {
       String student_id = studentDto.getStudent_id();
       scheduleList = scheduleService.getStudentWeekSchedule(student_id, startDate, endDate);
     }
+
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("scheduleList", scheduleList);
     return jsonObject.toString();

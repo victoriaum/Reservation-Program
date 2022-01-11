@@ -46,7 +46,6 @@ public class ScheduleService {
     return schedulerRepository.getStudentWeekSchedule(student_id, startDate, endDate);
   }
 
-
   @Transactional
   public Integer sendReport(Long schedule_no, String login_id) {
     String attenders = schedulerRepository.checkAttenders(schedule_no);

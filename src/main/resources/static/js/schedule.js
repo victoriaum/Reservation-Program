@@ -8,7 +8,7 @@ $(function(){
   func_inputDate(year,month);
   var calculateDate = func_calculateWeek(year, month, date);
   var dateArray = calculateDate.split(" ");
-  func_getSchedule(year, month, dateArray[0], dateArray[1]);
+  func_getSchedule(dateArray[0], dateArray[1]);
 
   // dateArea 변경하는 경우
   $(".dateAreaInput").change(function(){
@@ -110,6 +110,10 @@ function func_calculateWeek(year,month,date){
     }
   }
 
+  if(month<10){
+    month="0"+month;
+  }
+
   var weekStartDate, weekEndDate;
 
   if(weekcntToday==1){
@@ -141,41 +145,45 @@ function func_calculateWeek(year,month,date){
 
 
 // 일정 가져오기
-function func_getSchedule(year, month, weekStartDate, weekEndDate){
-  if(month<10){
-    month="0"+month;
-  }
-
+function func_getSchedule(startDate, endDate){
   $.ajax({
     url:"/getSchedule",
     type: "post",
     dataType: "json",
-    data:{weekStartDate:weekStartDate, weekEndDate:weekEndDate},
+    data:{startDate:startDate, endDate:endDate},
     success: function(data){
-      if(data.length>0) {    // 해당하는 일정이 있는 경우
-        $.each(data, function (idx,val) {
+      var cnt = data.scheduleList.length;
+      $("#scheduleCnt").html("총 "+cnt+"개 일정");
+
+      if(cnt>0) {    // 해당하는 일정이 있는 경우
+        $.each(data.scheduleList, function (idx,val) {
           var scheduleArray = val.split(",");
-          if($("loginType")=="1"){
-            var attenderCnt = scheduleArray[3].split(',').length;
-            $(".scheduleArea").append("<div class='scheduleAreaDetail' id='"+scheduleArray[0]+"' "
+          var dateArray = scheduleArray[1].split("-");
+          var date = Number(dateArray[1])+"/"+dateArray[2];
+
+          if($("#loginType").val()=="1"){
+            var attenderCnt = scheduleArray[4].split(',').length;
+            if(attenderCnt==1 && scheduleArray[4].split(',')[0]==""){
+              attenderCnt=0;
+            }
+
+            $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"' "
                                     + " onclick='func_detail(this.id)'>"
-                                    + "<div class='timeArea'>"
-                                    + "<span class='time'>"+scheduleArray[1]+"</span>"
-                                    + "<span class='time'> - </span>"
-                                    + "<span class='time'>"+scheduleArray[2]+"</span></div>"
+                                    + "<span class='date'>"+date+"&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+                                    + "<span class='time'>"+scheduleArray[2]+"&nbsp;-&nbsp;"+scheduleArray[3]+"</span>"
+                                    + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>"
                                     + "<img class='smallImg' src='image/report/attender.png'/>"
-                                    + "<span>"+attenderCnt+"</span>"
-                                    + "<span> / </span>"
-                                    + "<span class='import'>"+scheduleArray[4]+"</span></div>");
-          } else {
-            $(".scheduleArea").append("<div class='scheduleAreaDetail' id='"+scheduleArray[0]+"' "
+                                    + "<span> "+attenderCnt+"&nbsp;/&nbsp;</span>"
+                                    + "<span class=''>"+scheduleArray[5]+"</span></div>");
+          }
+          else {
+            $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"' "
                                     + " onclick='func_detail(id)'>"
-                                    + "<div class='timeArea'>"
-                                    + "<span class='time'>"+scheduleArray[1]+"</span>"
-                                    + "<span class='time'> - </span>"
-                                    + "<span class='time'>"+scheduleArray[2]+"</span></div>"
-                                    + "<span class='dept'>"+scheduleArray[3]+" </span></div>"
-                                    + "<span class='teacher'>"+scheduleArray[4]+" "+scheduleArray[5]+"</span>");
+                                    + "<span class='date'>"+date+"&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+                                    + "<span class='time'>"+scheduleArray[2]+"&nbsp;-&nbsp;"+scheduleArray[3]+"</span>"
+                                    + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+                                    + "<span>"+scheduleArray[4]+" </span></div>"
+                                    + "<span>"+scheduleArray[5]+"&nbsp;"+scheduleArray[6]+"</span>");
           }
         });
       }

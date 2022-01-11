@@ -67,28 +67,30 @@
 
 
 .scheduleArea {
-  color: black;
+  padding-top: 1rem;
   font-size: 0.9rem;
-  padding: 1rem;
-  text-align: center;
-  border-top: solid 0.1rem #2B2119;
+  overflow: auto;
+  height: 25rem;
 }
-.scheduleAreaDetail {
-  background-color: white;
-  border: solid 0.1rem #55705A;
-  border-radius: 0.5rem;
-  width: 80%;
-  margin: 2rem auto;
+#scheduleCnt {
+  margin-left: 2rem;
+}
+.scheduleDetail {
+  margin: 0.7rem auto;
+  width: 90%;
+  padding: 0.2rem 0 0.2rem 1rem;
+  border-bottom: solid 0.05rem lightgray;
   cursor: pointer;
 }
-.timeArea {
-  margin: 0.5rem 0.5rem 0 0.5rem;
+.date {
+  font-weight: bold;
 }
 .time {
+  color: #55705A;
   font-weight: bold;
-  font-size: 1rem;
-  margin: 0.5rem;
-  color: #2B2119;
+  background-color: #f8f2ec;
+  padding: 0.3rem;
+  border-radius: 0.2rem;
 }
 .smallImg {
   width: 0.9rem;
