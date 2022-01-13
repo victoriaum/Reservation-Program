@@ -11,21 +11,34 @@ $(function(){
   var dateArray = func_calculatePeriodDate(year, month, Number(weekcntArray[0]), Number(weekcntArray[1])).split(" ");
   func_getSchedule(dateArray[0], dateArray[1]);
 
-  // dateArea를 변경하는 경우
+  var selectedYear = $("#year").val(year).prop("selected",true);
+  var selectedMonth = $("#month").val(year).prop("selected",true);
+  var selectedWeek = $(".checkedWeekNo").val();
+
+  // dateAreaInput을 변경하는 경우
   $(".dateAreaInput").change(function(){
+    $(".scheduleCnt").html("");
     $(".scheduleArea").html("");
-    var checkedWeekNo = Number($(".checkedWeekNo").val());
+
+    var checkedWeekNo = Number($(".checkedWeekNo").text());
     func_inputDate(year,month);
     var weekcntArray = func_weekNow(year, month, date).split(" ");
     func_weekBtn(checkedWeekNo,Number(weekcntArray[1]));
     var dateArray = func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])).split(" ");
     func_getSchedule(dateArray[0], dateArray[1]);
   });
+
+  // week을 변경하는 경우
   $(".weekNo").click(function(){
+    $(".scheduleCnt").html("");
     $(".scheduleArea").html("");
     $(".weekNo").removeClass("checkedWeekNo");
     $(this).addClass("checkedWeekNo");
-    var checkedWeekNo = Number($(this).val());
+
+    var checkedWeekNo = Number($(".checkedWeekNo").text());
+    func_inputDate(year,month);
+    var weekcntArray = func_weekNow(year, month, date).split(" ");
+    func_weekBtn(checkedWeekNo,Number(weekcntArray[1]));
     var dateArray = func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])).split(" ");
     func_getSchedule(dateArray[0], dateArray[1]);
   });
