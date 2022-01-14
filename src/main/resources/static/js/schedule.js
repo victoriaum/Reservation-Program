@@ -12,31 +12,6 @@ $(function(){
   var dateArray = func_calculatePeriodDate(year, month, Number(weekcntArray[0]), Number(weekcntArray[1])).split(" ");
   func_getSchedule(dateArray[0], dateArray[1]);
 
-  // year를 변경하는 경우
-  $("#year").change(function(){
-    $(".scheduleCnt").html("");
-    $(".scheduleArea").html("");
-    var year = Number($("#year option:selected").val());
-
-    func_inputYear(year);
-    var weekcntArray = func_weekNow(year, month, date).split(" ");
-    func_weekBtn(1,Number(weekcntArray[1]));
-    var dateArray = func_calculatePeriodDate(year, month, 1, Number(weekcntArray[1])).split(" ");
-    func_getSchedule(dateArray[0], dateArray[1]);
-  });
-
-  // week을 변경하는 경우
-  $(".weekNo").click(function(){
-    $(".scheduleCnt").html("");
-    $(".scheduleArea").html("");
-    $(".weekNo").removeClass("checkedWeekNo");
-    $(this).addClass("checkedWeekNo");
-
-    var checkedWeekNo = Number($(".checkedWeekNo").text());
-    var dateArray = func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])).split(" ");
-    func_getSchedule(dateArray[0], dateArray[1]);
-  });
-
 
   /*/!* Url Hash Navigation *!/
   $('.owl-carousel').owlCarousel({
@@ -63,6 +38,45 @@ $(function(){
     func_getScheduleData(date);
   });*/
 });
+
+
+// year 변경하는 경우
+function func_yearChange() {
+  $(".scheduleCnt").html("");
+  $(".scheduleArea").html("");
+  var year = Number($("#year option:selected").val());
+  var month = Number($("#month option:selected").val());
+
+  func_inputYear(year);
+  var weekcntArray = func_weekNow(year, month, 1).split(" ");
+  func_weekBtn(1,Number(weekcntArray[1]));
+  var dateArray = func_calculatePeriodDate(year, month, 1, Number(weekcntArray[1])).split(" ");
+  func_getSchedule(dateArray[0], dateArray[1]);
+}
+
+
+// week을 선택하는 경우
+function func_weekChange(obj){
+  $(".scheduleCnt").html("");
+  $(".scheduleArea").html("");
+  $(".weekNo").removeClass("checkedWeekNo");
+  $(obj).addClass("checkedWeekNo");
+
+  var year = Number($("#year option:selected").val());
+  var month = Number($("#month option:selected").val());
+  var checkedWeekNo = $(obj).text();
+  console.log(checkedWeekNo);
+  var lastdate = new Date(year, month - 1, 0).getDay();
+  var date = 1+7*(checkedWeekNo-1);
+  if(date>lastdate){
+    date=lastdate;
+  }
+
+  var weekcntArray = func_weekNow(year, month, date).split(" ");
+  var dateArray = func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])).split(" ");
+  console.log(dateArray);
+  func_getSchedule(dateArray[0], dateArray[1]);
+}
 
 
 // 일정 편집페이지로 이동
@@ -132,9 +146,9 @@ function func_weekBtn(checkedWeekNo, weekcnt){
   $("#week").html("");
   for(var i=1; i<weekcnt+1; i++){
     if(i==checkedWeekNo){
-      $("#week").append("<span class='col weekNo checkedWeekNo' value='"+i+"'>"+i+"</span>");
+      $("#week").append("<span class='col weekNo checkedWeekNo' value='"+i+"' onclick='func_weekChange(this)'>"+i+"</span>");
     } else {
-      $("#week").append("<span class='col weekNo' value='"+i+"'>"+i+"</span>");
+      $("#week").append("<span class='col weekNo' value='"+i+"' onclick='func_weekChange(this)'>"+i+"</span>");
     }
   }
 }
