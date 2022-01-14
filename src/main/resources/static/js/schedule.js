@@ -8,13 +8,6 @@ $(function(){
   func_inputDate(year,month);
   var weekcntArray = func_weekNow(year, month, date).split(" ");
   func_weekBtn(Number(weekcntArray[0]),Number(weekcntArray[1]));
-
-  // check
-  var checkedWeekNo = Number($(".checkedWeekNo").text());
-  console.log(func_weekNow(year,month,date));
-  console.log(Number(weekcntArray[0])+Number(weekcntArray[1]));
-  console.log(checkedWeekNo);
-
   var dateArray = func_calculatePeriodDate(year, month, Number(weekcntArray[0]), Number(weekcntArray[1])).split(" ");
   func_getSchedule(dateArray[0], dateArray[1]);
 
@@ -39,7 +32,9 @@ $(function(){
     $(this).addClass("checkedWeekNo");
 
     var checkedWeekNo = Number($(".checkedWeekNo").text());
+    console.log(checkedWeekNo);
     var dateArray = func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])).split(" ");
+    console.log(func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])));
     func_getSchedule(dateArray[0], dateArray[1]);
   });
 
@@ -142,14 +137,15 @@ function func_weekBtn(checkedWeekNo, weekcnt){
 
 // 주차 시작일, 마지막날 계산하기
 function func_calculatePeriodDate(year,month,checkedWeekNo, weekcnt){
+  var lastdate = new Date(year, month - 1, 0).getDate();
+  var firstdateDay = new Date(year, month - 1, 1).getDay();
+  var lastdateDay = new Date(year, month - 1, lastdate).getDay();
+
   var date = 1+7*(checkedWeekNo-1);
   if(date>lastdate){
     date=lastdate;
   }
 
-  var lastdate = new Date(year, month - 1, 0).getDate();
-  var firstdateDay = new Date(year, month - 1, 0).getDay();
-  var lastdateDay = new Date(year, month - 1, lastdate).getDay();
   var today = new Date(year, month - 1, date).getDay();
 
   if(month<10){
@@ -180,9 +176,8 @@ function func_calculatePeriodDate(year,month,checkedWeekNo, weekcnt){
     else {
       weekEndDate = year+"-"+month+"-"+(date+6-today);
     }
-
-    return weekStartDate+" "+weekEndDate;
   }
+  return weekStartDate+" "+weekEndDate;
 }
 
 
