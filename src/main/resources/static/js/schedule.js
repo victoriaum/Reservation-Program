@@ -5,22 +5,23 @@ $(function(){
   var date = todayDate.getDate();
 
   // 초기값 설정
-  func_inputDate(year,month);
+  func_inputYear(year);
+  func_inputMonth(month);
   var weekcntArray = func_weekNow(year, month, date).split(" ");
   func_weekBtn(Number(weekcntArray[0]),Number(weekcntArray[1]));
   var dateArray = func_calculatePeriodDate(year, month, Number(weekcntArray[0]), Number(weekcntArray[1])).split(" ");
   func_getSchedule(dateArray[0], dateArray[1]);
 
-  // dateAreaInput을 변경하는 경우
-  $(".dateAreaInput").change(function(){
+  // year를 변경하는 경우
+  $("#year").change(function(){
     $(".scheduleCnt").html("");
     $(".scheduleArea").html("");
+    var year = Number($("#year option:selected").val());
 
-    var checkedWeekNo = Number($(".checkedWeekNo").text());
-    func_inputDate(year,month);
+    func_inputYear(year);
     var weekcntArray = func_weekNow(year, month, date).split(" ");
-    func_weekBtn(checkedWeekNo,Number(weekcntArray[1]));
-    var dateArray = func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])).split(" ");
+    func_weekBtn(1,Number(weekcntArray[1]));
+    var dateArray = func_calculatePeriodDate(year, month, 1, Number(weekcntArray[1])).split(" ");
     func_getSchedule(dateArray[0], dateArray[1]);
   });
 
@@ -32,9 +33,7 @@ $(function(){
     $(this).addClass("checkedWeekNo");
 
     var checkedWeekNo = Number($(".checkedWeekNo").text());
-    console.log(checkedWeekNo);
     var dateArray = func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])).split(" ");
-    console.log(func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])));
     func_getSchedule(dateArray[0], dateArray[1]);
   });
 
@@ -72,16 +71,22 @@ function func_detail(id) {
 }
 
 
-// dateArea Input 설정
-function func_inputDate(year,month){
+// year Input 설정
+function func_inputYear(year){
   $("#year").html("");
-  $("#month").html("");
 
   // Year Input, 현재 년도 기준으로 작년, 올해 보여줌.
   for(var i=year-1; i<year+2; i++){
+    console.log(i);
     $("#year").append("<option value='"+i+"'>"+i+"</option>");
   }
   $("#year").val(year).prop("selected",true);
+}
+
+
+// month Input 설정
+function func_inputMonth(month){
+  $("#month").html("");
 
   // Month Input
   var monthArray = ['January','February','March','April','May','June','July','August','September','October','November','December'];
