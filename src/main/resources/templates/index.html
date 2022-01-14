@@ -52,44 +52,11 @@
           <span class="indexContentsTitle">오늘 레포트검사 일정</span>
           <span class="more moreSchedule">more</span>
         </div>
-
-        <!-- 선생님 오늘 일정을 보여주는 부분 -->
-        <div th:if="${session.loginType}=='1' and ${not #lists.isEmpty(scheduleList)}" class="indexSchedule">
-          <th:block th:each="dto:${scheduleList}">
-            <p class="indexContentsDetail" th:value="${dto.schedule_no}">
-              <span class="indexContentsDetailInfo2" th:text="${dto.schedule_start}"></span>
-              <span class="noticeSubject">
-                검사를 요청한 인원:
-                <span th:text="${#lists.size(#strings.arraySplit(dto.schedule_attender,','))}" class="import"></span>명
-              </span>
-            </p>
-          </th:block>
-        </div>
-        <div th:if="${session.loginType}=='1' and ${#lists.isEmpty(scheduleList)}">
-          <p class="indexContentsDetail">
-            <span class="noticeSubject">오늘 일정은 없습니다.</span>
-          </p>
-        </div>
-
-        <!-- 학생 오늘 일정을 보여주는 부분 -->
-        <div th:if="${session.loginType}=='2' and ${not #lists.isEmpty(scheduleList)}" class="indexSchedule">
-          <th:block th:each="list:${scheduleList}">
-            <p class="indexContentsDetail" th:value="${#strings.arraySplit(list,',')[0]}">
-              <span class="indexContentsDetailInfo2" th:text="${#strings.arraySplit(list,',')[1]}"></span>
-              <span class="noticeSubject">
-                <span th:text="|${#strings.arraySplit(list,',')[2]}   ${#strings.arraySplit(list,',')[3]} ${#strings.arraySplit(list,',')[4]}|"></span>
-              </span>
-            </p>
-          </th:block>
-        </div>
-        <div th:if="${session.loginType}=='2' and ${#lists.isEmpty(scheduleList)}">
-          <p class="indexContentsDetail">
-            <span class="noticeSubject">오늘 일정은 없습니다.</span>
-          </p>
-        </div>
+        <div class="indexSchedule"></div>
       </div>
-
     </div>
+
+    <input type="hidden" id="loginType" th:value="${session.loginType}">
   </div>
 </div>
 

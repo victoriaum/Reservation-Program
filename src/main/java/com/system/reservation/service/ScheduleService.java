@@ -25,10 +25,8 @@ public class ScheduleService {
   }
 
   @Transactional
-  public List<SchedulerDto> getTodayTeacherSchedule(String teacher_id, String today) {
-    return schedulerRepository.getTodayTeacherSchedule(teacher_id, today).stream()
-        .map(SchedulerDto::new)
-        .collect(Collectors.toList());
+  public List<String> getTodayTeacherSchedule(String teacher_id, String today) {
+    return schedulerRepository.getTodayTeacherSchedule(teacher_id, today);
   }
 
   @Transactional

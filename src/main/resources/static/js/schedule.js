@@ -11,32 +11,6 @@ $(function(){
   func_weekBtn(Number(weekcntArray[0]),Number(weekcntArray[1]));
   var dateArray = func_calculatePeriodDate(year, month, Number(weekcntArray[0]), Number(weekcntArray[1])).split(" ");
   func_getSchedule(dateArray[0], dateArray[1]);
-
-
-  /*/!* Url Hash Navigation *!/
-  $('.owl-carousel').owlCarousel({
-    items:6,
-    loop:false,
-    center:true,
-    margin:10,
-    URLhashListener:true,
-    autoplayHoverPause:false,
-    startPosition: 'URLHash'
-  })
-
-  $(".owl-dots").hide();
-
-  var todayDate = $("#todayDate").val();
-  location.hash = todayDate;
-
-  $('.owl-item').click(function() {
-    $('.owl-item').removeClass("center");
-    $(this).addClass("center");
-    var date = $(".center").children().attr("data-hash");
-    location.hash = date;
-    $(".scheduleArea").empty();
-    func_getScheduleData(date);
-  });*/
 });
 
 

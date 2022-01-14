@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Controller;
@@ -52,24 +53,29 @@ public class MainController {
 
 
   @RequestMapping(value = {"/", "/index"})
-  public String mainPage(HttpServletRequest request, Model m) {
+  public String index(HttpServletRequest request, Model m) { return "index";  }
+
+  @ResponseBody
+  @RequestMapping(value = {"/getTodaySchedule"})
+  public String getTodaySchedule(HttpServletRequest request, Model m) {
     HttpSession httpSession = request.getSession();
     String loginType = (String)httpSession.getAttribute("loginType");
+    List<String> scheduleList;
 
     if("1".equals(loginType)){  // 선생님이 로그인한 경우
       TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
       String teacher_id = teacherDto.getTeacher_id();
-      List<SchedulerDto> scheduleList = scheduleService.getTodayTeacherSchedule(teacher_id, today);
-      m.addAttribute("scheduleList",scheduleList);
+      scheduleList = scheduleService.getTodayTeacherSchedule(teacher_id, today);
     }
     else {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
-      List<String> scheduleList = scheduleService.getTodayStudentSchedule(student_id, today);
-      m.addAttribute("scheduleList",scheduleList);
+      scheduleList = scheduleService.getTodayStudentSchedule(student_id, today);
     }
 
-    return "index";
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("scheduleList", scheduleList);
+    return jsonObject.toString();
   }
 
   @RequestMapping("/mypage")

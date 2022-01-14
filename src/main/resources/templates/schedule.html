@@ -15,8 +15,6 @@
 <div layout:fragment="content">
   <div id="container">
 
-    <input type="hidden" id="loginType" th:value="${session.loginType}">
-
     <span class="subTitle mb-3" onclick="location.href='/schedule'">Schedule</span>
 
     <div id="dateArea">
@@ -27,25 +25,12 @@
               id="month" name="month" onchange="func_monthChange()">
       </select>
       <div class="row" id="week" name="week"></div>
-
-      <!-- 일자별로 나타내고자 하는경우, owl-carousel
-      <div id="date">
-        <div class="owl-carousel owl-theme">
-          <th:block th:each="list:${dayList}">
-            <div class="item" th:data-hash="${#strings.arraySplit(list,'*')[0]}">
-              <div class="dateDetail">
-                <span class="day" th:text="${#strings.arraySplit(list,'*')[2]}"></span>
-                <span class="date" th:text="${#strings.arraySplit(list,'*')[1]}"></span>
-              </div>
-            </div>
-          </th:block>
-        </div>
-      </div>-->
-
     </div>
 
     <span class="scheduleCnt" id="scheduleCnt"></span>
     <div class="scheduleArea"></div>
+
+    <input type="hidden" id="loginType" th:value="${session.loginType}">
 
   </div>
 </div>
