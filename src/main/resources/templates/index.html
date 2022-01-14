@@ -11,25 +11,25 @@
   <div id="container">
     <div class="center">
       <div class="menu row row-cols-4">
-        <div th:if="${session.loginType}=='1'" class="indexMenu col" onclick="location.href='/report_t'">
-          <img class="menuIcon" th:src="@{image/index/report.png}"/>
-          <span class="menuName">Report</span>
+        <div th:if="${session.loginType}=='1'" class="indexMenu col">
+          <img class="menuIcon" th:src="@{image/index/report.png}" onclick="location.href='/report_t'"/>
+          <span class="menuName" onclick="location.href='/report_t'">Report</span>
         </div>
-        <div th:if="${session.loginType}=='2'" class="indexMenu col" onclick="location.href='/report_s'">
-          <img class="menuIcon" th:src="@{image/index/report.png}"/>
-          <span class="menuName">Report</span>
+        <div th:if="${session.loginType}=='2'" class="indexMenu col">
+          <img class="menuIcon" th:src="@{image/index/report.png}" onclick="location.href='/report_s'"/>
+          <span class="menuName" onclick="location.href='/report_s'">Report</span>
         </div>
-        <div class="indexMenu col" onclick="location.href='/schedule'">
-          <img class="menuIcon" th:src="@{image/index/schedule.png}"/>
-          <span class="menuName">Schedule</span>
+        <div class="indexMenu col" >
+          <img class="menuIcon" th:src="@{image/index/schedule.png}" onclick="location.href='/schedule'"/>
+          <span class="menuName" onclick="location.href='/schedule'">Schedule</span>
         </div>
-        <div class="indexMenu col" onclick="location.href='/notice'">
-          <img class="menuIcon" th:src="@{image/index/notice.png}"/>
-          <span class="menuName">Notice</span>
+        <div class="indexMenu col" >
+          <img class="menuIcon" th:src="@{image/index/notice.png}" onclick="location.href='/notice'"/>
+          <span class="menuName" onclick="location.href='/notice'">Notice</span>
         </div>
-        <div class="indexMenu col" onclick="location.href='/mypage'">
-          <img class="menuIcon" th:src="@{image/index/mypage.png}"/>
-          <span class="menuName">MyPage</span>
+        <div class="indexMenu col" >
+          <img class="menuIcon" th:src="@{image/index/mypage.png}" onclick="location.href='/mypage'"/>
+          <span class="menuName" onclick="location.href='/mypage'">MyPage</span>
         </div>
       </div>
 
