@@ -46,6 +46,7 @@ function func_yearChange() {
   $(".scheduleArea").html("");
   var year = Number($("#year option:selected").val());
   var month = Number($("#month option:selected").val());
+  console.log("func_yearChange:" +year,month);
 
   func_inputYear(year);
   var weekcntArray = func_weekNow(year, month, 1).split(" ");
@@ -141,15 +142,14 @@ function func_weekNow(year,month,date) {
     }
   }
 
-  var weekcntToday = Math.floor(date / 7);
+  var weekcntToday = Math.floor(date / 7)+1;
   if (firstdateDay != 0) {
     if (7 - firstdateDay < date % 7) {
-      weekcntToday = weekcntToday + 2;
-    } else {
       weekcntToday = weekcntToday + 1;
     }
   }
 
+  console.log(weekcntToday + " " + weekcnt);
   return weekcntToday + " " + weekcnt;
 }
 
