@@ -46,7 +46,6 @@ function func_yearChange() {
   $(".scheduleArea").html("");
   var year = Number($("#year option:selected").val());
   var month = Number($("#month option:selected").val());
-  console.log("func_yearChange:" +year,month);
 
   func_inputYear(year);
   var weekcntArray = func_weekNow(year, month, 1).split(" ");
@@ -149,7 +148,6 @@ function func_weekNow(year,month,date) {
     }
   }
 
-  console.log(weekcntToday + " " + weekcnt);
   return weekcntToday + " " + weekcnt;
 }
 
@@ -251,7 +249,7 @@ function func_getSchedule(startDate, endDate){
                                     + "<span class='date'>"+date+"&nbsp;&nbsp;&nbsp;&nbsp;</span>"
                                     + "<span class='time'>"+scheduleArray[2]+"&nbsp;-&nbsp;"+scheduleArray[3]+"</span>"
                                     + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>"
-                                    + "<span>"+scheduleArray[4]+" </span></div>"
+                                    + "<span>"+scheduleArray[4]+" </span>"
                                     + "<span>"+scheduleArray[5]+"&nbsp;"+scheduleArray[6]+"</span>");
           }
         });
