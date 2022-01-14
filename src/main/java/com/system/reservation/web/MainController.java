@@ -53,7 +53,7 @@ public class MainController {
 
 
   @RequestMapping(value = {"/", "/index"})
-  public String index(HttpServletRequest request, Model m) { return "index";  }
+  public String mainPage() { return "index";  }
 
   @ResponseBody
   @RequestMapping(value = {"/getTodaySchedule"})
