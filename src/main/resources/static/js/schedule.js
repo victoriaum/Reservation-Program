@@ -8,12 +8,15 @@ $(function(){
   func_inputDate(year,month);
   var weekcntArray = func_weekNow(year, month, date).split(" ");
   func_weekBtn(Number(weekcntArray[0]),Number(weekcntArray[1]));
+
+  // check
+  var checkedWeekNo = Number($(".checkedWeekNo").text());
+  console.log(func_weekNow(year,month,date));
+  console.log(Number(weekcntArray[0])+Number(weekcntArray[1]));
+  console.log(checkedWeekNo);
+
   var dateArray = func_calculatePeriodDate(year, month, Number(weekcntArray[0]), Number(weekcntArray[1])).split(" ");
   func_getSchedule(dateArray[0], dateArray[1]);
-
-  var selectedYear = $("#year").val(year).prop("selected",true);
-  var selectedMonth = $("#month").val(year).prop("selected",true);
-  var selectedWeek = $(".checkedWeekNo").val();
 
   // dateAreaInput을 변경하는 경우
   $(".dateAreaInput").change(function(){
@@ -36,9 +39,6 @@ $(function(){
     $(this).addClass("checkedWeekNo");
 
     var checkedWeekNo = Number($(".checkedWeekNo").text());
-    func_inputDate(year,month);
-    var weekcntArray = func_weekNow(year, month, date).split(" ");
-    func_weekBtn(checkedWeekNo,Number(weekcntArray[1]));
     var dateArray = func_calculatePeriodDate(year, month, checkedWeekNo, Number(weekcntArray[1])).split(" ");
     func_getSchedule(dateArray[0], dateArray[1]);
   });
@@ -101,24 +101,26 @@ function func_inputDate(year,month){
 // 일자로 현재 주차 계산하기
 function func_weekNow(year,month,date) {
   var lastdate = new Date(year, month - 1, 0).getDate();
-  var firstdateDay = new Date(year, month - 1, 0).getDay();
+  var firstdateDay = new Date(year, month - 1, 1).getDay();
   var lastdateDay = new Date(year, month - 1, lastdate).getDay();
   var today = new Date(year, month - 1, date).getDay();
 
   var weekcnt = Math.floor(lastdate / 7);
-  if (lastdate % 7 != 0) {
+  if (firstdateDay % 7 != 0) {
     if (7 - firstdateDay < lastdate % 7) {
       weekcnt = weekcnt + 2;
-    } else if (7 - firstdateDay == lastdate % 7) {
+    } else {
       weekcnt = weekcnt + 1;
     }
   }
 
-  var weekcntToday;
-  if (7 - firstdateDay < date % 7) {
-    weekcntToday = Math.floor(date / 7 + 2);
-  } else if (7 - firstdateDay == date % 7) {
-    weekcntToday = Math.floor(date / 7 + 1);
+  var weekcntToday = Math.floor(date / 7);
+  if (firstdateDay != 0) {
+    if (7 - firstdateDay < date % 7) {
+      weekcntToday = weekcntToday + 2;
+    } else {
+      weekcntToday = weekcntToday + 1;
+    }
   }
 
   return weekcntToday + " " + weekcnt;
@@ -140,7 +142,6 @@ function func_weekBtn(checkedWeekNo, weekcnt){
 
 // 주차 시작일, 마지막날 계산하기
 function func_calculatePeriodDate(year,month,checkedWeekNo, weekcnt){
-  console.log("func_calculatePeriodDate:"+checkedWeekNo+weekcnt);
   var date = 1+7*(checkedWeekNo-1);
   if(date>lastdate){
     date=lastdate;
@@ -187,7 +188,6 @@ function func_calculatePeriodDate(year,month,checkedWeekNo, weekcnt){
 
 // 일정 가져오기
 function func_getSchedule(startDate, endDate){
-  console.log("func_getSchedule:"+startDate+endDate);
   $.ajax({
     url:"/getSchedule",
     type: "post",
