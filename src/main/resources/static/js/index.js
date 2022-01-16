@@ -24,7 +24,6 @@ $(function(){
 
 // 오늘 일정 가져오기
 function func_getTodaySchedule(todayDate){
-  console.log(todayDate)
   $.ajax({
     url:"/getTodaySchedule",
     type: "post",
