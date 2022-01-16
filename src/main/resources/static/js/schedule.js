@@ -72,18 +72,27 @@ function func_weekChange(obj){
 function func_detailSchedule(obj) {
   var attenders = $(obj).next().val();
   var id = $(obj).next().next().val();
+  var attenderArray = attenders.split(",");
 
-  $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
-      + "<div class='attenders'>"+attenders+"</div>"
-      + "<div class='choice' onclick='func_detail()'>edit</div>");
+  if(attenderArray.length==0){
+    $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
+        + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
+  } else {
+    $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
+        + "<div class='attenders'>현재 신청자:</div>"
+        + "<div class='attendersDetail'>"+attenders+"</div>"
+        + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
+  }
+
+
   $(obj).remove();
 }
 
 
 // 참석자 명단 가리기
 function func_closeSchedule(obj) {
-  $(obj).next().remove();
   $(obj).next().next().remove();
+  $(obj).next().remove();
   $(obj).after("<img class='smallImg detailBtn dowonBtn' src='image/schedule/down.png' onclick='func_detailSchedule(this)'/>");
   $(obj).remove();
 }

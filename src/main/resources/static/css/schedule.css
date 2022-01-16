@@ -108,7 +108,24 @@
   float: right;
   margin-right: 0.5rem;
   margin-top: 0.2rem;
+  cursor: pointer;
 }
 .attenders {
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
+  font-weight: bold;
+}
+.attendersDetail {
+  margin-bottom: 0.3rem;
+}
+.edit {
+  cursor: pointer;
+  text-align: center;
+  padding: 0.2rem;
+  border-radius: 0.2rem;
+  background-color: #E48873;
+  color: #2B2119;
+  font-weight: bold;
+  font-size: 0.7rem;
+  margin: 0.5rem auto;
+  width: 60%;
 }
