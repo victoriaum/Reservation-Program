@@ -29,7 +29,7 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
       + " ORDER BY s.schedule_date, s.schedule_start ASC")
   List<String> getTeacherWeekSchedule(@Param("teacher_id") String teacher_id, @Param("startDate") String startDate, @Param("endDate") String endDate);
 
-  @Query("SELECT s.schedule_no, s.schedule_date, s.schedule_start, s.schedule_end, t.teacher_dept, t.teacher_name, t.teacher_position"
+  @Query("SELECT s.schedule_no, s.schedule_date, s.schedule_start, s.schedule_end, t.teacher_dept, t.teacher_name, t.teacher_position, s.schedule_attender"
       + " FROM Scheduler s LEFT JOIN Teacher t"
       + " ON s.teacher_id = t.teacher_id"
       + " WHERE s.schedule_attender LIKE CONCAT('%',:student_id,'%') AND s.schedule_date>=:startDate AND s.schedule_date<=:endDate "

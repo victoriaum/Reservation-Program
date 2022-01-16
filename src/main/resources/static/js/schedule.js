@@ -67,6 +67,29 @@ function func_weekChange(obj){
 }
 
 
+
+// 참석자 명단보기
+function func_detailSchedule(obj) {
+  var attenders = $(obj).next().val();
+  var id = $(obj).next().next().val();
+
+  $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
+      + "<div class='attenders'>"+attenders+"</div>"
+      + "<div class='choice' onclick='func_detail()'>edit</div>");
+  $(obj).remove();
+}
+
+
+// 참석자 명단 가리기
+function func_closeSchedule(obj) {
+  $(obj).next().remove();
+  $(obj).next().next().remove();
+  $(obj).after("<img class='smallImg detailBtn dowonBtn' src='image/schedule/down.png' onclick='func_detailSchedule(this)'/>");
+  $(obj).remove();
+}
+
+
+
 // 일정 편집페이지로 이동
 function func_detail(id) {
   location.href="/report_t/makeSchedule?no="+id;
@@ -208,23 +231,27 @@ function func_getSchedule(startDate, endDate){
               attenderCnt=0;
             }
 
-            $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"' "
-                                    + " onclick='func_detail(this.id)'>"
-                                    + "<span class='date'>"+date+"&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+            $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"'>"
+                                    + "<span class='date'>"+date+"&nbsp;&nbsp;</span>"
                                     + "<span class='time'>"+scheduleArray[2]+"&nbsp;-&nbsp;"+scheduleArray[3]+"</span>"
-                                    + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+                                    + "<span>&nbsp;&nbsp;</span>"
                                     + "<img class='smallImg' src='image/report/attender.png'/>"
                                     + "<span> "+attenderCnt+"&nbsp;/&nbsp;</span>"
-                                    + "<span class=''>"+scheduleArray[5]+"</span></div>");
+                                    + "<span class=''>"+scheduleArray[5]+"</span>"
+                                    + "<img class='smallImg detailBtn downBtn' src='image/schedule/down.png' onclick='func_detailSchedule(this)'/>"
+                                    + "<input type='hidden' value='"+scheduleArray[4]+"' />"
+                                    + "<input type='hidden' value='"+scheduleArray[0]+"' /></div>");
           }
           else {
-            $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"' "
-                                    + " onclick='func_detail(id)'>"
+            $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"' >"
                                     + "<span class='date'>"+date+"&nbsp;&nbsp;&nbsp;&nbsp;</span>"
-                                    + "<span class='time'>"+scheduleArray[2]+"&nbsp;-&nbsp;"+scheduleArray[3]+"</span>"
-                                    + "<span>&nbsp;&nbsp;&nbsp;&nbsp;</span>"
+                                    + "<span class='time'>"+scheduleArray[2]+"&nbsp;-&nbsp;"+scheduleArray[3]+"</span><br>"
                                     + "<span>"+scheduleArray[4]+" </span>"
-                                    + "<span>"+scheduleArray[5]+"&nbsp;"+scheduleArray[6]+"</span>");
+                                    + "<span>"+scheduleArray[5]+"&nbsp;"+scheduleArray[6]+"</span>"
+                                    + "<img class='smallImg detailBtn downBtn' src='image/schedule/down.png' onclick='func_detailSchedule(this)'/>"
+                                    + "<img class='smallImg detailBtn upBtn' src='image/schedule/up.png'/>"
+                                    + "<div class='attenders'>"+scheduleArray[7]+"</div>"
+                                    + "<input type='hidden' value='"+scheduleArray[0]+"' /></div>");
           }
         });
       }
@@ -237,38 +264,3 @@ function func_getSchedule(startDate, endDate){
     }
   });
 }
-
-
-/*// owlCarousel 값 넣기
-function func_dateDetail(year,month){
-  var dayCnt = new Date(year, month, 0).getDate();
-
-  for (var i=1; i<dayCnt+1; i++){
-    var day = new Date(year, month-1, i);
-    const dayArray = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    var week = dayArray[day.getDay()];
-
-    var month = ('0' + month).slice(-2);
-
-    if(i<10){
-      $(".owl-item").append("<div class='item' data-hash='"+year+"-"+month+"-0"+i+"'>"
-          + " <div class='dateDetail'>"
-          + " <span class='day'>"+week+"</span>"
-          + " <span>"+i+"</span>"
-          + " </div></div>");
-    } else {
-      $(".owl-item").append("<div class='item' data-hash='"+year+"-"+month+"-"+i+"'>"
-          + " <div class='dateDetail'>"
-          + " <span class='day'>"+week+"</span>"
-          + " <span>"+i+"</span>"
-          + " </div></div>");
-    }
-
-  }
-}*/
-
-
-/*  // Listen to owl events:
-  owl.on('changed.owl.carousel', function(event) {
-    location.hash = 'slide' + event.property.value;
-  })*/
