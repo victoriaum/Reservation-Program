@@ -1,6 +1,7 @@
 package com.system.reservation.web;
 
 import com.system.reservation.service.ScheduleService;
+import com.system.reservation.service.StudentService;
 import com.system.reservation.web.dto.SchedulerDto;
 import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ScheduleController {
   private final ScheduleService scheduleService;
+  private final StudentService studentService;
 
 
   @RequestMapping("/schedule")
@@ -55,6 +57,25 @@ public class ScheduleController {
 
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("scheduleList", scheduleList);
+    return jsonObject.toString();
+  }
+
+  @ResponseBody
+  @RequestMapping("/getNameList")
+  public String schedule(@RequestParam("attenders") String attenders, HttpServletRequest request) {
+
+    HttpSession httpSession = request.getSession();
+    String[] attenderList = attenders.split(",");
+    String nameList ="";
+
+    for(int i=0; i<attenderList.length; i++){
+      nameList += studentService.getNameList(attenderList[i]);
+    }
+
+    System.out.println(nameList);
+
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("nameList", nameList);
     return jsonObject.toString();
   }
 }

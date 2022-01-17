@@ -67,14 +67,34 @@ function func_weekChange(obj){
 }
 
 
+// 참석자 이름 가져오기
+function func_getNameList(attenders){
+  var attenders = String(attenders);
+
+  $.ajax({
+    url:"/getNameList",
+    type: "post",
+    dataType: "json",
+    data:{attenders:attenders},
+    success: function(data){
+      return data.nameList;
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
+}
+
+
 
 // 참석자 명단보기
 function func_detailSchedule(obj) {
   var attenders = $(obj).next().val();
   var id = $(obj).next().next().val();
-  var attenderArray = attenders.split(",");
+  var nameList = func_getNameList(attenders);
+  var nameListArray = nameList.split(",");
 
-  if(attenderArray.length==0){
+  if(nameListArray.length==0){
     $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
         + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
   } else {
@@ -258,8 +278,7 @@ function func_getSchedule(startDate, endDate){
                                     + "<span>"+scheduleArray[4]+" </span>"
                                     + "<span>"+scheduleArray[5]+"&nbsp;"+scheduleArray[6]+"</span>"
                                     + "<img class='smallImg detailBtn downBtn' src='image/schedule/down.png' onclick='func_detailSchedule(this)'/>"
-                                    + "<img class='smallImg detailBtn upBtn' src='image/schedule/up.png'/>"
-                                    + "<div class='attenders'>"+scheduleArray[7]+"</div>"
+                                    + "<input type='hidden' value='"+scheduleArray[7]+"' />"
                                     + "<input type='hidden' value='"+scheduleArray[0]+"' /></div>");
           }
         });

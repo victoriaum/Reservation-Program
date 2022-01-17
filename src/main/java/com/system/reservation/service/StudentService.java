@@ -21,4 +21,9 @@ public class StudentService {
     }
 
   }
+
+  @Transactional
+  public String getNameList(String id) {
+    return studentRepository.getNameList(id);
+  }
 }
