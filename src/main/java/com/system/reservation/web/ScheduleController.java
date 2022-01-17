@@ -69,10 +69,12 @@ public class ScheduleController {
     String nameList ="";
 
     for(int i=0; i<attenderList.length; i++){
-      nameList += studentService.getNameList(attenderList[i]);
+      if(i==0){
+        nameList = studentService.getNameList(attenderList[i]);
+      } else {
+        nameList += ", "+studentService.getNameList(attenderList[i]);
+      }
     }
-
-    System.out.println(nameList);
 
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("nameList", nameList);

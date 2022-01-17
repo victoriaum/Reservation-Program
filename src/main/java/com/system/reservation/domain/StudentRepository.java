@@ -11,6 +11,6 @@ public interface StudentRepository extends JpaRepository<Student, String> {
   List<StudentDto> findByStudent_idAndStudent_password(@Param("id") String id, @Param("password") String password);
 
   @Query("SELECT s.student_name FROM Student s WHERE s.student_id=:id")
-  String getNameList(String id);
+  String getNameList(@Param("id") String id);
 }
 

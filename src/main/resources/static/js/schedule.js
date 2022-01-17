@@ -67,17 +67,15 @@ function func_weekChange(obj){
 }
 
 
-// 참석자 이름 가져오기
+// 참석자 명단 이름 가져오기
 function func_getNameList(attenders){
-  var attenders = String(attenders);
-
   $.ajax({
     url:"/getNameList",
     type: "post",
     dataType: "json",
     data:{attenders:attenders},
     success: function(data){
-      return data.nameList;
+      $(".attenders").append("<br><span style='font-weight: normal'>"+data.nameList+"</span>");
     },
     error: function(report, status, error){
       alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
@@ -86,35 +84,36 @@ function func_getNameList(attenders){
 }
 
 
-
 // 참석자 명단보기
 function func_detailSchedule(obj) {
-  var attenders = $(obj).next().val();
-  var id = $(obj).next().next().val();
-  var nameList = func_getNameList(attenders);
-  var nameListArray = nameList.split(",");
+  $(".downBtn").show();
+  $(".upBtn").remove();
+  $(".attenders").remove();
+  $(".edit").remove();
 
-  if(nameListArray.length==0){
+  var attenders = String($(obj).next().val());
+  var id = $(obj).next().next().val();
+  var nameList = $("#nameList").val();
+
+  if(attenders==""){
     $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
-        + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
+                     + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
   } else {
     $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
         + "<div class='attenders'>현재 신청자:</div>"
-        + "<div class='attendersDetail'>"+attenders+"</div>"
         + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
+    func_getNameList(attenders);
   }
-
-
-  $(obj).remove();
+  $(obj).hide();
 }
 
 
 // 참석자 명단 가리기
 function func_closeSchedule(obj) {
-  $(obj).next().next().remove();
-  $(obj).next().remove();
-  $(obj).after("<img class='smallImg detailBtn dowonBtn' src='image/schedule/down.png' onclick='func_detailSchedule(this)'/>");
-  $(obj).remove();
+  $(obj).prev().show();
+  $(".upBtn").remove();
+  $(".attenders").remove();
+  $(".edit").remove();
 }
 
 
