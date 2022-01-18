@@ -20,7 +20,7 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
   @Query("SELECT s.schedule_no, s.schedule_start, t.teacher_dept, t.teacher_name, t.teacher_position"
       + " FROM Scheduler s LEFT JOIN Teacher t"
       + " ON s.teacher_id = t.teacher_id"
-      + " WHERE s.schedule_attender LIKE CONCAT('%',:student_id,'%') AND s.schedule_date=:today"
+      + " WHERE s.schedule_date=:today AND (s.schedule_attender LIKE CONCAT('%',:student_id) OR s.schedule_attender LIKE CONCAT('%',:student_id,',','%'))"
       + " ORDER BY s.schedule_date, s.schedule_start ASC")
   List<String> getTodayStudentSchedule(@Param("student_id") String student_id, @Param("today") String today);
 
@@ -32,7 +32,7 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
   @Query("SELECT s.schedule_no, s.schedule_date, s.schedule_start, s.schedule_end, t.teacher_dept, t.teacher_name, t.teacher_position, s.schedule_attender"
       + " FROM Scheduler s LEFT JOIN Teacher t"
       + " ON s.teacher_id = t.teacher_id"
-      + " WHERE s.schedule_attender LIKE CONCAT('%',:student_id,'%') AND s.schedule_date>=:startDate AND s.schedule_date<=:endDate "
+      + " WHERE (s.schedule_attender LIKE CONCAT('%',:student_id) OR s.schedule_attender LIKE CONCAT('%',:student_id,',','%')) AND s.schedule_date>=:startDate AND s.schedule_date<=:endDate "
       + " ORDER BY s.schedule_date, s.schedule_start ASC")
   List<String> getStudentWeekSchedule(@Param("student_id") String student_id, @Param("startDate") String startDate, @Param("endDate") String endDate);
 
