@@ -35,10 +35,11 @@ function func_getTodaySchedule(todayDate){
       if(cnt>0) {    // 해당하는 일정이 있는 경우
         $.each(data.scheduleList, function (idx,val) {
           var scheduleArray = val.split(",");
+          var length = scheduleArray.length;
 
           if($("#loginType").val()=="1"){
-            var attenderCnt = scheduleArray[3].split(',').length;
-            if(attenderCnt==1 && scheduleArray[3].split(',')[0]==""){
+            var attenderCnt = length-4;
+            if(scheduleArray[3]==""){
               attenderCnt=0;
             }
 

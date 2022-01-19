@@ -252,12 +252,18 @@ function func_getSchedule(startDate, endDate){
           var scheduleArray = val.split(",");
           var dateArray = scheduleArray[1].split("-");
           var date = Number(dateArray[1])+"/"+dateArray[2];
+          var length = scheduleArray.length;
+          var attenderArray,attenderCnt;
 
           if($("#loginType").val()=="1"){
-            var attenderCnt = scheduleArray[4].split(',').length;
-            if(attenderCnt==1 && scheduleArray[4].split(',')[0]==""){
-              attenderCnt=0;
+            for(var i=5; i<length; i++){
+              if(i==5){
+                attenderArray=scheduleArray[i];
+              } else {
+                attenderArray+=","+scheduleArray[i];
+              }
             }
+            attenderCnt = attenderArray.split(",").length;
 
             $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"'>"
                                     + "<span class='date'>"+date+"&nbsp;&nbsp;</span>"
@@ -265,19 +271,28 @@ function func_getSchedule(startDate, endDate){
                                     + "<span>&nbsp;&nbsp;</span>"
                                     + "<img class='smallImg' src='image/report/attender.png'/>"
                                     + "<span> "+attenderCnt+"&nbsp;/&nbsp;</span>"
-                                    + "<span class=''>"+scheduleArray[5]+"</span>"
+                                    + "<span class=''>"+scheduleArray[4]+"</span>"
                                     + "<img class='smallImg detailBtn downBtn' src='image/schedule/down.png' onclick='func_detailSchedule(this)'/>"
-                                    + "<input type='hidden' value='"+scheduleArray[4]+"' />"
+                                    + "<input type='hidden' value='"+attenderArray+"' />"
                                     + "<input type='hidden' value='"+scheduleArray[0]+"' /></div>");
           }
           else {
+            for(var i=7; i<length; i++){
+              if(i==7){
+                attenderArray=scheduleArray[i];
+              } else {
+                attenderArray+=","+scheduleArray[i];
+              }
+            }
+            attenderCnt = attenderArray.split(",").length;
+
             $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"' >"
                                     + "<span class='date'>"+date+"&nbsp;&nbsp;&nbsp;&nbsp;</span>"
                                     + "<span class='time'>"+scheduleArray[2]+"&nbsp;-&nbsp;"+scheduleArray[3]+"</span><br>"
                                     + "<span>"+scheduleArray[4]+" </span>"
                                     + "<span>"+scheduleArray[5]+"&nbsp;"+scheduleArray[6]+"</span>"
                                     + "<img class='smallImg detailBtn downBtn' src='image/schedule/down.png' onclick='func_detailSchedule(this)'/>"
-                                    + "<input type='hidden' value='"+scheduleArray[7]+"' />"
+                                    + "<input type='hidden' value='"+attenderArray+"' />"
                                     + "<input type='hidden' value='"+scheduleArray[0]+"' /></div>");
           }
         });
