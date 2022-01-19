@@ -264,6 +264,9 @@ function func_getSchedule(startDate, endDate){
               }
             }
             attenderCnt = attenderArray.split(",").length;
+            if(scheduleArray[5]==""){
+              attenderCnt = 0;
+            }
 
             $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"'>"
                                     + "<span class='date'>"+date+"&nbsp;&nbsp;</span>"
@@ -285,6 +288,9 @@ function func_getSchedule(startDate, endDate){
               }
             }
             attenderCnt = attenderArray.split(",").length;
+            if(scheduleArray[7]==""){
+              attenderCnt = 0;
+            }
 
             $(".scheduleArea").append("<div class='scheduleDetail' id='"+scheduleArray[0]+"' >"
                                     + "<span class='date'>"+date+"&nbsp;&nbsp;&nbsp;&nbsp;</span>"

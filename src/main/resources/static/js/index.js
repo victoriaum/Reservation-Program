@@ -38,9 +38,16 @@ function func_getTodaySchedule(todayDate){
           var length = scheduleArray.length;
 
           if($("#loginType").val()=="1"){
-            var attenderCnt = length-4;
-            if(scheduleArray[3]==""){
-              attenderCnt=0;
+            for(var i=4; i<length; i++){
+              if(i==4){
+                attenderArray=scheduleArray[i];
+              } else {
+                attenderArray+=","+scheduleArray[i];
+              }
+            }
+            attenderCnt = attenderArray.split(",").length;
+            if(scheduleArray[4]==""){
+              attenderCnt = 0;
             }
 
             $(".indexSchedule").append("<p class='indexContentsDetail' value='"+scheduleArray[0]+"'> "
