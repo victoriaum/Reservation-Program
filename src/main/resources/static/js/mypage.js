@@ -1,4 +1,13 @@
 $(function(){
+  if($("#result").val()!=null && $("#result").val()!=""){
+    Swal.fire({
+      title: 'Success!',
+      icon: 'success',
+      showConfirmButton: false,
+      timer: 1200
+    })
+  }
+
   $(".editAccount").click(function(){
     location.href="/mypage/editAccount";
   });

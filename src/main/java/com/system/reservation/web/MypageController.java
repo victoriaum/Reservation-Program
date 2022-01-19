@@ -47,7 +47,8 @@ public class MypageController {
       httpSession.setAttribute("loginUser",studentDto);
     }
 
-    return "mypage";
+    m.addAttribute("result","변경성공");
+    return "editAccount";
   }
 
 }
