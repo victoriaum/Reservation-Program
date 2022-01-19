@@ -78,9 +78,4 @@ public class MainController {
     return jsonObject.toString();
   }
 
-  @RequestMapping("/mypage")
-  public String mypage() {
-    return "mypage";
-  }
-
 }
