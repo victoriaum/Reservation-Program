@@ -36,10 +36,12 @@
 .lastTitle {
   font-weight: bold;
   color: #2B2119;
+  cursor: pointer;
 }
 .menuIcon {
   margin: 0 0.5rem;
   width: 1.2rem;
+  cursor: pointer;
 }
 
 .editAccountArea {
@@ -54,6 +56,7 @@
   font-size: 0.8rem;
   color: #2B2119;
   width: 30%;
+  cursor: pointer;
 }
 .subInput {
   font-size: 0.8rem;
