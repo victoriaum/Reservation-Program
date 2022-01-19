@@ -26,4 +26,10 @@ public class StudentService {
   public String getNameList(String id) {
     return studentRepository.getNameList(id);
   }
+
+  @Transactional
+  public void updatePassword(String id, String password) {
+    studentRepository.updatePassword(id, password);
+  }
+
 }

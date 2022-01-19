@@ -34,7 +34,10 @@ public class TeacherService {
     return teacherList;
   };
 
-
+  @Transactional
+  public void updatePassword(String id, String password) {
+    teacherRepository.updatePassword(id, password);
+  }
 
 
 }

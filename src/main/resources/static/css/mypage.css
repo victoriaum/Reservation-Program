@@ -32,3 +32,44 @@
   background-color: #f8f2ec;
   font-size: 0.8rem;
 }
+
+.lastTitle {
+  font-weight: bold;
+  color: #2B2119;
+}
+.menuIcon {
+  margin: 0 0.5rem;
+  width: 1.2rem;
+}
+
+.editAccountArea {
+  margin-top: 2rem;
+  height: 10rem;
+  background-color: #ECDCCB;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+.subLabel {
+  font-weight: bold;
+  font-size: 0.8rem;
+  color: #2B2119;
+  width: 30%;
+}
+.subInput {
+  font-size: 0.8rem;
+  width: 60%;
+  display: inline-block;
+}
+.btn {
+  float: right;
+  width: 5rem;
+  border: none;
+  color: #2B2119;
+  background-color: #E48873;
+  font-size: 0.8rem;
+}
+.error {
+  color: red;
+  font-size: 0.8rem;
+  margin-left: 32%;
+}
