@@ -36,10 +36,11 @@
         </th:block>
       </div>
 
-
       <div th:if="${schedule}!=''" class="area firstArea">
         <span th:text="${schedule}"></span>
       </div>
+
+      <input type="hidden" id="result" th:value="${result}"/>
 
     </div>
   </div>

@@ -128,9 +128,10 @@ public class ReportController {
     scheduleService.saveSchedule(schedulerDto);
 
     List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
+    m.addAttribute("result","변경성공");
     m.addAttribute("scheduleList",scheduleList);
 
-    return "redirect:/report_t";
+    return "/report_t";
   }
 
 
@@ -144,9 +145,10 @@ public class ReportController {
 
     Long schedule_no = Long.parseLong(no);
     scheduleService.editSchedule(schedule_no, date, start, end, space);
+    m.addAttribute("result","변경성공");
     m.addAttribute("","");
 
-    return "redirect:/report_t";
+    return "/report_t";
   }
 
 
@@ -155,6 +157,6 @@ public class ReportController {
   public String deleteSchedule(@RequestParam("no") String schedule_no, Model m) {
     Long no = Long.parseLong(schedule_no);
     scheduleService.deleteById(no);
-    return "성공적으로 삭제되었습니다.";
+    return "삭제성공";
   }
 }
