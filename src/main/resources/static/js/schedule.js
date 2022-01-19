@@ -95,16 +95,59 @@ function func_detailSchedule(obj) {
   var id = $(obj).next().next().val();
   var nameList = $("#nameList").val();
 
-  if(attenders==""){
-    $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
-                     + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
+  if($("#loginType").val()=="1"){
+    if(attenders==""){
+      $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
+          + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
+    } else {
+      $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
+          + "<div class='attenders'>현재 신청자:</div>"
+          + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
+      func_getNameList(attenders);
+    }
   } else {
-    $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
-        + "<div class='attenders'>현재 신청자:</div>"
-        + "<div class='edit' onclick='func_detail("+id+")'>수정/삭제하기</div>");
-    func_getNameList(attenders);
+    if(attenders==""){
+      $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
+          + "<div class='edit' onclick='func_requestCancel("+id+")'>취소하기</div>");
+    } else {
+      $(obj).after("<img class='smallImg detailBtn upBtn' src='image/schedule/up.png' onclick='func_closeSchedule(this)'/>"
+          + "<div class='attenders'>현재 신청자:</div>"
+          + "<div class='edit' onclick='func_requestCancel("+id+")'>취소하기</div>");
+      func_getNameList(attenders);
+    }
   }
+
   $(obj).hide();
+}
+
+
+// 일정 요청 취소하기
+function func_requestCancel(id) {
+  console.log(id);
+  console.log(typeof id);
+
+  $.ajax({
+    url:"/requestCancel",
+    type: "post",
+    dataType:"json",
+    data:{schedule_no:id},
+    success: function(json){
+      if(json.result!=""){    // 일정 취소성공
+        Swal.fire({
+          title: 'Success!',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1200
+        })
+        setTimeout(function() {
+          location.href="/schedule";
+        }, 1300);
+      }
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
 }
 
 

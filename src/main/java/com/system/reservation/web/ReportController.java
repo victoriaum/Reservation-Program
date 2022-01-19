@@ -55,9 +55,9 @@ public class ReportController {
   }
 
   @ResponseBody
-  @RequestMapping("/sendReport")
-  public String sendReport(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
-    Integer result = scheduleService.sendReport(schedule_no, login_id);
+  @RequestMapping("/requestReport")
+  public String requestReport(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
+    Integer result = scheduleService.requestReport(schedule_no, login_id);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("result", result);
     return jsonObject.toString();

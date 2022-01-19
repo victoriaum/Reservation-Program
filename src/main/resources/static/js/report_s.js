@@ -144,7 +144,7 @@ function func_reportOkay(obj) {
   var schedule_no = Number(obj.id);
 
   $.ajax({
-    url:"/sendReport",
+    url:"/requestReport",
     type: "post",
     dataType:"json",
     data:{schedule_no:schedule_no, login_id:login_id},
@@ -155,7 +155,7 @@ function func_reportOkay(obj) {
         var cnt = Number(attenderCnt.text());
         attenderCnt.html(cnt+1);
       }
-      else if(json.result==0){    // 일정 저장실패패
+      else if(json.result==0){    // 일정 저장실패
         alert("이미 등록된 예약입니다.");
       }
     },

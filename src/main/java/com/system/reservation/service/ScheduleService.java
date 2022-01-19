@@ -45,21 +45,27 @@ public class ScheduleService {
   }
 
   @Transactional
-  public Integer sendReport(Long schedule_no, String login_id) {
+  public Integer requestReport(Long schedule_no, String login_id) {
     String attenders = schedulerRepository.checkAttenders(schedule_no);
+    String[] attenderArray = attenders.split(",");
 
-    if(attenders.contains(login_id)){ // 일정 내 현재 요청한 참여자가 있는 경우
-      return 0;
-
-    } else {  // 일정 내 현재 요청한 참여자가 없는 경우
-      if(attenders.isEmpty()){
-        attenders = login_id;
-      } else {
-        attenders = attenders + "," + login_id;
+    for(int i=0; i<attenderArray.length; i++){
+      if(login_id.equals(attenderArray[i])){ // 일정 내 현재 요청한 참여자가 있는 경우
+        return 0;
       }
-      schedulerRepository.updateReport(schedule_no, attenders);
-      return 1;
     }
+
+    // 일정 내 현재 요청한 참여자가 없는 경우
+    if(attenders.isEmpty()){
+      attenders = login_id;
+    } else {
+      attenders = attenders + "," + login_id;
+    }
+    SchedulerDto schedulerDto = schedulerRepository.getOneSchedule(schedule_no);
+    schedulerDto.setSchedule_attender(attenders);
+    schedulerRepository.save(schedulerDto.toEntity());  // todo merge
+    return 1;
+
   }
 
   @Transactional
@@ -76,7 +82,9 @@ public class ScheduleService {
       } else {
         attenders = "";
       }
-      schedulerRepository.updateReport(schedule_no, attenders);
+      SchedulerDto schedulerDto = schedulerRepository.getOneSchedule(schedule_no);
+      schedulerDto.setSchedule_attender(attenders);
+      schedulerRepository.save(schedulerDto.toEntity());
       return 1;
 
     } else {  // 일정 내 현재 요청한 참여자가 없는 경우
