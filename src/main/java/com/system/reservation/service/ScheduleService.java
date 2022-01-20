@@ -63,7 +63,7 @@ public class ScheduleService {
     }
     SchedulerDto schedulerDto = schedulerRepository.getOneSchedule(schedule_no);
     schedulerDto.setSchedule_attender(attenders);
-    schedulerRepository.save(schedulerDto.toEntity());  // todo merge
+    schedulerRepository.save(schedulerDto.toEntity());
     return 1;
 
   }
@@ -111,7 +111,12 @@ public class ScheduleService {
 
   @Transactional
   public void editSchedule(Long no, String date, String start, String end, String space) {
-    schedulerRepository.editSchedule(no, date, start, end, space);
+    SchedulerDto schedulerDto = schedulerRepository.getOneSchedule(no);
+    schedulerDto.setSchedule_date(date);
+    schedulerDto.setSchedule_start(start);
+    schedulerDto.setSchedule_end(end);
+    schedulerDto.setSchedule_space(space);
+    schedulerRepository.save(schedulerDto.toEntity());
   }
 
 }

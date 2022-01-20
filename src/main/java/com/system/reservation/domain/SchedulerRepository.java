@@ -48,10 +48,6 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
       + "FROM Scheduler s WHERE s.schedule_no=:schedule_no")
   String findBySchedule_no(@Param("schedule_no") Long schedule_no);
 
-  @Modifying
-  @Query("UPDATE Scheduler s SET s.schedule_date=:date, s.schedule_start=:start, s.schedule_end=:end, s.schedule_space=:space WHERE s.schedule_no=:no")
-  void editSchedule(@Param("no") Long no, @Param("date") String date, @Param("start") String start, @Param("end") String end, @Param("space") String space);
-
   @Query("SELECT s FROM Scheduler s WHERE s.schedule_no=:schedule_no")
   SchedulerDto getOneSchedule(@Param("schedule_no") Long schedule_no);
 }

@@ -27,6 +27,7 @@ public class SchedulerDto {
 
   public Scheduler toEntity(){
     return Scheduler.builder()
+        .schedule_no(schedule_no)
         .schedule_attender(schedule_attender)
         .teacher_id(teacher_id)
         .schedule_date(schedule_date)

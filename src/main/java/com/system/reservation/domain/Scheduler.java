@@ -31,8 +31,9 @@ public class Scheduler{
   private String schedule_space;
 
   @Builder
-  public Scheduler(String schedule_attender, String teacher_id, String schedule_date, String schedule_start,
+  public Scheduler(Long schedule_no, String schedule_attender, String teacher_id, String schedule_date, String schedule_start,
                         String schedule_end, String schedule_space){
+    this.schedule_no = schedule_no;
     this.schedule_attender = schedule_attender;
     this.teacher_id = teacher_id;
     this.schedule_date = schedule_date;   /* 형식: 2021-12-10 */
