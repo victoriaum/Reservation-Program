@@ -9,8 +9,31 @@
 
 <div layout:fragment="content">
   <div id="container">
-    <div class="center">
-      Admin 페이지 입니다.
+    <div class="center" th:if="${session.loginType}=='3'">
+      <div class="area registerArea">
+        <span class="adminTitle">Register</span>
+        <hr>
+        <div class="adminMenu" onclick="location.href='/admin/peopleManage'">
+          <img class="menuIcon" th:src="@{image/admin/person.png}"/>
+          <span class="menuName">인원 등록하기</span>
+        </div>
+        <div class="adminMenu" onclick="location.href='/admin/scheduleManage'">
+          <img class="menuIcon" th:src="@{image/admin/schedule.png}"/>
+          <span class="menuName">공통 일정 등록하기</span>
+        </div>
+      </div>
+      <div class="area manageArea">
+        <span class="adminTitle">Management</span>
+        <hr>
+        <div class="adminMenu" onclick="location.href='/admin/peopleManage'">
+          <img class="menuIcon" th:src="@{image/admin/person.png}"/>
+          <span class="menuName">인원 관리하기</span>
+        </div>
+        <div class="adminMenu" onclick="location.href='/admin/getAllSchedule'">
+          <img class="menuIcon" th:src="@{image/admin/schedule.png}"/>
+          <span class="menuName">모든 일정보기</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
