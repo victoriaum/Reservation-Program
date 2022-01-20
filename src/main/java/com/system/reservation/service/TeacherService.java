@@ -35,9 +35,10 @@ public class TeacherService {
   };
 
   @Transactional
-  public void updatePassword(String id, String password) {
-    teacherRepository.updatePassword(id, password);
+  public TeacherDto editPassword(String id, String password) {
+    TeacherDto teacherDto = teacherRepository.findByTeacher_id(id);
+    teacherDto.setTeacher_password(password);
+    teacherRepository.save(teacherDto.toEntity());
+    return teacherDto;
   }
-
-
 }

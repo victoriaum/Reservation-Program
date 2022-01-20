@@ -18,7 +18,7 @@
         </div>
 
         <div class="editAccountArea">
-          <form name="editPasswordForm" id="editPasswordForm" method="post" th:action="@{/report_t/editPassword}" onsubmit="return func_editPassword()">
+          <form name="editPasswordForm" id="editPasswordForm" method="post" th:action="@{/mypage/editPassword}" onsubmit="return func_editPassword()">
 
             <div th:if="${session.loginType}=='1'" class="mb-2">
               <label for="teacher_id" class="form-label subLabel">아이디</label>

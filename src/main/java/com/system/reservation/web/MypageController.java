@@ -31,19 +31,17 @@ public class MypageController {
     return "editAccount";
   }
 
-  @PostMapping("/report_t/editPassword")
+  @PostMapping("/mypage/editPassword")
   public String login(@RequestParam("id") String id, @RequestParam("password") String password, @RequestParam("type") String type,
-                      HttpServletRequest request, HttpServletResponse response, Model m) throws IOException {
+                      HttpServletRequest request, Model m) {
 
     HttpSession httpSession = request.getSession();
 
     if("1".equals(type)) {
-      teacherService.updatePassword(id, password);
-      TeacherDto teacherDto = teacherService.findByTeacher_idAndTeacher_password(id, password);
+      TeacherDto teacherDto = teacherService.editPassword(id,password);
       httpSession.setAttribute("loginUser",teacherDto);
     } else {
-      studentService.updatePassword(id, password);
-      StudentDto studentDto = studentService.findByStudent_idAndStudent_password(id, password);
+      StudentDto studentDto = studentService.editPassword(id,password);
       httpSession.setAttribute("loginUser",studentDto);
     }
 

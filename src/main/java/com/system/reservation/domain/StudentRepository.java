@@ -14,8 +14,7 @@ public interface StudentRepository extends JpaRepository<Student, String> {
   @Query("SELECT s.student_name FROM Student s WHERE s.student_id=:id")
   String getNameList(@Param("id") String id);
 
-  @Modifying
-  @Query(value = "UPDATE Student s SET s.student_password=:password WHERE s.student_id=:id", nativeQuery = true)
-  void updatePassword(@Param("id") String id, @Param("password") String password);
+  @Query("SELECT s FROM Student s WHERE s.student_id=:id")
+  StudentDto findByStudent_id(@Param("id") String id);
 }
 

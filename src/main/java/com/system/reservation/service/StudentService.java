@@ -2,6 +2,7 @@ package com.system.reservation.service;
 
 import com.system.reservation.domain.StudentRepository;
 import com.system.reservation.web.dto.StudentDto;
+import com.system.reservation.web.dto.TeacherDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,8 +29,11 @@ public class StudentService {
   }
 
   @Transactional
-  public void updatePassword(String id, String password) {
-    studentRepository.updatePassword(id, password);
+  public StudentDto editPassword(String id, String password) {
+    StudentDto studentDto = studentRepository.findByStudent_id(id);
+    studentDto.setStudent_password(password);
+    studentRepository.save(studentDto.toEntity());
+    return studentDto;
   }
 
 }

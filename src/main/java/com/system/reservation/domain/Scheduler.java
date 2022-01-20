@@ -16,6 +16,7 @@ public class Scheduler{
   private Long schedule_no;
 
 /*
+  todo
   @ManyToOne
   @JoinColumn(name = "teacher_id")
 */
