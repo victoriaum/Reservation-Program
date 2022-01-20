@@ -1,7 +1,6 @@
 package com.system.reservation.web.dto;
 
 import com.system.reservation.domain.Student;
-import com.system.reservation.domain.Teacher;
 import lombok.*;
 
 @Getter

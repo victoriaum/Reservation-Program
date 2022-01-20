@@ -1,12 +1,8 @@
 package com.system.reservation.web;
 
-import com.system.reservation.service.NoticeService;
-import com.system.reservation.web.dto.NoticeDto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
 @Controller
-public class NoticeController {
-
-  private final NoticeService noticeService;
+public class AdminController {
 
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
@@ -27,23 +21,9 @@ public class NoticeController {
   int dayCnt = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month),1).lengthOfMonth();
 
 
-  @RequestMapping("/notice")
-  public String notice(HttpServletRequest request, Model m) {
-
-    HttpSession httpSession = request.getSession();
-    String type = (String)httpSession.getAttribute("loginType");
-
-    if("1".equals(type)){
-      type="teacher";
-    }
-    else if("2".equals(type)) {
-      type="student";
-    }
-
-    List<NoticeDto> noticeList = noticeService.noticeInfo(type);
-    m.addAttribute("noticeList",noticeList);
-
-    return "notice";
+  @RequestMapping("/admin")
+  public String admin(HttpServletRequest request, Model m) {
+    return "admin";
   }
 
 }

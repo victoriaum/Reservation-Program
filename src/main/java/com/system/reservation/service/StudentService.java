@@ -2,7 +2,6 @@ package com.system.reservation.service;
 
 import com.system.reservation.domain.StudentRepository;
 import com.system.reservation.web.dto.StudentDto;
-import com.system.reservation.web.dto.TeacherDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<footer th:fragment="footerFragment">
+  <div id="footerArea" class="row" style="margin-left: 0; display: block;">
+    <img class="footerMenu pointer col-xs-3" th:src="@{image/footer/report.png}"
+         th:if="${session.loginType}=='1'" onclick="location.href='/report_t'"/>
+    <img class="footerMenu pointer col-xs-3" th:src="@{image/footer/report.png}"
+         th:if="${session.loginType}=='2'" onclick="location.href='/report_s'"/>
+    <img class="footerMenu pointer col-xs-3" th:src="@{image/footer/schedule.png}"
+         onclick="location.href='/schedule'"/>
+    <img class="footerMenu pointer col-xs-3" th:src="@{image/footer/notice.png}"
+         onclick="location.href='/notice'"/>
+    <img class="footerMenu pointer col-xs-3" th:src="@{image/footer/mypage.png}"
+         onclick="location.href='/mypage'"/>
+  </div>
+</footer>
+</html>

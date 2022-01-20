@@ -34,7 +34,7 @@ public class UserController {
 
     HttpSession httpSession = request.getSession();
 
-    if("1".equals(type)) {
+    if("1".equals(type)) {  // 교수로 로그인 하고자 하는 경우
       TeacherDto teacherDto = teacherService.findByTeacher_idAndTeacher_password(id, password);
       if(teacherDto==null){
         m.addAttribute("loginFailed","일치하는 회원이 없습니다. 다시 로그인해주세요!");
@@ -42,12 +42,18 @@ public class UserController {
       }
       else {
         httpSession.setAttribute("loginUser",teacherDto);
-        httpSession.setAttribute("loginType",type);
-        response.sendRedirect("index");
-        return "index";
+        if("admin".equals(id)){ // 관리자인 경우
+          httpSession.setAttribute("loginType","3");
+          response.sendRedirect("admin");
+          return "admin";
+        } else {  // 교수인 경우
+          httpSession.setAttribute("loginType",type);
+          response.sendRedirect("index");
+          return "index";
+        }
       }
 
-    } else {
+    } else {  // 학생으로 로그인 하고자 하는 경우
       StudentDto studentDto = studentService.findByStudent_idAndStudent_password(id, password);
       if(studentDto==null){
         m.addAttribute("loginFailed","일치하는 회원이 없습니다. 다시 로그인해주세요!");
@@ -60,8 +66,5 @@ public class UserController {
         return "index";
       }
     }
-
-
-
   }
 }

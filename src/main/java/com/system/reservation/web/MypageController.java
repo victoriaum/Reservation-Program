@@ -38,7 +38,8 @@ public class MypageController {
     if("1".equals(type)) {
       TeacherDto teacherDto = teacherService.editPassword(id,password);
       httpSession.setAttribute("loginUser",teacherDto);
-    } else {
+    }
+    else if("2".equals(type)) {
       StudentDto studentDto = studentService.editPassword(id,password);
       httpSession.setAttribute("loginUser",studentDto);
     }

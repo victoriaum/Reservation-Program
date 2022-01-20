@@ -1,7 +1,6 @@
 package com.system.reservation.web.dto;
 
 import com.system.reservation.domain.Notice;
-import com.system.reservation.domain.Scheduler;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

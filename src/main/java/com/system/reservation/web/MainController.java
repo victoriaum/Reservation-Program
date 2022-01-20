@@ -1,7 +1,6 @@
 package com.system.reservation.web;
 
 import com.system.reservation.service.ScheduleService;
-import com.system.reservation.web.dto.SchedulerDto;
 import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
 import java.beans.PropertyVetoException;
@@ -59,22 +58,23 @@ public class MainController {
   @RequestMapping(value = {"/getTodaySchedule"})
   public String getTodaySchedule(HttpServletRequest request, Model m) {
     HttpSession httpSession = request.getSession();
-    String loginType = (String)httpSession.getAttribute("loginType");
+    String type = (String)httpSession.getAttribute("loginType");
     List<String> scheduleList;
+    JSONObject jsonObject = new JSONObject();
 
-    if("1".equals(loginType)){  // 선생님이 로그인한 경우
+    if("1".equals(type)){  // 선생님이 로그인한 경우
       TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
       String teacher_id = teacherDto.getTeacher_id();
       scheduleList = scheduleService.getTodayTeacherSchedule(teacher_id, today);
+      jsonObject.put("scheduleList", scheduleList);
     }
-    else {  // 학생이 로그인한 경우
+    else if("2".equals(type)) {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
       scheduleList = scheduleService.getTodayStudentSchedule(student_id, today);
+      jsonObject.put("scheduleList", scheduleList);
     }
 
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("scheduleList", scheduleList);
     return jsonObject.toString();
   }
 

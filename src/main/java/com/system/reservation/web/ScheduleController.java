@@ -26,7 +26,7 @@ public class ScheduleController {
   @RequestMapping("/schedule")
   public String schedule(HttpServletRequest request, Model m) {
     HttpSession httpSession = request.getSession();
-    String loginType = (String) httpSession.getAttribute("loginType");
+    String type = (String) httpSession.getAttribute("loginType");
     return "schedule";
   }
 
@@ -37,21 +37,23 @@ public class ScheduleController {
       HttpServletRequest request) {
 
     HttpSession httpSession = request.getSession();
-    String loginType = (String) httpSession.getAttribute("loginType");
+    String type = (String) httpSession.getAttribute("loginType");
     List<String> scheduleList;
+    JSONObject jsonObject = new JSONObject();
 
-    if ("1".equals(loginType)) {  // 선생님이 로그인한 경우
+    if ("1".equals(type)) {  // 선생님이 로그인한 경우
       TeacherDto teacherDto = (TeacherDto) httpSession.getAttribute("loginUser");
       String teacher_id = teacherDto.getTeacher_id();
       scheduleList = scheduleService.getTeacherWeekSchedule(teacher_id, startDate, endDate);
-    } else {  // 학생이 로그인한 경우
+      jsonObject.put("scheduleList", scheduleList);
+    }
+    else if("2".equals(type)) {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto) httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
       scheduleList = scheduleService.getStudentWeekSchedule(student_id, startDate, endDate);
+      jsonObject.put("scheduleList", scheduleList);
     }
 
-    JSONObject jsonObject = new JSONObject();
-    jsonObject.put("scheduleList", scheduleList);
     return jsonObject.toString();
   }
 
