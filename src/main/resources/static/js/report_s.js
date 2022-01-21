@@ -114,7 +114,6 @@ function func_teacherOut(){
   $(".thirdArea").hide();
 
   $(".thirdArea").html("");
-
 }
 
 
@@ -150,13 +149,29 @@ function func_reportOkay(obj) {
     data:{schedule_no:schedule_no, login_id:login_id},
     success: function(json){
       if(json.result==1){    // 일정 저장성공
-        alert("일정이 등록됐습니다.");
+        Swal.fire({
+          title: 'Success!',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1200
+        })
+        setTimeout(function() {
+          location.href="/report_s";
+        }, 1300);
         var attenderCnt = $(obj).parent().prev().children('span.space').children('span#attenderCnt');
         var cnt = Number(attenderCnt.text());
         attenderCnt.html(cnt+1);
       }
       else if(json.result==0){    // 일정 저장실패
-        alert("이미 등록된 예약입니다.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          showConfirmButton: false,
+          timer: 1200
+        })
+        setTimeout(function() {
+          location.href="/report_s";
+        }, 1300);
       }
     },
     error: function(report, status, error){
