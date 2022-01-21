@@ -41,4 +41,21 @@ public class TeacherService {
     teacherRepository.save(teacherDto.toEntity());
     return teacherDto;
   }
+
+  @Transactional
+  public Integer openRequest(String id, String student_id) {
+    TeacherDto teacherDto = teacherRepository.findByTeacher_id(id);
+    String request_students = teacherDto.getRequest_students();
+
+    if(request_students.isEmpty()){
+      request_students = student_id;
+    } else {
+      request_students += "," + student_id;
+    }
+
+    teacherDto.setRequest_students(request_students);
+    teacherRepository.save(teacherDto.toEntity());
+
+    return 1;
+  }
 }

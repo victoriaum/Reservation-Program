@@ -74,18 +74,19 @@ public class ReportController {
   }
 
 
- /* @ResponseBody
-  @RequestMapping("/report_s/checkOpenRequest")
-  public String checkOpenRequest(@RequestParam("teacher_id") Long teacher_id, HttpServletRequest request) {
+  @ResponseBody
+  @RequestMapping("/report_s/openRequest")
+  public String openRequest(@RequestParam("teacher_id") String teacher_id, HttpServletRequest request) {
     HttpSession httpSession = request.getSession();
-    StudentDto studentDto = (StudentDto) httpSession.getAttribute("loginUser");
+    StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
     String student_id = studentDto.getStudent_id();
 
-    Integer result = teacherService.checkOpenRequest(teacher_id,student_id);
+    Integer result = teacherService.openRequest(teacher_id, student_id);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("result", result);
     return jsonObject.toString();
-  }*/
+  }
+
 
 
   @RequestMapping("/report_t")

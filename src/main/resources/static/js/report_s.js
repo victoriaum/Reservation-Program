@@ -44,6 +44,8 @@ $(function(){
 // id값 ex) "teacher_name teacher_position,teacher_id,request_students"
 function func_getSchedule(id){
   var idArray = id.split(",");
+  var student_id = $("#loginId").val();
+  var checked = "";
 
   var studentsArray;
   for(var i=3; i<idArray.length; i++){
@@ -52,7 +54,14 @@ function func_getSchedule(id){
     } else {
       studentsArray+=","+idArray[i];
     }
+
+    if(student_id==idArray[i]){
+      checked = "checked";
+    }
   }
+
+
+
 
   $(".choosenArea").append("<span class='choice checkedChoice' id='checkedTeacher'>"
                             +idArray[0]
@@ -90,12 +99,12 @@ function func_getSchedule(id){
         });
       }
       else{    // 저장된 일정이 없는 경우
-        if(studentsArray==""){   //개설 요청을 안한 경우
+        if(checked==""){   //개설 요청을 안한 경우
           $(".thirdArea").html("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하겠습니까?"
-              + "<button class='btn openRequest' onclick='func_openRequest("+idArray[1]+")'>일정 개설 요청하기</button></div>");
+              + "<button class='btn noScheduleBtn openRequest' onclick='func_openRequest("+idArray[1]+")'>일정 개설 요청하기</button></div>");
         }
         else {    //개설 요청을 한 경우
-          $(".thirdArea").html("<div class='noSchedule'>일정 개설이 요청됐습니다.<br>요청 취소를 원하면 아래 취소 버튼을 눌러주세요."
+          $(".thirdArea").html("<div class='noSchedule'>일정 개설이 요청됐습니다.<br>요청 취소를 원하시면 아래 취소 버튼을 눌러주세요."
               + "<button class='btn noScheduleBtn revokeOpenRequest' onclick='func_revokeOpenRequest("+idArray[1]+")'>일정 개설 취소하기</button></div>");
         }
       }
@@ -230,7 +239,7 @@ function func_reportNo(obj) {
 // 일정 개설 요청하기
 function func_openRequest(id){
   $.ajax({
-    url:"/openRequest",
+    url:"/report_s/openRequest",
     type: "post",
     data: {"teacher_id":id},
     dataType:"json",
@@ -258,7 +267,7 @@ function func_openRequest(id){
 // 일정 개설 요청취소하기
 function func_revokeOpenRequest(id){
   $.ajax({
-    url:"/revokeOpenRequest",
+    url:"/report_s/revokeOpenRequest",
     type: "post",
     data: {"teacher_id":id},
     dataType:"json",
