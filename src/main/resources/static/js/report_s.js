@@ -80,7 +80,8 @@ function func_getSchedule(id){
         });
       }
       else{    // 저장된 일정이 없는 경우
-        $(".thirdArea").append("<div class='noSchedule'>정해진 일정이 없습니다.</div>");
+        $(".thirdArea").append("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하겠습니까?"
+            + "<button class='btn openRequest'>일정 개설요청하기</button></div>");
       }
 
     },
