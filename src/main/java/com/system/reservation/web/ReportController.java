@@ -3,6 +3,7 @@ package com.system.reservation.web;
 import com.system.reservation.service.ScheduleService;
 import com.system.reservation.service.TeacherService;
 import com.system.reservation.web.dto.SchedulerDto;
+import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -71,6 +72,20 @@ public class ReportController {
     jsonObject.put("result", result);
     return jsonObject.toString();
   }
+
+
+ /* @ResponseBody
+  @RequestMapping("/report_s/checkOpenRequest")
+  public String checkOpenRequest(@RequestParam("teacher_id") Long teacher_id, HttpServletRequest request) {
+    HttpSession httpSession = request.getSession();
+    StudentDto studentDto = (StudentDto) httpSession.getAttribute("loginUser");
+    String student_id = studentDto.getStudent_id();
+
+    Integer result = teacherService.checkOpenRequest(teacher_id,student_id);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("result", result);
+    return jsonObject.toString();
+  }*/
 
 
   @RequestMapping("/report_t")

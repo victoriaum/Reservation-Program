@@ -44,6 +44,16 @@ $(function(){
 // id값 ex) "teacher_name teacher_position,teacher_id,request_students"
 function func_getSchedule(id){
   var idArray = id.split(",");
+
+  var studentsArray;
+  for(var i=3; i<idArray.length; i++){
+    if(i==3){
+      studentsArray=idArray[i];
+    } else {
+      studentsArray+=","+idArray[i];
+    }
+  }
+
   $(".choosenArea").append("<span class='choice checkedChoice' id='checkedTeacher'>"
                             +idArray[0]
                             +"<img class='closeCheckedChose' id='teacherOut' "
@@ -80,9 +90,7 @@ function func_getSchedule(id){
         });
       }
       else{    // 저장된 일정이 없는 경우
-        var check = func_checkOpenRequest(idArray[1]);
-
-        if(check==""){   //개설 요청을 안한 경우
+        if(studentsArray==""){   //개설 요청을 안한 경우
           $(".thirdArea").html("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하겠습니까?"
               + "<button class='btn openRequest' onclick='func_openRequest("+idArray[1]+")'>일정 개설 요청하기</button></div>");
         }
@@ -210,24 +218,6 @@ function func_reportNo(obj) {
       else if(json.result==0){    // 일정 취소실패
         alert("등록되지 않은 예약으로 취소할 수 없습니다.");
       }
-    },
-    error: function(report, status, error){
-      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
-    }
-  });
-}
-
-
-
-// 일정 개설 요청했는지 여부 확인하기
-function func_checkOpenRequest(id){
-  $.ajax({
-    url:"/report_s/checkOpenRequest",
-    type: "post",
-    data: {"teacher_id":id},
-    dataType:"json",
-    success: function(json){
-
     },
     error: function(report, status, error){
       alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
