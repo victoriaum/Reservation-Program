@@ -50,23 +50,47 @@ function func_getTodaySchedule(todayDate){
               attenderCnt = 0;
             }
 
-            $(".indexSchedule").append("<p class='indexContentsDetail' value='"+scheduleArray[0]+"'> "
+            $(".indexSchedule").append("<p class='indexContentsDetail detail2' value='"+scheduleArray[0]+"'> "
                 + "<span class='indexContentsDetailInfo2'>"+scheduleArray[1]+"</span>"
-                + "<span class='noticeSubject'>검사요청 인원: "
+                + "<span class='noticeSubject1'>검사요청 인원: "
                 + "<span class='import'>"+attenderCnt+"</span>명</span></p>");
           }
           else {
-            $(".indexSchedule").append("<p class='indexContentsDetail' value='"+scheduleArray[0]+"'> "
+            $(".indexSchedule").append("<p class='indexContentsDetail detail2' value='"+scheduleArray[0]+"'> "
                 + "<span class='indexContentsDetailInfo2'>"+scheduleArray[1]+"</span>"
-                + "<span class='noticeSubject'>"
+                + "<span class='noticeSubject1'>"
                 + "<span>"+scheduleArray[2]+" "+scheduleArray[3]+" "+scheduleArray[4]+"</span></span></p>");
           }
         });
       }
       else{    // 해당하는 일정이 없는 경우
-        $(".indexSchedule").html("<p class='indexContentsDetail'> "
-            + "<span class='noticeSubject'>오늘 일정은 없습니다.</span></p>");
+        if($("#loginType").val()=="1"){
+          $(".indexSchedule").append("<p class='indexContentsDetail detail2'> "
+              + "<span class='noticeSubject2'>오늘 일정은 없습니다.</span></p>");
+          func_requestCnt();  // 교수님의 경우, 개설요청인원 표기하기
+        }
+        else {
+          $(".indexSchedule").append("<p class='indexContentsDetail detail2'> "
+              + "<span class='noticeSubject1'>오늘 일정은 없습니다.</span></p>");
+        }
       }
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
+}
+
+
+// 요청인원 찾기
+function func_requestCnt(){
+  $.ajax({
+    url:"/index/requestCnt",
+    type: "post",
+    dataType: "json",
+    success: function(data){
+      $(".detail2").append("<span class='requesters'>현재 개설 요청인원은  "
+          + "<span class='requestCnt'>"+data.requestCnt+" 명</span> 입니다.</span></p>");
     },
     error: function(report, status, error){
       alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);

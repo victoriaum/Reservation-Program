@@ -71,12 +71,18 @@ public class TeacherService {
         new_request_students += list[i];
       }
     }
-
-    System.out.println(new_request_students);
-
     teacherDto.setRequest_students(new_request_students);
     teacherRepository.save(teacherDto.toEntity());
 
     return 1;
+  }
+
+  public Integer requestCnt(String id) {
+    String students = teacherRepository.findByTeacher_id(id).getRequest_students();
+    if(students.isEmpty()){
+      return 0;
+    } else {
+      return students.split(",").length;
+    }
   }
 }

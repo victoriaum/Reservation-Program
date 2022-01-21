@@ -1,6 +1,7 @@
 package com.system.reservation.web;
 
 import com.system.reservation.service.ScheduleService;
+import com.system.reservation.service.TeacherService;
 import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
 import java.beans.PropertyVetoException;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class MainController {
   private final ScheduleService scheduleService;
+  private final TeacherService teacherService;
 
   @Value("${spring.datasource.driver-class-name}")
   private String driver;
@@ -79,5 +81,17 @@ public class MainController {
   }
 
 
+  @ResponseBody
+  @RequestMapping(value = {"/index/requestCnt"})
+  public String requestCnt(HttpServletRequest request, Model m) {
+    HttpSession httpSession = request.getSession();
+    TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
+    String teacher_id = teacherDto.getTeacher_id();
+    Integer requestCnt = teacherService.requestCnt(teacher_id);
+
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("requestCnt", requestCnt);
+    return jsonObject.toString();
+  }
 
 }

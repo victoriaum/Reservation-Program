@@ -123,9 +123,6 @@ function func_detailSchedule(obj) {
 
 // 일정 요청 취소하기
 function func_requestCancel(id) {
-  console.log(id);
-  console.log(typeof id);
-
   $.ajax({
     url:"/requestCancel",
     type: "post",

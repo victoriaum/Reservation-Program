@@ -89,3 +89,17 @@
   font-size: 0.9rem;
   margin: 0 0.3rem;
 }
+.requesters {
+
+}
+.requestCnt {
+  font-weight: bold;
+  color: #E48873;
+}
+.noticeSubject1 {
+
+}
+.noticeSubject2 {
+  display: block;
+  margin-bottom: 0.5rem;
+}
