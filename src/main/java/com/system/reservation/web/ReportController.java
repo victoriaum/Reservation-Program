@@ -39,7 +39,7 @@ public class ReportController {
   }
 
   @ResponseBody
-  @RequestMapping("/getTeacher")
+  @RequestMapping("/report_s/getTeacher")
   public String getTeacher(@RequestParam("checkedDept") String checkedDept) {
     List<String> teacherList = teacherService.getTeacher(checkedDept);
     JSONObject jsonObject = new JSONObject();
@@ -48,14 +48,14 @@ public class ReportController {
   }
 
   @ResponseBody
-  @RequestMapping("/getTeacherSchedule")
+  @RequestMapping("/report_s/getTeacherSchedule")
   public Object getTeacherSchedule(@RequestParam("checkedTeacher") String teacher_id) {
     List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
     return scheduleList;
   }
 
   @ResponseBody
-  @RequestMapping("/requestReport")
+  @RequestMapping("/report_s/requestReport")
   public String requestReport(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
     Integer result = scheduleService.requestReport(schedule_no, login_id);
     JSONObject jsonObject = new JSONObject();
@@ -64,7 +64,7 @@ public class ReportController {
   }
 
   @ResponseBody
-  @RequestMapping("/cancelReport")
+  @RequestMapping("/report_s/cancelReport")
   public String cancelReport(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
     Integer result = scheduleService.cancelReport(schedule_no, login_id);
     JSONObject jsonObject = new JSONObject();

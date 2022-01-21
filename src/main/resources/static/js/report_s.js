@@ -18,7 +18,7 @@ $(function(){
     $(".secondArea").show();
 
     $.ajax({
-      url:"/getTeacher",
+      url:"/report_s/getTeacher",
       type: "post",
       dataType:"json",
       data:{checkedDept:checkedDept},
@@ -54,7 +54,7 @@ function func_getSchedule(id){
   $(".thirdArea").show();
 
   $.ajax({
-    url:"/getTeacherSchedule",
+    url:"/report_s/getTeacherSchedule",
     type: "post",
     data:{checkedTeacher:idArray[1]},
     success: function(data){
@@ -152,7 +152,7 @@ function func_reportOkay(obj) {
   var schedule_no = Number(obj.id);
 
   $.ajax({
-    url:"/requestReport",
+    url:"/report_s/requestReport",
     type: "post",
     dataType:"json",
     data:{schedule_no:schedule_no, login_id:login_id},
@@ -196,7 +196,7 @@ function func_reportNo(obj) {
   var schedule_no = Number(obj.id);
 
   $.ajax({
-    url:"/cancelReport",
+    url:"/report_s/cancelReport",
     type: "post",
     dataType:"json",
     data:{schedule_no:schedule_no, login_id:login_id},
@@ -222,7 +222,7 @@ function func_reportNo(obj) {
 // 일정 개설 요청했는지 여부 확인하기
 function func_checkOpenRequest(id){
   $.ajax({
-    url:"/checkOpenRequest",
+    url:"/report_s/checkOpenRequest",
     type: "post",
     data: {"teacher_id":id},
     dataType:"json",
