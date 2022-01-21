@@ -50,7 +50,7 @@ header{
 .titleIconLogout {
   float: right;
 }
-#homeBtn {
+.homeBtn {
   float: left;
 }
 .loginInfo {

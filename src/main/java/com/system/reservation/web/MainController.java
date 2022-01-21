@@ -53,8 +53,21 @@ public class MainController {
   String today = now.format(dateTimeFormatter);
 
 
-  @RequestMapping(value = {"/", "/index"})
-  public String mainPage() { return "index";  }
+  @RequestMapping(value = {"/"})
+  public String mainPage(HttpServletRequest request) {
+    HttpSession httpSession = request.getSession();
+    String type = (String)httpSession.getAttribute("loginType");
+    if("3".equals(type)){
+      return "admin";
+    } else {
+      return "index";
+    }
+  }
+
+  @RequestMapping(value = {"/index"})
+  public String index() {
+    return "index";
+  }
 
   @ResponseBody
   @RequestMapping(value = {"/getTodaySchedule"})

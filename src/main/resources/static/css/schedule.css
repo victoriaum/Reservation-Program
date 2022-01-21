@@ -72,7 +72,8 @@
   padding-top: 1rem;
   font-size: 0.9rem;
   overflow: auto;
-  height: 25rem;
+  height: 20rem;
+  margin: 0 auto;
 }
 #scheduleCnt {
   margin-left: 1rem;
