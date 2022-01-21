@@ -18,10 +18,6 @@ public interface TeacherRepository extends JpaRepository<Teacher, String> {
   @Query("SELECT t.teacher_name, t.teacher_position, t.teacher_id FROM Teacher t WHERE t.teacher_dept=:checkedDept")
   List<String> findByTeacher_dept(@Param("checkedDept") String checkedDept);
 
-  @Modifying
-  @Query("UPDATE Teacher t SET t.teacher_password=:password WHERE t.teacher_id=:id")
-  void updatePassword(@Param("id") String id, @Param("password") String password);
-
   @Query("SELECT t FROM Teacher t WHERE t.teacher_id=:id")
   TeacherDto findByTeacher_id(@Param("id") String id);
 
