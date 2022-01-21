@@ -14,6 +14,7 @@ public class TeacherDto {
   private String teacher_email;
   private String teacher_dept;
   private String teacher_position;
+  private String request_students;
 
   public TeacherDto(Teacher entity){
     this.teacher_no = entity.getTeacher_no();
@@ -23,6 +24,7 @@ public class TeacherDto {
     this.teacher_email = entity.getTeacher_email();
     this.teacher_dept = entity.getTeacher_dept();
     this.teacher_position = entity.getTeacher_position();
+    this.request_students = entity.getRequest_students();
   }
 
   public Teacher toEntity(){
@@ -34,6 +36,7 @@ public class TeacherDto {
         .teacher_email(teacher_email)
         .teacher_dept(teacher_dept)
         .teacher_position(teacher_position)
+        .request_students(request_students)
         .build();
   }
 }

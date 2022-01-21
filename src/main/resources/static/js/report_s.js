@@ -26,7 +26,7 @@ $(function(){
         $.each(json.teacherList, function(idx, val) {
           var valArray = val.split(",");
           val = val.replace(","," ");
-          $(".secondArea").append("<span class='choice teacher' id='"+valArray[0]+" "+valArray[1]+","+valArray[2]+"' "
+          $(".secondArea").append("<span class='choice teacher' id='"+valArray[0]+" "+valArray[1]+","+valArray[2]+","+valArray[3]+"' "
                                   + "onclick='func_getSchedule(this.id)'>"
                                   + valArray[0]+" "+valArray[1]+"</span>")
         });
@@ -41,6 +41,7 @@ $(function(){
 
 
 // 선생님 선택했을 때
+// id값 ex) "teacher_name teacher_position,teacher_id,request_students"
 function func_getSchedule(id){
   var idArray = id.split(",");
   $(".choosenArea").append("<span class='choice checkedChoice' id='checkedTeacher'>"
@@ -59,7 +60,6 @@ function func_getSchedule(id){
     success: function(data){
 
       if(data.length>0) {    // 저장된 일정이 있는 경우
-
         $.each(data, function (idx,val) {
           var attenderCnt;
           if(val.schedule_attender==""){
@@ -80,16 +80,24 @@ function func_getSchedule(id){
         });
       }
       else{    // 저장된 일정이 없는 경우
-        $(".thirdArea").append("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하겠습니까?"
-            + "<button class='btn openRequest'>일정 개설요청하기</button></div>");
-      }
+        var check = func_checkOpenRequest(idArray[1]);
 
+        if(check==""){   //개설 요청을 안한 경우
+          $(".thirdArea").html("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하겠습니까?"
+              + "<button class='btn openRequest' onclick='func_openRequest("+idArray[1]+")'>일정 개설 요청하기</button></div>");
+        }
+        else {    //개설 요청을 한 경우
+          $(".thirdArea").html("<div class='noSchedule'>일정 개설이 요청됐습니다.<br>요청 취소를 원하면 아래 취소 버튼을 눌러주세요."
+              + "<button class='btn noScheduleBtn revokeOpenRequest' onclick='func_revokeOpenRequest("+idArray[1]+")'>일정 개설 취소하기</button></div>");
+        }
+      }
     },
     error: function(report, status, error){
       alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
     }
   });
 }
+
 
 
 // 선택한 진료과 지우기
@@ -209,5 +217,79 @@ function func_reportNo(obj) {
   });
 }
 
+
+
+// 일정 개설 요청했는지 여부 확인하기
+function func_checkOpenRequest(id){
+  $.ajax({
+    url:"/checkOpenRequest",
+    type: "post",
+    data: {"teacher_id":id},
+    dataType:"json",
+    success: function(json){
+
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
+}
+
+
+
+// 일정 개설 요청하기
+function func_openRequest(id){
+  $.ajax({
+    url:"/openRequest",
+    type: "post",
+    data: {"teacher_id":id},
+    dataType:"json",
+    success: function(json){
+      if(json.result==1){    // 요청성공
+        Swal.fire({
+          title: 'Success!',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1200
+        })
+        setTimeout(function() {
+          $(".thirdArea").html("<div class='noSchedule'>일정 개설이 요청됐습니다.<br>요청 취소를 원하면 아래 취소 버튼을 눌러주세요."
+              + "<button class='btn noScheduleBtn revokeOpenRequest' onclick='func_revokeOpenRequest()'>일정 개설 취소하기</button></div>");
+        }, 1300);
+      }
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
+}
+
+
+// 일정 개설 요청취소하기
+function func_revokeOpenRequest(id){
+  $.ajax({
+    url:"/revokeOpenRequest",
+    type: "post",
+    data: {"teacher_id":id},
+    dataType:"json",
+    success: function(json){
+      if(json.result==1){    // 요청 취소성공
+        Swal.fire({
+          title: 'Success!',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1200
+        })
+        setTimeout(function() {
+          $(".thirdArea").append("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하겠습니까?"
+              + "<button class='btn openRequest' onclick='func_openRequest()'>일정 개설 요청하기</button></div>");
+        }, 1300);
+      }
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
+}
 
 
