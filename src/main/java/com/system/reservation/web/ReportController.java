@@ -89,6 +89,21 @@ public class ReportController {
 
 
 
+  @ResponseBody
+  @RequestMapping("/report_s/revokeOpenRequest")
+  public String revokeOpenRequest(@RequestParam("teacher_id") String teacher_id, HttpServletRequest request) {
+    HttpSession httpSession = request.getSession();
+    StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
+    String student_id = studentDto.getStudent_id();
+
+    Integer result = teacherService.revokeOpenRequest(teacher_id, student_id);
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("result", result);
+    return jsonObject.toString();
+  }
+
+
+
   @RequestMapping("/report_t")
   public String report_t(HttpServletRequest request, Model m) {
     HttpSession httpSession = request.getSession();

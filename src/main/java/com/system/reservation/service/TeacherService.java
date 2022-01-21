@@ -58,4 +58,25 @@ public class TeacherService {
 
     return 1;
   }
+
+
+  @Transactional
+  public Integer revokeOpenRequest(String id, String student_id) {
+    TeacherDto teacherDto = teacherRepository.findByTeacher_id(id);
+    String request_students = teacherDto.getRequest_students();
+    String[] list = request_students.split(",");
+    String new_request_students = "";
+    for(int i=0; i<list.length; i++){
+      if(!student_id.equals((list[i]))){
+        new_request_students += list[i];
+      }
+    }
+
+    System.out.println(new_request_students);
+
+    teacherDto.setRequest_students(new_request_students);
+    teacherRepository.save(teacherDto.toEntity());
+
+    return 1;
+  }
 }

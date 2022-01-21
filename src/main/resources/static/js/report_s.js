@@ -44,12 +44,13 @@ $(function(){
 // id값 ex) "teacher_name teacher_position,teacher_id,request_students"
 function func_getSchedule(id){
   var idArray = id.split(",");
+  var teacher_id = idArray[1];
   var student_id = $("#loginId").val();
   var checked = "";
 
   var studentsArray;
-  for(var i=3; i<idArray.length; i++){
-    if(i==3){
+  for(var i=2; i<idArray.length; i++){
+    if(i==2){
       studentsArray=idArray[i];
     } else {
       studentsArray+=","+idArray[i];
@@ -59,8 +60,6 @@ function func_getSchedule(id){
       checked = "checked";
     }
   }
-
-
 
 
   $(".choosenArea").append("<span class='choice checkedChoice' id='checkedTeacher'>"
@@ -75,7 +74,7 @@ function func_getSchedule(id){
   $.ajax({
     url:"/report_s/getTeacherSchedule",
     type: "post",
-    data:{checkedTeacher:idArray[1]},
+    data:{checkedTeacher:teacher_id},
     success: function(data){
 
       if(data.length>0) {    // 저장된 일정이 있는 경우
@@ -99,13 +98,14 @@ function func_getSchedule(id){
         });
       }
       else{    // 저장된 일정이 없는 경우
+        console.log(checked);
         if(checked==""){   //개설 요청을 안한 경우
-          $(".thirdArea").html("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하겠습니까?"
-              + "<button class='btn noScheduleBtn openRequest' onclick='func_openRequest("+idArray[1]+")'>일정 개설 요청하기</button></div>");
+          $(".thirdArea").html("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하시겠습니까?"
+              + "<button class='btn noScheduleBtn openRequest' id='"+teacher_id+"' onclick='func_openRequest(this.id)'>일정 개설 요청하기</button></div>");
         }
         else {    //개설 요청을 한 경우
           $(".thirdArea").html("<div class='noSchedule'>일정 개설이 요청됐습니다.<br>요청 취소를 원하시면 아래 취소 버튼을 눌러주세요."
-              + "<button class='btn noScheduleBtn revokeOpenRequest' onclick='func_revokeOpenRequest("+idArray[1]+")'>일정 개설 취소하기</button></div>");
+              + "<button class='btn noScheduleBtn revokeOpenRequest' id='"+teacher_id+"' onclick='func_revokeOpenRequest(this.id)'>일정 개설 취소하기</button></div>");
         }
       }
     },
@@ -252,8 +252,8 @@ function func_openRequest(id){
           timer: 1200
         })
         setTimeout(function() {
-          $(".thirdArea").html("<div class='noSchedule'>일정 개설이 요청됐습니다.<br>요청 취소를 원하면 아래 취소 버튼을 눌러주세요."
-              + "<button class='btn noScheduleBtn revokeOpenRequest' onclick='func_revokeOpenRequest()'>일정 개설 취소하기</button></div>");
+          $(".thirdArea").html("<div class='noSchedule'>일정 개설이 요청됐습니다.<br>요청 취소를 원하시면 아래 취소 버튼을 눌러주세요."
+              + "<button class='btn noScheduleBtn revokeOpenRequest' id='"+id+"' onclick='func_revokeOpenRequest(this.id)'>일정 개설 취소하기</button></div>");
         }, 1300);
       }
     },
@@ -280,8 +280,8 @@ function func_revokeOpenRequest(id){
           timer: 1200
         })
         setTimeout(function() {
-          $(".thirdArea").append("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하겠습니까?"
-              + "<button class='btn openRequest' onclick='func_openRequest()'>일정 개설 요청하기</button></div>");
+          $(".thirdArea").html("<div class='noSchedule'>정해진 일정이 없습니다.<br>일정 개설을 요청하시겠습니까?"
+              + "<button class='btn noScheduleBtn openRequest' id='"+id+"' onclick='func_openRequest(this.id)'>일정 개설 요청하기</button></div>");
         }, 1300);
       }
     },
