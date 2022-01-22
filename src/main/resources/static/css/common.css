@@ -4,7 +4,11 @@
 }
 
 html{
-  height: 100%;
+  max-width: 100% !important;
+  width: 500px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  height: 100% !important;
 }
 body{
   font-family: "NanumR";
@@ -73,20 +77,31 @@ header{
 }
 
 /*footer.html*/
+footer{
+  line-height: 2rem;
+  cursor: pointer;
+  background-color: #f8f2ec;
+  position: absolute;
+  bottom: 0;
+  max-width: 100% !important;
+  width: 500px !important;
+}
 #footerArea{
   display: block;
-  text-align: center;
   border-top: solid 0.1rem #2B2119;
-  position:absolute;
-  bottom:0;
   vertical-align: center;
+  text-align: center;
   padding: 0.3rem 1rem;
   width: 100%;
   margin: 0 auto !important;
-  background-color: #f8f2ec;
 }
-.footerMenu{
-  width: 3.5rem !important;
+.footerMenu {
+  width: 23%;
+  display: inline-block;
+  text-align: center;
+}
+.footerIcon{
+  width: 2rem !important;
   height: auto !important;
   text-align: center;
 }
