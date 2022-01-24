@@ -26,4 +26,9 @@ public class AdminController {
     return "admin";
   }
 
+  @RequestMapping("/admin/peopleRegister")
+  public String peopleRegister(HttpServletRequest request, Model m) {
+    return "peopleRegister";
+  }
+
 }

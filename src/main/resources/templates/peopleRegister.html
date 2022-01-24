@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layouts/layout_admin}">
+<head>
+  <link th:href="@{css/admin.css}" rel="stylesheet">
+  <script th:src="@{js/admin.js}"></script>
+</head>
+
+<div layout:fragment="content">
+  <div id="container">
+    <div class="center2" th:if="${session.loginType}=='3'">
+      <div class="area2 titleArea">
+        <span class="subTitle mb-3" onclick="location.href='/admin'">Register</span>
+        <div>
+          <img class="backBtn" th:src="@{image/admin/back.png}" onclick="location.href='/admin'"/>
+          <span class="secondTitle" onclick="location.href='/admin/peopleRegister'">인원 등록하기</span>
+        </div>
+      </div>
+
+      <div class="row check typeCheck">
+        <div class="col-xs-6">Student</div>
+        <div class="col-xs-6">Teacher</div>
+      </div>
+
+      <div class="area2 helpArea">
+        <span>※ 학번은 아이디와 초기 비밀번호로 입력됩니다.</span>
+      </div>
+
+      <div class="area2 inputArea">
+        <div class="row">
+          <div class="inputTitle col-xs-6">학번</div>
+          <div class="inputTitle col-xs-6">이름</div>
+        </div>
+
+        <div>
+          <img class="minusBtn" th:src="@{image/admin/minus.png}"/>
+          <input type="text" id="id" name="id" placeholder="학번" />
+          <input type="text" id="name" name="name" placeholder="이름" />
+        </div>
+
+        <div class="addBtn">
+          <img th:src="@{image/admin/addPerson.png}"/>
+        </div>
+      </div>
+    </div>
+
+    <div class="check saveBtn">저장하기</div>
+
+  </div>
+</div>
+
+</html>

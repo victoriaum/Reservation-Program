@@ -29,3 +29,90 @@ hr {
   font-weight: bold;
   color: #2B2119;
 }
+
+
+
+/* peopleRegister.html */
+.center2 {
+  color: black;
+  font-size: 1rem;
+  width: 85%;
+  margin: 1rem auto;
+  text-align: left;
+}
+.area2 {
+  margin-top: 0.5rem;
+}
+.titleArea {
+  margin-bottom: 1rem;
+}
+.inputArea {
+  width: 90%;
+  margin: 0.3rem auto;
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.secondTitle {
+  font-weight: bold;
+  color: #2B2119;
+  cursor: pointer;
+}
+.backBtn {
+  margin: 0 0.5rem;
+  width: 1.2rem;
+  cursor: pointer;
+}
+.check {
+  text-align: center;
+  width: 100%;
+  margin: 0 auto;
+}
+.typeCheck>* {
+  width: 49%;
+  font-size: 0.8rem;
+  color: #2B2119;
+  background-color: #ECDCCB;
+  padding: 0.3rem 0;
+}
+.helpArea {
+  font-size: 0.8rem;
+  color: #E48873;
+}
+.inputTitle {
+  display: inline-block;
+  width: 49%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #2B2119;
+  padding: 0.3rem 0;
+  border-bottom: solid 0.05rem #2B2119;
+}
+.inputArea>div>input {
+  display: inline-block;
+  width: 35%;
+  border: none;
+  border-bottom: solid 0.05rem lightgrey;
+  font-size: 0.8rem;
+  margin: 0 0.7rem;
+}
+.minusBtn, .addBtn>*{
+  width: 1rem;
+
+}
+.addBtn {
+  width: 100%;
+  text-align: center;
+  border: dashed 0.05rem #55705A;
+  border-radius: 0.3rem;
+  margin-top: 0.5rem;
+}
+.saveBtn {
+  float: right;
+  margin-right: 2rem;
+  padding: 0.2rem 0;
+  font-size: 0.8rem;
+  width: 7rem;
+  background-color: #55705A;
+  color: white;
+}
