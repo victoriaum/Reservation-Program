@@ -76,36 +76,42 @@ hr {
   padding: 0.3rem 0;
 }
 .helpArea {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #E48873;
+  margin-bottom: 1rem;
 }
 .inputTitle {
+  width: 100%;
   display: inline-block;
-  width: 49%;
   font-size: 0.8rem;
   font-weight: bold;
   color: #2B2119;
   padding: 0.3rem 0;
   border-bottom: solid 0.05rem #2B2119;
 }
-.inputArea>div>input {
+.space1 {
+  text-align: center;
+  margin-right: 0.5rem;
+}
+.space2, .space3 {
   display: inline-block;
-  width: 35%;
+  width: 40%;
+}
+.inputArea>div>input {
   border: none;
   border-bottom: solid 0.05rem lightgrey;
   font-size: 0.8rem;
-  margin: 0 0.7rem;
 }
 .minusBtn, .addBtn>*{
   width: 1rem;
-
 }
 .addBtn {
-  width: 100%;
+  float: right;
+  width: 90%;
   text-align: center;
   border: dashed 0.05rem #55705A;
   border-radius: 0.3rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem auto;
 }
 .saveBtn {
   float: right;
