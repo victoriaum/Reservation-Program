@@ -4,7 +4,8 @@
       layout:decorator="~{layouts/layout_admin}">
 <head>
   <link th:href="@{css/admin.css}" rel="stylesheet">
-  <script th:src="@{js/admin.js}"></script>
+  <link th:href="@{css/peopleRegister.css}" rel="stylesheet">
+  <script th:src="@{js/peopleRegister.js}"></script>
 </head>
 
 <div layout:fragment="content">
@@ -19,25 +20,12 @@
       </div>
 
       <div class="row check typeCheck">
-        <div class="col-xs-6">Student</div>
-        <div class="col-xs-6">Teacher</div>
+        <div class="col-xs-6" id="studentCheck">Student</div>
+        <div class="col-xs-6" id="teacherCheck">Teacher</div>
       </div>
 
-      <div class="area2 helpArea">
-        <span>※ 학번은 아이디와 초기 비밀번호로 입력됩니다.</span>
-      </div>
-
-      <div class="area2 inputArea">
-        <div>
-          <img class="space1 minusBtn" th:src="@{image/admin/minus.png}"/>
-          <input type="text" class="space2" id="id" name="id" placeholder="학번" />
-          <input type="text" class="space3" id="name" name="name" placeholder="이름" />
-        </div>
-
-        <div class="addBtn">
-          <img th:src="@{image/admin/addPerson.png}"/>
-        </div>
-      </div>
+      <div class="area2 helpArea"></div>
+      <div class="area2 inputArea"></div>
     </div>
 
     <div class="check saveBtn">저장하기</div>
