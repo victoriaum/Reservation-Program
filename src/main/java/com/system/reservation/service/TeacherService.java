@@ -85,4 +85,8 @@ public class TeacherService {
       return students.split(",").length;
     }
   }
+
+  public void requestCntDelete(TeacherDto teacherDto) {
+    teacherRepository.save(teacherDto.toEntity());
+  }
 }

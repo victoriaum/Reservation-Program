@@ -107,4 +107,13 @@ public class MainController {
     return jsonObject.toString();
   }
 
+  @ResponseBody
+  @RequestMapping(value = {"/index/requestCntDelete"})
+  public void requestCntDelete(HttpServletRequest request, Model m) {
+    HttpSession httpSession = request.getSession();
+    TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
+    teacherDto.setRequest_students("");
+    teacherService.requestCntDelete(teacherDto);
+  }
+
 }

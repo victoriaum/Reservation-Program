@@ -38,6 +38,8 @@ function func_getTodaySchedule(todayDate){
           var length = scheduleArray.length;
 
           if($("#loginType").val()=="1"){
+            func_requestCntDelete();  // 요청인원 지우기
+
             for(var i=4; i<length; i++){
               if(i==4){
                 attenderArray=scheduleArray[i];
@@ -91,6 +93,20 @@ function func_requestCnt(){
     success: function(data){
       $(".detail2").append("<span class='requesters'>현재 개설 요청인원은  "
           + "<span class='requestCnt'>"+data.requestCnt+" 명</span> 입니다.</span></p>");
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
+}
+
+
+// 요청인원 지우기
+function func_requestCntDelete(){
+  $.ajax({
+    url:"/index/requestCntDelete",
+    type: "post",
+    success: function(){
     },
     error: function(report, status, error){
       alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
