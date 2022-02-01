@@ -20,12 +20,17 @@
       </div>
 
       <div class="row check typeCheck">
-        <div class="col-xs-6" id="studentCheck">Student</div>
-        <div class="col-xs-6" id="teacherCheck">Teacher</div>
+        <div class="col-xs-6" id="studentCheck" onclick="func_studentBtn()">Student</div>
+        <div class="col-xs-6" id="teacherCheck" onclick="func_teacherBtn()">Teacher</div>
       </div>
 
       <div class="area2 helpArea"></div>
       <div class="area2 inputArea"></div>
+      <div class="area2 addArea">
+        <div class='addBtn' onclick='func_addStudent(this)'>
+          <img class='/' src='image/admin/addPerson.png' />
+        </div>
+      </div>
     </div>
 
     <div class="check saveBtn">저장하기</div>

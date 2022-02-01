@@ -101,8 +101,6 @@ hr {
 .space2, .space3 {
   display: inline-block;
   width: 40%;
-}
-.inputArea>div>input {
   border: none;
   border-bottom: solid 0.05rem lightgrey;
   font-size: 0.8rem;
