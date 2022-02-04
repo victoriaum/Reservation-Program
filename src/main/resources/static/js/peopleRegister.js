@@ -52,14 +52,9 @@ function func_addStudent(obj){
 
 // RegisterForm 유효성검사
 function func_peopleRegister(){
-  console.log("하하");
   var form = document.peopleResiterForm;
   var id = $(".id").val();
   var name = $(".name").val();
-
-  console.log(id);
-  console.log(name);
-
 
   if(id==null || id=="" || id=="학번" || name==null || name=="" || name=="이름"){
     $("#error").html("빈칸이 없어야 저장이 가능합니다!");
@@ -71,7 +66,7 @@ function func_peopleRegister(){
 
   }
 
-  $("form").append("<>");
+  $("form").next().append("<>");
 
   return true;
   form.submit();

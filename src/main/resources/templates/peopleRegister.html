@@ -26,22 +26,26 @@
 
       <div class="area2 helpArea"></div>
 
-      <form name="peopleResiterForm" id="peopleResiterForm" th:action="@{/admin/peopleResiter}"
-            onsubmit="return func_peopleRegister()" method="post">
-        <div class="area2 inputArea"></div>
-      </form>
+      <div class="area2 formArea">
+        <form name="peopleResiterForm" id="peopleResiterForm" th:action="@{/admin/peopleResiter}"
+              onsubmit="return func_peopleRegister()" method="post">
+          <div class="area2 inputArea"></div>
 
-      <div class="area2 addArea">
-        <div class='addBtn' onclick='func_addStudent(this)'>
-          <img class='/' src='image/admin/addPerson.png' />
-        </div>
+          <div class="addBtn" onclick="func_addStudent(this)">
+            <img class='/' src='image/admin/addPerson.png' />
+          </div>
+
+          <div id="error"></div>
+
+          <div>
+            <button type="submit" class="btn btn-primary registerBtn" th:onclick="func_peopleRegister">
+              저장하기
+            </button>
+          </div>
+        </form>
       </div>
+
     </div>
-
-    <div id="error"></div>
-
-    <div class="check saveBtn">저장하기</div>
-
   </div>
 </div>
 

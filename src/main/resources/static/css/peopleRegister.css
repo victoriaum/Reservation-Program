@@ -67,6 +67,10 @@
   display: inline-block;
   width: 40%;
 }
+.formArea {
+  overflow: auto;
+  text-align: center;
+}
 .inputArea>div>input {
   border: none;
   border-bottom: solid 0.05rem lightgrey;
@@ -76,19 +80,33 @@
   width: 1rem;
 }
 .addBtn {
-  float: right;
-  width: 90%;
   text-align: center;
-  border: dashed 0.05rem #55705A;
   border-radius: 0.3rem;
   margin: 0.5rem auto;
+  width: 85%;
+  height: 1.5rem;
+  font-size: 0.7rem;
+  display: inline-block;
+  float: none;
+  padding: 0.2rem;
+  background-color: white;
+  border: dashed 0.01rem #55705A;
 }
-.saveBtn {
-  float: right;
-  margin-right: 2rem;
-  padding: 0.2rem 0;
-  font-size: 0.8rem;
-  width: 7rem;
+.registerBtn {
+  width: 85%;
+  height: 1.5rem;
+  font-size: 0.7rem;
+  text-align: center;
+  display: inline-block;
+  float: none;
+  padding: 0.2rem;
   background-color: #55705A;
-  color: white;
+  border: none;
+}
+
+#error {
+  font-size: 0.7rem;
+  color: red;
+  display: inline-block;
+  margin-bottom: 0.2rem;
 }
