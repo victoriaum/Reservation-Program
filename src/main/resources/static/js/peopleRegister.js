@@ -52,22 +52,43 @@ function func_addStudent(obj){
 
 // RegisterForm 유효성검사
 function func_peopleRegister(){
-  var form = document.peopleResiterForm;
-  var id = $(".id").val();
-  var name = $(".name").val();
+  var idAll = "";
+  var nameAll = "";
+  var flag = true;
 
-  if(id==null || id=="" || id=="학번" || name==null || name=="" || name=="이름"){
-    $("#error").html("빈칸이 없어야 저장이 가능합니다!");
+  $(".id").each(function() {
+    var id = $(this).val();
+    if(id==null || id==""){
+      $("#error").html("빈칸이 없어야 저장이 가능합니다!");
+      flag = false;
+    } else {
+      idAll += id+" ";
+    }
+  });
+
+  $(".name").each(function() {
+    var name = $(this).val();
+    if(name==null || name==""){
+      $("#error").html("빈칸이 없어야 저장이 가능합니다!");
+      flag = false;
+    } else {
+      nameAll += name+" ";
+    }
+  });
+
+  $(".grade").each(function() {
+    var grade = $(this).val();
+    gradeAll += grade+" ";
+  });
+
+  $(".idAll").val(idAll);
+  $(".nameAll").val(nameAll);
+  $(".gradeAll").val(gradeAll);
+
+  if(!flag){
     return false;
+  } else {
+    /*ajax*/
   }
 
-  var count = $(".id").length;
-  for(var i=0; i<count; i++){
-
-  }
-
-  $("form").next().append("<>");
-
-  return true;
-  form.submit();
 }

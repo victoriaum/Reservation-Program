@@ -38,8 +38,24 @@ public class AdminController {
     return "peopleRegister";
   }
 
-  @PostMapping("/admin/peopleRegister")
-  public String peopleRegister() {
+  @PostMapping("/admin/studentRegister")
+  public String studentRegister(@RequestParam("idAll") String idAll,
+      @RequestParam("nameAll") String nameAll, @RequestParam("gradeAll") String gradeAll) {
+    String[] idArr = idAll.split(" ");
+    String[] nameArr = nameAll.split(" ");
+    String[] gradeArr = nameAll.split(" ");
+
+    for(int i=0; i<idArr.length; i++){
+      StudentDto studentDto = null;
+      studentDto.setStudent_id(idArr[i]);
+      studentDto.setStudent_password(idArr[i]);
+      studentDto.setStudent_email(idArr[i]+"@ckdu.com");
+      studentDto.setStudent_grade(gradeArr[i]);
+      studentDto.setStudent_name(nameArr[i]);
+
+      Integer result = StudentService.requestReport(studentDto);
+    }
+
     return "peopleRegister";
   }
 
