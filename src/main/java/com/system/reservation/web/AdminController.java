@@ -179,4 +179,25 @@ public class AdminController {
     return jsonObject.toString();
   }
 
+
+  @ResponseBody
+  @PostMapping("/admin/getTeacherAll")
+  public String getTeacherAll(){
+    List<TeacherDto> teacherDtoList = teacherService.getTeacherAll();
+    String html = "";
+
+    for(int i=0; i<teacherDtoList.size(); i++){
+      html += "<tbody><tr id='"+teacherDtoList.get(i).getTeacher_id()+"'>"
+          + "<td>"+teacherDtoList.get(i).getTeacher_dept()+"</td>"
+          + "<td>"+teacherDtoList.get(i).getTeacher_id()+"</td>"
+          + "<td>"+teacherDtoList.get(i).getTeacher_name()+"</td>"
+          + "<td>"+teacherDtoList.get(i).getTeacher_position()+"</td>"
+          + "</tr></tbody>";
+    }
+
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("html", html);
+    return jsonObject.toString();
+  }
+
 }

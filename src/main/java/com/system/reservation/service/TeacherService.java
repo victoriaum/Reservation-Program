@@ -3,6 +3,7 @@ package com.system.reservation.service;
 import com.system.reservation.domain.TeacherRepository;
 import com.system.reservation.web.dto.TeacherDto;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -106,5 +107,12 @@ public class TeacherService {
   @Transactional
   public void teacherRegister(TeacherDto teacherDto) {
     teacherRepository.save(teacherDto.toEntity());
+  }
+
+  @Transactional
+  public List<TeacherDto> getTeacherAll() {
+    return teacherRepository.findAll().stream()
+        .map(TeacherDto::new)
+        .collect(Collectors.toList());
   }
 }
