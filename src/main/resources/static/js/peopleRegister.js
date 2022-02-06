@@ -31,6 +31,8 @@ function func_studentField(){
               + " <option>본4</option></select>"
               + " <input type='number' class='space2 id' placeholder='학번' />"
               + " <input type='text' class='space3 name' placeholder='이름' /></div>");
+  $("#button").html("<button type='submit' class='btn btn-primary registerBtn' onclick='func_studentRegister()'>"
+              + " 저장하기</button>");
 }
 
 
@@ -59,7 +61,7 @@ function func_addStudent(obj){
 
 
 // RegisterForm 유효성검사
-function func_peopleRegister(){
+function func_studentRegister(){
   var idAll = "";
   var nameAll = "";
   var gradeAll = "";
@@ -89,10 +91,6 @@ function func_peopleRegister(){
     var grade = $(this).val();
     gradeAll += grade+" ";
   });
-
-  console.log(idAll);
-  console.log(nameAll);
-  console.log(gradeAll);
 
   if(!flag){
     return false;
