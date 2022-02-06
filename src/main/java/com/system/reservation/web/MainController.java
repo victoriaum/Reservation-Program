@@ -25,27 +25,6 @@ public class MainController {
   private final ScheduleService scheduleService;
   private final TeacherService teacherService;
 
-  @Value("${spring.datasource.driver-class-name}")
-  private String driver;
-
-  @Value("${spring.datasource.url}")
-  private String url;
-
-  @Value("${spring.datasource.username}")
-  private String username;
-
-  @Value("${spring.datasource.password}")
-  private String password;
-
-  public DataSource dataSource() throws PropertyVetoException{
-    final DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    dataSource.setDriverClassName(driver);
-    dataSource.setUrl(url);
-    dataSource.setUsername(username);
-    dataSource.setPassword(password);
-    return dataSource;
-  }
-
 
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
