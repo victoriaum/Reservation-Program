@@ -55,7 +55,7 @@ function func_teacherField(){
       + " <option>외과</option>"
       + " <option>치주과</option></select>");
   $(".inputArea").append("<div><img class='space1 minusBtn' src='image/admin/minus.png' onclick='func_minusTeacher(this)'/>"
-      + " <input type='number' class='space4 id' placeholder='아이디' />"
+      + " <input type='text' class='space4 id' placeholder='아이디' />"
       + " <input type='text' class='space5 name' placeholder='성함' />"
       + " <select class='position'><option selected>교수님</option>"
       + " <option>선생님</option></select></div>");
@@ -92,7 +92,7 @@ function func_addStudent(obj){
 // teacher 필드 입력줄 한 개 추가
 function func_addTeacher(obj){
   $(".inputArea").append("<div><img class='space1 minusBtn' src='image/admin/minus.png' onclick='func_minusTeacher(this)'/>"
-      + " <input type='number' class='space4 id' placeholder='아이디' />"
+      + " <input type='text' class='space4 id' placeholder='아이디' />"
       + " <input type='text' class='space5 name' placeholder='성함' />"
       + " <select class='position'><option selected>교수님</option>"
       + " <option>선생님</option></select></div>");
