@@ -83,14 +83,12 @@ select {
   border: none;
   border-bottom: solid 0.05rem lightgrey;
   font-size: 0.7rem;
+  background-color: white;
 }
 .inputArea>div>input {
   border: none;
   border-bottom: solid 0.05rem lightgrey;
   font-size: 0.8rem;
-}
-.name {
-
 }
 .minusBtn, .addBtn>*{
   width: 1rem;
