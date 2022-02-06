@@ -6,11 +6,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @RequiredArgsConstructor
 @Controller
@@ -39,12 +41,15 @@ public class AdminController {
   }
 
 
+  @ResponseBody
   @PostMapping("/admin/studentRegister")
   public String studentRegister(@RequestParam("idAll") String idAll,
       @RequestParam("nameAll") String nameAll, @RequestParam("gradeAll") String gradeAll) {
     String[] idArr = idAll.split(" ");
     String[] nameArr = nameAll.split(" ");
     String[] gradeArr = nameAll.split(" ");
+    String hasId = "";
+    String result = "";
 
     for(int i=0; i<idArr.length; i++){
       StudentDto studentDto = new StudentDto();
@@ -55,10 +60,29 @@ public class AdminController {
       studentDto.setStudent_grade(gradeArr[i]);
       studentDto.setStudent_name(nameArr[i]);
 
-      /*StudentService.studentRegister(studentDto);*/
+      int check = studentService.findByStudent_id(idArr[i]);
+
+      if(1==check){   // 이미 아이디가 등록된 경우
+        if(hasId.isEmpty()){
+          hasId+=idArr[i];
+        } else {
+          hasId+=", "+idArr[i];
+        }
+      } else {   // 아이디가 등록되지 않은 경우
+       studentService.studentRegister(studentDto);
+      }
     }
 
-    return "peopleRegister";
+
+    if(hasId.isEmpty()){
+      result="1";
+    } else {
+      result=hasId;
+    }
+
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("result", result);
+    return jsonObject.toString();
   }
 
 }

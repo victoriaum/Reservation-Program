@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class StudentService {
   private final StudentRepository studentRepository;
 
+
   @Transactional
   public StudentDto findByStudent_idAndStudent_password(String id, String password) {
 
@@ -33,6 +34,17 @@ public class StudentService {
     studentDto.setStudent_password(password);
     studentRepository.save(studentDto.toEntity());
     return studentDto;
+  }
+
+  @Transactional
+  public Integer findByStudent_id(String id) {
+    StudentDto studentDto = studentRepository.findByStudent_id(id);
+
+    if(studentDto!=null){
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   @Transactional
