@@ -3,14 +3,34 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{layouts/layout_admin}">
 <head>
-  <link th:href="@{css/admin.css}" rel="stylesheet">
-  <link th:href="@{css/peopleRegister.css}" rel="stylesheet">
-  <script th:src="@{js/peopleRegister.js}"></script>
+  <link th:href="@{css/admin/admin.css}" rel="stylesheet">
+  <link th:href="@{css/admin/peopleManage.css}" rel="stylesheet">
+  <script th:src="@{js/admin/peopleManage.js}"></script>
 </head>
 
 <div layout:fragment="content">
   <div id="container">
+    <div class="center2" th:if="${session.loginType}=='3'">
+      <div class="area2 titleArea">
+        <span class="subTitle mb-3" onclick="location.href='/admin'">Register</span>
+        <div>
+          <img class="backBtn" th:src="@{image/admin/back.png}" onclick="location.href='/admin'"/>
+          <span class="secondTitle" onclick="location.href='/admin/peopleRegister'">인원 관리하기</span>
+        </div>
+      </div>
 
+      <div class="row check typeCheck">
+        <div class="col-xs-6" id="studentCheck" onclick="func_studentBtn()">Student</div>
+        <div class="col-xs-6" id="teacherCheck" onclick="func_teacherBtn()">Teacher</div>
+      </div>
+
+      <!--<div class="area2 searchArea"></div>-->
+
+    </div>
+
+    <div class="center3" th:if="${session.loginType}=='3'">
+      <div class="area2 dataArea"></div>
+    </div>
   </div>
 </div>
 

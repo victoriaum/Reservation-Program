@@ -6,6 +6,7 @@ import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
@@ -155,6 +156,26 @@ public class AdminController {
 
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("result", result);
+    return jsonObject.toString();
+  }
+
+
+  @ResponseBody
+  @PostMapping("/admin/getStudentAll")
+  public String getStudentAll(){
+    List<StudentDto> studentDtoList = studentService.getStudentAll();
+    String html = "";
+
+    for(int i=0; i<studentDtoList.size(); i++){
+      html += "<tbody><tr id='"+studentDtoList.get(i).getStudent_id()+"'>"
+          + "<td>"+studentDtoList.get(i).getStudent_grade()+"</td>"
+          + "<td>"+studentDtoList.get(i).getStudent_id()+"</td>"
+          + "<td>"+studentDtoList.get(i).getStudent_name()+"</td>"
+          + "</tr></tbody>";
+    }
+
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("html", html);
     return jsonObject.toString();
   }
 
