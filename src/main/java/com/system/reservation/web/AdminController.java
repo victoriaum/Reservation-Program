@@ -41,6 +41,27 @@ public class AdminController {
     return "peopleRegister";
   }
 
+  @RequestMapping("/admin/scheduleRegister")
+  public String scheduleRegister(HttpServletRequest request, Model m) {
+    return "scheduleRegister";
+  }
+
+  @RequestMapping("/admin/peopleManage")
+  public String peopleManage(HttpServletRequest request, Model m) {
+    return "peopleManage";
+  }
+
+  @RequestMapping("/admin/deptManage")
+  public String deptManage(HttpServletRequest request, Model m) {
+    return "deptManage";
+  }
+
+  @RequestMapping("/admin/scheduleManage")
+  public String scheduleManage(HttpServletRequest request, Model m) {
+    return "scheduleManage";
+  }
+
+
   @ResponseBody
   @PostMapping("/admin/studentRegister")
   public String studentRegister(@RequestParam("idAll") String idAll,
