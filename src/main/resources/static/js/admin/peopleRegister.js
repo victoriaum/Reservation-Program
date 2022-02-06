@@ -187,7 +187,7 @@ function func_teacherRegister(){
     }
   });
 
-  $(".poisition").each(function() {
+  $(".position").each(function() {
     var poisition = $(this).val();
     positionAll += poisition+" ";
   });
