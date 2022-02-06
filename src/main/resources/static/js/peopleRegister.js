@@ -111,13 +111,10 @@ function func_studentRegister(){
           setTimeout(function() {}, 1300);
         } else {    // 학생 일부/전체 등록 실패
           Swal.fire({
-            title: '모두 등록이 실패했습니다!',
-            icon: 'fail',
-            showConfirmButton: true
+            icon: 'error',
+            title: 'Failed',
+            text: json.result+'위 학번을 가진 학생은 이미 등록되어 있습니다. 다시 시도해주세요!'
           })
-          setTimeout(function() {
-            $("#error").html(json.result+"<br>위 학번을 가진 학생은 이미 등록되어 있습니다. 그 외의 학생은 모두 등록되었습니다.");
-          }, 1300);
         }
       },
       error: function(report, status, error){

@@ -51,15 +51,8 @@ public class AdminController {
     String hasId = "";
     String result = "";
 
+    // 아이디 존재 여부 확인
     for(int i=0; i<idArr.length; i++){
-      StudentDto studentDto = new StudentDto();
-
-      studentDto.setStudent_id(idArr[i]);
-      studentDto.setStudent_password(idArr[i]);
-      studentDto.setStudent_email(idArr[i]+"@cudh.com");
-      studentDto.setStudent_grade(gradeArr[i]);
-      studentDto.setStudent_name(nameArr[i]);
-
       int check = studentService.findByStudent_id(idArr[i]);
 
       if(1==check){   // 이미 아이디가 등록된 경우
@@ -68,13 +61,25 @@ public class AdminController {
         } else {
           hasId+=", "+idArr[i];
         }
-      } else {   // 아이디가 등록되지 않은 경우
-       studentService.studentRegister(studentDto);
       }
     }
 
+    /*todo
+    고민중인 로직 - 일부 확실치 않아도 옳은 것은 등록할 것인지..
+    일단, 이미 등록된 경우 전체 저장하지 않기로 해놓음*/
 
     if(hasId.isEmpty()){
+      for(int i=0; i<idArr.length; i++){
+        StudentDto studentDto = new StudentDto();
+
+        studentDto.setStudent_id(idArr[i]);
+        studentDto.setStudent_password(idArr[i]);
+        studentDto.setStudent_email(idArr[i]+"@cudh.com");
+        studentDto.setStudent_grade(gradeArr[i]);
+        studentDto.setStudent_name(nameArr[i]);
+
+        studentService.studentRegister(studentDto);
+      }
       result="1";
     } else {
       result=hasId;
