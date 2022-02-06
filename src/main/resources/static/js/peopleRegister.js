@@ -113,7 +113,7 @@ function func_studentRegister(){
           Swal.fire({
             icon: 'error',
             title: 'Failed',
-            text: json.result+'위 학번을 가진 학생은 이미 등록되어 있습니다. 다시 시도해주세요!'
+            html: json.result+'<br>위 학번을 가진 학생은 이미 있습니다. <br>수정후 다시 시도해주세요!'
           })
         }
       },

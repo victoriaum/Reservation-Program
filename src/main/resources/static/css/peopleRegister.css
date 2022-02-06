@@ -124,3 +124,7 @@ select {
   display: inline-block;
   margin-bottom: 0.2rem;
 }
+
+.swal2-popup {
+  font-size: 0.7rem !important;
+}
