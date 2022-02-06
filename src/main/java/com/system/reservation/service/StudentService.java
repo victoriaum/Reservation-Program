@@ -35,4 +35,9 @@ public class StudentService {
     return studentDto;
   }
 
+  @Transactional
+  public void studentRegister(StudentDto studentDto) {
+    studentRepository.save(studentDto.toEntity());
+  }
+
 }
