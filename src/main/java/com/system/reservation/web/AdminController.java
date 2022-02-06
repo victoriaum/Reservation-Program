@@ -41,7 +41,6 @@ public class AdminController {
     return "peopleRegister";
   }
 
-
   @ResponseBody
   @PostMapping("/admin/studentRegister")
   public String studentRegister(@RequestParam("idAll") String idAll,
@@ -67,7 +66,7 @@ public class AdminController {
 
     /*todo
     고민중인 로직 - 일부 확실치 않아도 옳은 것은 등록할 것인지..
-    일단, 이미 등록된 경우 전체 저장하지 않기로 해놓음*/
+    일단, 이미 등록된 경우 전체 저장하지 않기로 해놓음, teacher도 동일*/
 
     if(hasId.isEmpty()){
       for(int i=0; i<idArr.length; i++){

@@ -1,6 +1,5 @@
 $(function(){
   func_studentBtn();
-
 })
 
 
@@ -39,7 +38,7 @@ function func_studentField(){
               + " <input type='text' class='space3 name' placeholder='이름' /></div>");
   $(".inputArea").after("<div class='addBtn' onclick='func_addStudent(this)'>"
               + " <img class='/' src='image/admin/addPerson.png' /></div>");
-  $("#button").html("<button type='submit' class='btn btn-primary registerBtn' onclick='func_studentRegister()'>"
+  $("#button").html("<button type='button' class='btn btn-primary registerBtn' onclick='func_studentRegister()'>"
               + " 저장하기</button>");
 }
 
@@ -61,7 +60,7 @@ function func_teacherField(){
       + " <option>선생님</option></select></div>");
   $(".inputArea").after("<div class='addBtn' onclick='func_addTeacher(this)'>"
       + " <img class='/' src='image/admin/addPerson.png' /></div>");
-  $("#button").html("<button type='submit' class='btn btn-primary registerBtn' onclick='func_teacherRegister()'>"
+  $("#button").html("<button type='button' class='btn btn-primary registerBtn' onclick='func_teacherRegister()'>"
       + " 저장하기</button>");
 }
 
@@ -109,7 +108,6 @@ function func_studentRegister(){
   $(".id").each(function() {
     var id = $(this).val();
     if(id==null || id==""){
-      $("#error").html("빈칸이 없어야 저장이 가능합니다!");
       flag = false;
     } else {
       idAll += id+" ";
@@ -119,7 +117,6 @@ function func_studentRegister(){
   $(".name").each(function() {
     var name = $(this).val();
     if(name==null || name==""){
-      $("#error").html("빈칸이 없어야 저장이 가능합니다!");
       flag = false;
     } else {
       nameAll += name+" ";
@@ -132,7 +129,7 @@ function func_studentRegister(){
   });
 
   if(!flag){
-    return false;
+    $("#error").html("빈칸이 없어야 저장이 가능합니다!");
   } else {
     $.ajax({
       url:"/admin/studentRegister",
@@ -175,7 +172,6 @@ function func_teacherRegister(){
   $(".id").each(function() {
     var id = $(this).val();
     if(id==null || id==""){
-      $("#error").html("빈칸이 없어야 저장이 가능합니다!");
       flag = false;
     } else {
       idAll += id+" ";
@@ -185,7 +181,6 @@ function func_teacherRegister(){
   $(".name").each(function() {
     var name = $(this).val();
     if(name==null || name==""){
-      $("#error").html("빈칸이 없어야 저장이 가능합니다!");
       flag = false;
     } else {
       nameAll += name+" ";
@@ -197,13 +192,8 @@ function func_teacherRegister(){
     positionAll += poisition+" ";
   });
 
-  console.log(idAll);
-  console.log(nameAll);
-  console.log(positionAll);
-  console.log(dept);
-
   if(!flag){
-    return false;
+    $("#error").html("빈칸이 없어야 저장이 가능합니다!");
   } else {
     $.ajax({
       url:"/admin/teacherRegister",
