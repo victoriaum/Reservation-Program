@@ -219,13 +219,22 @@ function func_reportNo(obj) {
     data:{schedule_no:schedule_no, login_id:login_id},
     success: function(json){
       if(json.result==1){    // 일정 취소성공
-        alert("일정이 취소됐습니다.");
+        Swal.fire({
+          title: 'Success!',
+          icon: 'success',
+          showConfirmButton: false,
+          timer: 1200
+        })
         var attenderCnt = $(obj).parent().prev().children('span.space').children('span#attenderCnt');
         var cnt = Number(attenderCnt.text());
         attenderCnt.html(cnt-1);
       }
       else if(json.result==0){    // 일정 취소실패
-        alert("등록되지 않은 예약으로 취소할 수 없습니다.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed',
+          html: '등록되지 않은 예약으로 취소할 수 없습니다!'
+        })
       }
     },
     error: function(report, status, error){
