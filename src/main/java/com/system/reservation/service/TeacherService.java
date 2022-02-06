@@ -81,7 +81,7 @@ public class TeacherService {
   @Transactional
   public Integer requestCnt(String id) {
     String students = teacherRepository.findByTeacher_id(id).getRequest_students();
-    if(students.isEmpty()){
+    if(students==null || students.isEmpty()){
       return 0;
     } else {
       return students.split(",").length;
