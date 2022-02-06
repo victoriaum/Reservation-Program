@@ -91,7 +91,7 @@ function func_requestCnt(){
     type: "post",
     dataType: "json",
     success: function(data){
-      $(".detail2").append("<span class='requesters'>현재 개설 요청인원은  "
+      $(".detail2").append("<span class='requesters'>현재 개설 요청인원은"
           + "<span class='requestCnt'>"+data.requestCnt+" 명</span> 입니다.</span></p>");
     },
     error: function(report, status, error){
