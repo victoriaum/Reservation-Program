@@ -1,6 +1,7 @@
 package com.system.reservation.service;
 
 import com.system.reservation.domain.TeacherRepository;
+import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -77,6 +78,7 @@ public class TeacherService {
     return 1;
   }
 
+  @Transactional
   public Integer requestCnt(String id) {
     String students = teacherRepository.findByTeacher_id(id).getRequest_students();
     if(students.isEmpty()){
@@ -86,7 +88,24 @@ public class TeacherService {
     }
   }
 
+  @Transactional
   public void requestCntDelete(TeacherDto teacherDto) {
+    teacherRepository.save(teacherDto.toEntity());
+  }
+
+  @Transactional
+  public Integer findByTeacher_id(String id) {
+    TeacherDto teacherDto = teacherRepository.findByTeacher_id(id);
+
+    if(teacherDto!=null){
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  @Transactional
+  public void teacherRegister(TeacherDto teacherDto) {
     teacherRepository.save(teacherDto.toEntity());
   }
 }

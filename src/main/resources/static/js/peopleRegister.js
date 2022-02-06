@@ -169,6 +169,7 @@ function func_teacherRegister(){
   var idAll = "";
   var nameAll = "";
   var positionAll = "";
+  var dept = $(".dept").val();
   var flag = true;
 
   $(".id").each(function() {
@@ -196,6 +197,11 @@ function func_teacherRegister(){
     positionAll += poisition+" ";
   });
 
+  console.log(idAll);
+  console.log(nameAll);
+  console.log(positionAll);
+  console.log(dept);
+
   if(!flag){
     return false;
   } else {
@@ -203,7 +209,7 @@ function func_teacherRegister(){
       url:"/admin/teacherRegister",
       type: "post",
       dataType:"json",
-      data:{idAll:idAll,nameAll:nameAll,positionAll:positionAll,dept:$(".dept").val()},
+      data:{idAll:idAll,nameAll:nameAll,positionAll:positionAll,dept:dept},
       success: function(json) {
         if (json.result == 1) {    // 선생님 모두 등록 성공
           Swal.fire({
