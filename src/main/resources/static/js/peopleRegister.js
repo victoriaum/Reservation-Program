@@ -99,7 +99,7 @@ function func_addTeacher(obj){
 }
 
 
-// RegisterForm 유효성검사
+// student 유효성검사 및 등록
 function func_studentRegister(){
   var idAll = "";
   var nameAll = "";
@@ -153,6 +153,71 @@ function func_studentRegister(){
             icon: 'error',
             title: 'Failed',
             html: json.result+'<br>위 학번을 가진 학생은 이미 있습니다. <br>수정후 다시 시도해주세요!'
+          })
+        }
+      },
+      error: function(report, status, error){
+        alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+      }
+    });
+  }
+}
+
+
+// teacher 유효성검사 및 등록
+function func_teacherRegister(){
+  var idAll = "";
+  var nameAll = "";
+  var positionAll = "";
+  var flag = true;
+
+  $(".id").each(function() {
+    var id = $(this).val();
+    if(id==null || id==""){
+      $("#error").html("빈칸이 없어야 저장이 가능합니다!");
+      flag = false;
+    } else {
+      idAll += id+" ";
+    }
+  });
+
+  $(".name").each(function() {
+    var name = $(this).val();
+    if(name==null || name==""){
+      $("#error").html("빈칸이 없어야 저장이 가능합니다!");
+      flag = false;
+    } else {
+      nameAll += name+" ";
+    }
+  });
+
+  $(".poisition").each(function() {
+    var poisition = $(this).val();
+    positionAll += poisition+" ";
+  });
+
+  if(!flag){
+    return false;
+  } else {
+    $.ajax({
+      url:"/admin/teacherRegister",
+      type: "post",
+      dataType:"json",
+      data:{idAll:idAll,nameAll:nameAll,positionAll:positionAll,dept:$(".dept").val()},
+      success: function(json) {
+        if (json.result == 1) {    // 선생님 모두 등록 성공
+          Swal.fire({
+            title: 'Success!',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 1200
+          })
+          setTimeout(function() {}, 1300);
+        } else {    // 선생님 일부/전체 등록 실패
+          Swal.fire({
+            icon: 'error',
+            title: 'Failed',
+            html: json.result+'<br>위 아이디가 이미 있습니다. <br>수정후 다시 시도해주세요!'
           })
         }
       },
