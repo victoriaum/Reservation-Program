@@ -9,6 +9,9 @@ $(function(){
 function func_studentBtn(){
   $("#teacherCheck").removeClass("clickedCheck");
   $("#studentCheck").addClass("clickedCheck");
+  $(".inputArea").next().remove();
+  $(".inputArea").html("");
+  $("#error").html("");
   func_studentField();
 }
 
@@ -17,6 +20,9 @@ function func_studentBtn(){
 function func_teacherBtn(){
   $("#studentCheck").removeClass("clickedCheck");
   $("#teacherCheck").addClass("clickedCheck");
+  $(".inputArea").next().remove();
+  $(".inputArea").html("");
+  $("#error").html("");
   func_teacherField();
 }
 
@@ -31,6 +37,8 @@ function func_studentField(){
               + " <option>본4</option></select>"
               + " <input type='number' class='space2 id' placeholder='학번' />"
               + " <input type='text' class='space3 name' placeholder='이름' /></div>");
+  $(".inputArea").after("<div class='addBtn' onclick='func_addStudent(this)'>"
+              + " <img class='/' src='image/admin/addPerson.png' /></div>");
   $("#button").html("<button type='submit' class='btn btn-primary registerBtn' onclick='func_studentRegister()'>"
               + " 저장하기</button>");
 }
@@ -38,17 +46,38 @@ function func_studentField(){
 
 // teacher 필드 생성
 function func_teacherField(){
-
+  $(".helpArea").html("<span>※ 아이디는 되도록 다음 예시를 준수해주세요"
+      + "<br>ex) '조치대'인 경우, 'choicd'</span>");
+  $(".inputArea").html(" <select class='dept'><option selected>교정과</option>"
+      + " <option>내과</option>"
+      + " <option>보철과</option>"
+      + " <option>소아치과</option>"
+      + " <option>외과</option>"
+      + " <option>치주과</option></select>");
+  $(".inputArea").append("<div><img class='space1 minusBtn' src='image/admin/minus.png' onclick='func_minusTeacher(this)'/>"
+      + " <input type='number' class='space4 id' placeholder='아이디' />"
+      + " <input type='text' class='space5 name' placeholder='성함' />"
+      + " <select class='position'><option selected>교수님</option>"
+      + " <option>선생님</option></select></div>");
+  $(".inputArea").after("<div class='addBtn' onclick='func_addTeacher(this)'>"
+      + " <img class='/' src='image/admin/addPerson.png' /></div>");
+  $("#button").html("<button type='submit' class='btn btn-primary registerBtn' onclick='func_teacherRegister()'>"
+      + " 저장하기</button>");
 }
 
 
-// 학생 필드 입력줄 한 개 삭제
+// student 필드 입력줄 한 개 삭제
 function func_minusStudent(obj){
   $(obj).parent().remove();
 }
 
+// teacher 필드 입력줄 한 개 삭제
+function func_minusTeacher(obj){
+  $(obj).parent().remove();
+}
 
-// 학생 필드 입력줄 한 개 추가
+
+// student 필드 입력줄 한 개 추가
 function func_addStudent(obj){
   $(".inputArea").append("<div><img class='space1 minusBtn' src='image/admin/minus.png' onclick='func_minusStudent(this)'/>"
       + " <select class='grade'><option selected>본1</option>"
@@ -57,6 +86,16 @@ function func_addStudent(obj){
       + " <option>본4</option></select>"
       + " <input type='number' class='space2 id' placeholder='학번' />"
       + " <input type='text' class='space3 name' placeholder='이름' /></div>");
+}
+
+
+// teacher 필드 입력줄 한 개 추가
+function func_addTeacher(obj){
+  $(".inputArea").append("<div><img class='space1 minusBtn' src='image/admin/minus.png' onclick='func_minusTeacher(this)'/>"
+      + " <input type='number' class='space4 id' placeholder='아이디' />"
+      + " <input type='text' class='space5 name' placeholder='성함' />"
+      + " <select class='position'><option selected>교수님</option>"
+      + " <option>선생님</option></select></div>");
 }
 
 

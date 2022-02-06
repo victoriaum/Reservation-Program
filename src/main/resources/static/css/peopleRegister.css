@@ -22,7 +22,6 @@
 .inputArea {
   width: 100%;
   margin: 0.3rem auto;
-  text-align: center;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -75,6 +74,10 @@
   display: inline-block;
   width: 35%;
 }
+.space4, .space5 {
+  display: inline-block;
+  width: 30%;
+}
 .formArea {
   overflow: auto;
   text-align: center;
@@ -92,6 +95,13 @@ select {
 }
 .minusBtn, .addBtn>*{
   width: 1rem;
+}
+.dept {
+  font-size: 0.9rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  width: 40%;
+  text-align: center;
 }
 .addBtn {
   text-align: center;
