@@ -50,5 +50,9 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
 
   @Query("SELECT s FROM Scheduler s WHERE s.schedule_no=:schedule_no")
   SchedulerDto getOneSchedule(@Param("schedule_no") Long schedule_no);
+
+  @Query("SELECT count(s) FROM Scheduler s WHERE s.teacher_id=:teacher_id")
+  Integer scheduleCnt(@Param("teacher_id") String teacher_id);
+
 }
 

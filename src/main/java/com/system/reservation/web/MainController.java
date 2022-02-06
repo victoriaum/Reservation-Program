@@ -100,8 +100,11 @@ public class MainController {
     HttpSession httpSession = request.getSession();
     TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
     String teacher_id = teacherDto.getTeacher_id();
-    Integer requestCnt = teacherService.requestCnt(teacher_id);
 
+    // 일정이 하나라도 있으면 요청인원 초기화
+    scheduleService.requestCntManage(teacherDto);
+
+    Integer requestCnt = teacherService.requestCnt(teacher_id);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("requestCnt", requestCnt);
     return jsonObject.toString();

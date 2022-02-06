@@ -1,7 +1,9 @@
 package com.system.reservation.service;
 
 import com.system.reservation.domain.SchedulerRepository;
+import com.system.reservation.domain.TeacherRepository;
 import com.system.reservation.web.dto.SchedulerDto;
+import com.system.reservation.web.dto.TeacherDto;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ScheduleService {
   private final SchedulerRepository schedulerRepository;
-
+  private final TeacherRepository teacherRepository;
 
   @Transactional
   public List<SchedulerDto> getTeacherSchedule(String teacher_id, String today) {
@@ -119,4 +121,12 @@ public class ScheduleService {
     schedulerRepository.save(schedulerDto.toEntity());
   }
 
+  @Transactional
+  public void requestCntManage(TeacherDto teacherDto) {
+    int i = schedulerRepository.scheduleCnt(teacherDto.getTeacher_id());
+    if(i!=0){
+      teacherDto.setRequest_students("");
+      teacherRepository.save(teacherDto.toEntity());
+    }
+  }
 }
