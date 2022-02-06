@@ -27,7 +27,7 @@ public class NoticeController {
   int dayCnt = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month),1).lengthOfMonth();
 
 
-  @RequestMapping("/notice")
+  @RequestMapping("notice")
   public String notice(HttpServletRequest request, Model m) {
 
     HttpSession httpSession = request.getSession();

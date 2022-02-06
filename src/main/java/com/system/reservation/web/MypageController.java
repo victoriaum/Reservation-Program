@@ -19,17 +19,17 @@ public class MypageController {
   private final TeacherService teacherService;
   private final StudentService studentService;
 
-  @RequestMapping("/mypage")
+  @RequestMapping("mypage")
   public String mypage() {
     return "mypage";
   }
 
-  @RequestMapping("/mypage/editAccount")
+  @RequestMapping("mypage/editAccount")
   public String editAccount() {
     return "editAccount";
   }
 
-  @PostMapping("/mypage/editPassword")
+  @PostMapping("mypage/editPassword")
   public String login(@RequestParam("id") String id, @RequestParam("password") String password, @RequestParam("type") String type,
                       HttpServletRequest request, Model m) {
 

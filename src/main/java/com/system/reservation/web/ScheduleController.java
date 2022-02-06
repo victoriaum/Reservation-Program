@@ -23,7 +23,7 @@ public class ScheduleController {
   private final StudentService studentService;
 
 
-  @RequestMapping("/schedule")
+  @RequestMapping("schedule")
   public String schedule(HttpServletRequest request, Model m) {
     HttpSession httpSession = request.getSession();
     String type = (String) httpSession.getAttribute("loginType");
@@ -31,7 +31,7 @@ public class ScheduleController {
   }
 
   @ResponseBody
-  @RequestMapping("/getSchedule")
+  @RequestMapping("getSchedule")
   public String getSchedule(@RequestParam("startDate") String startDate,
       @RequestParam("endDate") String endDate,
       HttpServletRequest request) {
@@ -58,7 +58,7 @@ public class ScheduleController {
   }
 
   @ResponseBody
-  @RequestMapping("/getNameList")
+  @RequestMapping("getNameList")
   public String getNameList(@RequestParam("attenders") String attenders,
       HttpServletRequest request) {
 
@@ -81,7 +81,7 @@ public class ScheduleController {
 
 
   @ResponseBody
-  @RequestMapping("/requestCancel")
+  @RequestMapping("requestCancel")
   public String requestCancel(@RequestParam("schedule_no") Long schedule_no,
       HttpServletRequest request) {
 

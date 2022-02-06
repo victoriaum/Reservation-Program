@@ -32,39 +32,39 @@ public class AdminController {
   int dayCnt = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month),1).lengthOfMonth();
 
 
-  @RequestMapping("/admin")
+  @RequestMapping("admin")
   public String admin(HttpServletRequest request, Model m) {
     return "admin";
   }
 
-  @RequestMapping("/admin/peopleRegister")
+  @RequestMapping("admin/peopleRegister")
   public String peopleRegister(HttpServletRequest request, Model m) {
     return "peopleRegister";
   }
 
-  @RequestMapping("/admin/scheduleRegister")
+  @RequestMapping("admin/scheduleRegister")
   public String scheduleRegister(HttpServletRequest request, Model m) {
     return "scheduleRegister";
   }
 
-  @RequestMapping("/admin/peopleManage")
+  @RequestMapping("admin/peopleManage")
   public String peopleManage(HttpServletRequest request, Model m) {
     return "peopleManage";
   }
 
-  @RequestMapping("/admin/deptManage")
+  @RequestMapping("admin/deptManage")
   public String deptManage(HttpServletRequest request, Model m) {
     return "deptManage";
   }
 
-  @RequestMapping("/admin/scheduleManage")
+  @RequestMapping("admin/scheduleManage")
   public String scheduleManage(HttpServletRequest request, Model m) {
     return "scheduleManage";
   }
 
 
   @ResponseBody
-  @PostMapping("/admin/studentRegister")
+  @PostMapping("admin/studentRegister")
   public String studentRegister(@RequestParam("idAll") String idAll,
       @RequestParam("nameAll") String nameAll, @RequestParam("gradeAll") String gradeAll) {
     String[] idArr = idAll.split(" ");
@@ -86,8 +86,7 @@ public class AdminController {
       }
     }
 
-    /*todo
-    고민중인 로직 - 일부 확실치 않아도 옳은 것은 등록할 것인지..
+    /*고민중인 로직 - 일부 확실치 않아도 옳은 것은 등록할 것인지..
     일단, 이미 등록된 경우 전체 저장하지 않기로 해놓음, teacher도 동일*/
 
     if(hasId.isEmpty()){
@@ -114,7 +113,7 @@ public class AdminController {
 
 
   @ResponseBody
-  @PostMapping("/admin/teacherRegister")
+  @PostMapping("admin/teacherRegister")
   public String teacherRegister(@RequestParam("idAll") String idAll, @RequestParam("nameAll") String nameAll,
       @RequestParam("positionAll") String positionAll, @RequestParam("dept") String dept) {
     String[] idArr = idAll.split(" ");
@@ -161,7 +160,7 @@ public class AdminController {
 
 
   @ResponseBody
-  @PostMapping("/admin/getStudentAll")
+  @PostMapping("admin/getStudentAll")
   public String getStudentAll(){
     List<StudentDto> studentDtoList = studentService.getStudentAll();
     String html = "";
@@ -181,7 +180,7 @@ public class AdminController {
 
 
   @ResponseBody
-  @PostMapping("/admin/getTeacherAll")
+  @PostMapping("admin/getTeacherAll")
   public String getTeacherAll(){
     List<TeacherDto> teacherDtoList = teacherService.getTeacherAll();
     String html = "";

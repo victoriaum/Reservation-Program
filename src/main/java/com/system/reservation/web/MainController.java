@@ -64,13 +64,13 @@ public class MainController {
     }
   }
 
-  @RequestMapping(value = {"/index"})
+  @RequestMapping(value = {"index"})
   public String index() {
     return "index";
   }
 
   @ResponseBody
-  @RequestMapping(value = {"/getTodaySchedule"})
+  @RequestMapping(value = {"getTodaySchedule"})
   public String getTodaySchedule(HttpServletRequest request, Model m) {
     HttpSession httpSession = request.getSession();
     String type = (String)httpSession.getAttribute("loginType");
@@ -95,7 +95,7 @@ public class MainController {
 
 
   @ResponseBody
-  @RequestMapping(value = {"/index/requestCnt"})
+  @RequestMapping(value = {"index/requestCnt"})
   public String requestCnt(HttpServletRequest request, Model m) {
     HttpSession httpSession = request.getSession();
     TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
@@ -111,7 +111,7 @@ public class MainController {
   }
 
   @ResponseBody
-  @RequestMapping(value = {"/index/requestCntDelete"})
+  @RequestMapping(value = {"index/requestCntDelete"})
   public void requestCntDelete(HttpServletRequest request, Model m) {
     HttpSession httpSession = request.getSession();
     TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");

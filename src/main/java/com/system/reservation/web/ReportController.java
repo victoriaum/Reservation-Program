@@ -32,7 +32,7 @@ public class ReportController {
   String today = now.format(dateTimeFormatter);
 
 
-  @RequestMapping("/report_s")
+  @RequestMapping("report_s")
   public String report_s(Model m) {
     List<String> deptList = teacherService.getDept();
     m.addAttribute("deptList",deptList);
@@ -40,7 +40,7 @@ public class ReportController {
   }
 
   @ResponseBody
-  @RequestMapping("/report_s/getTeacher")
+  @RequestMapping("report_s/getTeacher")
   public String getTeacher(@RequestParam("checkedDept") String checkedDept) {
     List<String> teacherList = teacherService.getTeacher(checkedDept);
     JSONObject jsonObject = new JSONObject();
@@ -49,14 +49,14 @@ public class ReportController {
   }
 
   @ResponseBody
-  @RequestMapping("/report_s/getTeacherSchedule")
+  @RequestMapping("report_s/getTeacherSchedule")
   public Object getTeacherSchedule(@RequestParam("checkedTeacher") String teacher_id) {
     List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
     return scheduleList;
   }
 
   @ResponseBody
-  @RequestMapping("/report_s/requestReport")
+  @RequestMapping("report_s/requestReport")
   public String requestReport(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
     Integer result = scheduleService.requestReport(schedule_no, login_id);
     JSONObject jsonObject = new JSONObject();
@@ -65,7 +65,7 @@ public class ReportController {
   }
 
   @ResponseBody
-  @RequestMapping("/report_s/cancelReport")
+  @RequestMapping("report_s/cancelReport")
   public String cancelReport(@RequestParam("schedule_no") Long schedule_no, @RequestParam("login_id") String login_id) {
     Integer result = scheduleService.cancelReport(schedule_no, login_id);
     JSONObject jsonObject = new JSONObject();
@@ -75,7 +75,7 @@ public class ReportController {
 
 
   @ResponseBody
-  @RequestMapping("/report_s/openRequest")
+  @RequestMapping("report_s/openRequest")
   public String openRequest(@RequestParam("teacher_id") String teacher_id, HttpServletRequest request) {
     HttpSession httpSession = request.getSession();
     StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
@@ -90,7 +90,7 @@ public class ReportController {
 
 
   @ResponseBody
-  @RequestMapping("/report_s/revokeOpenRequest")
+  @RequestMapping("report_s/revokeOpenRequest")
   public String revokeOpenRequest(@RequestParam("teacher_id") String teacher_id, HttpServletRequest request) {
     HttpSession httpSession = request.getSession();
     StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
@@ -104,7 +104,7 @@ public class ReportController {
 
 
 
-  @RequestMapping("/report_t")
+  @RequestMapping("report_t")
   public String report_t(HttpServletRequest request, Model m) {
     HttpSession httpSession = request.getSession();
     TeacherDto teacherDto = (TeacherDto)httpSession.getAttribute("loginUser");
@@ -123,7 +123,7 @@ public class ReportController {
     return "report_t";
   }
 
-  @RequestMapping("/report_t/makeSchedule")
+  @RequestMapping("report_t/makeSchedule")
   public String makeSchedule(@RequestParam("no") String no, HttpServletRequest request, Model m) {
 
     if(!"0".equals(no)){
@@ -138,7 +138,7 @@ public class ReportController {
     return "makeSchedule";
   }
 
-  @RequestMapping("/report_t/saveSchedule")
+  @RequestMapping("report_t/saveSchedule")
   public String saveSchedule(@RequestParam("date") String date,
                              @RequestParam("startTime") String start,
                              @RequestParam("endTime") String end,
@@ -166,7 +166,7 @@ public class ReportController {
   }
 
 
-  @RequestMapping("/report_t/editSchedule")
+  @RequestMapping("report_t/editSchedule")
   public String editSchedule(@RequestParam("no") String no,
                               @RequestParam("date") String date,
                               @RequestParam("startTime") String start,
@@ -184,7 +184,7 @@ public class ReportController {
 
 
   @ResponseBody
-  @RequestMapping("/report_t/deleteSchedule")
+  @RequestMapping("report_t/deleteSchedule")
   public String deleteSchedule(@RequestParam("no") String schedule_no, Model m) {
     Long no = Long.parseLong(schedule_no);
     scheduleService.deleteById(no);
