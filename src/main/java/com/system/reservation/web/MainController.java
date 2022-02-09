@@ -10,11 +10,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -81,7 +78,7 @@ public class MainController {
     String teacher_id = teacherDto.getTeacher_id();
 
     // 일정이 하나라도 있으면 요청인원 초기화
-    scheduleService.requestCntManage(teacherDto);
+    scheduleService.requestCntManage(teacherDto,today);
 
     Integer requestCnt = teacherService.requestCnt(teacher_id);
     JSONObject jsonObject = new JSONObject();

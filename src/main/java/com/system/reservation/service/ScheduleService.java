@@ -122,8 +122,8 @@ public class ScheduleService {
   }
 
   @Transactional
-  public void requestCntManage(TeacherDto teacherDto) {
-    int i = schedulerRepository.scheduleCnt(teacherDto.getTeacher_id());
+  public void requestCntManage(TeacherDto teacherDto, String today) {
+    int i = schedulerRepository.scheduleCnt(teacherDto.getTeacher_id(), today);
     if(i!=0){
       teacherDto.setRequest_students("");
       teacherRepository.save(teacherDto.toEntity());
