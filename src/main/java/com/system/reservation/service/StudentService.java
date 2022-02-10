@@ -1,7 +1,6 @@
 package com.system.reservation.service;
 
 import com.system.reservation.domain.StudentRepository;
-import com.system.reservation.web.dto.SchedulerDto;
 import com.system.reservation.web.dto.StudentDto;
 import java.util.List;
 import java.util.stream.Collectors;
