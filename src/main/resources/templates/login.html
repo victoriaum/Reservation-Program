@@ -20,14 +20,15 @@
   </head>
 
   <body style="font-family: 'NanumR';">
-    <header th:fragment="headerFragment"
-            style="margin-top: 3rem; font-size: 1.2rem; font-weight: bold; text-align: center; line-height: 2rem; color: #101357;">
-      <div>조치대 레포트 관리시스템</div>
-    </header>
     <div id="container" style="margin: 0 auto; background-color: white;">
       <div class="center" style="width: 90%; margin: 3rem auto; text-align: center;">
         <form name="loginForm" id="loginForm" th:action="@{/login}" method="post" onsubmit="return func_login()"
               style="padding: 0.2rem 1rem; width: 85%; display: inline-block;">
+
+          <header th:fragment="headerFragment"
+                  style="margin: 2rem 0; font-size: 1.5rem; font-weight: bold; text-align: left; line-height: 2rem; color: #101357;">
+            <div>조선대학교<br>레포트 관리시스템</div>
+          </header>
 
           <div id="loginType" style="margin-bottom: 1rem; text-align: left;">
             <div class="form-check form-check-inline" style="line-height: 1.3rem; font-size: 0.7rem !important; color: #62626a;">
@@ -56,6 +57,7 @@
               로그인
             </button>
           </div>
+
         </form>
       </div>
     </div>
