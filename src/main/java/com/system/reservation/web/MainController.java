@@ -4,7 +4,6 @@ import com.system.reservation.service.ScheduleService;
 import com.system.reservation.service.TeacherService;
 import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
-import java.beans.PropertyVetoException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
