@@ -4,6 +4,8 @@ import com.system.reservation.service.StudentService;
 import com.system.reservation.service.TeacherService;
 import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MypageController {
   private final TeacherService teacherService;
   private final StudentService studentService;
+  private final AES256 aes;
 
   @RequestMapping("mypage")
   public String mypage() {
@@ -31,16 +34,17 @@ public class MypageController {
 
   @PostMapping("mypage/editPassword")
   public String login(@RequestParam("id") String id, @RequestParam("password") String password, @RequestParam("type") String type,
-                      HttpServletRequest request, Model m) {
+                      HttpServletRequest request, Model m)
+      throws GeneralSecurityException, UnsupportedEncodingException {
 
     HttpSession httpSession = request.getSession();
 
     if("1".equals(type)) {
-      TeacherDto teacherDto = teacherService.editPassword(id,password);
+      TeacherDto teacherDto = teacherService.editPassword(id,aes.decrypt(password));
       httpSession.setAttribute("loginUser",teacherDto);
     }
     else if("2".equals(type)) {
-      StudentDto studentDto = studentService.editPassword(id,password);
+      StudentDto studentDto = studentService.editPassword(id,aes.decrypt(password));
       httpSession.setAttribute("loginUser",studentDto);
     }
 

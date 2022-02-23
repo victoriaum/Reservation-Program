@@ -1,87 +1,51 @@
 package com.system.reservation.web;
 
-import java.io.ByteArrayOutputStream;
-import java.security.SecureRandom;
-import java.security.spec.AlgorithmParameterSpec;
-import java.util.Arrays;
-import java.util.Base64;
-
+import java.io.UnsupportedEncodingException;
+import java.security.GeneralSecurityException;
+import java.security.Key;
 import javax.crypto.Cipher;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.context.annotation.Configuration;
 
-public class AES256{
+@RequiredArgsConstructor
+@Configuration
+public class AES256 {
+  private String iv;
+  private Key keySpec;
 
-  static String key = "12345678901234567890123456789012";
 
-  public static String encrypt(String plainText) throws Exception {
-    SecretKey keyspec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
+  public AES256(String key) throws UnsupportedEncodingException {
+    this.iv = key.substring(0, 16);
+    byte[] keyBytes = new byte[16];
+    byte[] b = key.getBytes("UTF-8");
+    int len = b.length;
+    if(len > keyBytes.length){
+      len = keyBytes.length;
+    }
+    System.arraycopy(b, 0, keyBytes, 0, len);
+    SecretKeySpec keySpec = new SecretKeySpec(keyBytes, "AES");
 
-    //set iv as random 16byte
-    int ivSize = 16;
-    byte[] iv = new byte[ivSize];
-    SecureRandom random = new SecureRandom();
-    random.nextBytes(iv);
-    AlgorithmParameterSpec ivspec = new IvParameterSpec(iv);
-
-    // Encryption
-    Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
-    cipher.init(Cipher.ENCRYPT_MODE, keyspec, ivspec);
-
-    int blockSize = 128; //block size
-    byte[] dataBytes = plainText.getBytes("UTF-8");
-
-    //find fillChar & pad
-    int plaintextLength = dataBytes.length;
-    int fillChar = ((blockSize - (plaintextLength % blockSize)));
-    plaintextLength += fillChar; //pad
-
-    byte[] plaintext = new byte[plaintextLength];
-    Arrays.fill(plaintext, (byte) fillChar);
-    System.arraycopy(dataBytes, 0, plaintext, 0, dataBytes.length);
-
-    //encrypt
-    byte[] cipherBytes = cipher.doFinal(plaintext);
-
-    //add iv to front of cipherBytes
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
-    outputStream.write( iv );
-    outputStream.write( cipherBytes );
-
-    //encode into base64
-    byte [] encryptedIvText = outputStream.toByteArray();
-    return new String(Base64.getEncoder().encode(encryptedIvText), "UTF-8");
+    this.keySpec = keySpec;
   }
 
-  public static String decrypt(String encryptedIvText) throws Exception {
-    //decode with base64 decoder
-    byte [] encryptedIvTextBytes = Base64.getDecoder().decode(encryptedIvText);
 
-    // Extract IV.
-    int ivSize = 16;
-    byte[] iv = new byte[ivSize];
-    System.arraycopy(encryptedIvTextBytes, 0, iv, 0, iv.length);
-
-    // Extract encrypted part.
-    int encryptedSize = encryptedIvTextBytes.length - ivSize;
-    byte[] encryptedBytes = new byte[encryptedSize];
-    System.arraycopy(encryptedIvTextBytes, ivSize, encryptedBytes, 0, encryptedSize);
+  public String encrypt(String str) throws GeneralSecurityException, UnsupportedEncodingException{
+    Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
+    c.init(Cipher.ENCRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
+    byte[] encrypted = c.doFinal(str.getBytes("UTF-8"));
+    String enStr = new String(Base64.encodeBase64(encrypted));
+    return enStr;
+  }
 
 
-
-    // Decryption
-    Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
-    SecretKey keyspec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
-    AlgorithmParameterSpec ivspec = new IvParameterSpec(iv);
-    cipher.init(Cipher.DECRYPT_MODE, keyspec, ivspec);
-    byte[] aesdecode = cipher.doFinal(encryptedBytes);
-
-    // unpad
-    byte[] origin = new byte[aesdecode.length - (aesdecode[aesdecode.length - 1])];
-    System.arraycopy(aesdecode, 0, origin, 0, origin.length);
-
-    return new String(origin, "UTF-8");
+  public String decrypt(String str) throws GeneralSecurityException, UnsupportedEncodingException {
+    Cipher c = Cipher.getInstance("AES/CBC/PKCS5Padding");
+    c.init(Cipher.DECRYPT_MODE, keySpec, new IvParameterSpec(iv.getBytes()));
+    byte[] byteStr = Base64.decodeBase64(str.getBytes());
+    return new String(c.doFinal(byteStr), "UTF-8");
   }
 
 }

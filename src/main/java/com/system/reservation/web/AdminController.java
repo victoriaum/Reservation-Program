@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AdminController {
   private final StudentService studentService;
   private final TeacherService teacherService;
+  private final AES256 aes;
 
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
@@ -115,7 +116,8 @@ public class AdminController {
   @ResponseBody
   @PostMapping("admin/teacherRegister")
   public String teacherRegister(@RequestParam("idAll") String idAll, @RequestParam("nameAll") String nameAll,
-      @RequestParam("positionAll") String positionAll, @RequestParam("dept") String dept) {
+      @RequestParam("positionAll") String positionAll, @RequestParam("dept") String dept)
+      throws Exception {
     String[] idArr = idAll.split(" ");
     String[] nameArr = nameAll.split(" ");
     String[] positionArr = positionAll.split(" ");
@@ -135,12 +137,12 @@ public class AdminController {
       }
     }
 
-    if(hasId.isEmpty()){
+    if(hasId.isEmpty()){  // 아이디가 없는 경우, 신규 등록
       for(int i=0; i<idArr.length; i++){
         TeacherDto teacherDto = new TeacherDto();
 
         teacherDto.setTeacher_id(idArr[i]);
-        teacherDto.setTeacher_password(idArr[i]);
+        teacherDto.setTeacher_password(aes.decrypt(idArr[i]));
         teacherDto.setTeacher_email(idArr[i]+"@cudh.com");
         teacherDto.setTeacher_dept(dept);
         teacherDto.setTeacher_name(nameArr[i]);
