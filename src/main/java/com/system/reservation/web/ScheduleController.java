@@ -64,13 +64,14 @@ public class ScheduleController {
 
     HttpSession httpSession = request.getSession();
     String[] attenderList = attenders.split(",");
-    String nameList = "";
+    String name, nameList = "";
 
     for (int i = 0; i < attenderList.length; i++) {
+      name = attenderList[i].trim();
       if (i == 0) {
-        nameList = studentService.getNameList(attenderList[i]);
+        nameList = studentService.getNameList(name);
       } else {
-        nameList += ", " + studentService.getNameList(attenderList[i]);
+        nameList += ", " + studentService.getNameList(name);
       }
     }
 
