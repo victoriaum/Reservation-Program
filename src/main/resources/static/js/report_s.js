@@ -41,6 +41,11 @@ $(function(){
   $(".openRequest").click(function(){
     func_openRequest(teacher_id);
   });
+
+  // 개설요청 취소하기
+  $(".revokeOpenRequest").click(function(){
+    func_revokeOpenRequest(teacher_id);
+  });
 });
 
 
@@ -139,22 +144,20 @@ function func_reportOkay(obj) {
     success: function(json){
       if(json.result==1){    // 일정 저장성공
         Swal.fire({
-          title: 'Success!',
           icon: 'success',
+          title: 'Success!',
           showConfirmButton: false,
           timer: 1200
         })
         setTimeout(function() {
           location.href='/report_s?dept_no='+dept_no+'&teacher_id='+teacher_id;
         }, 1300);
-        var attenderCnt = $(obj).parent().prev().children('span.space').children('span#attenderCnt');
-        var cnt = Number(attenderCnt.text());
-        attenderCnt.html(cnt+1);
       }
       else if(json.result==0){    // 일정 저장실패
         Swal.fire({
           icon: 'error',
-          title: '이미 신청한 일정입니다.',
+          title: 'Failed',
+          html: '이미 신청된 일정입니다!',
           showConfirmButton: false,
           timer: 1200
         })
@@ -175,6 +178,12 @@ function func_reportNo(obj) {
   var login_id = $("#loginId").val();
   var schedule_no = Number(obj.id);
 
+  var url = document.location.href;
+  var para = url.substr(url.indexOf("?")+1);
+  var details = para.split("&");
+  var dept_no = details[0].substr(details[0].indexOf("=")+1);
+  var teacher_id = details[1].substr(details[1].indexOf("=")+1);
+
   $.ajax({
     url:"/report_s/cancelReport",
     type: "post",
@@ -183,21 +192,26 @@ function func_reportNo(obj) {
     success: function(json){
       if(json.result==1){    // 일정 취소성공
         Swal.fire({
-          title: 'Success!',
           icon: 'success',
+          title: 'Success!',
           showConfirmButton: false,
           timer: 1200
         })
-        var attenderCnt = $(obj).parent().prev().children('span.space').children('span#attenderCnt');
-        var cnt = Number(attenderCnt.text());
-        attenderCnt.html(cnt-1);
+        setTimeout(function() {
+          location.href='/report_s?dept_no='+dept_no+'&teacher_id='+teacher_id;
+        }, 1300);
       }
       else if(json.result==0){    // 일정 취소실패
         Swal.fire({
           icon: 'error',
           title: 'Failed',
-          html: '등록되지 않은 예약으로 취소할 수 없습니다!'
+          html: '신청하지 않은 예약으로 취소할 수 없습니다!',
+          showConfirmButton: false,
+          timer: 1200
         })
+        setTimeout(function() {
+          location.href='/report_s?dept_no='+dept_no+'&teacher_id='+teacher_id;
+        }, 1300);
       }
     },
     error: function(report, status, error){

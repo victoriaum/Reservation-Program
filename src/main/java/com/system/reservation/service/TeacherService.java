@@ -121,4 +121,18 @@ public class TeacherService {
     String teacherInfo = teacherRepository.teacherInfo(teacher_id);
     return teacherInfo;
   }
+
+  @Transactional
+  public String requestCheck(String teacher_id, String student_id) {
+    String requestCheck = teacherRepository.requestCheck(teacher_id);
+    String[] requesters = requestCheck.split(",");
+    String check = "0";
+    for(int i=0; i<requesters.length; i++){
+      if(student_id.equals(requesters[i].trim())){
+        check = "1";
+        break;
+      }
+    }
+    return check;
+  }
 }

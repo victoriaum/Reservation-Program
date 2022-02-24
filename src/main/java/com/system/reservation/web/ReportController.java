@@ -32,10 +32,16 @@ public class ReportController {
   String today = now.format(dateTimeFormatter);
 
   @RequestMapping("report_s")
-  public String report_s(@RequestParam("dept_no") String dept_no, @RequestParam("teacher_id") String teacher_id, Model m) {
+  public String report_s(@RequestParam("dept_no") String dept_no, @RequestParam("teacher_id") String teacher_id,
+      HttpServletRequest request, Model m) {
     List<String> deptList = new ArrayList<>();
     List<TeacherDto> teacherList = new ArrayList<>();
     List<SchedulerDto> scheduleList = new ArrayList<>();
+    String check = "";
+
+    HttpSession httpSession = request.getSession();
+    StudentDto studentDto = (StudentDto)httpSession.getAttribute("loginUser");
+    String student_id = studentDto.getStudent_id();
 
     String dept="";
     switch (dept_no){
@@ -52,11 +58,13 @@ public class ReportController {
     } else if(!"0".equals(dept) && "0".equals(teacher_id)){
       teacherList = teacherService.getTeacher(dept);
     } else if(!"0".equals(dept) && !"0".equals(teacher_id)){
+      check = teacherService.requestCheck(teacher_id, student_id);
       scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
     }
 
     m.addAttribute("deptList",deptList);
     m.addAttribute("teacherList",teacherList);
+    m.addAttribute("check",check);
     m.addAttribute("scheduleList",scheduleList);
 
     return "report_s";
@@ -80,6 +88,7 @@ public class ReportController {
     jsonObject.put("result", result);
     return jsonObject.toString();
   }
+
 
   @ResponseBody
   @RequestMapping("report_s/cancelReport")

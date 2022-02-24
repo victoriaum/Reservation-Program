@@ -22,4 +22,7 @@ public interface TeacherRepository extends JpaRepository<Teacher, String> {
 
   @Query("SELECT t.teacher_name, t.teacher_position FROM Teacher t WHERE t.teacher_id=:teacher_id")
   String teacherInfo(@Param("teacher_id") String teacher_id);
+
+  @Query("SELECT t.request_students FROM Teacher t WHERE t.teacher_id=:teacher_id")
+  String requestCheck(@Param("teacher_id") String teacher_id);
 }

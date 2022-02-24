@@ -45,10 +45,18 @@
           </div>
         </th:block>
         <th:block th:if="${scheduleList.isEmpty()}">
-          <div class='noSchedule'>
-            정해진 일정이 없습니다.<br>일정 개설을 요청하시겠습니까?
-            <button class='btn noScheduleBtn openRequest'>일정 개설 요청하기</button>
-          </div>
+          <th:block th:if="${check=='0'}">
+            <div class='noSchedule'>
+              정해진 일정이 없습니다.<br>일정 개설을 요청하시겠습니까?
+              <button class='btn noScheduleBtn openRequest'>일정 개설 요청하기</button>
+            </div>
+          </th:block>
+          <th:block th:if="${check=='1'}">
+            <div class='noSchedule'>
+              일정 개설이 요청됐습니다.<br>요청 취소를 원하시면 아래 취소 버튼을 눌러주세요.
+              <button class='btn noScheduleBtn revokeOpenRequest'>일정 개설 취소하기</button>
+            </div>
+          </th:block>
         </th:block>
       </div>
 
