@@ -16,8 +16,8 @@
           <span class="menuName" onclick="location.href='/report_t'">Report</span>
         </div>
         <div th:if="${session.loginType}=='2'" class="indexMenu col">
-          <img class="menuIcon" th:src="@{image/index/report.png}" onclick="location.href='/report_s'"/>
-          <span class="menuName" onclick="location.href='/report_s'">Report</span>
+          <img class="menuIcon" th:src="@{image/index/report.png}" onclick="location.href='/report_s?dept=0&teacher_id=0'"/>
+          <span class="menuName" onclick="location.href='/report_s?dept=0&teacher_id=0'">Report</span>
         </div>
         <div class="indexMenu col" >
           <img class="menuIcon" th:src="@{image/index/schedule.png}" onclick="location.href='/schedule'"/>

@@ -6,7 +6,7 @@
       <img class="footerIcon pointer" th:src="@{image/footer/report.png}"
            th:if="${session.loginType}=='1'" onclick="location.href='/report_t'"/>
       <img class="footerIcon pointer" th:src="@{image/footer/report.png}"
-           th:if="${session.loginType}=='2'" onclick="location.href='/report_s'"/>
+           th:if="${session.loginType}=='2'" onclick="location.href='/report_s?dept=0&teacher_id=0'"/>
     </div>
     <div class="footerMenu col-xs-3">
       <img class="footerIcon pointer" th:src="@{image/footer/schedule.png}"

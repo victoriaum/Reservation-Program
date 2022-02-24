@@ -22,12 +22,13 @@
         </th:block>
       </div>
 
-      <div class="area secondArea"></div>
+      <div class="area secondArea"> </div>
 
       <div class="area thirdArea"></div>
 
       <input type="hidden" id="loginId" th:value="${session.loginUser.student_id}"/>
-
+      <input type="hidden" id="teacherList" th:value="${teacherList}"/>
+      <input type="hidden" id="scheduleList" th:value="${scheduleList}"/>
 
     </div>
   </div>

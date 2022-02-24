@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AdminController {
   private final StudentService studentService;
   private final TeacherService teacherService;
-  private final AES256 aes;
+
 
   // 오늘 날짜 구하기
   LocalDate now = LocalDate.now();
@@ -142,7 +142,7 @@ public class AdminController {
         TeacherDto teacherDto = new TeacherDto();
 
         teacherDto.setTeacher_id(idArr[i]);
-        teacherDto.setTeacher_password(aes.decrypt(idArr[i]));
+        teacherDto.setTeacher_password(idArr[i]);
         teacherDto.setTeacher_email(idArr[i]+"@cudh.com");
         teacherDto.setTeacher_dept(dept);
         teacherDto.setTeacher_name(nameArr[i]);

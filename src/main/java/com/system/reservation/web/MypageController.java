@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class MypageController {
   private final TeacherService teacherService;
   private final StudentService studentService;
-  private final AES256 aes;
+
 
   @RequestMapping("mypage")
   public String mypage() {
@@ -40,11 +40,11 @@ public class MypageController {
     HttpSession httpSession = request.getSession();
 
     if("1".equals(type)) {
-      TeacherDto teacherDto = teacherService.editPassword(id,aes.decrypt(password));
+      TeacherDto teacherDto = teacherService.editPassword(id,password);
       httpSession.setAttribute("loginUser",teacherDto);
     }
     else if("2".equals(type)) {
-      StudentDto studentDto = studentService.editPassword(id,aes.decrypt(password));
+      StudentDto studentDto = studentService.editPassword(id,password);
       httpSession.setAttribute("loginUser",studentDto);
     }
 

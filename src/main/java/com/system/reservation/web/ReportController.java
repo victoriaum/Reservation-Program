@@ -33,27 +33,40 @@ public class ReportController {
 
 
   @RequestMapping("report_s")
-  public String report_s(Model m) {
-    List<String> deptList = teacherService.getDept();
+  public String report_s(@RequestParam("dept") String dept, @RequestParam("teacher_id") String teacher_id, Model m) {
+    List<String> deptList = new ArrayList<>();
+    List<String> teacherList = new ArrayList<>();
+    List<SchedulerDto> scheduleList = new ArrayList<>();
+
+    if("0".equals(dept) && "0".equals(teacher_id)){
+      deptList = teacherService.getDept();
+    } else if(!"0".equals(dept) && "0".equals(teacher_id)){
+      teacherList = teacherService.getTeacher(dept);
+    } else if(!"0".equals(dept) && !"0".equals(teacher_id)){
+      scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
+    }
+
     m.addAttribute("deptList",deptList);
+    m.addAttribute("teacherList",teacherList);
+    m.addAttribute("scheduleList",scheduleList);
     return "report_s";
   }
 
-  @ResponseBody
+ /* @ResponseBody
   @RequestMapping("report_s/getTeacher")
   public String getTeacher(@RequestParam("checkedDept") String checkedDept) {
     List<String> teacherList = teacherService.getTeacher(checkedDept);
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("teacherList", teacherList);
     return jsonObject.toString();
-  }
+  }*/
 
-  @ResponseBody
+  /*@ResponseBody
   @RequestMapping("report_s/getTeacherSchedule")
   public Object getTeacherSchedule(@RequestParam("checkedTeacher") String teacher_id) {
     List<SchedulerDto> scheduleList = scheduleService.getTeacherSchedule(teacher_id, today);
     return scheduleList;
-  }
+  }*/
 
   @ResponseBody
   @RequestMapping("report_s/requestReport")
