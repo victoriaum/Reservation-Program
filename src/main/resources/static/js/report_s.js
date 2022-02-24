@@ -23,7 +23,7 @@ $(function(){
     func_checkedDept(dept);
   }
   else if(dept_no!=0 && teacher_id!=0){
-    func_checkedTeacher(dept,teacher_id);
+    func_checkedTeacher(dept,dept_no,teacher_id);
     func_teacherInfo(teacher_id);
   }
 
@@ -52,21 +52,21 @@ function func_checkedDept(dept) {
 
   $(".firstArea").hide();
   $(".secondArea").show();
+  $(".thirdArea").hide();
 }
 
 // dept, teacher 파라미터 값이 있는 경우
-function func_checkedTeacher(dept, teacher_id){
-  func_reportOkay(teacher_id);
+function func_checkedTeacher(dept, dept_no, teacher_id){
   var student_id = $("#loginId").val();
-  var teacherInfo = $("#teacherInfo").val();
 
   $(".choosenArea").append("<span class='choice checkedChoice' id='checkedDept'>"
       + dept+"<img class='closeCheckedChose' id='deptOut' onclick='func_deptOut()' "
       + "src='image/close_white.png'/></span>"
       + "<span class='choice checkedChoice' id='checkedTeacher'>"
-      + teacherInfo+"<img class='closeCheckedChose' id='teacherOut' onclick='func_teacherOut("+dept+")' "
+      + "<img class='closeCheckedChose' id='teacherOut' onclick='func_teacherOut("+dept_no+")' "
       + "src='image/close_white.png'/></span>");
 
+  $(".firstArea").hide();
   $(".secondArea").hide();
   $(".thirdArea").show();
 }
@@ -96,8 +96,8 @@ function func_deptOut(){
 }
 
 // 선택한 선생님 지우기
-function func_teacherOut(dept){
-  location.href='/report_s?dept_no='+dept+'&teacher_id=0';
+function func_teacherOut(dept_no){
+  location.href='/report_s?dept_no='+dept_no+'&teacher_id=0';
 }
 
 // 검사요청하기

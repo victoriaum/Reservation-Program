@@ -58,7 +58,7 @@ public class ReportController {
     m.addAttribute("deptList",deptList);
     m.addAttribute("teacherList",teacherList);
     m.addAttribute("scheduleList",scheduleList);
-    System.out.println(scheduleList);
+
     return "report_s";
   }
 

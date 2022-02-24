@@ -30,17 +30,21 @@
       </div>
 
       <div class="area thirdArea">
-        <th:block th:if="${scheduleList}!=null" th:each="schedule:${scheduleList}">
+        <th:block th:if="!${scheduleList.isEmpty()}" th:each="schedule:${scheduleList}">
           <div class="subArea" th:id="${schedule.schedule_no}" onclick="func_report(this)">
             <span class="date" th:text="${schedule.schedule_date}"></span><br>
-            <span class="time" th:text="|${schedule.schedule_start} ${schedule.schedule_end}|"></span><br>
+            <span class="time" th:text="|${schedule.schedule_start} - ${schedule.schedule_end}|"></span><br>
             <span class="space">
-              <span id="attenderCnt"></span>
+              <span class="attenderCnt" th:if="${not #strings.isEmpty(schedule.schedule_attender)}"
+                    th:text="${#lists.size(schedule.schedule_attender.split(','))}"></span>
+              <span class="attenderCnt" th:if="${#strings.isEmpty(schedule.schedule_attender)}">0</span>
+              <span> / </span>
+              <span th:text="${schedule.schedule_space}"></span>
             </span>
             <img class="attenderImg" th:src="@{image/report/attender.png}"/>
           </div>
         </th:block>
-        <th:block th:if="${scheduleList}==null">
+        <th:block th:if="${scheduleList.isEmpty()}">
           <div class='noSchedule'>
             정해진 일정이 없습니다.<br>일정 개설을 요청하시겠습니까?
             <button class='btn noScheduleBtn openRequest'>일정 개설 요청하기</button>
