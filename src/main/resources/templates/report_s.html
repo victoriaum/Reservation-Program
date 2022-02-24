@@ -12,24 +12,43 @@
     <div class="center">
 
       <div class="area choosenArea">
-        <span class="subTitle mb-3" onclick="location.href='/report_s'">Report</span>
+        <span class="subTitle mb-3" onclick="location.href='/report_s?dept_no=0&teacher_id=0'">Report</span>
         <br>
       </div>
 
       <div class="area firstArea">
-        <th:block th:each="dept:${deptList}">
-          <span class="choice dept" th:text="${dept}"></span>
+        <th:block th:each="dept,deptCount:${deptList}">
+          <span class="choice dept" th:text="${dept}" th:id=${deptCount.count}></span>
         </th:block>
       </div>
 
-      <div class="area secondArea"> </div>
+      <div class="area secondArea">
+        <th:block th:if="${teacherList}!=null" th:each="teacher:${teacherList}">
+          <span class="choice teacher" th:id="${teacher.teacher_id}"
+                th:text="|${teacher.teacher_name} ${teacher.teacher_position}|"></span>
+        </th:block>
+      </div>
 
-      <div class="area thirdArea"></div>
+      <div class="area thirdArea">
+        <th:block th:if="${scheduleList}!=null" th:each="schedule:${scheduleList}">
+          <div class="subArea" th:id="${schedule.schedule_no}" onclick="func_report(this)">
+            <span class="date" th:text="${schedule.schedule_date}"></span><br>
+            <span class="time" th:text="|${schedule.schedule_start} ${schedule.schedule_end}|"></span><br>
+            <span class="space">
+              <span id="attenderCnt"></span>
+            </span>
+            <img class="attenderImg" th:src="@{image/report/attender.png}"/>
+          </div>
+        </th:block>
+        <th:block th:if="${scheduleList}==null">
+          <div class='noSchedule'>
+            정해진 일정이 없습니다.<br>일정 개설을 요청하시겠습니까?
+            <button class='btn noScheduleBtn openRequest'>일정 개설 요청하기</button>
+          </div>
+        </th:block>
+      </div>
 
       <input type="hidden" id="loginId" th:value="${session.loginUser.student_id}"/>
-      <input type="hidden" id="teacherList" th:value="${teacherList}"/>
-      <input type="hidden" id="scheduleList" th:value="${scheduleList}"/>
-
     </div>
   </div>
 

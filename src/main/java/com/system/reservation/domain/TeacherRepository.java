@@ -14,10 +14,12 @@ public interface TeacherRepository extends JpaRepository<Teacher, String> {
   @Query("SELECT DISTINCT t.teacher_dept FROM Teacher t")
   List<String> getDept();
 
-  @Query("SELECT t.teacher_name, t.teacher_position, t.teacher_id, t.request_students FROM Teacher t WHERE t.teacher_dept=:checkedDept AND t.teacher_id NOT LIKE 'admin'")
-  List<String> findByTeacher_dept(@Param("checkedDept") String checkedDept);
+  @Query("SELECT t FROM Teacher t WHERE t.teacher_dept=:dept and t.teacher_id NOT LIKE 'admin'")
+  List<TeacherDto> getTeacher(@Param("dept") String dept);
 
   @Query("SELECT t FROM Teacher t WHERE t.teacher_id=:id")
   TeacherDto findByTeacher_id(@Param("id") String id);
 
+  @Query("SELECT t.teacher_name, t.teacher_position FROM Teacher t WHERE t.teacher_id=:teacher_id")
+  String teacherInfo(@Param("teacher_id") String teacher_id);
 }

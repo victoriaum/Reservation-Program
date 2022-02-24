@@ -30,10 +30,10 @@ public class TeacherService {
   };
 
   @Transactional
-  public List<String> getTeacher(String checkedDept){
-    List<String> teacherList = teacherRepository.findByTeacher_dept(checkedDept);
-    return teacherList;
-  };
+  public List<TeacherDto> getTeacher(String dept){
+    List<TeacherDto> deptList = teacherRepository.getTeacher(dept);
+    return deptList;
+  }
 
   @Transactional
   public TeacherDto editPassword(String id, String password) {
@@ -114,5 +114,11 @@ public class TeacherService {
     return teacherRepository.findAll().stream()
         .map(TeacherDto::new)
         .collect(Collectors.toList());
+  }
+
+  @Transactional
+  public String teacherInfo(String teacher_id) {
+    String teacherInfo = teacherRepository.teacherInfo(teacher_id);
+    return teacherInfo;
   }
 }

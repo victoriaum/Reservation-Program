@@ -1,37 +1,45 @@
 $(function(){
-  // 파라미터 값에 따른 화면구성 변경하기
   var url = document.location.href;
   var para = url.substr(url.indexOf("?")+1);
   var details = para.split("&");
-  var dept = details[0].substr(details[0].indexOf("=")+1);
+  var dept_no = details[0].substr(details[0].indexOf("=")+1);
   var teacher_id = details[1].substr(details[1].indexOf("=")+1);
 
-  // 아무것도 선택하지 않은 경우
-  $(".firstArea").show();
-  $(".secondArea").hide();
-  $(".thirdArea").hide();
+  var dept = "";
+  if(dept_no==0){dept="0";}
+  else if(dept_no==1){dept="외과";}
+  else if(dept_no==2){dept="보철과";}
+  else if(dept_no==3){dept="치주과";}
+  else if(dept_no==4){dept="보존과";}
+  else if(dept_no==5){dept="교정과";}
 
-  // 과만 선택된 경우
-  if(dept!="0" && teacher_id=="0"){
+  // 뷰단 구성변경
+  if(dept_no==0 && teacher_id==0){
+    $(".firstArea").show();
+    $(".secondArea").hide();
+    $(".thirdArea").hide();
+  }
+  else if(dept_no!=0 && teacher_id==0){
     func_checkedDept(dept);
   }
-
-  // 선생님도 선택된 경우
-  if(dept!="0" && teacher_id!="0"){
+  else if(dept_no!=0 && teacher_id!=0){
     func_checkedTeacher(dept,teacher_id);
+    func_teacherInfo(teacher_id);
   }
 
   // 과 선택했을 때
   $(".dept").click(function() {
-    var dept = $(this).text();
-    location.href = '/report_s?dept='+dept+'&teacher_id=0';
+    location.href = '/report_s?dept_no='+$(this).attr("id")+'&teacher_id=0';
   });
 
   // 선생님 선택했을 때
   $(".teacher").click(function() {
-    var teacher = $(this).text();
-    var teacher_id =  val.split(",").get(1);
-    location.href = '/report_s?dept='+dept+'&teacher_id='+teacher_id;
+    location.href = '/report_s?dept_no='+dept_no+'&teacher_id='+$(this).attr("id");
+  });
+
+  // 개설요청하기
+  $(".openRequest").click(function(){
+    func_openRequest(teacher_id);
   });
 });
 
@@ -39,102 +47,58 @@ $(function(){
 // dept 파라미터 값이 있는 경우
 function func_checkedDept(dept) {
   $(".choosenArea").append("<span class='choice checkedChoice' id='checkedDept'>"
-      +dept
-      +"<img class='closeCheckedChose' id='deptOut' "
-      + "onclick='func_deptOut()' src='image/close_white.png'/>"
-      +"</span>")
+      + dept+"<img class='closeCheckedChose' id='deptOut' onclick='func_deptOut()' "
+      + "src='image/close_white.png'/></span>");
 
   $(".firstArea").hide();
   $(".secondArea").show();
-
-  var teacherList = $("#teacherList").val();
-  $.each(teacherList, function(idx, val) {
-    var valArray = val.split(",");
-    val = val.replace(","," ");
-    console.log(valArray[0]+" "+valArray[1]+","+valArray[2]+","+valArray[3]);
-    // id값 ex) "teacher_name teacher_position,teacher_id,request_students"
-    $(".secondArea").append("<span class='choice teacher' id='"+valArray[0]+" "+valArray[1]+","+valArray[2]+","+valArray[3]+"'>"
-        + valArray[0]+" "+valArray[1]+"</span>");
-  });
 }
-
 
 // dept, teacher 파라미터 값이 있는 경우
 function func_checkedTeacher(dept, teacher_id){
+  func_reportOkay(teacher_id);
   var student_id = $("#loginId").val();
-  var scheduleList = $("#scheduleList").val();
+  var teacherInfo = $("#teacherInfo").val();
 
-  $(".choosenArea").append("<span class='choice checkedChoice' id='checkedTeacher'>"
-      +teacher_id
-      +"<img class='closeCheckedChose' id='teacherOut' onclick='func_teacherOut()' src='image/close_white.png'/>"
-      +"</span>")
+  $(".choosenArea").append("<span class='choice checkedChoice' id='checkedDept'>"
+      + dept+"<img class='closeCheckedChose' id='deptOut' onclick='func_deptOut()' "
+      + "src='image/close_white.png'/></span>"
+      + "<span class='choice checkedChoice' id='checkedTeacher'>"
+      + teacherInfo+"<img class='closeCheckedChose' id='teacherOut' onclick='func_teacherOut("+dept+")' "
+      + "src='image/close_white.png'/></span>");
 
   $(".secondArea").hide();
   $(".thirdArea").show();
-
-
-  $.each(scheduleList, function(idx, val) {
-    var attenderCnt;
-    if(val.schedule_attender==""){
-      attenderCnt = 0;
-    } else {
-      attenderCnt = val.schedule_attender.split(",").length;
-    }
-
-    var checked = "";
-
-/*    var studentsArray;
-    for(var i=2; i<idArray.length; i++){
-      if(i==2){
-        studentsArray=idArray[i];
-      } else {
-        studentsArray+=","+idArray[i];
-      }
-
-      if(student_id==idArray[i]){
-        checked = "checked";
-      }
-    }*/
-
-    $(".thirdArea").append(
-        "<div class='subArea' id='" +val.schedule_no+ "' onclick='func_report(this)'>"
-        + "<span class='date'>" + val.schedule_date + "</span><br>"
-        + "<span class='time'>" + val.schedule_start + " - "
-        + val.schedule_end + "</span><br>"
-        + "<span class='space'><span id='attenderCnt'>" + attenderCnt
-        + "</span> / " + val.schedule_space + "</span>"
-        + "<img class='attenderImg' src='image/report/attender.png'/>"
-        + "</div>");
-  });
 }
 
+
+// 선생님 정보가져오기
+function func_teacherInfo(teacher_id) {
+  $.ajax({
+    url:"/report_s/teacherInfo",
+    type: "post",
+    dataType:"json",
+    data:{teacher_id:teacher_id},
+    success: function(json){
+      var teacherInfo = json.teacherInfo.split(",")[0]+" "+json.teacherInfo.split(",")[1];
+      $("#checkedTeacher").append(teacherInfo);
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
+}
 
 
 // 선택한 진료과 지우기
 function func_deptOut(){
-  $("#checkedDept").remove();
-  $("#checkedTeacher").remove();
-
-  $(".firstArea").show();
-  $(".secondArea").hide();
-  $(".thirdArea").hide();
-
-  $(".secondArea").html("");
-  $(".thirdArea").html("");
+  location.href='/report_s?dept_no=0&teacher_id=0';
 }
-
 
 // 선택한 선생님 지우기
-function func_teacherOut(){
-  $("#checkedTeacher").remove();
-
-  $(".secondArea").show();
-  $(".firstArea").hide();
-  $(".thirdArea").hide();
-
-  $(".thirdArea").html("");
+function func_teacherOut(dept){
+  location.href='/report_s?dept_no='+dept+'&teacher_id=0';
 }
-
 
 // 검사요청하기
 function func_report(subArea) {
