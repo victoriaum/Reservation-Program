@@ -102,7 +102,7 @@ function func_teacherOut(dept_no){
 
 // 검사요청하기
 function func_report(subArea) {
-  var id = subArea.id;
+  var no = subArea.id;
 
   if($(subArea).hasClass("smallWidth")){
     $(subArea).removeClass("smallWidth");
@@ -110,10 +110,10 @@ function func_report(subArea) {
   } else {
     $(subArea).addClass("smallWidth");
     $(subArea).after("<div class='reportBtnSpace'>"
-                  + "<span type='button' class='reportBtn reportOkay' id='"+id+"' onclick='func_reportOkay(this)'>"
+                  + "<span type='button' class='reportBtn reportOkay' id='"+no+"' onclick='func_reportOkay(this)'>"
                   + "<img class='reportBtnImg' src='image/check_white.png'/>"
                   + "</span>"
-                  + "<span type='button' class='reportBtn reportNo' id='"+id+"' onclick='func_reportNo(this)'>"
+                  + "<span type='button' class='reportBtn reportNo' id='"+no+"' onclick='func_reportNo(this)'>"
                   + "<img class='reportBtnImg' src='image/close_white.png'/>"
                   + "</span></div>");
   }
@@ -124,6 +124,12 @@ function func_report(subArea) {
 function func_reportOkay(obj) {
   var login_id = $("#loginId").val();
   var schedule_no = Number(obj.id);
+
+  var url = document.location.href;
+  var para = url.substr(url.indexOf("?")+1);
+  var details = para.split("&");
+  var dept_no = details[0].substr(details[0].indexOf("=")+1);
+  var teacher_id = details[1].substr(details[1].indexOf("=")+1);
 
   $.ajax({
     url:"/report_s/requestReport",
@@ -139,7 +145,7 @@ function func_reportOkay(obj) {
           timer: 1200
         })
         setTimeout(function() {
-          location.href="/report_s";
+          location.href='/report_s?dept_no='+dept_no+'&teacher_id='+teacher_id;
         }, 1300);
         var attenderCnt = $(obj).parent().prev().children('span.space').children('span#attenderCnt');
         var cnt = Number(attenderCnt.text());
@@ -148,12 +154,12 @@ function func_reportOkay(obj) {
       else if(json.result==0){    // 일정 저장실패
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
+          title: '이미 신청한 일정입니다.',
           showConfirmButton: false,
           timer: 1200
         })
         setTimeout(function() {
-          location.href="/report_s";
+          location.href='/report_s?dept_no='+dept_no+'&teacher_id='+teacher_id;
         }, 1300);
       }
     },
