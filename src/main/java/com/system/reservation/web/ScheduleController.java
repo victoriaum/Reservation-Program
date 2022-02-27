@@ -37,7 +37,7 @@ public class ScheduleController {
 
     HttpSession httpSession = request.getSession();
     String type = (String) httpSession.getAttribute("loginType");
-    List<String> scheduleList = null;
+    List<String> scheduleList = new ArrayList<>();
     JSONObject jsonObject = new JSONObject();
 
     if ("1".equals(type)) {  // 선생님이 로그인한 경우
@@ -56,7 +56,7 @@ public class ScheduleController {
         for(int j=1; j<checkpoint.length; j++){
           if(student_id.equals(checkpoint[j].trim())){
             String schedule = scheduleService.getSchedule(Long.parseLong(checkpoint[0]));
-            scheduleList.add(scheduleList.size()-1,schedule);
+            scheduleList.add(scheduleList.size(),schedule);
           }
         }
       }
