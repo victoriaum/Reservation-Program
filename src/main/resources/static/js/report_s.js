@@ -169,7 +169,7 @@ function func_reportOkay(obj) {
         Swal.fire({
           icon: 'error',
           title: 'Failed',
-          html: '인원수 초과로 신청할 수 없는 일정입니다!',
+          html: '인원수 초과로 신청할 수 없습니다!',
           showConfirmButton: false,
           timer: 1500
         })

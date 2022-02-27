@@ -55,6 +55,7 @@ public class ScheduleService {
   public Integer requestReport(Long schedule_no, String login_id) {
     String attenders = schedulerRepository.checkAttenders(schedule_no);
     String space = schedulerRepository.checkSpace(schedule_no);
+    int int_space = Integer.parseInt(space);
     String[] attenderArray = attenders.split(",");
 
     // 일정 내 현재 요청한 참여자가 있는 경우
@@ -65,7 +66,7 @@ public class ScheduleService {
     }
 
     // 신청인원이 제한된 인원수와 동일한 경우
-    if(space.equals(attenderArray.length)){
+    if(int_space==attenderArray.length || int_space<attenderArray.length){
       return 2;
     }
 
