@@ -157,7 +157,6 @@ function func_closeSchedule(obj) {
 }
 
 
-
 // 일정 편집페이지로 이동
 function func_detail(id) {
   location.href="/report_t/makeSchedule?no="+id;
@@ -284,6 +283,7 @@ function func_getSchedule(startDate, endDate){
     dataType: "json",
     data:{startDate:startDate, endDate:endDate},
     success: function(data){
+      console.log(data.scheduleList);
       var cnt = data.scheduleList.length;
       $("#scheduleCnt").html("총 "+cnt+"개의 일정");
 

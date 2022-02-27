@@ -42,8 +42,13 @@ public class ScheduleService {
   }
 
   @Transactional
-  public List<String> getStudentWeekSchedule(String student_id, String startDate, String endDate) {
-    return schedulerRepository.getStudentWeekSchedule(student_id, startDate, endDate);
+  public List<String> getAttenderList(String startDate, String endDate) {
+    return schedulerRepository.getAttenderList(startDate, endDate);
+  }
+
+  @Transactional
+  public String getSchedule(Long schedule_no) {
+    return schedulerRepository.getSchedule(schedule_no);
   }
 
   @Transactional
@@ -129,5 +134,4 @@ public class ScheduleService {
       teacherRepository.save(teacherDto.toEntity());
     }
   }
-
 }

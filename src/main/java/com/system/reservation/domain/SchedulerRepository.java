@@ -32,14 +32,13 @@ public interface SchedulerRepository extends JpaRepository<Scheduler, Long> {
       + " ORDER BY s.schedule_date, s.schedule_start ASC")
   List<String> getTeacherWeekSchedule(@Param("teacher_id") String teacher_id, @Param("startDate") String startDate, @Param("endDate") String endDate);
 
+  @Query("SELECT s.schedule_no, s.schedule_attender FROM Scheduler s "
+      + "WHERE s.schedule_date>=:startDate AND s.schedule_date<=:endDate ORDER BY s.schedule_date, s.schedule_start ASC")
+  List<String> getAttenderList(@Param("startDate") String startDate, @Param("endDate") String endDate);
+
   @Query("SELECT s.schedule_no, s.schedule_date, s.schedule_start, s.schedule_end, t.teacher_dept, t.teacher_name, t.teacher_position, s.schedule_attender"
-      + " FROM Scheduler s LEFT JOIN Teacher t"
-      + " ON s.teacher_id = t.teacher_id"
-      + " WHERE s.schedule_date>=:startDate AND s.schedule_date<=:endDate"
-      + " AND (s.schedule_attender=:student_id OR s.schedule_attender LIKE CONCAT(:student_id,',','%') "
-      + " OR s.schedule_attender LIKE CONCAT('%',',',:student_id) OR s.schedule_attender LIKE CONCAT('%',',',:student_id,',','%'))"
-      + " ORDER BY s.schedule_date, s.schedule_start ASC")
-  List<String> getStudentWeekSchedule(@Param("student_id") String student_id, @Param("startDate") String startDate, @Param("endDate") String endDate);
+      + " FROM Scheduler s LEFT JOIN Teacher t ON s.teacher_id = t.teacher_id WHERE s.schedule_no=:schedule_no")
+  String getSchedule(@Param("schedule_no") Long schedule_no);
 
   @Query("SELECT s.schedule_attender FROM Scheduler s WHERE s.schedule_no=:schedule_no")
   String checkAttenders(@Param("schedule_no") Long schedule_no);

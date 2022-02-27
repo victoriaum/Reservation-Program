@@ -33,12 +33,11 @@ public class ScheduleController {
   @ResponseBody
   @RequestMapping("getSchedule")
   public String getSchedule(@RequestParam("startDate") String startDate,
-      @RequestParam("endDate") String endDate,
-      HttpServletRequest request) {
+      @RequestParam("endDate") String endDate, HttpServletRequest request) {
 
     HttpSession httpSession = request.getSession();
     String type = (String) httpSession.getAttribute("loginType");
-    List<String> scheduleList;
+    List<String> scheduleList = null;
     JSONObject jsonObject = new JSONObject();
 
     if ("1".equals(type)) {  // 선생님이 로그인한 경우
@@ -50,10 +49,19 @@ public class ScheduleController {
     else if("2".equals(type)) {  // 학생이 로그인한 경우
       StudentDto studentDto = (StudentDto) httpSession.getAttribute("loginUser");
       String student_id = studentDto.getStudent_id();
-      scheduleList = scheduleService.getStudentWeekSchedule(student_id, startDate, endDate);
+      // 참석자에 있는지 확인 후, scheduleList에 추가
+      List<String> attenderList = scheduleService.getAttenderList(startDate,endDate);
+      for(int i=0; i<attenderList.size(); i++){
+        String[] checkpoint = attenderList.get(i).split(",");
+        for(int j=1; j<checkpoint.length; j++){
+          if(student_id.equals(checkpoint[j].trim())){
+            String schedule = scheduleService.getSchedule(Long.parseLong(checkpoint[0]));
+            scheduleList.add(scheduleList.size()-1,schedule);
+          }
+        }
+      }
       jsonObject.put("scheduleList", scheduleList);
     }
-
     return jsonObject.toString();
   }
 
