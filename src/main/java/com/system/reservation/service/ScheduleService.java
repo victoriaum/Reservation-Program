@@ -54,12 +54,19 @@ public class ScheduleService {
   @Transactional
   public Integer requestReport(Long schedule_no, String login_id) {
     String attenders = schedulerRepository.checkAttenders(schedule_no);
+    String space = schedulerRepository.checkSpace(schedule_no);
     String[] attenderArray = attenders.split(",");
 
+    // 일정 내 현재 요청한 참여자가 있는 경우
     for(int i=0; i<attenderArray.length; i++){
-      if(login_id.equals(attenderArray[i])){ // 일정 내 현재 요청한 참여자가 있는 경우
+      if(login_id.equals(attenderArray[i].trim())){
         return 0;
       }
+    }
+
+    // 신청인원이 제한된 인원수와 동일한 경우
+    if(space.equals(attenderArray.length)){
+      return 2;
     }
 
     // 일정 내 현재 요청한 참여자가 없는 경우

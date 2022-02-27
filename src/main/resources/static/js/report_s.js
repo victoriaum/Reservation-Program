@@ -153,13 +153,25 @@ function func_reportOkay(obj) {
           location.href='/report_s?dept_no='+dept_no+'&teacher_id='+teacher_id;
         }, 1300);
       }
-      else if(json.result==0){    // 일정 저장실패
+      else if(json.result==0){    // 이미 신청해서 일정 저장실패
         Swal.fire({
           icon: 'error',
           title: 'Failed',
           html: '이미 신청된 일정입니다!',
           showConfirmButton: false,
-          timer: 1200
+          timer: 1500
+        })
+        setTimeout(function() {
+          location.href='/report_s?dept_no='+dept_no+'&teacher_id='+teacher_id;
+        }, 1300);
+      }
+      else if(json.result==2){    // 인원수 초과로 일정 저장실패
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed',
+          html: '인원수 초과로 신청할 수 없는 일정입니다!',
+          showConfirmButton: false,
+          timer: 1500
         })
         setTimeout(function() {
           location.href='/report_s?dept_no='+dept_no+'&teacher_id='+teacher_id;
@@ -207,7 +219,7 @@ function func_reportNo(obj) {
           title: 'Failed',
           html: '신청하지 않은 예약으로 취소할 수 없습니다!',
           showConfirmButton: false,
-          timer: 1200
+          timer: 1500
         })
         setTimeout(function() {
           location.href='/report_s?dept_no='+dept_no+'&teacher_id='+teacher_id;
