@@ -30,13 +30,13 @@
             <div>조선대학교 치과대학<br>레포트 관리시스템</div>
           </header>
 
-          <div id="loginType" style="margin-bottom: 1rem; text-align: left;">
-            <div class="form-check form-check-inline" style="line-height: 1.3rem; font-size: 0.7rem !important; color: #62626a;">
+          <div id="loginType" style="margin-bottom: 1rem; text-align: left; line-height: 1.3rem; font-size: 0.7rem !important; ">
+            <div class="form-check form-check-inline" style="color: #62626a;">
               <input class="form-check-input" type="radio" th:name="inlineRadioOptions" id="teacher" value="1" checked="checked"
                      style="line-height: 0.5rem; height: 0.7rem; width: 0.7rem; margin-top: 0.4rem;">
               <label class="form-check-label" for="teacher">Teacher</label>
             </div>
-            <div class="form-check form-check-inline" style="line-height: 1.3rem; font-size: 0.7rem !important; color: #62626a;">
+            <div class="form-check form-check-inline" style="color: #62626a;">
               <input class="form-check-input" type="radio" th:name="inlineRadioOptions" id="student" value="2"
                      style="line-height: 0.5rem; height: 0.7rem; width: 0.7rem; margin-top: 0.4rem;">
               <label class="form-check-label" for="student">Student</label>
@@ -45,11 +45,23 @@
 
           <div id="loginInput">
             <div class="input-group input-group-sm mb-3">
-              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" th:name="id" id="id" placeholder="아이디">
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                     th:name="id" id="id" th:value="${savedId}" placeholder="아이디">
             </div>
             <div class="input-group input-group-sm mb-3">
-              <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" th:name="password" id="password" placeholder="비밀번호">
+              <input type="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"
+                     th:name="password" id="password" placeholder="비밀번호">
             </div>
+
+           <div style="text-align: left !important;">
+              <input class="form-check-input" type="checkbox" th:name="saveId" id="saveId" th:checked="${checked}"
+                     style="line-height: 0.5rem; height: 0.7rem; width: 0.7rem; margin-top: 0.45rem; vertical-align: text-top;">
+              <label class="form-check-label" for="saveId"
+                     style="margin-bottom: 1rem; text-align: left; line-height: 1.3rem; font-size: 0.7rem !important; ">
+                아이디 기억하기</label>
+            </div>
+            <input type="hidden" th:name="saveId" value=""/>
+
             <span id="error" th:text="${loginFailed}" style="color: red; float: left; font-size: 0.7rem; margin-bottom: 0.2rem;"></span>
             <button type="submit" class="btn btn-primary loginBtn" th:onclick="func_login"
                     style="display: inline-block; float: right; line-height: 0.5rem; height: 2rem;

@@ -5,6 +5,10 @@ import com.system.reservation.service.TeacherService;
 import com.system.reservation.web.dto.StudentDto;
 import com.system.reservation.web.dto.TeacherDto;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -20,19 +24,40 @@ public class UserController {
   private final StudentService studentService;
 
   @GetMapping("login")
-  public String loginPage(HttpServletRequest request) {
+  public String loginPage(HttpServletRequest request, Model m) throws UnsupportedEncodingException {
     HttpSession session = request.getSession();
     session.removeAttribute("loginUser");
     session.removeAttribute("loginType");
+
+    Cookie[] cookies = request.getCookies();
+    for(Cookie c:cookies){
+      if("saveId".equals(c.getName())){
+        m.addAttribute("savedId",c.getValue());
+        m.addAttribute("checked","true");
+      } else {
+        m.addAttribute("savedId","");
+        m.addAttribute("checked","false");
+      }
+    }
+
     return "login";
   }
 
   @PostMapping("login")
   public String login(@RequestParam("inlineRadioOptions") String type, @RequestParam("id") String id,
-                      @RequestParam("password") String password, Model m, HttpServletRequest request, HttpServletResponse response)
+                      @RequestParam("password") String password, @RequestParam("saveId") String saveId,
+                      Model m, HttpServletRequest request, HttpServletResponse response)
       throws IOException {
 
     HttpSession httpSession = request.getSession();
+
+    Cookie c = new Cookie("saveId",id);
+    if(!saveId.isEmpty()) {
+      c.setMaxAge(60*60*24*7);
+    } else {
+      c.setMaxAge(0);
+    }
+    response.addCookie(c);
 
     if("1".equals(type)) {  // 교수로 로그인 하고자 하는 경우
       TeacherDto teacherDto = teacherService.findByTeacher_idAndTeacher_password(id, password);
