@@ -90,6 +90,10 @@ public class ScheduleService {
     if(attenders!=null && attenders.contains(login_id)){ // 일정 내 현재 요청한 참여자가 있는 경우
       if(attenders.contains(",")){
         String[] attendersArray = attenders.split(",");
+        // 공백문제
+        for(int i=0; i<attendersArray.length; i++){
+          attendersArray[i]=attendersArray[i].trim();
+        }
         List<String> tempList = new ArrayList<String>(Arrays.asList(attendersArray));
         tempList.remove(login_id);
         attenders = tempList.toString();
