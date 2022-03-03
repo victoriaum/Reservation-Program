@@ -29,17 +29,6 @@ public class UserController {
     session.removeAttribute("loginUser");
     session.removeAttribute("loginType");
 
-    Cookie[] cookies = request.getCookies();
-    for(Cookie c:cookies){
-      if("saveId".equals(c.getName())){
-        m.addAttribute("savedId",c.getValue());
-        m.addAttribute("checked","true");
-      } else {
-        m.addAttribute("savedId","");
-        m.addAttribute("checked","false");
-      }
-    }
-
     return "login";
   }
 
@@ -50,14 +39,6 @@ public class UserController {
       throws IOException {
 
     HttpSession httpSession = request.getSession();
-
-    Cookie c = new Cookie("saveId",id);
-    if(!saveId.isEmpty()) {
-      c.setMaxAge(60*60*24*7);
-    } else {
-      c.setMaxAge(0);
-    }
-    response.addCookie(c);
 
     if("1".equals(type)) {  // 교수로 로그인 하고자 하는 경우
       TeacherDto teacherDto = teacherService.findByTeacher_idAndTeacher_password(id, password);
