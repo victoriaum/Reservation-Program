@@ -13,14 +13,12 @@ function func_login(){
     $("#error").html("아이디를 입력해 주세요.");
     return false;
   }
-
-  if (password==null || password=="") {
+  else if (password==null || password=="") {
     $("#password").focus();
     $("#error").html("비밀번호를를 입력해 주세요.");
     return false;
   }
-
-  if($("input:checkbox[id='saveId']").prop("checked")){
+  else if($("input:checkbox[id='saveId']").prop("checked")){
     func_setCookie("saveId",id,7);
   } else {
     func_deleteCookie("saveId");
