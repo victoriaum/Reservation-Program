@@ -1,10 +1,9 @@
 $(function(){
-  func_inputId();
+  func_inputId("saveId");
 });
 
 // 로그인 유효성 검사
 function func_login(){
-
   var form = document.loginForm;
   var id = $("#id").val();
   var password = $("#password").val();
@@ -21,46 +20,52 @@ function func_login(){
     return false;
   }
 
+  if($("input:checkbox[id='saveId']").prop("checked")){
+    func_setCookie("saveId",id,7);
+  } else {
+    func_deleteCookie("saveId");
+  }
+
   return true;
-  func_saveId(id);
   form.submit();
 }
 
-function func_inputId(){
-  var saveid = func_getCookie("saveid");
-  console.log(saveid);
+// 저장된 아이디 넣기
+function func_inputId(name){
+  var saveid = func_getCookie(name);
   if(saveid !=""){
     $("input:checkbox[id='saveId']").prop("checked", true);
     $('#id').val(saveid);
   }
 }
 
-function func_saveId(id) {
-  var date = new Date();
-  var name = "saveId"
-  if ($("#saveId").is(":checked")){
-    date.setDate(date.getDate() + 7);
-    document.cookie = name + "=" + escape(id) +  '; expires=' + date.toUTCString();
-  }else{
-    date.setDate(date.getDate() - 7);
-    document.cookie = name + "=" + escape(id) +  '; expires=' + date.toUTCString();
-  }
+// 쿠키 생성
+function func_setCookie(name, value, exdays){
+  var exdate = new Date();
+  exdate.setDate(exdate.getDate() + exdays);
+  var value = escape(value) + ((exdays==null) ? "" : "; expires=" + exdate.toGMTString());
+  document.cookie = name + "=" + value;
 }
 
+// 쿠키 삭제
+function func_deleteCookie(name){
+  var expireDate = new Date();
+  expireDate.setDate(expireDate.getDate() - 1);
+  document.cookie = name + "= " + "; expires=" + expireDate.toGMTString();
+}
+
+// 쿠키 가져오기
 function func_getCookie(name) {
-  var search = name + "=";
-  if (document.cookie.length > 0) {
-    offset = document.cookie.indexOf(search);
-    console.log(offset);
-    if (offset != -1) {
-      offset += search.length;
-      end = document.cookie.indexOf(";", offset);
-      console.log(end);
-      if (end == -1)
-        end = document.cookie.length;
-      return unescape(document.cookie.substring(offset, end));
-    }
+  cookieName = name + "=";
+  var cookieData = document.cookie;
+  var start = cookieData.indexOf(name);
+  var value = "";
+  if(start != -1){
+    start += name.length;
+    var end = cookieData.indexOf(";", start);
+    if(end == -1)end = cookieData.length;
+    value = cookieData.substring(start+1, end);
   }
-  return "";
+  return unescape(value);
 }
 
