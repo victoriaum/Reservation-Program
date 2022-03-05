@@ -29,7 +29,7 @@
 
 
 ### 프로젝트 현재 배포환경
-+ OS: Linux 3.10.x
++ OS: Linux 3.10.x (카페24 Tomcat JSP)
 + DB: MariaDB 10.1.x
 + Middleware: Tomcat 8.0.x (jsp 2.3/Servlet 3.1)
 
