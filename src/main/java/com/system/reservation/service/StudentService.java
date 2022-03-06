@@ -2,6 +2,7 @@ package com.system.reservation.service;
 
 import com.system.reservation.domain.StudentRepository;
 import com.system.reservation.web.dto.StudentDto;
+import com.system.reservation.web.dto.TeacherDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class StudentService {
   private final StudentRepository studentRepository;
 
+  @Transactional
+  public StudentDto getOneStudentInfo(String id) {
+    return studentRepository.findByStudent_id(id);
+  }
 
   @Transactional
   public StudentDto findByStudent_idAndStudent_password(String id, String password) {
@@ -60,5 +65,4 @@ public class StudentService {
         .map(StudentDto::new)
         .collect(Collectors.toList());
   }
-
 }

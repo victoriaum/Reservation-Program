@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.json.simple.JSONObject;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class AdminController {
   private final StudentService studentService;
   private final TeacherService teacherService;
+  private final PasswordEncoder passwordEncoder;
 
 
   // 오늘 날짜 구하기
@@ -38,19 +40,31 @@ public class AdminController {
     return "admin";
   }
 
-  @RequestMapping("admin/peopleRegister")
-  public String peopleRegister(HttpServletRequest request, Model m) {
-    return "peopleRegister";
-  }
+  @RequestMapping("admin/adminPeopleRegister")
+  public String peopleRegister(HttpServletRequest request, Model m) { return "adminPeopleRegister";  }
 
   @RequestMapping("admin/scheduleRegister")
   public String scheduleRegister(HttpServletRequest request, Model m) {
     return "scheduleRegister";
   }
 
-  @RequestMapping("admin/peopleManage")
+  @RequestMapping("admin/adminPeopleManage")
   public String peopleManage(HttpServletRequest request, Model m) {
-    return "peopleManage";
+    return "adminPeopleManage";
+  }
+
+  @RequestMapping("admin/adminEditAccount")
+  public String editAccount(@RequestParam("type") String type, @RequestParam("id") String id,
+                            HttpServletRequest request, Model m) {
+    if("teacher".equals(type)){
+      TeacherDto teacherDto = teacherService.getOneTeacherInfo(id);
+      m.addAttribute(teacherDto);
+    } else if("student".equals(type)) {
+      StudentDto studentDto = studentService.getOneStudentInfo(id);
+      m.addAttribute(studentDto);
+    }
+
+    return "adminEditAccount";
   }
 
   @RequestMapping("admin/deptManage")
@@ -87,15 +101,12 @@ public class AdminController {
       }
     }
 
-    /*고민중인 로직 - 일부 확실치 않아도 옳은 것은 등록할 것인지..
-    일단, 이미 등록된 경우 전체 저장하지 않기로 해놓음, teacher도 동일*/
-
     if(hasId.isEmpty()){
       for(int i=0; i<idArr.length; i++){
         StudentDto studentDto = new StudentDto();
 
         studentDto.setStudent_id(idArr[i]);
-        studentDto.setStudent_password(idArr[i]);
+        studentDto.setStudent_password(passwordEncoder.encode(idArr[i]));
         studentDto.setStudent_email(idArr[i]+"@cudh.com");
         studentDto.setStudent_grade(gradeArr[i]);
         studentDto.setStudent_name(nameArr[i]);
@@ -142,7 +153,7 @@ public class AdminController {
         TeacherDto teacherDto = new TeacherDto();
 
         teacherDto.setTeacher_id(idArr[i]);
-        teacherDto.setTeacher_password(idArr[i]);
+        teacherDto.setTeacher_password(passwordEncoder.encode(idArr[i]));
         teacherDto.setTeacher_email(idArr[i]+"@cudh.com");
         teacherDto.setTeacher_dept(dept);
         teacherDto.setTeacher_name(nameArr[i]);
@@ -168,7 +179,7 @@ public class AdminController {
     String html = "";
 
     for(int i=0; i<studentDtoList.size(); i++){
-      html += "<tbody><tr id='"+studentDtoList.get(i).getStudent_id()+"'>"
+      html += "<tbody><tr id='"+studentDtoList.get(i).getStudent_id()+"' onclick='func_info(this.id)'>"
           + "<td>"+studentDtoList.get(i).getStudent_grade()+"</td>"
           + "<td>"+studentDtoList.get(i).getStudent_id()+"</td>"
           + "<td>"+studentDtoList.get(i).getStudent_name()+"</td>"
@@ -188,7 +199,7 @@ public class AdminController {
     String html = "";
 
     for(int i=0; i<teacherDtoList.size(); i++){
-      html += "<tbody><tr id='"+teacherDtoList.get(i).getTeacher_id()+"'>"
+      html += "<tbody><tr id='"+teacherDtoList.get(i).getTeacher_id()+"' onclick='func_info(this.id)'>"
           + "<td>"+teacherDtoList.get(i).getTeacher_dept()+"</td>"
           + "<td>"+teacherDtoList.get(i).getTeacher_id()+"</td>"
           + "<td>"+teacherDtoList.get(i).getTeacher_name()+"</td>"

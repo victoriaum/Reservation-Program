@@ -14,6 +14,11 @@ public class TeacherService {
   private final TeacherRepository teacherRepository;
 
   @Transactional
+  public TeacherDto getOneTeacherInfo(String id) {
+    return teacherRepository.findByTeacher_id(id);
+  }
+
+  @Transactional
   public TeacherDto findByTeacher_idAndTeacher_password(String id, String password) {
 
     if(teacherRepository.findByTeacher_idAndTeacher_password(id, password).size()==0){
