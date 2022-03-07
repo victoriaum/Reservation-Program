@@ -54,16 +54,16 @@ public class AdminController {
   }
 
   @RequestMapping("admin/adminEditAccount")
-  public String editAccount(@RequestParam("type") String type, @RequestParam("id") String id,
-                            HttpServletRequest request, Model m) {
-    if("teacher".equals(type)){
+  public String editAccount(@RequestParam("type") String type, @RequestParam("id") String id, Model m) {
+    if("1".equals(type)) {
       TeacherDto teacherDto = teacherService.getOneTeacherInfo(id);
       m.addAttribute(teacherDto);
-    } else if("student".equals(type)) {
+
+    } else if("2".equals(type)) {
       StudentDto studentDto = studentService.getOneStudentInfo(id);
       m.addAttribute(studentDto);
     }
-
+    m.addAttribute("type",type);
     return "adminEditAccount";
   }
 

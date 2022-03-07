@@ -4,8 +4,9 @@
       layout:decorator="~{layouts/layout_admin}">
 <head>
   <link th:href="@{css/admin/admin.css}" rel="stylesheet">
-  <link th:href="@{css/admin/peopleManage.css}" rel="stylesheet">
-  <script th:src="@{js/admin/peopleManage.js}"></script>
+  <link th:href="@{css/admin/adminPeopleManage.css}" rel="stylesheet">
+  <link th:href="@{css/admin/adminEditAccount.css}" rel="stylesheet">
+  <script th:src="@{js/admin/adminEditAccount.js}"></script>
 </head>
 
 <div layout:fragment="content">
@@ -20,35 +21,37 @@
       </div>
 
         <div class="editAccountArea">
-          <form name="editPasswordForm" id="editPasswordForm" method="post" th:action="@{/mypage/editPassword}" onsubmit="return func_editPassword()">
+          <div th:if="${#strings.equals('1',type)}" class="mb-3">
+            <label for="teacher_id" class="form-label subLabel">아이디</label>
+            <input type="text" class="form-control subInput" id="teacher_id" name="teacher_id" th:value="${teacherDto.teacher_id}"><br>
+            <label for="teacher_password" class="form-label subLabel">비밀번호</label>
+            <input type="text" class="form-control subInput" id="teacher_password" name="teacher_password"><br>
+            <label for="teacher_name" class="form-label subLabel">이름</label>
+            <input type="text" class="form-control subInput" id="teacher_name" name="teacher_name" th:value="${teacherDto.teacher_name}"><br>
+            <label for="teacher_dept" class="form-label subLabel">소속</label>
+            <input type="text" class="form-control subInput" id="teacher_dept" name="teacher_dept" th:value="${teacherDto.teacher_dept}"><br>
+            <label for="teacher_position" class="form-label subLabel">직위</label>
+            <input type="text" class="form-control subInput" id="teacher_position" name="teacher_position" th:value="${teacherDto.teacher_position}"><br>
+          </div>
 
-            <div th:if="${session.loginType}=='1'" class="mb-2">
-              <label for="teacher_id" class="form-label subLabel">아이디</label>
-              <input type="text" class="form-control subInput" id="teacher_id" name="id" readonly th:value="${session.loginUser?.teacher_id}"><br>
-            </div>
+          <div th:if="${#strings.equals('2',type)}" class="mb-3">
+            <label for="student_id" class="form-label subLabel">아이디</label>
+            <input type="text" class="form-control subInput" id="student_id" name="student_id" th:value="${studentDto.student_id}"><br>
+            <label for="student_password" class="form-label subLabel">비밀번호</label>
+            <input type="text" class="form-control subInput" id="student_password" name="student_password"><br>
+            <label for="student_name" class="form-label subLabel">이름</label>
+            <input type="text" class="form-control subInput" id="student_name" name="student_name" th:value="${studentDto.student_name}"><br>
+            <label for="student_grade" class="form-label subLabel">학년</label>
+            <input type="text" class="form-control subInput" id="student_grade" name="student_grade" th:value="${studentDto.student_grade}">
+          </div>
 
-            <div th:if="${session.loginType}=='2'" class="mb-2">
-              <label for="student_id" class="form-label subLabel">아이디</label>
-              <input type="text" class="form-control subInput" id="student_id" name="id" readonly th:value="${session.loginUser?.student_id}"><br>
-            </div>
+          <div class="btnArea">
+            <button class="btn btn-primary editBtn" type="submit">수정하기</button>
+            <button class="btn btn-primary delBtn" type="submit">삭제하기</button>
+          </div>
 
-            <div class="mb-3">
-              <label for="password" class="form-label subLabel">비밀번호</label>
-              <input  type="password" class="form-control subInput" id="password" name="password">
-            </div>
-
-            <input type="hidden" id="type" name="type" th:value="${session.loginType}" />
-
-            <div class="error"></div>
-
-            <div>
-              <button class="btn btn-primary btn" type="submit">변경하기</button>
-            </div>
-
-          </form>
+          <div class="error"></div>
         </div>
-
-        <input type="hidden" id="result" th:value="${result}"/>
 
       </div>
 
