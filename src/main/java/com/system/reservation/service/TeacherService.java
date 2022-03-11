@@ -5,6 +5,7 @@ import com.system.reservation.web.dto.TeacherDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,8 +15,8 @@ public class TeacherService {
   private final TeacherRepository teacherRepository;
 
   @Transactional
-  public TeacherDto getOneTeacherInfo(String id) {
-    return teacherRepository.findByTeacher_id(id);
+  public TeacherDto getOneTeacherInfo(Long no) {
+    return teacherRepository.findByTeacher_no(no);
   }
 
   @Transactional
@@ -139,5 +140,12 @@ public class TeacherService {
       }
     }
     return check;
+  }
+
+  @Modifying
+  @Transactional
+  public int delAccount(Long no) {
+    teacherRepository.deleteById(String.valueOf(no));
+    return 1;
   }
 }

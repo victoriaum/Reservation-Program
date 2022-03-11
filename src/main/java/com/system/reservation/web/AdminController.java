@@ -54,13 +54,13 @@ public class AdminController {
   }
 
   @RequestMapping("admin/adminEditAccount")
-  public String editAccount(@RequestParam("type") String type, @RequestParam("id") String id, Model m) {
+  public String editAccount(@RequestParam("type") String type, @RequestParam("no") Long no, Model m) {
     if("1".equals(type)) {
-      TeacherDto teacherDto = teacherService.getOneTeacherInfo(id);
+      TeacherDto teacherDto = teacherService.getOneTeacherInfo(no);
       m.addAttribute(teacherDto);
 
     } else if("2".equals(type)) {
-      StudentDto studentDto = studentService.getOneStudentInfo(id);
+      StudentDto studentDto = studentService.getOneStudentInfo(no);
       m.addAttribute(studentDto);
     }
     m.addAttribute("type",type);
@@ -179,7 +179,7 @@ public class AdminController {
     String html = "";
 
     for(int i=0; i<studentDtoList.size(); i++){
-      html += "<tbody><tr id='"+studentDtoList.get(i).getStudent_id()+"' onclick='func_info(this.id)'>"
+      html += "<tbody><tr id='"+studentDtoList.get(i).getStudent_no()+"' onclick='func_info(this.id)'>"
           + "<td>"+studentDtoList.get(i).getStudent_grade()+"</td>"
           + "<td>"+studentDtoList.get(i).getStudent_id()+"</td>"
           + "<td>"+studentDtoList.get(i).getStudent_name()+"</td>"
@@ -199,7 +199,7 @@ public class AdminController {
     String html = "";
 
     for(int i=0; i<teacherDtoList.size(); i++){
-      html += "<tbody><tr id='"+teacherDtoList.get(i).getTeacher_id()+"' onclick='func_info(this.id)'>"
+      html += "<tbody><tr id='"+teacherDtoList.get(i).getTeacher_no()+"' onclick='func_info(this.id)'>"
           + "<td>"+teacherDtoList.get(i).getTeacher_dept()+"</td>"
           + "<td>"+teacherDtoList.get(i).getTeacher_id()+"</td>"
           + "<td>"+teacherDtoList.get(i).getTeacher_name()+"</td>"
@@ -209,6 +209,24 @@ public class AdminController {
 
     JSONObject jsonObject = new JSONObject();
     jsonObject.put("html", html);
+    return jsonObject.toString();
+  }
+
+
+  @ResponseBody
+  @PostMapping("admin/delAccount")
+  public String delAccount(@RequestParam("type") String type, @RequestParam("no") Long no){
+    int result = 0;
+
+    if("1".equals(type)){
+      result = teacherService.delAccount(no);
+    }
+    else if("2".equals(type)){
+      result = studentService.delAccount(no);
+    }
+
+    JSONObject jsonObject = new JSONObject();
+    jsonObject.put("result", result);
     return jsonObject.toString();
   }
 

@@ -6,6 +6,7 @@ import com.system.reservation.web.dto.TeacherDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +16,8 @@ public class StudentService {
   private final StudentRepository studentRepository;
 
   @Transactional
-  public StudentDto getOneStudentInfo(String id) {
-    return studentRepository.findByStudent_id(id);
+  public StudentDto getOneStudentInfo(Long no) {
+    return studentRepository.findByStudent_no(no);
   }
 
   @Transactional
@@ -64,5 +65,12 @@ public class StudentService {
     return studentRepository.findAll().stream()
         .map(StudentDto::new)
         .collect(Collectors.toList());
+  }
+
+  @Modifying
+  @Transactional
+  public int delAccount(Long no) {
+    studentRepository.deleteById(String.valueOf(no));
+    return 1;
   }
 }

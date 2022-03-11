@@ -65,12 +65,12 @@ function func_getTeacherAll(){
 
 
 // 상세 확인하기
-function func_info(id){
+function func_info(no){
   if($("#teacherCheck").hasClass("clickedCheck")){
-    location.href="/admin/adminEditAccount?type=1&id="+id;
+    location.href="/admin/adminEditAccount?type=1&no="+no;
   }
   else if($("#studentCheck").hasClass("clickedCheck")){
-    location.href="/admin/adminEditAccount?type=2&id="+id;
+    location.href="/admin/adminEditAccount?type=2&no="+no;
   }
 
 }
