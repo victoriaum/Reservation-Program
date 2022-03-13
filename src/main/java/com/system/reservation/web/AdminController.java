@@ -217,13 +217,13 @@ public class AdminController {
     int result = 0;
     String[] infoArray = info.split(" ");
     String id = ((String[])infoArray)[0];
-    String password = ((String[])infoArray)[1];
+    String encodedPassword = passwordEncoder.encode(((String[])infoArray)[1]);
     String name = ((String[])infoArray)[2];
 
     if("1".equals(type)){
       TeacherDto teacherDto = teacherService.getOneTeacherInfoById(id);
       teacherDto.setTeacher_id(id);
-      teacherDto.setTeacher_password(password);
+      teacherDto.setTeacher_password(encodedPassword);
       teacherDto.setTeacher_name(name);
       teacherDto.setTeacher_dept(((String[])infoArray)[3]);
       teacherDto.setTeacher_position(((String[])infoArray)[4]);
@@ -232,7 +232,7 @@ public class AdminController {
     else if("2".equals(type)){
       StudentDto studentDto = studentService.getOneStudentInfoById(id);
       studentDto.setStudent_id(id);
-      studentDto.setStudent_password(password);
+      studentDto.setStudent_password(encodedPassword);
       studentDto.setStudent_name(name);
       studentDto.setStudent_grade(((String[])infoArray)[3]);
       result = studentService.editAccount(studentDto);
