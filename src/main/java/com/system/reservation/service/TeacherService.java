@@ -21,6 +21,11 @@ public class TeacherService {
   }
 
   @Transactional
+  public TeacherDto getOneTeacherInfoById(String id) {
+    return teacherRepository.findByTeacher_id(id);
+  }
+
+  @Transactional
   public TeacherDto findByTeacher_idAndTeacher_password(String id, String password) {
 
     if(teacherRepository.findByTeacher_idAndTeacher_password(id, password).size()==0){
@@ -48,6 +53,12 @@ public class TeacherService {
     teacherDto.setTeacher_password(password);
     teacherRepository.save(teacherDto.toEntity());
     return teacherDto;
+  }
+
+  @Transactional
+  public int editAccount(TeacherDto teacherDto) {
+    teacherRepository.save(teacherDto.toEntity());
+    return 1;
   }
 
   @Transactional
@@ -150,4 +161,5 @@ public class TeacherService {
     teacherRepository.delete(teacherDto.toEntity());
     return 1;
   }
+
 }

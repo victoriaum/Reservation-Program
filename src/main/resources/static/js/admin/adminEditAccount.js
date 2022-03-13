@@ -2,6 +2,7 @@ $(function(){
 
 })
 
+// 현재 url 파악하기
 function func_url() {
   var url = document.location.href;
   var para = url.substr(url.indexOf("?") + 1);
@@ -22,6 +23,7 @@ function func_editAccount(){
   var details = func_url();
   var type = details[0].substr(details[0].indexOf("=") + 1);
   var no = details[1].substr(details[1].indexOf("=") + 1);
+  var infoArray;
 
   if (type == '1') {
     teacher_id = $("#teacher_id").val();
@@ -32,7 +34,6 @@ function func_editAccount(){
 
     infoArray = [teacher_id, teacher_password, teacher_name, teacher_dept,
       teacher_position];
-    func_delAjax(type, infoArray);
   }
   else if (type == '2') {
     student_id = $("#student_id").val();
@@ -41,9 +42,45 @@ function func_editAccount(){
     student_grade = $("#student_grade").val();
 
     infoArray = [student_id, student_password, student_name, student_grade];
-    func_delAjax(type, infoArray);
   }
+  func_editAjax(type, no, infoArray);
 }
+
+
+function func_editAjax(type, no, infoArray){
+  console.log("하하");
+  $.ajax({
+    url:"/admin/editAccount",
+    type: "post",
+    dataType:"json",
+    data:{type:type,infoArray:infoArray},
+    success: function(json) {
+      if (json.result == 1) {    // 계정수정 성공
+        Swal.fire({
+          title: 'Success!',
+          icon: 'success',
+          html: '계정수정 성공!',
+          showConfirmButton: false,
+          timer: 1200
+        })
+        setTimeout(function() {
+          location.href='/admin/adminEditAccount?type='+type+'&no='+no;
+        }, 1300);
+      } else {    // 계정수정 실패
+        Swal.fire({
+          icon: 'error',
+          title: 'Failed',
+          showConfirmButton: false,
+          timer: 1200
+        })
+      }
+    },
+    error: function(report, status, error){
+      alert("code: "+report.status+"\n"+"message: "+report.responseText+"\n"+"error: "+error);
+    }
+  });
+}
+
 
 
 // 계정 삭제하기
@@ -62,7 +99,7 @@ function func_delAccount() {
         Swal.fire({
           title: 'Success!',
           icon: 'success',
-          html: '계정이 성공적으로 삭제되었습니다.',
+          html: '계정삭제 성공!',
           showConfirmButton: false,
           timer: 1200
         })

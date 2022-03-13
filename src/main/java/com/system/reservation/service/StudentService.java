@@ -21,6 +21,11 @@ public class StudentService {
   }
 
   @Transactional
+  public StudentDto getOneStudentInfoById(String id) {
+    return studentRepository.findByStudent_id(id);
+  }
+
+  @Transactional
   public StudentDto findByStudent_idAndStudent_password(String id, String password) {
 
     if(studentRepository.findByStudent_idAndStudent_password(id, password).size()==0){
@@ -42,6 +47,12 @@ public class StudentService {
     studentDto.setStudent_password(password);
     studentRepository.save(studentDto.toEntity());
     return studentDto;
+  }
+
+  @Transactional
+  public int editAccount(StudentDto studentDto) {
+    studentRepository.save(studentDto.toEntity());
+    return 1;
   }
 
   @Transactional

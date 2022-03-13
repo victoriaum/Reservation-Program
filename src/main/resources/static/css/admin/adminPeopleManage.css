@@ -23,7 +23,7 @@
   font-weight: bold;
   color: #2B2119;
   cursor: pointer;
-  display: inline-block;
+  display: inline-block !important;
 }
 .backBtn {
   margin: 0 0.5rem;
