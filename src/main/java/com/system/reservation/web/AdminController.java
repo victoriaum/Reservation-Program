@@ -213,8 +213,9 @@ public class AdminController {
 
   @ResponseBody
   @PostMapping("admin/editAccount")
-  public String editAccount(@RequestParam("type") String type, @RequestParam("infoArray") Object infoArray){
+  public String editAccount(@RequestParam("type") String type, @RequestParam("info") String info){
     int result = 0;
+    String[] infoArray = info.split(" ");
     String id = ((String[])infoArray)[0];
     String password = ((String[])infoArray)[1];
     String name = ((String[])infoArray)[2];

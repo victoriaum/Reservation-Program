@@ -36,3 +36,6 @@
 .delBtn {
   background-color: #E48873;
 }
+.secondTitle {
+  display: inline-block !important;
+}

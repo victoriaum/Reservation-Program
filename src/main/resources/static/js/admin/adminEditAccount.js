@@ -23,7 +23,7 @@ function func_editAccount(){
   var details = func_url();
   var type = details[0].substr(details[0].indexOf("=") + 1);
   var no = details[1].substr(details[1].indexOf("=") + 1);
-  var infoArray;
+  var info;
 
   if (type == '1') {
     teacher_id = $("#teacher_id").val();
@@ -32,8 +32,7 @@ function func_editAccount(){
     teacher_dept = $("#teacher_dept").val();
     teacher_position = $("#teacher_position").val();
 
-    infoArray = [teacher_id, teacher_password, teacher_name, teacher_dept,
-      teacher_position];
+    info = teacher_id+" "+teacher_password+" "+teacher_name+" "+teacher_dept+" "+teacher_position;
   }
   else if (type == '2') {
     student_id = $("#student_id").val();
@@ -41,19 +40,18 @@ function func_editAccount(){
     student_name = $("#student_name").val();
     student_grade = $("#student_grade").val();
 
-    infoArray = [student_id, student_password, student_name, student_grade];
+    info = student_id+" "+student_password+" "+student_name+" "+student_grade;
   }
-  func_editAjax(type, no, infoArray);
+  func_editAjax(type, no, info);
 }
 
 
-function func_editAjax(type, no, infoArray){
-  console.log("하하");
+function func_editAjax(type, no, info){
   $.ajax({
     url:"/admin/editAccount",
     type: "post",
     dataType:"json",
-    data:{type:type,infoArray:infoArray},
+    data:{type:type,info:info},
     success: function(json) {
       if (json.result == 1) {    // 계정수정 성공
         Swal.fire({
