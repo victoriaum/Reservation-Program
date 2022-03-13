@@ -70,7 +70,8 @@ public class StudentService {
   @Modifying
   @Transactional
   public int delAccount(Long no) {
-    studentRepository.deleteById(String.valueOf(no));
+    StudentDto studentDto = studentRepository.findByStudent_no(no);
+    studentRepository.delete(studentDto.toEntity());
     return 1;
   }
 }

@@ -2,6 +2,13 @@ $(function(){
 
 })
 
+function func_url() {
+  var url = document.location.href;
+  var para = url.substr(url.indexOf("?") + 1);
+  var details = para.split("&");
+  return details;
+}
+
 
 // 계정 수정하기
 function func_editAccount(){
@@ -12,7 +19,10 @@ function func_editAccount(){
     }
   }
 
-  var type = $("#type").val();
+  var details = func_url();
+  var type = details[0].substr(details[0].indexOf("=") + 1);
+  var no = details[1].substr(details[1].indexOf("=") + 1);
+
   if (type == '1') {
     teacher_id = $("#teacher_id").val();
     teacher_password = $("#teacher_password").val();
@@ -38,21 +48,15 @@ function func_editAccount(){
 
 // 계정 삭제하기
 function func_delAccount() {
-  var type = $("#type").val();
-  var infoArray, id;
-
-  if (type == '1') {
-    id = $("#teacher_id").val();
-  }
-  else if (type == '2') {
-    id = $("#student_id").val();
-  }
+  var details = func_url();
+  var type = details[0].substr(details[0].indexOf("=") + 1);
+  var no = details[1].substr(details[1].indexOf("=") + 1);
 
   $.ajax({
     url:"/admin/delAccount",
     type: "post",
     dataType:"json",
-    data:{type:type,id:id},
+    data:{type:type,no:no},
     success: function(json) {
       if (json.result == 1) {    // 계정삭제 성공
         Swal.fire({
@@ -62,7 +66,9 @@ function func_delAccount() {
           showConfirmButton: false,
           timer: 1200
         })
-        setTimeout(function() {}, 1300);
+        setTimeout(function() {
+          location.href='/admin/adminPeopleManage';
+        }, 1300);
       } else {    // 계정삭제 실패
         Swal.fire({
           icon: 'error',

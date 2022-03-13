@@ -16,7 +16,12 @@
         <span class="subTitle mb-3" onclick="location.href='/admin'">Register</span>
         <div>
           <img class="backBtn" th:src="@{image/admin/back.png}" onclick="location.href='/admin/adminPeopleManage'"/>
-          <span class="secondTitle" onclick="location.href='/admin/adminEditAccount'">계정 수정/삭제</span>
+          <div th:if="${#strings.equals('1',type)}" class="mb-3">
+            <span class="secondTitle" th:onclick="location.href='/admin/adminEditAccount?type=1&no=''+@{${teacherDto.teacher_no}}+'">계정 수정/삭제</span>
+          </div>
+          <div th:if="${#strings.equals('2',type)}" class="mb-3">
+            <span class="secondTitle" th:onclick="location.href='/admin/adminEditAccount?type=2&no=''+@{${studentDto.student_no}}+'">계정 수정/삭제</span>
+          </div>
         </div>
       </div>
 
