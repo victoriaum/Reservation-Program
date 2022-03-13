@@ -13,13 +13,6 @@ function func_url() {
 
 // 계정 수정하기
 function func_editAccount(){
-  for(var i=0; i<$(".subInput").length; i++){
-    if($(".subInput").val()==null && $(".subInput").val().trim()==""){
-      $(".error").html("빈칸이 있으면 계정삭제가 불가합니다.");
-      return false;
-    }
-  }
-
   var details = func_url();
   var type = details[0].substr(details[0].indexOf("=") + 1);
   var no = details[1].substr(details[1].indexOf("=") + 1);
@@ -32,6 +25,12 @@ function func_editAccount(){
     teacher_dept = $("#teacher_dept").val();
     teacher_position = $("#teacher_position").val();
 
+    if(teacher_id.trim()=="" || teacher_password.trim()=="" ||
+        teacher_name.trim()==""|| teacher_dept.trim()==""||teacher_position.trim()==""){
+      $(".error").html("빈칸이 있으면 계정삭제가 불가합니다!");
+      return false;
+    }
+
     info = teacher_id+" "+teacher_password+" "+teacher_name+" "+teacher_dept+" "+teacher_position;
   }
   else if (type == '2') {
@@ -39,6 +38,12 @@ function func_editAccount(){
     student_password = $("#student_password").val();
     student_name = $("#student_name").val();
     student_grade = $("#student_grade").val();
+
+    if(student_id.trim()=="" || student_password.trim()=="" ||
+        student_name.trim()==""|| student_grade.trim()==""){
+      $(".error").html("빈칸이 있으면 계정삭제가 불가합니다!");
+      return false;
+    }
 
     info = student_id+" "+student_password+" "+student_name+" "+student_grade;
   }
