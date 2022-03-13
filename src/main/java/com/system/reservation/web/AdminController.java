@@ -107,7 +107,6 @@ public class AdminController {
 
         studentDto.setStudent_id(idArr[i]);
         studentDto.setStudent_password(passwordEncoder.encode(idArr[i]));
-        studentDto.setStudent_email(idArr[i]+"@cudh.com");
         studentDto.setStudent_grade(gradeArr[i]);
         studentDto.setStudent_name(nameArr[i]);
 
@@ -154,7 +153,6 @@ public class AdminController {
 
         teacherDto.setTeacher_id(idArr[i]);
         teacherDto.setTeacher_password(passwordEncoder.encode(idArr[i]));
-        teacherDto.setTeacher_email(idArr[i]+"@cudh.com");
         teacherDto.setTeacher_dept(dept);
         teacherDto.setTeacher_name(nameArr[i]);
         teacherDto.setTeacher_position(positionArr[i]);

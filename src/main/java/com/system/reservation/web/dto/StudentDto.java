@@ -11,7 +11,6 @@ public class StudentDto {
   private String student_id;
   private String student_password;
   private String student_name;
-  private String student_email;
   private String student_grade;
 
   public StudentDto(Student entity){
@@ -19,7 +18,6 @@ public class StudentDto {
     this.student_id = entity.getStudent_id();
     this.student_password = entity.getStudent_password();
     this.student_name = entity.getStudent_name();
-    this.student_email = entity.getStudent_email();
     this.student_grade = entity.getStudent_grade();
   }
 
@@ -29,7 +27,6 @@ public class StudentDto {
         .student_id(student_id)
         .student_password(student_password)
         .student_name(student_name)
-        .student_email(student_email)
         .student_grade(student_grade)
         .build();
   }

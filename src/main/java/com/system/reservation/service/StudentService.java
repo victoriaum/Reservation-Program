@@ -2,7 +2,6 @@ package com.system.reservation.service;
 
 import com.system.reservation.domain.StudentRepository;
 import com.system.reservation.web.dto.StudentDto;
-import com.system.reservation.web.dto.TeacherDto;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
