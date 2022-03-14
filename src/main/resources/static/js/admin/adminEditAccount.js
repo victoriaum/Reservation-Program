@@ -56,7 +56,7 @@ function func_editAjax(type, no, info){
     url:"/admin/editAccount",
     type: "post",
     dataType:"json",
-    data:{type:type,info:info},
+    data:{type:type,no:no, info:info},
     success: function(json) {
       if (json.result == 1) {    // 계정수정 성공
         Swal.fire({

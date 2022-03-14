@@ -213,7 +213,8 @@ public class AdminController {
 
   @ResponseBody
   @PostMapping("admin/editAccount")
-  public String editAccount(@RequestParam("type") String type, @RequestParam("info") String info){
+  public String editAccount(@RequestParam("type") String type, @RequestParam("no") String no,
+      @RequestParam("info") String info){
     int result = 0;
     String[] infoArray = info.split(" ");
     String id = ((String[])infoArray)[0];
@@ -221,7 +222,7 @@ public class AdminController {
     String name = ((String[])infoArray)[2];
 
     if("1".equals(type)){
-      TeacherDto teacherDto = teacherService.getOneTeacherInfoById(id);
+      TeacherDto teacherDto = teacherService.getOneTeacherInfo(Long.parseLong(no));
       teacherDto.setTeacher_id(id);
       teacherDto.setTeacher_password(encodedPassword);
       teacherDto.setTeacher_name(name);
@@ -230,7 +231,7 @@ public class AdminController {
       result = teacherService.editAccount(teacherDto);
     }
     else if("2".equals(type)){
-      StudentDto studentDto = studentService.getOneStudentInfoById(id);
+      StudentDto studentDto = studentService.getOneStudentInfo(Long.parseLong(no));
       studentDto.setStudent_id(id);
       studentDto.setStudent_password(encodedPassword);
       studentDto.setStudent_name(name);
