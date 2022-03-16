@@ -45,7 +45,7 @@ public class AdminController {
 
   @RequestMapping("admin/scheduleRegister")
   public String scheduleRegister(HttpServletRequest request, Model m) {
-    return "scheduleRegister";
+    return "adminScheduleRegister";
   }
 
   @RequestMapping("admin/adminPeopleManage")
