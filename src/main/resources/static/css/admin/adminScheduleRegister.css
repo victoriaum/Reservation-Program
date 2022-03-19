@@ -1,0 +1,67 @@
+.titleArea {
+  margin-bottom: 1rem;
+}
+.inputArea {
+  width: 100%;
+  margin: 0.3rem auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.secondTitle {
+  font-weight: bold;
+  color: #2B2119;
+  cursor: pointer;
+}
+.backBtn {
+  margin: 0 0.5rem;
+  width: 1.2rem;
+  cursor: pointer;
+}
+.subInput {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  width: 8rem;
+  height: 1.5rem;
+  font-size: 0.7rem;
+  padding: 0.1rem 0.3rem;
+  cursor: pointer;
+}
+.space {
+  width: 3rem;
+}
+
+#saveSchedule {
+  width: 100%;
+  height: 2rem;
+  text-align: center;
+  background-color: #55705A;
+  color: white;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  margin: 1rem auto 0rem auto;
+}
+.saveSchedule2 {
+  display: inline-block;
+  width: 48%;
+  height: 2rem;
+  text-align: center;
+  background-color: #55705A;
+  color: white;
+  border: none;
+  padding: 0;
+  font-size: 0.8rem;
+  margin: 0.7rem auto 0rem auto;
+}
+#deleteSchedule {
+  background-color: #E48873;
+}
+#buttons {
+  margin: 0 auto;
+}
+.error {
+  color: red;
+  float: left;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}

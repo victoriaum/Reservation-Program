@@ -3,8 +3,25 @@
   text-align: center;
   margin: 2rem auto;
 }
+.center2 {
+  color: black;
+  font-size: 1rem;
+  width: 85%;
+  margin: 1rem auto;
+  text-align: left;
+}
+.center3 {
+  color: black;
+  font-size: 1rem;
+  width: 90%;
+  margin: 1rem auto;
+  text-align: left;
+}
 .area {
   margin-bottom: 2rem;
+}
+.area2 {
+  margin-top: 0.5rem;
 }
 .adminTitle {
   margin-top: 0.5rem;

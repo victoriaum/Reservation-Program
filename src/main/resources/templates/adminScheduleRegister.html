@@ -4,13 +4,57 @@
       layout:decorator="~{layouts/layout_admin}">
 <head>
   <link th:href="@{css/admin/admin.css}" rel="stylesheet">
-  <link th:href="@{css/admin/peopleRegister.css}" rel="stylesheet">
-  <script th:src="@{js/admin/adminPeopleRegister.js}"></script>
+  <link th:href="@{css/admin/adminScheduleRegister.css}" rel="stylesheet">
+  <script th:src="@{js/admin/adminScheduleRegister.js}"></script>
 </head>
 
 <div layout:fragment="content">
   <div id="container">
+    <div class="center2" th:if="${session.loginType}=='3'">
+      <div class="area2 titleArea">
+        <span class="subTitle mb-3" onclick="location.href='/admin'">Register</span>
+        <div>
+          <img class="backBtn" th:src="@{image/admin/back.png}" onclick="location.href='/admin'"/>
+          <span class="secondTitle" onclick="location.href='/admin/adminScheduleRegister'">일정 등록하기</span>
+        </div>
+      </div>
+    </div>
 
+    <div class="center3" th:if="${session.loginType}=='3'">
+      <div class="area2 formArea">
+        <form name="saveScheduleForm" id="saveScheduleForm" th:action="@{/admin/adminScheduleRegister/save}" onsubmit="return func_saveAdminSchedule()">
+
+          <label for="date" class="form-label subHelp">
+            <img class="smallImg" th:src="@{image/report/date.png}"/>
+            날짜
+          </label>
+          <input type="date" class="form-control subInput" id="date" name="date"><br>
+
+          <label for="startTime" class="form-label subHelp">
+            <img class="smallImg" th:src="@{image/report/time.png}"/>
+            시작시간
+          </label>
+          <input type="time" class="form-control subInput timepicker" id="startTime" name="startTime"/><br>
+
+          <label for="endTime" class="form-label subHelp">
+            <img class="smallImg" th:src="@{image/report/time.png}"/>
+            마감시간
+          </label>
+          <input type="time" class="form-control subInput timepicker" id="endTime" name="endTime"/><br>
+
+          <label for="space" class="form-label subHelp">
+            <img class="smallImg" th:src="@{image/report/attender.png}"/>
+            가능인원
+          </label>
+          <input type="number" min="1" max="100" step="1" class="form-control subInput space" id="space" name="space" placeholder="0"/>
+          <span> 명</span>
+
+          <span class="error"></span>
+
+          <button type="submit" id="saveSchedule">저장하기</button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
 

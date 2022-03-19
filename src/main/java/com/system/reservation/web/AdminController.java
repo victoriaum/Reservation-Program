@@ -36,17 +36,15 @@ public class AdminController {
 
 
   @RequestMapping("admin")
-  public String admin(HttpServletRequest request, Model m) {
+  public String admin() {
     return "admin";
   }
 
   @RequestMapping("admin/adminPeopleRegister")
-  public String peopleRegister(HttpServletRequest request, Model m) { return "adminPeopleRegister";  }
+  public String peopleRegister() { return "adminPeopleRegister";  }
 
   @RequestMapping("admin/scheduleRegister")
-  public String scheduleRegister(HttpServletRequest request, Model m) {
-    return "adminScheduleRegister";
-  }
+  public String scheduleRegister() { return "adminScheduleRegister"; }
 
   @RequestMapping("admin/adminPeopleManage")
   public String peopleManage(HttpServletRequest request, Model m) {
